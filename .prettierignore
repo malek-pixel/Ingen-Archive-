@@ -1,0 +1,6 @@
+dist
+node_modules
+package-lock.json
+src/data/ingen.json
+scripts/_ingen_data.raw.json
+public

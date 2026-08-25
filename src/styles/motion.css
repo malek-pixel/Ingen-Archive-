@@ -1,0 +1,610 @@
+/* ============================================================================
+   InGen Archive — motion system
+   ----------------------------------------------------------------------------
+   One rhythm for the whole application. Everything added here moves only
+   `transform`, `opacity` or `box-shadow`, so the compositor does the work and
+   the motion layer cannot introduce layout shift.
+
+   The one exception is inherited, not introduced: the frozen design slides
+   .ig-index-row / .ig-sev-row by animating padding-left on hover. That is part
+   of the locked visual language, it is scoped to a single hovered row, and it
+   is left alone.
+
+   This file owns every duration and easing in the product. base.css carries
+   hover *target values* only — see the note there.
+
+   The existing frozen keyframes (ig-rise / ig-pulse / ig-scan / ig-sweep) live
+   in base.css and are reused rather than replaced.
+   ========================================================================== */
+
+:root {
+  /* Duration ladder. Micro-interactions stay under the 300ms guideline;
+     only large plates are allowed the slow lane. */
+  --ig-t-press: 90ms;
+  --ig-t-micro: 160ms;
+  --ig-t-hover: 220ms;
+  --ig-t-enter: 300ms;
+  --ig-t-plate: 460ms;
+
+  /* Entering decelerates, exiting accelerates. Exit is ~65% of enter. */
+  --ig-ease-out: cubic-bezier(0.16, 0.84, 0.44, 1);
+  --ig-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ig-ease-soft: cubic-bezier(0.2, 0.7, 0.3, 1);
+
+  /* Stagger step. Fast enough that a 21-card grid completes in ~0.5s. */
+  --ig-stagger: 26ms;
+
+  /* Reserved-blue accents, reused from the palette — no new colours. */
+  --ig-glow-blue: rgba(59, 167, 224, 0.16);
+  --ig-glow-blue-soft: rgba(59, 167, 224, 0.07);
+  --ig-lift-shadow: 0 6px 20px -8px rgba(0, 0, 0, 0.7);
+}
+
+/* ---------------------------------------------------------------- keyframes */
+
+/* The universal entrance: rise a little, settle. Used by page entry,
+   scroll reveal and route changes so everything shares one gesture. */
+@keyframes ig-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Panels and cards add a hair of scale — reads as a plate seating itself. */
+@keyframes ig-seat {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0) scale(0.988);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* A hairline drawing itself across a panel edge as it arrives. */
+@keyframes ig-rule {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* The InGen read head: a single cyan pass across a surface. Runs once. */
+@keyframes ig-readhead {
+  from {
+    transform: translate3d(-100%, 0, 0);
+  }
+  to {
+    transform: translate3d(220%, 0, 0);
+  }
+}
+
+/* Ambient plate drift — the engineering grid breathing. ~40s, imperceptible. */
+@keyframes ig-grid-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-40px, -40px, 0);
+  }
+}
+
+/* Route change. Deliberately shorter than a page entry: navigation must
+   never feel slower because of animation. */
+@keyframes ig-route-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 6px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ------------------------------------------------------- page entry sequence
+   Boot order: heading → supporting text → controls → content.
+
+   Gated on html.ig-motion, which the motion runtime adds only when it can
+   actually drive the sequence. Without it — no JS, no IntersectionObserver,
+   a stalled script — content simply renders, never hidden behind an animation
+   that may not run. Content visibility never depends on animation succeeding. */
+
+.ig-motion [data-enter] {
+  animation: ig-enter var(--ig-t-enter) var(--ig-ease-out) both;
+  animation-delay: calc(var(--ig-step, 0) * 55ms);
+}
+
+.ig-motion [data-enter="plate"] {
+  animation-name: ig-seat;
+  animation-duration: var(--ig-t-plate);
+}
+
+/* ------------------------------------------------------------ scroll reveal
+   Elements opt in with data-reveal. They hold their space from first paint
+   (only opacity/transform change), so revealing cannot shift layout.
+   `.is-in` is set once by the shared observer and never removed — content
+   does not re-animate when it scrolls back into view. */
+
+/* Hidden only once the runtime confirms it can reveal them — see above.
+   No will-change on purpose: the running animation promotes the layer by
+   itself, and a page can hold 40+ revealable nodes at once — pre-promoting them
+   all would cost far more memory than it saves. */
+.ig-motion [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 12px, 0) scale(0.995);
+}
+
+/* Revealed either directly (the observed unit itself) or as a descendant of a
+   revealed unit — children stagger off --i without needing their own observer. */
+.ig-motion [data-reveal].is-in,
+.ig-motion .is-in [data-reveal] {
+  animation: ig-seat var(--ig-t-enter) var(--ig-ease-out) both;
+  animation-delay: calc(min(var(--i, 0), 11) * var(--ig-stagger));
+  opacity: 1;
+  transform: none;
+}
+
+/* Watchdog. If anything has not revealed by the time the runtime gives up —
+   an observer that never fired, a tab that never composited — everything is
+   shown unconditionally. Motion is allowed to fail; the archive is not. */
+.ig-motion-timeout [data-reveal],
+.ig-motion-timeout [data-enter] {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+/* The full-run galleries stack 21+ dossiers on one page. Each record is skipped
+   entirely by layout and paint until it nears the viewport; the reserved height
+   keeps the scrollbar honest so nothing jumps as records are realised. This is
+   virtualisation the browser does for us — no library, no windowing maths. */
+.ig-run > main > section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1100px;
+}
+
+/* The full-run galleries stack 21+ dossiers on one page. A page-entry sequence
+   would fire for every one of them at mount, almost all off screen — so inside
+   a run the boot sequence is disabled and each record reveals on scroll. */
+.ig-run [data-enter] {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+/* -------------------------------------------------------- route transitions */
+
+.ig-route {
+  animation: ig-route-in var(--ig-t-micro) var(--ig-ease-out) both;
+}
+
+/* Focused programmatically on navigation so assistive tech follows the page
+   change. It is not a user-chosen target, so it never shows a focus ring —
+   every genuinely interactive element keeps its own. */
+.ig-route:focus {
+  outline: none;
+}
+
+/* --------------------------------------------------------- sticky surfaces
+   The page header is not sticky in the frozen design and is left alone.
+   The surfaces that *do* persist while content moves under them — the index
+   toolbar and the full-run header — gain a hairline and a faint lift once the
+   page is scrolled, so they read as instrument panels over moving content. */
+
+.ig-sticky {
+  transition:
+    box-shadow var(--ig-t-hover) var(--ig-ease-out),
+    background-color var(--ig-t-hover) var(--ig-ease-out);
+}
+
+.ig-sticky[data-scrolled="true"] {
+  background: rgba(11, 15, 20, 0.94);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 24px -20px rgba(0, 0, 0, 0.95);
+}
+
+/* Nav: the active rule slides in rather than snapping between items. */
+.ig-navlink,
+.ig-navlink-active {
+  position: relative;
+  transition: color var(--ig-t-micro) var(--ig-ease-out);
+}
+
+.ig-navlink::after,
+.ig-navlink-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1.5px;
+  background: var(--ig-blue-rule);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--ig-t-hover) var(--ig-ease-out);
+}
+
+.ig-navlink-active::after {
+  transform: scaleX(1);
+}
+.ig-navlink:hover::after {
+  transform: scaleX(0.34);
+}
+
+/* Nav icons drift a hair toward their label on hover. */
+.ig-navlink svg,
+.ig-navlink-active svg {
+  transition: transform var(--ig-t-hover) var(--ig-ease-out);
+}
+.ig-navlink:hover svg {
+  transform: translate3d(1.5px, 0, 0);
+}
+
+/* --------------------------------------------------------------------- cards
+   Lift + border + a restrained blue bloom. The existing --zoom image scale
+   and border/background transitions in base.css still drive; this adds the
+   elevation and the one-shot read head. */
+
+.ig-card {
+  transform: translate3d(0, 0, 0);
+  transition:
+    border-color var(--ig-t-hover) var(--ig-ease-out),
+    background-color var(--ig-t-hover) var(--ig-ease-out),
+    transform var(--ig-t-hover) var(--ig-ease-out),
+    box-shadow var(--ig-t-hover) var(--ig-ease-out);
+}
+
+.ig-card:hover,
+.ig-card:focus-visible {
+  transform: translate3d(0, -2px, 0);
+  box-shadow:
+    var(--ig-lift-shadow),
+    0 0 0 1px var(--ig-glow-blue-soft);
+}
+
+.ig-card:active {
+  transform: translate3d(0, -1px, 0) scale(0.997);
+  transition-duration: var(--ig-t-press);
+}
+
+/* The read head. One pass, on hover only, over the card's media well. */
+.ig-scanline {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--ig-t-micro) var(--ig-ease-out);
+}
+
+.ig-scanline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 34%;
+  background: linear-gradient(90deg, transparent, rgba(59, 167, 224, 0.13), transparent);
+  transform: translate3d(-100%, 0, 0);
+}
+
+.ig-card:hover .ig-scanline,
+.ig-card:focus-visible .ig-scanline {
+  opacity: 1;
+}
+
+.ig-card:hover .ig-scanline::before,
+.ig-card:focus-visible .ig-scanline::before {
+  animation: ig-readhead 1.1s var(--ig-ease-soft);
+}
+
+/* Card footer affordance — "Open record" nudges toward the reader. */
+.ig-card .ig-openlabel {
+  transition: transform var(--ig-t-hover) var(--ig-ease-out);
+}
+.ig-card:hover .ig-openlabel {
+  transform: translate3d(3px, 0, 0);
+}
+
+/* -------------------------------------------------- rows, tiles, plate links */
+
+.ig-screen-tile,
+.ig-section-tile {
+  position: relative;
+  transition:
+    background-color var(--ig-t-hover) var(--ig-ease-out),
+    transform var(--ig-t-hover) var(--ig-ease-out);
+}
+
+.ig-screen-tile:hover,
+.ig-section-tile:hover {
+  transform: translate3d(0, -1px, 0);
+}
+
+/* Directional arrow on the screen tiles. */
+.ig-screen-tile .ig-arrow {
+  transition: transform var(--ig-t-hover) var(--ig-ease-out);
+}
+.ig-screen-tile:hover .ig-arrow {
+  transform: translate3d(4px, 0, 0);
+}
+
+/* Index rows already slide their padding; add the marker illuminating. */
+.ig-index-row .ig-row-marker {
+  transition:
+    transform var(--ig-t-hover) var(--ig-ease-out),
+    filter var(--ig-t-hover) var(--ig-ease-out);
+}
+.ig-index-row:hover .ig-row-marker {
+  transform: scaleY(1.18);
+  filter: brightness(1.35);
+}
+
+.ig-plate-link {
+  transition:
+    border-color var(--ig-t-hover) var(--ig-ease-out),
+    box-shadow var(--ig-t-hover) var(--ig-ease-out);
+}
+.ig-plate-link:hover {
+  box-shadow:
+    0 0 0 1px var(--ig-glow-blue-soft),
+    var(--ig-lift-shadow);
+}
+
+/* The plate's engineering grid drifts very slowly — the only ambient motion
+   in the product, and confined to surfaces that are already a grid. */
+.ig-plate-grid {
+  animation: ig-grid-drift 44s linear infinite;
+}
+
+/* ------------------------------------------------------------------ controls */
+
+.ig-chip,
+.ig-sort,
+.ig-btn-primary,
+.ig-btn-danger,
+.ig-btn-ghost {
+  transform: translate3d(0, 0, 0);
+  transition:
+    border-color var(--ig-t-micro) var(--ig-ease-out),
+    color var(--ig-t-micro) var(--ig-ease-out),
+    background-color var(--ig-t-micro) var(--ig-ease-out),
+    transform var(--ig-t-micro) var(--ig-ease-out),
+    box-shadow var(--ig-t-micro) var(--ig-ease-out);
+}
+
+.ig-chip:hover,
+.ig-sort:hover,
+.ig-btn-primary:hover,
+.ig-btn-ghost:hover {
+  transform: translate3d(0, -1px, 0);
+}
+
+.ig-btn-primary:hover,
+.ig-sort:hover {
+  box-shadow: 0 0 0 1px var(--ig-glow-blue-soft);
+}
+
+/* Press: everything drops back flat, fast. No bounce. */
+.ig-chip:active,
+.ig-sort:active,
+.ig-btn-primary:active,
+.ig-btn-danger:active,
+.ig-btn-ghost:active {
+  transform: translate3d(0, 0, 0) scale(0.984);
+  transition-duration: var(--ig-t-press);
+}
+
+/* Sort direction arrow reacts to the cycle. */
+.ig-sort .ig-sort-arrow {
+  display: inline-block;
+  transition: transform var(--ig-t-hover) var(--ig-ease-out);
+}
+.ig-sort:hover .ig-sort-arrow {
+  transform: translate3d(0, -1.5px, 0);
+}
+
+/* Chips: the semantic dot lights up when its filter is engaged. */
+.ig-chip .ig-chip-dot {
+  transition: transform var(--ig-t-micro) var(--ig-ease-out);
+}
+.ig-chip[aria-pressed="true"] .ig-chip-dot {
+  transform: scale(1.22);
+}
+
+/* ------------------------------------------------------------------- search */
+
+.ig-search {
+  transition:
+    border-color var(--ig-t-micro) var(--ig-ease-out),
+    box-shadow var(--ig-t-hover) var(--ig-ease-out);
+}
+.ig-search[data-focused="true"] {
+  box-shadow: 0 0 0 3px var(--ig-glow-blue-soft);
+}
+
+.ig-search svg {
+  transition: transform var(--ig-t-hover) var(--ig-ease-out);
+}
+.ig-search[data-focused="true"] svg {
+  transform: scale(1.06);
+}
+
+.ig-iconbtn {
+  transition:
+    color var(--ig-t-micro) var(--ig-ease-out),
+    transform var(--ig-t-micro) var(--ig-ease-out);
+}
+.ig-iconbtn:hover {
+  transform: rotate(90deg);
+}
+
+/* Result count swaps without the number jumping the line. */
+.ig-count {
+  display: inline-block;
+  animation: ig-enter var(--ig-t-micro) var(--ig-ease-out) both;
+}
+
+/* Grid results settle in when a filter or sort changes. */
+.ig-results {
+  animation: ig-enter var(--ig-t-micro) var(--ig-ease-out) both;
+}
+
+/* ---------------------------------------------------------------- skeletons
+   A negative per-card delay desynchronises the shimmer across the grid, so the
+   loading state reads as a read head sweeping the index rather than every card
+   pulsing in lockstep. Negative delays start mid-cycle — no added wait. */
+
+[style*="--i"] .ig-skl {
+  animation-delay: calc(min(var(--i, 0), 8) * -120ms);
+}
+
+/* ------------------------------------------------------------------ meters
+   Threat / clearance / competency bars fill from the left when revealed. */
+
+.ig-meter-cell {
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform var(--ig-t-enter) var(--ig-ease-out);
+  transition-delay: calc(var(--c, 0) * 45ms);
+}
+.is-in .ig-meter-cell,
+.no-reveal .ig-meter-cell {
+  transform: scaleX(1);
+}
+
+/* Chronology bars draw the same way. */
+.ig-bar-fill {
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform var(--ig-t-plate) var(--ig-ease-out);
+}
+.is-in .ig-bar-fill,
+.no-reveal .ig-bar-fill {
+  transform: scaleX(1);
+}
+
+/* --------------------------------------------------------- panel hairlines */
+
+.ig-hairline {
+  transform-origin: left center;
+  animation: ig-rule var(--ig-t-plate) var(--ig-ease-out) both;
+}
+
+/* ------------------------------------------------------------------- links */
+
+.ig-textlink,
+.ig-quiet {
+  transition:
+    color var(--ig-t-micro) var(--ig-ease-out),
+    transform var(--ig-t-micro) var(--ig-ease-out);
+}
+.ig-quiet:hover {
+  transform: translate3d(1px, 0, 0);
+}
+.ig-back:hover {
+  transform: translate3d(-2px, 0, 0);
+}
+
+/* Seal on dossiers — a quiet acknowledgement, no more. */
+.ig-seal {
+  transition: border-color var(--ig-t-hover) var(--ig-ease-out);
+}
+.ig-seal:hover {
+  border-color: var(--ig-line-hover);
+}
+
+/* ==========================================================================
+   Reduced motion.
+   base.css already collapses every duration to ~0. These rules additionally
+   neutralise the *starting* states, so nothing can be left invisible or
+   mid-transform when motion is switched off.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-reveal].is-in,
+  [data-enter],
+  .ig-route {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .ig-meter-cell,
+  .ig-bar-fill,
+  .ig-hairline {
+    transform: scaleX(1) !important;
+    animation: none !important;
+  }
+
+  .ig-plate-grid,
+  .ig-scanline::before {
+    animation: none !important;
+  }
+  .ig-scanline {
+    display: none;
+  }
+
+  .ig-card:hover,
+  .ig-card:active,
+  .ig-screen-tile:hover,
+  .ig-section-tile:hover,
+  .ig-chip:hover,
+  .ig-chip:active,
+  .ig-sort:hover,
+  .ig-sort:active,
+  .ig-btn-primary:hover,
+  .ig-btn-primary:active,
+  .ig-btn-danger:active,
+  .ig-btn-ghost:hover,
+  .ig-btn-ghost:active,
+  .ig-quiet:hover,
+  .ig-back:hover,
+  .ig-iconbtn:hover {
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   Touch devices.
+   Hover is not a reliable signal here, and the read head would either never
+   fire or stick after a tap. Elevation and scan are dropped; the press state
+   remains, so every control still confirms the touch.
+   ========================================================================== */
+
+@media (hover: none) {
+  .ig-card:hover,
+  .ig-screen-tile:hover,
+  .ig-section-tile:hover,
+  .ig-chip:hover,
+  .ig-sort:hover,
+  .ig-btn-primary:hover,
+  .ig-btn-ghost:hover,
+  .ig-quiet:hover,
+  .ig-back:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .ig-scanline {
+    display: none;
+  }
+  .ig-iconbtn:hover {
+    transform: none;
+  }
+
+  /* Stagger is halved on touch — smaller viewports show fewer cards at once
+     and a long cascade reads as lag. */
+  :root {
+    --ig-stagger: 14ms;
+  }
+}

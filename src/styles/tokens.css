@@ -1,0 +1,69 @@
+/* InGen Archive — design tokens transcribed from the frozen .dc.html mockups.
+   Values are lifted verbatim; do not invent new ones. */
+:root {
+  /* Surfaces */
+  --ig-bg: #0b0f14;
+  --ig-surface: #0c1117;
+  --ig-surface-raised: #10161d;
+  --ig-surface-input: #0e131a;
+  --ig-plate: #e3e8ed;
+
+  /* Borders — 1px hairlines, square corners */
+  --ig-line: #1a222c;
+  --ig-line-soft: #161d26;
+  --ig-line-softer: #141b23;
+  --ig-line-strong: #232d38;
+  --ig-line-strongest: #28323d;
+  --ig-line-hover: #3d5568;
+  --ig-line-track: #1f2833;
+
+  /* Text.
+     --ig-text-6..9 were lifted from the original #5A6878 / #54626F / #4E5D6E /
+     #414F5C during the accessibility pass: all four failed WCAG AA (2.29–3.37:1
+     on #0B0F14) and two failed even the 3:1 non-text floor. Hue and the
+     four-step quiet-to-loud hierarchy are preserved; only luminance moved.
+     Every step now clears 4.5:1 on all three surfaces (#0B0F14/#0E131A/#10161D).
+     Verified by `npm test` — see test/contrast.test.ts. */
+  --ig-text: #e4e9ef;
+  --ig-text-bright: #dce6ef;
+  --ig-text-2: #bac6d2;
+  --ig-text-3: #9fb2c4;
+  --ig-text-4: #8895a5;
+  --ig-text-5: #7e8c9c;
+  --ig-text-6: #788ba0;
+  --ig-text-7: #748899;
+  --ig-text-8: #6f859d;
+  --ig-text-9: #6b8297;
+  --ig-text-10: #333f4c;
+  --ig-link: #8fa6bc;
+  --ig-link-hover: #bac6d2;
+
+  /* Reserved brand blue — active / identity only */
+  --ig-blue: #3ba7e0;
+  --ig-blue-rule: #2e9bd6;
+  --ig-blue-border: #2e5c7a;
+  --ig-blue-ink: #9fcdea;
+  --ig-blue-fill: #13202b;
+  --ig-blue-l5: #7cb9e0;
+
+  /* Semantic status */
+  --ig-green: #7acb9a;
+  --ig-red: #d2564d;
+  --ig-red-soft: #e08a84;
+  --ig-amber: #c98a2e;
+  --ig-amber-soft: #e0b36a;
+  --ig-archival: #b07a50;
+  --ig-slate: #5a6e82;
+  --ig-slate-deep: #3d5568;
+
+  /* Classified block */
+  --ig-classified-line: #3a2228;
+  --ig-classified-bg: #12141a;
+  --ig-classified-ink: #c8524b;
+  --ig-classified-text: #b7aba9;
+
+  /* Type */
+  --ig-display: "Archivo", sans-serif;
+  --ig-body: "IBM Plex Sans", system-ui, sans-serif;
+  --ig-mono: "IBM Plex Mono", monospace;
+}
