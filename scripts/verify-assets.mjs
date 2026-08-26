@@ -14,13 +14,21 @@ import { fileURLToPath } from "node:url";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const data = JSON.parse(readFileSync(join(root, "src/data/ingen.json"), "utf8"));
 
-const referenced = new Set([...Object.values(data.specimenImages), ...Object.values(data.personnelImages)]);
+const locationImages = JSON.parse(readFileSync(join(root, "src/data/location-images.json"), "utf8"));
+
+const referenced = new Set([
+  ...Object.values(data.specimenImages),
+  ...Object.values(data.personnelImages),
+  ...Object.values(locationImages),
+]);
 
 const missing = [...referenced].filter((p) => !existsSync(join(root, "public", p)));
 
-const onDisk = ["dinos", "personnel"].flatMap((folder) =>
-  readdirSync(join(root, "public/media", folder)).map((f) => `/media/${folder}/${f}`)
-);
+// Locations are optional and partially covered, so the folder may not exist yet.
+const onDisk = ["dinos", "personnel", "locations"].flatMap((folder) => {
+  const dir = join(root, "public/media", folder);
+  return existsSync(dir) ? readdirSync(dir).map((f) => `/media/${folder}/${f}`) : [];
+});
 const orphans = onDisk.filter((p) => !referenced.has(p));
 
 if (missing.length || orphans.length) {

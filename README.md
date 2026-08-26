@@ -185,6 +185,22 @@ Three, and no more. The motion pass added no visual redesign.
 
 Nothing else was re-themed, re-spaced, or added.
 
+## Adding location imagery
+
+Locations support real photography per record, with partial coverage by design:
+a location with a file shows it, one without keeps its technical plate.
+
+1. Drop images into `incoming/locations/`, named after the record id
+   (`isla-nublar.png`, `jurassic-park.jpg`, …). See the README in that folder
+   for the full id list.
+2. Run `npm run images:locations`.
+
+That converts to WebP at the 1200px cap, writes `public/media/locations/`,
+records the paths in `src/data/location-images.json`, and reports which records
+are still on a technical plate. Re-running is safe; deleting a file and
+re-running removes it from the map. `npm run verify:assets` covers these paths
+too, so a missing or orphaned location plate fails the build like any other.
+
 ## Imagery across divisions
 
 Only genetic assets and personnel carry photography. The four expansion divisions

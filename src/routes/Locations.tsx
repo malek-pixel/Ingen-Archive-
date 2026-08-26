@@ -104,7 +104,8 @@ export function LocationDetail() {
             security={record.security}
             tags={record.tags}
             relations={record.relations}
-            plateCaption="Site plan"
+            plateCaption={record.img ? "Site survey" : "Site plan"}
+            img={record.img}
             badges={[{ label: record.type }]}
             facts={[
               { label: "Region", value: record.region },

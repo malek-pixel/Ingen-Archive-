@@ -14,7 +14,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "verify:assets": "node scripts/verify-assets.mjs",
-    "images": "node scripts/optimize-images.mjs"
+    "images": "node scripts/optimize-images.mjs",
+    "images:locations": "node scripts/ingest-location-images.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",

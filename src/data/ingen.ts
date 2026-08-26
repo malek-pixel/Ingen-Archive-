@@ -3,6 +3,7 @@ import locationsRaw from "./locations.json";
 import floraRaw from "./flora.json";
 import facilitiesRaw from "./facilities.json";
 import operationsRaw from "./operations.json";
+import locationImages from "./location-images.json";
 
 import { ArchiveDataError, validateArchive, validateDivisions } from "./validate";
 import { recordHref } from "./divisions";
@@ -64,10 +65,15 @@ function build(
   const specimens = withImg(r.specimens, r.specimenImages);
   const personnel = withImg(r.personnel, r.personnelImages);
 
-  // Divisions added in the expansion phase carry no photographic plates; their
-  // dossiers render a technical plate instead. Empty string, never a broken path.
+  // Expansion divisions render a technical plate unless a real plate exists.
+  // Locations can carry photography per record — coverage is partial by design,
+  // so this is resolved per id rather than per division.
   const noImg = <T extends object>(list: T[]): WithImage<T>[] => list.map((rec) => ({ ...rec, img: "" }));
-  const locationRecords = noImg(locations);
+  const locationPlates = locationImages as Record<string, string>;
+  const locationRecords: WithImage<Location>[] = locations.map((rec) => ({
+    ...rec,
+    img: locationPlates[rec.id] ?? "",
+  }));
   const floraRecords = noImg(flora);
   const facilityRecords = noImg(facilities);
   const incidentRecords = noImg(incidents);
@@ -117,7 +123,7 @@ function build(
       subtitle: l.designation,
       status: l.status,
       security: l.security,
-      img: "",
+      img: l.img,
       href: recordHref("location", l.id),
       haystack: lower([
         l.name,

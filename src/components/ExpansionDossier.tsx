@@ -4,6 +4,7 @@ import { getRelatedRecords } from "../lib/archive";
 import { step } from "../lib/motion";
 import { ArchiveSeal, Watermark } from "./Chrome";
 import { TechnicalPlate } from "./TechnicalPlate";
+import { RecordImage } from "./RecordImage";
 import { FactRows, RelatedRecords, SecurityBadge, StatusInk, TagRow } from "./RecordChrome";
 
 /**
@@ -30,6 +31,7 @@ export function ExpansionDossier({
   children,
   relations,
   plateCaption,
+  img,
 }: {
   kind: RecordKind;
   id: string;
@@ -48,6 +50,8 @@ export function ExpansionDossier({
   children: ReactNode;
   relations?: Parameters<typeof getRelatedRecords>[2];
   plateCaption?: string;
+  /** Real plate for records that have one; falls back to the technical plate. */
+  img?: string;
 }) {
   const groups = getRelatedRecords(kind, id, relations);
 
@@ -159,7 +163,33 @@ export function ExpansionDossier({
         >
           <div data-enter="plate" style={{ ...step(2), border: "1px solid #1A222C" }}>
             <div style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden", background: "#E3E8ED" }}>
-              <TechnicalPlate kind={kind} fileId={fileId} caption={plateCaption} />
+              {img ? (
+                <>
+                  <RecordImage
+                    src={img}
+                    alt={`${name} — ${plateCaption ?? "reference plate"}`}
+                    loading="eager"
+                    plate
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  />
+                  <span
+                    style={{
+                      position: "absolute",
+                      left: 16,
+                      bottom: 13,
+                      padding: "3px 8px",
+                      background: "rgba(11,15,20,.72)",
+                      font: "500 11px 'IBM Plex Mono',monospace",
+                      letterSpacing: ".06em",
+                      color: "#BAC6D2",
+                    }}
+                  >
+                    {plateCaption ?? "Reference plate"} · {fileId}
+                  </span>
+                </>
+              ) : (
+                <TechnicalPlate kind={kind} fileId={fileId} caption={plateCaption} />
+              )}
             </div>
           </div>
 
