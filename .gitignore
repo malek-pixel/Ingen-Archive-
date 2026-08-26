@@ -9,3 +9,7 @@ dist
 
 # Local agent/editor tooling
 .claude
+
+# Source drops for the image pipeline; the WebP output is what ships.
+incoming/**
+!incoming/**/README.md
