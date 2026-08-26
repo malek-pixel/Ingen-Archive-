@@ -253,3 +253,105 @@ input::placeholder {
     max-width: 200px;
   }
 }
+
+/* Navigation grouping — added when the archive grew to six divisions.
+   The links keep the frozen tab treatment; only the grouping label is new. */
+/* The nav can never clip: if the divisions outgrow the bar at any width it
+   scrolls rather than cutting a register off. On wide screens it simply fits
+   and nothing scrolls. */
+.ig-nav {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.ig-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.ig-nav-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-left: 10px;
+  margin-left: 4px;
+  border-left: 1px solid var(--ig-line);
+}
+.ig-nav-group-label {
+  font: 500 8px var(--ig-mono);
+  letter-spacing: 0.17em;
+  color: var(--ig-text-8);
+  text-transform: uppercase;
+  padding: 8px 12px 0;
+  white-space: nowrap;
+}
+.ig-nav-group-items {
+  display: flex;
+  align-items: stretch;
+  min-height: 34px;
+}
+.ig-nav-group-items > a {
+  height: 100%;
+}
+.ig-searchlink.is-current {
+  border-color: var(--ig-blue-border);
+}
+
+/* Six divisions plus the brand lockup and session block is a wide bar. Things
+   are dropped in order of how little they cost the reader: first the search
+   label (the icon still reads), then the group scaffolding, then the session
+   wording, and finally the nav becomes its own scrollable row. */
+@media (max-width: 1520px) {
+  .ig-search-label {
+    display: none;
+  }
+}
+
+/* Laptop widths: the division icons go before any label does. Six icons cost
+   ~144px of bar, and the words carry the meaning on their own. */
+@media (max-width: 1340px) {
+  .ig-nav a svg {
+    display: none;
+  }
+  .ig-nav a {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+}
+
+@media (max-width: 1180px) {
+  .ig-nav-group-label {
+    display: none;
+  }
+  .ig-nav-group {
+    flex-direction: row;
+    align-items: stretch;
+    padding-left: 6px;
+    margin-left: 2px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .ig-session-label {
+    display: none;
+  }
+}
+
+/* Below the header wrap breakpoint the nav becomes its own scrollable row so
+   six divisions stay reachable without a menu the rest of the app does not use. */
+@media (max-width: 640px) {
+  .ig-nav {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .ig-nav::-webkit-scrollbar {
+    display: none;
+  }
+  .ig-nav-group {
+    border-left: none;
+    padding-left: 0;
+    margin-left: 0;
+  }
+}

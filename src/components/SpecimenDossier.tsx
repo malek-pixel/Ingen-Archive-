@@ -14,10 +14,17 @@ import {
 } from "../lib/derive";
 import { stagger, step, useReveal } from "../lib/motion";
 import { RecordImage } from "./RecordImage";
+import { RelatedRecords } from "./RecordChrome";
+import { getRelatedRecords } from "../lib/archive";
 
 /** The asset dossier body — shared by the detail route and the full-run gallery. */
 export function SpecimenDossier({ d }: { d: WithImage<Specimen> }) {
   const specsReveal = useReveal();
+  const related = getRelatedRecords("specimen", d.id, undefined, {
+    locations: d.locations,
+    facilities: d.facilities,
+    personnel: d.personnel,
+  });
   const threatReveal = useReveal();
   const t = Number(d.threat) || 0;
   const ink = threatInk(t, true);
@@ -330,6 +337,8 @@ export function SpecimenDossier({ d }: { d: WithImage<Specimen> }) {
               <Timeline events={incidents} />
             </div>
           )}
+
+          <RelatedRecords groups={related} />
 
           <div style={{ paddingTop: 28 }}>
             <ClassifiedBlock>{d.classified}</ClassifiedBlock>

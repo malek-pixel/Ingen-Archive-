@@ -1,8 +1,27 @@
 import raw from "./ingen.json";
-import { ArchiveDataError, validateArchive } from "./validate";
-import type { Archive, ArchiveStats, Person, Specimen, WithImage } from "./types";
+import locationsRaw from "./locations.json";
+import floraRaw from "./flora.json";
+import facilitiesRaw from "./facilities.json";
+import operationsRaw from "./operations.json";
 
-export type { Specimen, Person, ArchiveStats, WithImage, Archive } from "./types";
+import { ArchiveDataError, validateArchive, validateDivisions } from "./validate";
+import { recordHref } from "./divisions";
+import type {
+  Archive,
+  ArchiveEntry,
+  ArchiveStats,
+  Facility,
+  Flora,
+  Incident,
+  Location,
+  Person,
+  RecordKind,
+  SecurityLevel,
+  Specimen,
+  WithImage,
+} from "./types";
+
+export type * from "./types";
 export { ArchiveDataError } from "./validate";
 
 interface RawArchive {
@@ -13,8 +32,29 @@ interface RawArchive {
   stats: ArchiveStats;
 }
 
-function build(source: unknown): Archive {
-  const issues = validateArchive(source);
+/** Key for the flat entry index — ids are only unique within a division. */
+export const entryKey = (kind: RecordKind, id: string) => `${kind}:${id}`;
+
+/**
+ * Security classification for the two original divisions, which predate the
+ * common shape. Derived rather than stored so the source records stay untouched.
+ */
+const specimenSecurity = (d: Specimen): SecurityLevel =>
+  Number(d.threat) >= 5 ? "CRITICAL" : Number(d.threat) >= 4 ? "CLASSIFIED" : "RESTRICTED";
+
+const personSecurity = (p: Person): SecurityLevel =>
+  Number(p.clearance) >= 5 ? "CLASSIFIED" : Number(p.clearance) >= 4 ? "CONFIDENTIAL" : "INTERNAL";
+
+const lower = (parts: unknown[]) => parts.filter(Boolean).join(" ").toLowerCase();
+
+function build(
+  source: unknown,
+  locations: Location[],
+  flora: Flora[],
+  facilities: Facility[],
+  incidents: Incident[]
+): Archive {
+  const issues = [...validateArchive(source), ...validateDivisions({ locations, flora, facilities, incidents })];
   if (issues.length) throw new ArchiveDataError(issues);
 
   const r = source as RawArchive;
@@ -24,17 +64,173 @@ function build(source: unknown): Archive {
   const specimens = withImg(r.specimens, r.specimenImages);
   const personnel = withImg(r.personnel, r.personnelImages);
 
+  // Divisions added in the expansion phase carry no photographic plates; their
+  // dossiers render a technical plate instead. Empty string, never a broken path.
+  const noImg = <T extends object>(list: T[]): WithImage<T>[] => list.map((rec) => ({ ...rec, img: "" }));
+  const locationRecords = noImg(locations);
+  const floraRecords = noImg(flora);
+  const facilityRecords = noImg(facilities);
+  const incidentRecords = noImg(incidents);
+
+  const entries: ArchiveEntry[] = [
+    ...specimens.map((d) => ({
+      kind: "specimen" as const,
+      id: d.id,
+      fileId: d.fileId,
+      name: d.name,
+      subtitle: d.species,
+      status: d.status,
+      security: specimenSecurity(d),
+      img: d.img,
+      href: recordHref("specimen", d.id),
+      haystack: lower([
+        d.name,
+        d.species,
+        d.fileId,
+        d.codename,
+        d.diet,
+        d.classification,
+        d.threat,
+        d.contain,
+        d.status,
+        d.notes,
+        (d.incidents ?? []).join(" "),
+      ]),
+    })),
+    ...personnel.map((p) => ({
+      kind: "person" as const,
+      id: p.id,
+      fileId: p.fileId,
+      name: p.name,
+      subtitle: p.role,
+      status: p.status,
+      security: personSecurity(p),
+      img: p.img,
+      href: recordHref("person", p.id),
+      haystack: lower([p.name, p.role, p.dept, p.aff, p.nat, p.status, p.threat, p.tag, p.fileId, `L${p.clearance}`]),
+    })),
+    ...locationRecords.map((l) => ({
+      kind: "location" as const,
+      id: l.id,
+      fileId: l.fileId,
+      name: l.name,
+      subtitle: l.designation,
+      status: l.status,
+      security: l.security,
+      img: "",
+      href: recordHref("location", l.id),
+      haystack: lower([
+        l.name,
+        l.designation,
+        l.fileId,
+        l.type,
+        l.region,
+        l.status,
+        l.primaryFunction,
+        l.description,
+        l.tags.join(" "),
+      ]),
+    })),
+    ...floraRecords.map((f) => ({
+      kind: "flora" as const,
+      id: f.id,
+      fileId: f.fileId,
+      name: f.name,
+      subtitle: f.scientificName,
+      status: f.status,
+      security: f.security,
+      img: "",
+      href: recordHref("flora", f.id),
+      haystack: lower([
+        f.name,
+        f.scientificName,
+        f.fileId,
+        f.classification,
+        f.habitat,
+        f.era,
+        f.status,
+        f.notes,
+        f.tags.join(" "),
+      ]),
+    })),
+    ...facilityRecords.map((f) => ({
+      kind: "facility" as const,
+      id: f.id,
+      fileId: f.fileId,
+      name: f.name,
+      subtitle: f.designation,
+      status: f.status,
+      security: f.security,
+      img: "",
+      href: recordHref("facility", f.id),
+      haystack: lower([f.name, f.designation, f.fileId, f.type, f.function, f.status, f.description, f.tags.join(" ")]),
+    })),
+    ...incidentRecords.map((i) => ({
+      kind: "incident" as const,
+      id: i.id,
+      fileId: i.fileId,
+      name: i.name,
+      subtitle: `${i.year} · ${i.type}`,
+      status: i.status,
+      security: i.security,
+      img: "",
+      href: recordHref("incident", i.id),
+      haystack: lower([
+        i.name,
+        i.fileId,
+        i.type,
+        i.year,
+        i.date,
+        i.classification,
+        i.status,
+        i.summary,
+        i.tags.join(" "),
+      ]),
+    })),
+  ];
+
   return {
     specimens,
     personnel,
+    locations: locationRecords,
+    flora: floraRecords,
+    facilities: facilityRecords,
+    incidents: incidentRecords,
+
     stats: r.stats,
+    counts: {
+      specimen: specimens.length,
+      person: personnel.length,
+      location: locationRecords.length,
+      flora: floraRecords.length,
+      facility: facilityRecords.length,
+      incident: incidentRecords.length,
+      total: entries.length,
+    },
+
     specimenById: new Map(specimens.map((d) => [d.id, d])),
     personById: new Map(personnel.map((p) => [p.id, p])),
+    locationById: new Map(locationRecords.map((l) => [l.id, l])),
+    floraById: new Map(floraRecords.map((f) => [f.id, f])),
+    facilityById: new Map(facilityRecords.map((f) => [f.id, f])),
+    incidentById: new Map(incidentRecords.map((i) => [i.id, i])),
+    entries,
+    entryByKey: new Map(entries.map((e) => [entryKey(e.kind, e.id), e])),
   };
 }
 
 /** Parses and validates an arbitrary payload — exported for tests. */
-export const buildArchive = build;
+export const buildArchive = (
+  source: unknown,
+  divisions?: { locations?: Location[]; flora?: Flora[]; facilities?: Facility[]; incidents?: Incident[] }
+) =>
+  build(
+    source,
+    divisions?.locations ?? (locationsRaw as Location[]),
+    divisions?.flora ?? (floraRaw as Flora[]),
+    divisions?.facilities ?? (facilitiesRaw as Facility[]),
+    divisions?.incidents ?? (operationsRaw as Incident[])
+  );
 
 let cached: Archive | null = null;
 let failure: ArchiveDataError | null = null;
@@ -47,7 +243,13 @@ export function loadArchive(): Archive {
   if (cached) return cached;
   if (failure) throw failure;
   try {
-    cached = build(raw);
+    cached = build(
+      raw,
+      locationsRaw as Location[],
+      floraRaw as Flora[],
+      facilitiesRaw as Facility[],
+      operationsRaw as Incident[]
+    );
     return cached;
   } catch (err) {
     failure = err as ArchiveDataError;
@@ -55,3 +257,5 @@ export function loadArchive(): Archive {
     throw failure;
   }
 }
+
+export { division, recordHref } from "./divisions";

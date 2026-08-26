@@ -123,3 +123,111 @@ export const queryPersonnel = (records: WithImage<Person>[], query: string, filt
   });
 
 export { specimenHaystack, personHaystack };
+
+/* ========================================================================== */
+/*  Expansion divisions                                                        */
+/*                                                                             */
+/*  These filter ArchiveEntry rather than the raw record: the shared card and  */
+/*  the global search both work in entry space, so the index screens do too.   */
+/* ========================================================================== */
+
+import type { ArchiveEntry } from "../data/types";
+
+export const entryHaystack = (e: ArchiveEntry) => e.haystack;
+
+const statusIs = (re: RegExp) => (e: ArchiveEntry) => re.test(e.status.toUpperCase());
+const tagged = (tag: string) => (e: ArchiveEntry) => e.haystack.includes(tag);
+
+const byEntryName = (a: ArchiveEntry, b: ArchiveEntry) => a.name.localeCompare(b.name);
+const byFileId = (a: ArchiveEntry, b: ArchiveEntry) => a.fileId.localeCompare(b.fileId);
+
+/** Security runs least to most restricted; sorting descending surfaces the sensitive files. */
+const SECURITY_ORDER: Record<string, number> = {
+  PUBLIC: 0,
+  INTERNAL: 1,
+  RESTRICTED: 2,
+  CONFIDENTIAL: 3,
+  CLASSIFIED: 4,
+  CRITICAL: 5,
+};
+const bySecurity = (a: ArchiveEntry, b: ArchiveEntry) =>
+  (SECURITY_ORDER[b.security] ?? 0) - (SECURITY_ORDER[a.security] ?? 0) || byEntryName(a, b);
+
+const ENTRY_SORTS: SortDef<ArchiveEntry>[] = [
+  { label: "Record ID", dir: "↑", cmp: byFileId },
+  { label: "Name", dir: "↑", cmp: byEntryName },
+  { label: "Classification", dir: "↓", cmp: bySecurity },
+  { label: "Status", dir: "↑", cmp: (a, b) => a.status.localeCompare(b.status) || byEntryName(a, b) },
+];
+
+export const LOCATION_FILTERS: FilterDef<ArchiveEntry>[] = [
+  { key: "all", label: "All", match: () => true },
+  { key: "island", label: "Islands", match: tagged("island") },
+  { key: "park", label: "Park sites", match: tagged("park") },
+  { key: "operational", label: "Operational", dotInk: "#7ACB9A", match: statusIs(/ACTIVE/) },
+  { key: "lost", label: "Lost", dotInk: "#E08A84", match: statusIs(/DESTROYED|ABANDONED/) },
+  {
+    key: "uncontained",
+    label: "Uncontained",
+    dotInk: "#E0B36A",
+    match: (e) => /UNCONTAINED|ABANDONED|RESTRICTED/.test(e.status.toUpperCase()),
+  },
+];
+export const LOCATION_SORTS = ENTRY_SORTS;
+
+export const FLORA_FILTERS: FilterDef<ArchiveEntry>[] = [
+  { key: "all", label: "All", match: () => true },
+  { key: "cycad", label: "Cycads", match: tagged("cycad") },
+  { key: "conifer", label: "Conifers", match: tagged("conifer") },
+  { key: "angiosperm", label: "Angiosperms", match: tagged("angiosperm") },
+  { key: "fern", label: "Ferns", match: (e) => e.haystack.includes("fern") || e.haystack.includes("horsetail") },
+  { key: "toxic", label: "Toxic", dotInk: "#E0B36A", match: tagged("toxic") },
+  { key: "naturalised", label: "Naturalised", dotInk: "#7ACB9A", match: statusIs(/NATURALISED/) },
+];
+export const FLORA_SORTS = ENTRY_SORTS;
+
+export const FACILITY_FILTERS: FilterDef<ArchiveEntry>[] = [
+  { key: "all", label: "All", match: () => true },
+  { key: "lab", label: "Laboratories", match: tagged("laboratory") },
+  {
+    key: "containment",
+    label: "Containment",
+    match: (e) => e.haystack.includes("paddock") || e.haystack.includes("containment"),
+  },
+  {
+    key: "guest",
+    label: "Guest",
+    match: (e) => e.haystack.includes("resort") || e.haystack.includes("visitor") || e.haystack.includes("exhibition"),
+  },
+  { key: "operational", label: "Operational", dotInk: "#7ACB9A", match: statusIs(/ACTIVE/) },
+  { key: "lost", label: "Lost", dotInk: "#E08A84", match: statusIs(/DESTROYED|ABANDONED|DERELICT/) },
+];
+export const FACILITY_SORTS = ENTRY_SORTS;
+
+export const OPERATION_FILTERS: FilterDef<ArchiveEntry>[] = [
+  { key: "all", label: "All", match: () => true },
+  { key: "containment", label: "Containment", match: tagged("containment-failure") },
+  {
+    key: "dispersal",
+    label: "Dispersal",
+    match: (e) => e.haystack.includes("dispersal") || e.haystack.includes("release"),
+  },
+  { key: "catastrophic", label: "Catastrophic", dotInk: "#D2564D", match: (e) => e.haystack.includes("catastrophic") },
+  { key: "open", label: "Open files", dotInk: "#E0B36A", match: statusIs(/OPEN|SEALED/) },
+];
+/** Operations lead with chronology; an incident archive reads by date. */
+export const OPERATION_SORTS: SortDef<ArchiveEntry>[] = [
+  { label: "Chronological", dir: "↑", cmp: (a, b) => a.subtitle.localeCompare(b.subtitle) || byEntryName(a, b) },
+  { label: "Record ID", dir: "↑", cmp: byFileId },
+  { label: "Classification", dir: "↓", cmp: bySecurity },
+  { label: "Name", dir: "↑", cmp: byEntryName },
+];
+
+export const queryEntries = (
+  records: ArchiveEntry[],
+  query: string,
+  filter: string,
+  sortIndex: number,
+  filters: FilterDef<ArchiveEntry>[],
+  sorts: SortDef<ArchiveEntry>[]
+) => runQuery({ records, query, filter, sortIndex, filters, sorts, haystack: entryHaystack });

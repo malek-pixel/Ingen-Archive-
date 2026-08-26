@@ -20,7 +20,7 @@ describe("route smoke tests", () => {
   it("renders the archive index", async () => {
     renderAt("/");
     expect(await screen.findByRole("heading", { level: 1 })).toHaveTextContent(
-      "Every screen and every record in the archive."
+      "Central biological and operations record."
     );
     expect(screen.getByText("21 indexed specimens")).toBeTruthy();
     expect(screen.getByText("22 files on record")).toBeTruthy();
@@ -32,7 +32,7 @@ describe("route smoke tests", () => {
       "Master index of the InGen record system."
     );
     expect(screen.getByText("Incident chronology")).toBeTruthy();
-    expect(screen.getByText("43 records indexed")).toBeTruthy();
+    expect(screen.getByText("94 records indexed")).toBeTruthy();
   });
 
   it("renders the genetic asset index with every card", async () => {

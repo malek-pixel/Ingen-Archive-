@@ -16,6 +16,18 @@ const NotFound = lazy(() => import("./routes/NotFound"));
 const AllSpecimens = lazy(() => import("./routes/FullRun").then((m) => ({ default: m.AllSpecimens })));
 const AllPersonnel = lazy(() => import("./routes/FullRun").then((m) => ({ default: m.AllPersonnel })));
 
+// Expansion divisions. Index and dossier ship in one chunk per division —
+// they share the record data, so splitting them would double the download.
+const Locations = lazy(() => import("./routes/Locations"));
+const LocationDetail = lazy(() => import("./routes/Locations").then((m) => ({ default: m.LocationDetail })));
+const Paleobotany = lazy(() => import("./routes/Paleobotany"));
+const FloraDetail = lazy(() => import("./routes/Paleobotany").then((m) => ({ default: m.FloraDetail })));
+const Facilities = lazy(() => import("./routes/Facilities"));
+const FacilityDetail = lazy(() => import("./routes/Facilities").then((m) => ({ default: m.FacilityDetail })));
+const Operations = lazy(() => import("./routes/Operations"));
+const IncidentDetail = lazy(() => import("./routes/Operations").then((m) => ({ default: m.IncidentDetail })));
+const Search = lazy(() => import("./routes/Search"));
+
 /**
  * On navigation: scroll to the top (unless a hash targets a record in a full
  * run) and move focus to the new page's content.
@@ -71,6 +83,15 @@ export default function App() {
               <Route path="/personnel" element={<Personnel />} />
               <Route path="/personnel/all" element={<AllPersonnel />} />
               <Route path="/personnel/:id" element={<PersonDetail />} />
+              <Route path="/locations" element={<Locations />} />
+              <Route path="/locations/:id" element={<LocationDetail />} />
+              <Route path="/paleobotany" element={<Paleobotany />} />
+              <Route path="/paleobotany/:id" element={<FloraDetail />} />
+              <Route path="/facilities" element={<Facilities />} />
+              <Route path="/facilities/:id" element={<FacilityDetail />} />
+              <Route path="/operations" element={<Operations />} />
+              <Route path="/operations/:id" element={<IncidentDetail />} />
+              <Route path="/search" element={<Search />} />
               <Route path="/states" element={<States />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

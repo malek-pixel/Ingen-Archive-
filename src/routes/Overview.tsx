@@ -5,45 +5,10 @@ import { useArchive } from "../lib/useArchive";
 import { useDocumentTitle } from "../lib/useDocumentTitle";
 import { clearanceRowInk, threatRowInk } from "../lib/derive";
 import { stagger, step, useCountUp, useReveal } from "../lib/motion";
+import { DIVISIONS } from "../data/divisions";
 import { RecordImage } from "../components/RecordImage";
 
-const SCREENS = [
-  {
-    tag: "Home",
-    name: "Overview",
-    desc: "Archive landing with live counts, flagged assets and top clearance holders.",
-    href: "/dashboard",
-  },
-  {
-    tag: "Index",
-    name: "Genetic assets",
-    desc: "Searchable, filterable index of every indexed specimen.",
-    href: "/assets",
-  },
-  {
-    tag: "Index",
-    name: "Personnel",
-    desc: "Searchable, filterable index of every employment record.",
-    href: "/personnel",
-  },
-  {
-    tag: "Record",
-    name: "Asset dossier",
-    desc: "Full specimen record with threat profile and incident timeline.",
-    href: "/assets/indominus-rex",
-  },
-  {
-    tag: "Record",
-    name: "Personnel file",
-    desc: "Full employee record with clearance, profile and assignments.",
-    href: "/personnel/owen-grady",
-  },
-  {
-    tag: "System",
-    name: "System states",
-    desc: "Loading, no results, record not found and clearance denied.",
-    href: "/states",
-  },
+const RUNS = [
   {
     tag: "Run",
     name: "All asset dossiers",
@@ -55,6 +20,12 @@ const SCREENS = [
     name: "All personnel files",
     desc: "Every personnel record rendered as a full dossier.",
     href: "/personnel/all",
+  },
+  {
+    tag: "System",
+    name: "System states",
+    desc: "Loading, no results, record not found and clearance denied.",
+    href: "/states",
   },
 ];
 
@@ -105,16 +76,17 @@ export default function Overview() {
     "InGen Archive — master directory",
     "Master directory of every genetic asset and personnel file held under InGen custodianship."
   );
-  const { specimens, personnel, stats } = useArchive();
+  const { specimens, personnel, stats, counts } = useArchive();
   const tilesReveal = useReveal();
   const dinoReveal = useReveal();
   const peopleReveal = useReveal();
+  const runsReveal = useReveal();
 
   const heroStats = [
-    { value: stats.dTotal + stats.pTotal, label: "Records" },
-    { value: stats.dTotal, label: "Assets" },
-    { value: stats.pTotal, label: "Files" },
-    { value: SCREENS.length, label: "Screens" },
+    { value: counts.total, label: "Records" },
+    { value: DIVISIONS.length, label: "Divisions" },
+    { value: counts.specimen, label: "Assets" },
+    { value: counts.person, label: "Files" },
   ];
 
   const dinos = [...specimens].sort((a, b) => a.name.localeCompare(b.name));
@@ -144,7 +116,7 @@ export default function Overview() {
             marginBottom: 20,
           }}
         >
-          International Genetic Technologies &nbsp;·&nbsp; Complete directory
+          International Genetic Technologies &nbsp;·&nbsp; Master index
         </div>
         <h1
           data-enter
@@ -158,7 +130,7 @@ export default function Overview() {
             textWrap: "balance",
           }}
         >
-          Every screen and every record in the archive.
+          Central biological and operations record.
         </h1>
         <p
           data-enter
@@ -171,8 +143,8 @@ export default function Overview() {
             textWrap: "pretty",
           }}
         >
-          Each genetic asset and personnel file has its own complete dossier. Open a full run to read them end to end,
-          or jump straight to a single record.
+          Genetic assets, personnel, locations, paleobotany, facilities and operations, held under a single index. Every
+          record carries its own dossier and its links to every other file that references it.
         </p>
         <div
           data-enter
@@ -194,8 +166,10 @@ export default function Overview() {
       <main id="main">
         <section style={{ padding: "0 clamp(20px,3vw,40px) clamp(34px,4vw,44px)" }}>
           <div style={{ ...sectionHead, flexWrap: "nowrap" }}>
-            <h2 style={h2}>Screens</h2>
-            <span style={note}>Eight views across the archive</span>
+            <h2 style={h2}>Divisions</h2>
+            <span style={note}>
+              {counts.total} records across {DIVISIONS.length} divisions
+            </span>
           </div>
           <div
             ref={tilesReveal}
@@ -207,10 +181,10 @@ export default function Overview() {
               border: "1px solid #1A222C",
             }}
           >
-            {SCREENS.map((s, i) => (
+            {DIVISIONS.map((d, i) => (
               <Link
-                key={s.name}
-                to={s.href}
+                key={d.kind}
+                to={`/${d.path}`}
                 className="ig-screen-tile"
                 data-reveal
                 style={{
@@ -233,15 +207,21 @@ export default function Overview() {
                       textTransform: "uppercase",
                     }}
                   >
-                    {s.tag}
+                    {d.badge}
                   </span>
-                  <span className="ig-arrow" style={{ font: "500 13px 'IBM Plex Sans',sans-serif", color: "#8FA6BC" }}>
-                    →
+                  <span
+                    style={{
+                      font: "500 17px 'IBM Plex Mono',monospace",
+                      color: "#9FB2C4",
+                      fontVariantNumeric: "tabular-nums",
+                    }}
+                  >
+                    {counts[d.kind]}
                   </span>
                 </div>
-                <div style={{ font: "700 18px 'Archivo',sans-serif", letterSpacing: "-.02em" }}>{s.name}</div>
+                <div style={{ font: "700 18px 'Archivo',sans-serif", letterSpacing: "-.02em" }}>{d.label}</div>
                 <div style={{ font: "400 13px/1.55 'IBM Plex Sans',sans-serif", color: "#7E8C9C", textWrap: "pretty" }}>
-                  {s.desc}
+                  {d.blurb}
                 </div>
               </Link>
             ))}
@@ -371,6 +351,62 @@ export default function Overview() {
                 >
                   L{p.clearance}
                 </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section style={{ padding: "0 clamp(20px,3vw,40px) clamp(48px,6vw,64px)" }}>
+          <div style={{ ...sectionHead, flexWrap: "nowrap" }}>
+            <h2 style={h2}>Archive tools</h2>
+            <span style={note}>Full runs and interface reference</span>
+          </div>
+          <div
+            ref={runsReveal}
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill,minmax(280px,1fr))",
+              gap: 1,
+              background: "#1A222C",
+              border: "1px solid #1A222C",
+            }}
+          >
+            {RUNS.map((r, i) => (
+              <Link
+                key={r.name}
+                to={r.href}
+                className="ig-screen-tile"
+                data-reveal
+                style={{
+                  ...stagger(i),
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 10,
+                  padding: 22,
+                  background: "#0B0F14",
+                  textDecoration: "none",
+                  color: "inherit",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                  <span
+                    style={{
+                      font: "500 10.5px 'IBM Plex Sans',sans-serif",
+                      letterSpacing: ".11em",
+                      color: "#748899",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {r.tag}
+                  </span>
+                  <span className="ig-arrow" style={{ font: "500 13px 'IBM Plex Sans',sans-serif", color: "#8FA6BC" }}>
+                    →
+                  </span>
+                </div>
+                <div style={{ font: "700 18px 'Archivo',sans-serif", letterSpacing: "-.02em" }}>{r.name}</div>
+                <div style={{ font: "400 13px/1.55 'IBM Plex Sans',sans-serif", color: "#7E8C9C", textWrap: "pretty" }}>
+                  {r.desc}
+                </div>
               </Link>
             ))}
           </div>

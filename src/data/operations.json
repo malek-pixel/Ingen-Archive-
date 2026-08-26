@@ -1,0 +1,461 @@
+[
+  {
+    "id": "isla-nublar-1993",
+    "slug": "isla-nublar-1993",
+    "fileId": "ING-OPS-001",
+    "name": "Isla Nublar Containment Failure",
+    "date": "June 1993",
+    "year": "1993",
+    "type": "Containment failure — total site loss",
+    "severity": 5,
+    "classification": "CATASTROPHIC — SITE ABANDONED",
+    "status": "CLOSED",
+    "security": "CLASSIFIED",
+    "summary": "An endorsement inspection intended to satisfy the park's underwriters coincided with a deliberate shutdown of the island's security systems by an InGen employee acting for a competitor. Every powered barrier on Isla Nublar failed simultaneously during a tropical storm. Three fatalities, total loss of the site, and the permanent abandonment of the first park build.",
+    "timeline": [
+      {
+        "label": "Inspection party arrives",
+        "detail": "Endorsement inspection begins with two palaeontologists, a mathematician and legal counsel touring the completed circuit."
+      },
+      {
+        "label": "Systems shutdown initiated",
+        "detail": "Chief programmer disables security systems to mask the theft of viable embryos, and departs the control room."
+      },
+      {
+        "label": "Barrier failure during storm",
+        "detail": "Perimeter power drops across every enclosure as a tropical storm makes landfall. The tyrannosaur paddock fails first."
+      },
+      {
+        "label": "Control room unmanned",
+        "detail": "Attempt to restore systems requires a full shutdown and manual restart. The senior engineer does not return from the maintenance shed."
+      },
+      {
+        "label": "Raptor containment lost",
+        "detail": "Restart restores power to the fences but releases the Velociraptor holding pen. Game warden killed during the response."
+      },
+      {
+        "label": "Evacuation",
+        "detail": "Survivors reach the helipad and evacuate. Site is abandoned within the week."
+      }
+    ],
+    "outcome": "Site abandoned; park never opened. Embryo theft succeeded in intent but the material was lost on the island and never recovered. The failure was subsequently classified as structural rather than zoological.",
+    "notes": "The single point of failure was administrative, not biological: one unaudited employee held root access to every system on the island with no manual fallback and no second signature. Independent enclosure circuits became mandatory in all later builds.",
+    "tags": ["containment-failure", "nublar", "1993", "catastrophic", "espionage"],
+    "relations": {
+      "locations": ["isla-nublar", "jurassic-park", "ingen-hq"],
+      "facilities": ["visitor-centre", "trex-paddock", "hammond-creation-lab"],
+      "personnel": [
+        "john-hammond",
+        "alan-grant",
+        "ellie-sattler",
+        "ian-malcolm",
+        "dennis-nedry",
+        "robert-muldoon",
+        "ray-arnold",
+        "lewis-dodgson"
+      ]
+    }
+  },
+  {
+    "id": "isla-sorna-1995",
+    "slug": "isla-sorna-1995",
+    "fileId": "ING-OPS-002",
+    "name": "Site B Evacuation — Hurricane Clarissa",
+    "date": "1995",
+    "year": "1995",
+    "type": "Site evacuation — asset release",
+    "severity": 4,
+    "classification": "MAJOR — UNCONTROLLED RELEASE",
+    "status": "CLOSED",
+    "security": "CLASSIFIED",
+    "summary": "Hurricane Clarissa forced the evacuation of Isla Sorna in under seventy-two hours. Staff released assets from containment rather than destroy them, and left. No recovery operation was mounted. The released population survived, bred, and established the ecosystem that Site B is now studied for.",
+    "timeline": [
+      {
+        "label": "Storm track confirmed",
+        "detail": "Category-four system tracks directly across Las Cinco Muertes. Full evacuation ordered."
+      },
+      {
+        "label": "Release decision",
+        "detail": "Site staff open containment rather than cull. The decision is not recorded as authorised at corporate level."
+      },
+      {
+        "label": "Evacuation completes",
+        "detail": "All personnel off-island. Production infrastructure left running down under its own power."
+      },
+      {
+        "label": "Site written off",
+        "detail": "Sorna is removed from active operations. No return is scheduled and none takes place."
+      }
+    ],
+    "outcome": "Permanent loss of the production site. Unplanned establishment of a self-sustaining population that has since outlived every managed InGen ecosystem.",
+    "notes": "Recorded here because every later Sorna file depends on it. The release decision was informal and is the origin point of the archive's most valuable ecological dataset.",
+    "tags": ["evacuation", "sorna", "1995", "release", "site-b"],
+    "relations": {
+      "locations": ["isla-sorna", "sorna-interior"],
+      "facilities": ["sorna-compound", "sorna-hatchery", "sorna-worker-village"]
+    }
+  },
+  {
+    "id": "isla-sorna-1997",
+    "slug": "isla-sorna-1997",
+    "fileId": "ING-OPS-003",
+    "name": "Site B Expedition and San Diego Incident",
+    "date": "1997",
+    "year": "1997",
+    "type": "Unauthorised expedition — mainland asset release",
+    "severity": 5,
+    "classification": "CATASTROPHIC — MAINLAND EXPOSURE",
+    "status": "CLOSED",
+    "security": "CLASSIFIED",
+    "summary": "Two parties reached Isla Sorna simultaneously: a research team documenting the population, and an InGen capture operation extracting assets for a mainland exhibition. The capture operation failed on the island and again in transit. An adult tyrannosaur was released into San Diego, producing the first documented urban asset event.",
+    "timeline": [
+      {
+        "label": "Research team lands",
+        "detail": "Small documentation team reaches the interior basin to record the population in situ."
+      },
+      {
+        "label": "Capture operation arrives",
+        "detail": "InGen hunting party lands with vehicles and equipment to take live assets for mainland exhibition."
+      },
+      {
+        "label": "Base camp destroyed",
+        "detail": "Both parties lose equipment and personnel after an injured infant tyrannosaur is taken into the research trailer."
+      },
+      {
+        "label": "Transport departs with cargo",
+        "detail": "An adult tyrannosaur is shipped to the mainland. Crew is lost in transit and the vessel arrives under no effective control."
+      },
+      {
+        "label": "San Diego release",
+        "detail": "Asset moves through the urban area before being lured back to the vessel and shipped to Isla Sorna."
+      }
+    ],
+    "outcome": "Mainland exhibition project cancelled. Corporate leadership replaced. Isla Sorna placed under international protection, ending InGen's ability to operate there legally.",
+    "notes": "The first occasion an asset entered a populated mainland area. Every subsequent containment policy is written against this precedent.",
+    "tags": ["expedition", "sorna", "1997", "san-diego", "mainland", "catastrophic"],
+    "relations": {
+      "locations": ["isla-sorna", "sorna-interior"],
+      "facilities": ["sorna-compound", "sorna-hatchery"],
+      "personnel": ["ian-malcolm", "sarah-harding", "nick-van-owen", "peter-ludlow", "john-hammond"]
+    }
+  },
+  {
+    "id": "isla-sorna-2001",
+    "slug": "isla-sorna-2001",
+    "fileId": "ING-OPS-004",
+    "name": "Site B Private Landing",
+    "date": "2001",
+    "year": "2001",
+    "type": "Unauthorised landing — search and rescue",
+    "severity": 3,
+    "classification": "SERIOUS — THIRD-PARTY EXPOSURE",
+    "status": "CLOSED",
+    "security": "RESTRICTED",
+    "summary": "A private party landed on Isla Sorna without authorisation to search for a missing person. The aircraft was lost on landing. The party survived eight days on the island and was recovered by military assets, producing the first close observation of Sorna's nesting behaviour and its resident spinosaurid.",
+    "timeline": [
+      {
+        "label": "Unauthorised landing",
+        "detail": "Private aircraft lands on a disused service strip. Aircraft is destroyed almost immediately."
+      },
+      {
+        "label": "Party moves inland",
+        "detail": "Survivors cross the interior basin on foot, passing through the abandoned worker village and compound."
+      },
+      {
+        "label": "Nesting site contact",
+        "detail": "Party enters an active Velociraptor nesting site. Direct observation of vocal coordination and egg-recovery behaviour is recorded."
+      },
+      {
+        "label": "Recovery",
+        "detail": "Party reaches the coast and is extracted by military units after eight days on the island."
+      }
+    ],
+    "outcome": "All survivors recovered. Site protection unchanged. Behavioural observations from the landing remain among the most detailed InGen holds on wild-population Velociraptor.",
+    "notes": "Value of this file is scientific rather than operational. The nesting and vocalisation observations were made under conditions no InGen programme could have arranged.",
+    "tags": ["sorna", "2001", "landing", "nesting", "behaviour"],
+    "relations": {
+      "locations": ["isla-sorna", "sorna-interior"],
+      "facilities": ["sorna-worker-village", "sorna-compound"],
+      "personnel": ["alan-grant"]
+    }
+  },
+  {
+    "id": "ile-saint-hubert-2010",
+    "slug": "ile-saint-hubert-2010",
+    "fileId": "ING-OPS-005",
+    "name": "Saint-Hubert Programme Termination",
+    "date": "2010",
+    "year": "2010",
+    "type": "Facility loss — restricted programme",
+    "severity": 5,
+    "classification": "CATASTROPHIC — PROGRAMME SEALED",
+    "status": "SEALED",
+    "security": "CRITICAL",
+    "summary": "Staffed operations at the Île Saint-Hubert research station ended following a containment event involving assets from the restricted mutation programme. The station was sealed with assets alive on site. No recovery, cull or inspection has been authorised since.",
+    "timeline": [
+      {
+        "label": "Programme escalation",
+        "detail": "Restricted work proceeds past exhibition-viable parameters. Several assets are produced with no assigned exhibition classification."
+      },
+      {
+        "label": "Containment event",
+        "detail": "Containment is lost within the station. Details are held at Level 5 and are not reproduced in this summary."
+      },
+      {
+        "label": "Station sealed",
+        "detail": "Surviving personnel evacuate. Station is sealed from the outside with assets alive within it."
+      },
+      {
+        "label": "Programme terminated",
+        "detail": "Restricted mutation work is ended on paper. Material and specimens remain on the island."
+      }
+    ],
+    "outcome": "Programme terminated administratively. Island retains a viable and uncontained population. Access prohibited without Level 5 authorisation.",
+    "notes": "The file is retained at CRITICAL because the assets are extant, not because the programme continues. Sealing a facility is not containment; it is deferral.",
+    "tags": ["saint-hubert", "2010", "restricted", "sealed", "catastrophic"],
+    "relations": {
+      "locations": ["ile-saint-hubert"],
+      "facilities": ["saint-hubert-lab"],
+      "specimens": ["distortus-rex"]
+    }
+  },
+  {
+    "id": "jurassic-world-2015",
+    "slug": "jurassic-world-2015",
+    "fileId": "ING-OPS-006",
+    "name": "Jurassic World Containment Failure",
+    "date": "December 2015",
+    "year": "2015",
+    "type": "Containment failure — park evacuation",
+    "severity": 5,
+    "classification": "CATASTROPHIC — SITE EVACUATED",
+    "status": "CLOSED",
+    "security": "CLASSIFIED",
+    "summary": "The Indominus rex asset escaped Paddock 11 by inducing staff to open the enclosure, then moved south through the park. A pterosaur aviary breach during the response released flying assets over the resort core. Twenty thousand guests were evacuated; the park never reopened.",
+    "timeline": [
+      {
+        "label": "Enclosure assessed as breached",
+        "detail": "Thermal tracking places the asset outside Paddock 11. Staff enter to inspect. The asset has not left."
+      },
+      {
+        "label": "Asset escapes",
+        "detail": "Enclosure door is opened from inside the containment area. The asset moves into Sector 5 and disables its own tracking implant."
+      },
+      {
+        "label": "Response force lost",
+        "detail": "Asset Containment Unit deployed with non-lethal equipment against a threat profile that did not match the asset's actual capability."
+      },
+      {
+        "label": "Aviary breach",
+        "detail": "Pterosaur aviary is compromised during the aerial response. Flying assets disperse over Main Street."
+      },
+      {
+        "label": "Guest evacuation",
+        "detail": "Full evacuation of the resort core. No guest fatalities attributable to the evacuation itself."
+      },
+      {
+        "label": "Asset neutralised",
+        "detail": "Indominus rex is killed at the lagoon perimeter by the resident marine asset following a pack engagement."
+      }
+    ],
+    "outcome": "Park closed permanently. Masrani Global leadership lost. The hybrid programme was suspended, though not before its genetic material had been duplicated off-site.",
+    "notes": "The asset's file was written by the division that created it and omitted thermal concealment and tracking-implant awareness. Containment was specified against that file. This is the central finding of the review.",
+    "tags": ["containment-failure", "nublar", "2015", "indominus", "catastrophic", "evacuation"],
+    "relations": {
+      "locations": ["isla-nublar", "jurassic-world", "nublar-north", "nublar-lagoon"],
+      "facilities": ["indominus-paddock", "raptor-paddock", "main-street", "lagoon", "hammond-creation-lab"],
+      "specimens": ["indominus-rex", "blue", "delta", "echo", "charlie", "mosasaurus", "pteranodon"],
+      "personnel": ["owen-grady", "claire-dearing", "simon-masrani", "henry-wu", "vic-hoskins", "barry-sembene"]
+    }
+  },
+  {
+    "id": "nublar-eruption-2018",
+    "slug": "nublar-eruption-2018",
+    "fileId": "ING-OPS-007",
+    "name": "Mount Sibo Eruption",
+    "date": "2018",
+    "year": "2018",
+    "type": "Natural event — total site loss",
+    "severity": 5,
+    "classification": "CATASTROPHIC — SITE DESTROYED",
+    "status": "CLOSED",
+    "security": "RESTRICTED",
+    "summary": "Mount Sibo erupted, destroying Isla Nublar and every structure on it. The volcano had been logged as dormant in the 1982 site survey and was never re-assessed. Assets remaining on the island were lost except for those removed during the rescue operation immediately preceding the event.",
+    "timeline": [
+      {
+        "label": "Activity confirmed",
+        "detail": "Seismic monitoring establishes an imminent eruption. Public debate follows over whether to intervene."
+      },
+      {
+        "label": "Rescue operation launched",
+        "detail": "A privately funded operation lands to remove viable assets ahead of the eruption."
+      },
+      {
+        "label": "Eruption",
+        "detail": "Mount Sibo erupts. Pyroclastic flow crosses the island. Structures and remaining assets are lost."
+      },
+      {
+        "label": "Island lost",
+        "detail": "Isla Nublar ceases to be habitable. The lease is not renewed."
+      }
+    ],
+    "outcome": "Total loss of the primary exhibition site. The rescue operation's true purpose — asset acquisition for private sale — was not disclosed to its participants.",
+    "notes": "The 1982 survey classified Sibo as dormant on a single assessment and the classification was carried forward unexamined for thirty-six years. No later survey was commissioned by either owner.",
+    "tags": ["eruption", "nublar", "2018", "site-loss", "catastrophic"],
+    "relations": {
+      "locations": ["isla-nublar", "jurassic-world", "nublar-lagoon", "nublar-north"],
+      "facilities": ["hammond-creation-lab", "lagoon", "visitor-centre"],
+      "specimens": ["mosasaurus"]
+    }
+  },
+  {
+    "id": "fallen-kingdom-2018",
+    "slug": "fallen-kingdom-2018",
+    "fileId": "ING-OPS-008",
+    "name": "Lockwood Estate Asset Dispersal",
+    "date": "2018",
+    "year": "2018",
+    "type": "Unauthorised sale — mainland dispersal",
+    "severity": 5,
+    "classification": "CATASTROPHIC — UNCONTROLLED DISPERSAL",
+    "status": "OPEN",
+    "security": "CLASSIFIED",
+    "summary": "Assets removed from Isla Nublar under the guise of a rescue operation were transported to the Lockwood Estate in Northern California and offered to private buyers at auction. The auction was interrupted, the holding cages were breached, and surviving assets were released into the surrounding region.",
+    "timeline": [
+      {
+        "label": "Assets shipped to mainland",
+        "detail": "Animals removed from Isla Nublar are transported by sea and road to the estate sub-levels."
+      },
+      {
+        "label": "Auction convened",
+        "detail": "Private international buyers bid on live assets, including a hybrid produced specifically for sale."
+      },
+      {
+        "label": "Auction disrupted",
+        "detail": "Proceedings are interrupted. A hybrid asset escapes its handlers within the building."
+      },
+      {
+        "label": "Containment breached",
+        "detail": "Hydrogen cyanide leak in the holding level forces a choice between releasing the caged assets or losing them."
+      },
+      {
+        "label": "Dispersal",
+        "detail": "Surviving assets are released to open ground and disperse into the Northern California region."
+      }
+    ],
+    "outcome": "The largest uncontrolled dispersal of InGen genetic assets on record. Buyers were private and international; the majority of sold assets have never been located. File remains open.",
+    "notes": "This is the point at which the archive ceases to describe a contained population. Every subsequent record assumes assets exist outside any operator's control.",
+    "tags": ["dispersal", "lockwood", "2018", "auction", "open", "catastrophic"],
+    "relations": {
+      "locations": ["lockwood-estate", "isla-nublar"],
+      "facilities": ["lockwood-sublevel"],
+      "specimens": ["blue", "baryonyx", "carnotaurus", "ankylosaurus"],
+      "personnel": [
+        "owen-grady",
+        "claire-dearing",
+        "benjamin-lockwood",
+        "maisie-lockwood",
+        "henry-wu",
+        "zia-rodriguez",
+        "franklin-webb",
+        "eli-mills"
+      ]
+    }
+  },
+  {
+    "id": "dominion-2022",
+    "slug": "dominion-2022",
+    "fileId": "ING-OPS-009",
+    "name": "Biosyn Valley Pathogen Event",
+    "date": "2022",
+    "year": "2022",
+    "type": "Competitor programme exposure",
+    "severity": 4,
+    "classification": "MAJOR — EXTERNAL PROGRAMME",
+    "status": "CLOSED",
+    "security": "CONFIDENTIAL",
+    "summary": "An engineered locust vector developed at the Biosyn Valley research complex was released into the agricultural chain, destroying crops selectively while sparing seed lines sold by its developer. Exposure of the programme coincided with a containment failure and fire within the valley sanctuary.",
+    "timeline": [
+      {
+        "label": "Vector deployment observed",
+        "detail": "Engineered locusts appear in agricultural regions, consuming all crops except those grown from a single supplier's seed."
+      },
+      {
+        "label": "Independent investigation",
+        "detail": "Researchers obtain a specimen and trace its genetics to the valley complex."
+      },
+      {
+        "label": "Programme exposed",
+        "detail": "Evidence of deliberate design reaches outside the organisation. Internal control of the facility breaks down."
+      },
+      {
+        "label": "Containment and fire",
+        "detail": "Valley containment fails during the response. Fire destroys part of the laboratory level and the amber sample vault."
+      },
+      {
+        "label": "Leadership removed",
+        "detail": "Programme is terminated and the responsible executive is removed. The sanctuary continues to operate."
+      }
+    ],
+    "outcome": "Pathogen programme terminated. The valley sanctuary remains operational and continues to hold the largest concentrated population of InGen-derived assets outside Isla Sorna.",
+    "notes": "Retained in this archive because a competitor now controls both a renewable amber source and a substantial share of our genetic legacy. The assets were never the point of the 2022 programme.",
+    "tags": ["biosyn", "2022", "pathogen", "competitor", "major"],
+    "relations": {
+      "locations": ["biosyn-valley"],
+      "facilities": ["biosyn-research-complex", "biosyn-amber-mine"],
+      "personnel": [
+        "lewis-dodgson",
+        "henry-wu",
+        "ian-malcolm",
+        "ellie-sattler",
+        "alan-grant",
+        "owen-grady",
+        "claire-dearing",
+        "kayla-watts",
+        "maisie-lockwood"
+      ],
+      "specimens": ["giganotosaurus", "blue", "therizinosaurus"]
+    }
+  },
+  {
+    "id": "embryo-loss-1993",
+    "slug": "embryo-loss-1993",
+    "fileId": "ING-OPS-010",
+    "name": "Genetic Material Loss — Industrial Espionage",
+    "date": "June 1993",
+    "year": "1993",
+    "type": "Industrial espionage — genetic material",
+    "severity": 4,
+    "classification": "MAJOR — MATERIAL UNRECOVERED",
+    "status": "OPEN",
+    "security": "CRITICAL",
+    "summary": "Fifteen viable embryos representing the full species catalogue were removed from the Hammond Creation Laboratory by an InGen employee acting for a competitor. The carrier was lost on Isla Nublar during the containment failure and the material was never recovered. The recruitment channel was never closed.",
+    "timeline": [
+      {
+        "label": "Recruitment",
+        "detail": "A competitor recruits an InGen contractor with privileged systems access. Payment is arranged off the books."
+      },
+      {
+        "label": "Extraction",
+        "detail": "Fifteen embryos are removed from cold storage into a concealed field carrier during a systems shutdown."
+      },
+      {
+        "label": "Carrier lost",
+        "detail": "The employee does not reach the eastern dock. The carrier is lost in the field and never recovered."
+      },
+      {
+        "label": "Investigation stalls",
+        "detail": "The competitor's involvement is understood but not provable. No prosecution follows."
+      }
+    ],
+    "outcome": "Material presumed destroyed by exposure but never confirmed. The originating competitor later acquired InGen genetic assets by other means and now operates a rival programme at scale.",
+    "notes": "Filed separately from the 1993 containment failure because it has a different cause, a different perpetrator and a different status. The containment file is closed. This one is not.",
+    "tags": ["espionage", "1993", "embryos", "open", "dodgson", "nedry"],
+    "relations": {
+      "locations": ["isla-nublar", "ingen-hq", "biosyn-valley"],
+      "facilities": ["hammond-creation-lab"],
+      "personnel": ["dennis-nedry", "lewis-dodgson", "henry-wu", "john-hammond"],
+      "incidents": ["isla-nublar-1993"]
+    }
+  }
+]

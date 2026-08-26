@@ -162,3 +162,176 @@ export function validateArchive(raw: unknown): string[] {
   }
   return issues;
 }
+
+/* ========================================================================== */
+/*  Expansion divisions                                                        */
+/* ========================================================================== */
+
+import { SECURITY_LEVELS } from "./types";
+import type { Facility, Flora, Incident, Location } from "./types";
+
+const SECURITY = new Set<string>(SECURITY_LEVELS);
+
+const COMMON: [string, Kind, boolean?][] = [
+  ["id", "string"],
+  ["fileId", "string"],
+  ["name", "string"],
+  ["status", "string"],
+  ["notes", "string"],
+  ["tags", "string[]"],
+  ["security", "string"],
+];
+
+const LOCATION_FIELDS: [string, Kind, boolean?][] = [
+  ...COMMON,
+  ["designation", "string"],
+  ["type", "string"],
+  ["region", "string"],
+  ["environment", "string"],
+  ["terrain", "string"],
+  ["climate", "string"],
+  ["established", "string"],
+  ["decommissioned", "string", true],
+  ["primaryFunction", "string"],
+  ["description", "string"],
+  ["inGenInvolvement", "string"],
+  ["historicalNotes", "string", true],
+];
+
+const FLORA_FIELDS: [string, Kind, boolean?][] = [
+  ...COMMON,
+  ["scientificName", "string"],
+  ["classification", "string"],
+  ["era", "string"],
+  ["habitat", "string"],
+  ["distribution", "string"],
+  ["growth", "string"],
+  ["toxicity", "string"],
+  ["ecologicalRole", "string"],
+  ["reconstruction", "string"],
+  ["researchValue", "string"],
+  ["genome", "number", true],
+];
+
+const FACILITY_FIELDS: [string, Kind, boolean?][] = [
+  ...COMMON,
+  ["designation", "string"],
+  ["type", "string"],
+  ["location", "string"],
+  ["established", "string"],
+  ["decommissioned", "string", true],
+  ["function", "string"],
+  ["description", "string"],
+  ["capacity", "string", true],
+  ["condition", "string"],
+];
+
+const INCIDENT_FIELDS: [string, Kind, boolean?][] = [
+  ...COMMON,
+  ["slug", "string"],
+  ["date", "string"],
+  ["year", "string"],
+  ["type", "string"],
+  ["severity", "number"],
+  ["classification", "string"],
+  ["summary", "string"],
+  ["outcome", "string"],
+];
+
+const RELATION_KEYS = ["specimens", "personnel", "locations", "facilities", "incidents", "flora"];
+
+export interface DivisionData {
+  locations: Location[];
+  flora: Flora[];
+  facilities: Facility[];
+  incidents: Incident[];
+}
+
+/**
+ * Validates the expansion divisions, including referential integrity: a
+ * cross-link pointing at a record that does not exist would render a dead
+ * link in a dossier, so it fails here instead.
+ */
+export function validateDivisions(data: DivisionData): string[] {
+  const issues: string[] = [];
+
+  const sets: Record<string, Set<string>> = {
+    locations: new Set(data.locations.map((r) => r.id)),
+    flora: new Set(data.flora.map((r) => r.id)),
+    facilities: new Set(data.facilities.map((r) => r.id)),
+    incidents: new Set(data.incidents.map((r) => r.id)),
+  };
+
+  const check = (name: keyof DivisionData, list: unknown[], fields: [string, Kind, boolean?][], prefix: string) => {
+    if (!Array.isArray(list) || list.length === 0) {
+      issues.push(`${name}: expected a non-empty array`);
+      return;
+    }
+    const seen = new Set<string>();
+    list.forEach((rec, i) => {
+      const where = `${name}[${i}]`;
+      if (typeof rec !== "object" || rec === null) {
+        issues.push(`${where}: expected an object`);
+        return;
+      }
+      const o = rec as Record<string, unknown>;
+      for (const [key, kind, optional] of fields) checkField(issues, where, key, o[key], kind, optional);
+
+      if (typeof o.id === "string") {
+        if (seen.has(o.id)) issues.push(`${where}: duplicate id "${o.id}"`);
+        seen.add(o.id);
+      }
+      if (typeof o.fileId === "string" && !o.fileId.startsWith(prefix)) {
+        issues.push(`${where}: fileId "${o.fileId}" should start with "${prefix}"`);
+      }
+      if (typeof o.security === "string" && !SECURITY.has(o.security)) {
+        issues.push(`${where}: unknown security level "${o.security}"`);
+      }
+
+      const rel = o.relations;
+      if (rel != null) {
+        if (typeof rel !== "object" || Array.isArray(rel)) {
+          issues.push(`${where}: "relations" expected an object`);
+        } else {
+          for (const [key, ids] of Object.entries(rel as Record<string, unknown>)) {
+            if (!RELATION_KEYS.includes(key)) {
+              issues.push(`${where}: unknown relation "${key}"`);
+              continue;
+            }
+            if (!Array.isArray(ids) || !ids.every((v) => typeof v === "string")) {
+              issues.push(`${where}: relation "${key}" expected string[]`);
+              continue;
+            }
+            // Only divisions defined here can be checked; specimen and personnel
+            // ids are verified against the base archive in validateCrossLinks.
+            const target = sets[key];
+            if (!target) continue;
+            for (const id of ids as string[]) {
+              if (!target.has(id)) issues.push(`${where}: relation "${key}" points at unknown record "${id}"`);
+            }
+          }
+        }
+      }
+    });
+  };
+
+  check("locations", data.locations, LOCATION_FIELDS, "ING-LOC");
+  check("flora", data.flora, FLORA_FIELDS, "ING-FLR");
+  check("facilities", data.facilities, FACILITY_FIELDS, "ING-FAC");
+  check("incidents", data.incidents, INCIDENT_FIELDS, "ING-OPS");
+
+  // Every facility must sit at a real location.
+  for (const f of data.facilities) {
+    if (typeof f.location === "string" && !sets.locations.has(f.location)) {
+      issues.push(`facilities[${f.id}]: location "${f.location}" is not a known location record`);
+    }
+  }
+
+  for (const i of data.incidents) {
+    if (typeof i.severity === "number" && (i.severity < 1 || i.severity > 5)) {
+      issues.push(`incidents[${i.id}]: severity out of range 1-5 (got ${i.severity})`);
+    }
+  }
+
+  return issues;
+}

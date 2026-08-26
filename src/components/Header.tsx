@@ -1,11 +1,25 @@
 import { NavLink, Link, useLocation } from "react-router-dom";
-import { HelixIcon, OverviewIcon, PersonnelIcon } from "./icons";
+import {
+  EventIcon,
+  HelixIcon,
+  LeafIcon,
+  OverviewIcon,
+  PersonnelIcon,
+  SearchIcon,
+  SiteIcon,
+  StructureIcon,
+} from "./icons";
+import { DIVISIONS, NAV_GROUPS } from "../data/divisions";
+import type { RecordKind } from "../data/types";
 
-const NAV = [
-  { to: "/dashboard", label: "Overview", Icon: OverviewIcon, owns: ["/dashboard"] },
-  { to: "/assets", label: "Genetic assets", Icon: HelixIcon, owns: ["/assets"] },
-  { to: "/personnel", label: "Personnel", Icon: PersonnelIcon, owns: ["/personnel"] },
-];
+const ICONS: Record<RecordKind, () => JSX.Element> = {
+  specimen: HelixIcon,
+  flora: LeafIcon,
+  person: PersonnelIcon,
+  location: SiteIcon,
+  facility: StructureIcon,
+  incident: EventIcon,
+};
 
 export function BrandLockup() {
   return (
@@ -37,7 +51,7 @@ export function BrandLockup() {
           style={{
             font: "500 8px 'IBM Plex Mono',monospace",
             letterSpacing: ".17em",
-            color: "#748899",
+            color: "#788D9F",
             whiteSpace: "nowrap",
           }}
         >
@@ -72,19 +86,28 @@ export function SessionMeta() {
             flex: "none",
           }}
         />
-        Restricted session
+        <span className="ig-session-label">Restricted session</span>
       </span>
     </div>
   );
 }
 
 /**
- * @param descriptor Replaces the primary nav with a single descriptor line
- *                   (used by the index and states screens, matching the mockups).
+ * Primary navigation.
+ *
+ * Six divisions is more than a flat bar carries comfortably, so items are
+ * grouped by the archive's own taxonomy. The group label sits above its links
+ * on wide viewports and collapses away below — the links themselves keep the
+ * frozen tab treatment and the animated active rule at every size.
+ *
+ * @param descriptor Replaces the nav with a single descriptor line.
  * @param icons      Detail screens render the nav without icons.
  */
 export function Header({ descriptor, icons = true }: { descriptor?: string; icons?: boolean }) {
   const { pathname } = useLocation();
+  const isCurrent = (path: string) => pathname === `/${path}` || pathname.startsWith(`/${path}/`);
+  const onOverview = pathname === "/dashboard";
+  const onSearch = pathname === "/search";
 
   return (
     <header
@@ -93,44 +116,104 @@ export function Header({ descriptor, icons = true }: { descriptor?: string; icon
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        gap: 24,
+        gap: 20,
         padding: "0 clamp(20px,3vw,40px)",
-        height: 56,
+        minHeight: 56,
         borderBottom: "1px solid #1A222C",
       }}
     >
       <BrandLockup />
+
       {descriptor ? (
         <span className="ig-meta" style={{ font: "400 12.5px 'IBM Plex Sans',sans-serif", color: "#7E8C9C", flex: 1 }}>
           {descriptor}
         </span>
       ) : (
-        <nav className="ig-nav" style={{ display: "flex", gap: 4, height: "100%", flex: 1 }} aria-label="Primary">
-          {NAV.map(({ to, label, Icon, owns }) => {
-            const current = owns.some((p) => pathname === p || pathname.startsWith(`${p}/`));
+        <nav
+          className="ig-nav"
+          style={{ display: "flex", alignItems: "stretch", gap: 2, flex: 1, minWidth: 0 }}
+          aria-label="Primary"
+        >
+          <NavLink
+            to="/dashboard"
+            className={onOverview ? "ig-navlink-active" : "ig-navlink"}
+            aria-current={onOverview ? "page" : undefined}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              padding: "0 12px",
+              whiteSpace: "nowrap",
+              textDecoration: "none",
+              font: onOverview ? "600 13px 'IBM Plex Sans',sans-serif" : "400 13px 'IBM Plex Sans',sans-serif",
+              color: onOverview ? "#E4E9EF" : "#7E8C9C",
+            }}
+          >
+            {icons && <OverviewIcon />}
+            Overview
+          </NavLink>
+
+          {NAV_GROUPS.map((group) => {
+            const items = DIVISIONS.filter((d) => d.group === group.key);
+            if (!items.length) return null;
             return (
-              <NavLink
-                key={to}
-                to={to}
-                className={current ? "ig-navlink-active" : "ig-navlink"}
-                aria-current={current ? "page" : undefined}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  padding: "0 14px",
-                  textDecoration: "none",
-                  font: current ? "600 13px 'IBM Plex Sans',sans-serif" : "400 13px 'IBM Plex Sans',sans-serif",
-                  color: current ? "#E4E9EF" : "#7E8C9C",
-                }}
-              >
-                {icons && <Icon />}
-                {label}
-              </NavLink>
+              <span key={group.key} className="ig-nav-group">
+                <span className="ig-nav-group-label" aria-hidden="true">
+                  {group.label}
+                </span>
+                <span className="ig-nav-group-items">
+                  {items.map((d) => {
+                    const current = isCurrent(d.path);
+                    const Icon = ICONS[d.kind];
+                    return (
+                      <NavLink
+                        key={d.kind}
+                        to={`/${d.path}`}
+                        className={current ? "ig-navlink-active" : "ig-navlink"}
+                        aria-current={current ? "page" : undefined}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          padding: "0 12px",
+                          whiteSpace: "nowrap",
+                          textDecoration: "none",
+                          font: current ? "600 13px 'IBM Plex Sans',sans-serif" : "400 13px 'IBM Plex Sans',sans-serif",
+                          color: current ? "#E4E9EF" : "#7E8C9C",
+                        }}
+                      >
+                        {icons && <Icon />}
+                        {d.label}
+                      </NavLink>
+                    );
+                  })}
+                </span>
+              </span>
             );
           })}
         </nav>
       )}
-      <SessionMeta />
+
+      <div style={{ display: "flex", alignItems: "center", gap: 14, flex: "none" }}>
+        <NavLink
+          to="/search"
+          aria-label="Search the archive"
+          className={`ig-btn-ghost ig-searchlink${onSearch ? " is-current" : ""}`}
+          aria-current={onSearch ? "page" : undefined}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            padding: "6px 11px",
+            border: "1px solid #232D38",
+            textDecoration: "none",
+            font: "400 12px 'IBM Plex Sans',sans-serif",
+            color: onSearch ? "#E4E9EF" : "#7E8C9C",
+          }}
+        >
+          <SearchIcon stroke="currentColor" />
+          <span className="ig-search-label">Search archive</span>
+        </NavLink>
+        <SessionMeta />
+      </div>
     </header>
   );
 }

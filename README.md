@@ -1,9 +1,26 @@
 # InGen Archive
 
 Production rebuild of the frozen InGen Archive design (`*.dc.html` mockups) as a
-React + TypeScript + Vite SPA. **The design is frozen** — every colour, type
-ramp, spacing value and motion curve here is transcribed from the mockups. The
-only deliberate departures are documented under "Design deltas" below.
+React + TypeScript + Vite SPA, expanded into a six-division archive. **The design
+is frozen** — every colour, type ramp, spacing value and motion curve here is
+transcribed from the mockups. The only deliberate departures are documented under
+"Design deltas" below.
+
+## Divisions
+
+| Division       | Route          | Records | Identifier                                    |
+| -------------- | -------------- | ------- | --------------------------------------------- |
+| Genetic assets | `/assets`      | 21      | `ING-DIN` / `ING-MAR` / `ING-HYB` / `ING-AIR` |
+| Paleobotany    | `/paleobotany` | 15      | `ING-FLR`                                     |
+| Personnel      | `/personnel`   | 22      | `ING-CHR`                                     |
+| Locations      | `/locations`   | 12      | `ING-LOC`                                     |
+| Facilities     | `/facilities`  | 14      | `ING-FAC`                                     |
+| Operations     | `/operations`  | 10      | `ING-OPS`                                     |
+
+Counts are illustrative of the current data — the application never hardcodes
+them. `src/data/divisions.ts` is the single source of truth for the taxonomy:
+navigation, routing, identifiers, search labelling and every dashboard figure
+derive from it, so adding a division means adding an entry there and a data file.
 
 ## Run
 
@@ -60,9 +77,27 @@ the responsive header rules, and every hover/focus state.
 
 ## Data
 
-`src/data/ingen.json` holds all 43 dossiers (21 specimens, 22 personnel) and is
-generated from the original export by `scripts/build-data.mjs`, which only
-rewrites image paths onto `public/media/`. **No record content is authored here.**
+`src/data/ingen.json` holds the original 43 dossiers (21 specimens, 22 personnel),
+generated from the source export by `scripts/build-data.mjs`, which only rewrites
+image paths onto `public/media/`. **That file is not hand-edited.**
+
+The expansion divisions live alongside it as `locations.json`, `flora.json`,
+`facilities.json` and `operations.json`.
+
+### Relationships
+
+Records link across divisions. Links are declared once — on the expansion record
+— and read in both directions through a lazily built reverse index in
+`src/lib/archive.ts`, so a specimen dossier shows the incidents and facilities
+that reference it without its own record changing. The seven incident slugs the
+original specimen and personnel records already carried are resolved into the
+Operations division the same way, which is why the two oldest divisions gained a
+full set of cross-links with no edits to their data.
+
+Validation is referential: a link pointing at a record that does not exist, or a
+facility sited at an unknown location, fails at load rather than rendering a dead
+link. `getRelatedRecords()` is exercised across every record in the archive by
+`test/expansion.test.tsx`, asserting no self-links and no unresolvable targets.
 
 Every load runs `validateArchive()`: field types, required keys, duplicate ids and
 a mapped image for each record. Failures throw `ArchiveDataError` — logged in dev,
@@ -149,6 +184,16 @@ Three, and no more. The motion pass added no visual redesign.
    the portrait is capped at 200px.
 
 Nothing else was re-themed, re-spaced, or added.
+
+## Imagery across divisions
+
+Only genetic assets and personnel carry photography. The four expansion divisions
+render a **technical plate** instead — the engineering grid already used behind
+specimen plates, with a division glyph and the record identifier. This is a
+designed state, not a fallback: those records were never photographed for the
+archive, and drafting language is a more honest answer than a stand-in image.
+`hasImagery` on each division records which is which, and `verify:assets` only
+demands files for the divisions that have them.
 
 ## Media pipeline
 

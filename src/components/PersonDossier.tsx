@@ -3,10 +3,17 @@ import { ClassifiedBlock, Meter, StatRows, Timeline, Watermark } from "./Chrome"
 import { byYear, cells, clearance, humanizeStat, parseSlug, personStatus, personThreatLabel } from "../lib/derive";
 import { stagger, step, useReveal } from "../lib/motion";
 import { RecordImage } from "./RecordImage";
+import { RelatedRecords } from "./RecordChrome";
+import { getRelatedRecords } from "../lib/archive";
 
 /** The personnel file body — shared by the detail route and the full-run gallery. */
 export function PersonDossier({ p }: { p: WithImage<Person> }) {
   const clearReveal = useReveal();
+  const related = getRelatedRecords("person", p.id, undefined, {
+    locations: p.locations,
+    facilities: p.facilities,
+    specimens: p.specimens,
+  });
   const factsReveal = useReveal();
   const c = Number(p.clearance) || 0;
   const cl = clearance(c);
@@ -342,6 +349,8 @@ export function PersonDossier({ p }: { p: WithImage<Person> }) {
               <Timeline events={history} />
             </div>
           )}
+
+          <RelatedRecords groups={related} />
 
           <div style={{ paddingTop: 28 }}>
             <ClassifiedBlock>{p.classified}</ClassifiedBlock>

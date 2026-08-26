@@ -39,6 +39,42 @@ export const PersonnelIcon = () => (
   </svg>
 );
 
+/** Site plan — the Locations division. */
+export const SiteIcon = () => (
+  <svg {...base} strokeLinecap="round" strokeLinejoin="round">
+    <path d="M3 7.5 9 4.5l6 3 6-3v12l-6 3-6-3-6 3z" />
+    <path d="M9 4.5v12M15 7.5v12" />
+  </svg>
+);
+
+/** Structure elevation — the Facilities division. */
+export const StructureIcon = () => (
+  <svg {...base} strokeLinecap="round" strokeLinejoin="round">
+    <path d="M3 21h18" />
+    <path d="M5 21V9l7-5 7 5v12" />
+    <rect x="10" y="14" width="4" height="7" />
+    <path d="M8.5 10.5h2M13.5 10.5h2" />
+  </svg>
+);
+
+/** Frond — the Paleobotany division. */
+export const LeafIcon = () => (
+  <svg {...base} strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 21V8" />
+    <path d="M12 13c-4-.5-6-3.5-6-7 3.5.5 5.5 3 6 7z" />
+    <path d="M12 16c4-.5 6-3.5 6-7-3.5.5-5.5 3-6 7z" />
+  </svg>
+);
+
+/** Event marker — the Operations division. */
+export const EventIcon = () => (
+  <svg {...base} strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 3.5 21.5 20H2.5z" />
+    <path d="M12 10v4.5" />
+    <path d="M12 17.4h.01" />
+  </svg>
+);
+
 export const SearchIcon = ({ stroke }: { stroke: string }) => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="2" aria-hidden="true">
     <circle cx="11" cy="11" r="7" />

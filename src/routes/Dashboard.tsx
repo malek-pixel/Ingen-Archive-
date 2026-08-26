@@ -5,6 +5,8 @@ import { useArchive } from "../lib/useArchive";
 import { useDocumentTitle } from "../lib/useDocumentTitle";
 import { containmentTidy, parseSlug, plateBlend } from "../lib/derive";
 import { stagger, step, useCountUp, useReveal } from "../lib/motion";
+import { DIVISIONS } from "../data/divisions";
+import { SecurityBadge, StatusInk } from "../components/RecordChrome";
 import { RecordImage } from "../components/RecordImage";
 
 /** Hero figures roll up once, when the lockup first reveals. */
@@ -82,26 +84,33 @@ export default function Dashboard() {
     "Overview — InGen Archive",
     "Archive overview: record counts, containment status, flagged assets and incident chronology."
   );
-  const { specimens, personnel, stats: s } = useArchive();
+  const { specimens, personnel, incidents, locations, counts, entries, stats: s } = useArchive();
   const metricsReveal = useReveal();
   const severityReveal = useReveal();
   const clearanceReveal = useReveal();
-  const sectionsReveal = useReveal();
+  const divisionsReveal = useReveal();
   const chronoReveal = useReveal();
+  const criticalReveal = useReveal();
 
+  // Every figure on this page derives from the loaded data. Adding a record to
+  // any division updates the dashboard with no edit here.
   const heroStats = [
-    { value: s.dTotal + s.pTotal, label: "Indexed records" },
-    { value: s.dTotal, label: "Genetic assets" },
-    { value: s.pTotal, label: "Personnel files" },
+    { value: counts.total, label: "Indexed records" },
+    { value: counts.specimen, label: "Genetic assets" },
+    { value: counts.person, label: "Personnel files" },
+    { value: DIVISIONS.length, label: "Divisions" },
   ];
 
   const flagged = specimens.filter((d) => Number(d.threat) >= 4);
 
   // Numbers dominate; the note stays quiet. Colour only where it means something.
+  const catastrophic = incidents.filter((i) => i.severity >= 5).length;
+  const openFiles = incidents.filter((i) => /OPEN|SEALED/i.test(i.status)).length;
+
   const metrics = [
-    { label: "Genetic assets", value: s.dTotal, ink: "#E4E9EF", note: `${s.dActive} currently active` },
+    { label: "Total records", value: counts.total, ink: "#E4E9EF", note: `Across ${DIVISIONS.length} divisions` },
     { label: "Containment failed", value: s.dFailed, ink: "#D2564D", note: "Breach recorded" },
-    { label: "Personnel files", value: s.pTotal, ink: "#E4E9EF", note: `${s.pAlive} active, ${s.pDeceased} closed` },
+    { label: "Catastrophic events", value: catastrophic, ink: "#D2564D", note: `${openFiles} files still open` },
     { label: "Level 5 clearance", value: s.pL5, ink: "#E4E9EF", note: "Full archive access" },
   ];
 
@@ -130,37 +139,49 @@ export default function Dashboard() {
   const plate =
     [...specimens].sort((a, b) => Number(b.threat || 0) - Number(a.threat || 0)).find((d) => d.img) ?? specimens[0];
 
-  const sections = [
-    {
-      title: "Genetic assets",
-      count: s.dTotal,
-      href: "/assets",
-      desc: "Status, classification, containment history and behavioral profile for every indexed specimen.",
-      stats: [
-        { label: "Active", value: s.dActive, ink: "#7ACB9A" },
-        { label: "Deceased", value: s.dDeceased, ink: "#E08A84" },
-        { label: "Threat 4+", value: flagged.length, ink: "#E0B36A" },
-      ],
-    },
-    {
-      title: "Personnel",
-      count: s.pTotal,
-      href: "/personnel",
-      desc: "Employment records, external consultants and persons of interest connected to InGen operations.",
-      stats: [
-        { label: "Active", value: s.pAlive, ink: "#7ACB9A" },
-        { label: "Closed", value: s.pDeceased, ink: "#E08A84" },
-        { label: "Level 5", value: s.pL5, ink: "#9FB2C4" },
-      ],
-    },
-  ];
+  const DIVISION_STATS: Record<string, { label: string; value: number; ink: string }[]> = {
+    specimen: [
+      { label: "Active", value: s.dActive, ink: "#7ACB9A" },
+      { label: "Deceased", value: s.dDeceased, ink: "#E08A84" },
+      { label: "Threat 4+", value: flagged.length, ink: "#E0B36A" },
+    ],
+    person: [
+      { label: "Active", value: s.pAlive, ink: "#7ACB9A" },
+      { label: "Closed", value: s.pDeceased, ink: "#E08A84" },
+      { label: "Level 5", value: s.pL5, ink: "#9FB2C4" },
+    ],
+    location: [
+      { label: "Operational", value: locations.filter((l) => /ACTIVE/i.test(l.status)).length, ink: "#7ACB9A" },
+      { label: "Lost", value: locations.filter((l) => /DESTROYED|ABANDONED/i.test(l.status)).length, ink: "#E08A84" },
+    ],
+    incident: [
+      { label: "Catastrophic", value: catastrophic, ink: "#D2564D" },
+      { label: "Open", value: openFiles, ink: "#E0B36A" },
+    ],
+  };
+
+  const sections = DIVISIONS.map((d) => ({
+    key: d.kind,
+    title: d.label,
+    count: counts[d.kind],
+    href: `/${d.path}`,
+    desc: d.blurb,
+    stats: DIVISION_STATS[d.kind] ?? [],
+  }));
+
+  // Highest-classification records from every division, so the command view
+  // surfaces what matters rather than only what is numerous.
+  const criticalRecords = entries
+    .filter((e) => e.security === "CRITICAL" || e.security === "CLASSIFIED")
+    .sort((a, b) => (a.security === b.security ? a.name.localeCompare(b.name) : a.security === "CRITICAL" ? -1 : 1))
+    .slice(0, 8);
 
   // Aggregated from the incident slugs already on each asset record — nothing invented.
-  const counts = new Map<string, number>();
-  for (const d of specimens) for (const slug of d.incidents ?? []) counts.set(slug, (counts.get(slug) ?? 0) + 1);
-  const entries = [...counts].map(([slug, count]) => ({ count, ...parseSlug(slug) }));
-  const max = entries.reduce((m, e) => Math.max(m, e.count), 1);
-  const chronology = entries
+  const slugTally = new Map<string, number>();
+  for (const d of specimens) for (const slug of d.incidents ?? []) slugTally.set(slug, (slugTally.get(slug) ?? 0) + 1);
+  const chronologyEntries = [...slugTally].map(([slug, count]) => ({ count, ...parseSlug(slug) }));
+  const max = chronologyEntries.reduce((m, e) => Math.max(m, e.count), 1);
+  const chronology = chronologyEntries
     .sort((a, b) => a.year.localeCompare(b.year))
     .map((e) => ({ ...e, pct: `${Math.round((e.count / max) * 100)}%` }));
 
@@ -495,13 +516,13 @@ export default function Dashboard() {
 
         <section style={{ padding: "0 clamp(20px,3vw,40px) clamp(38px,5vw,58px)" }}>
           <div style={{ marginBottom: 16 }}>
-            <Eyebrow>Archive sections</Eyebrow>
+            <Eyebrow>Archive divisions</Eyebrow>
           </div>
           <div
-            ref={sectionsReveal}
+            ref={divisionsReveal}
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit,minmax(320px,1fr))",
+              gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))",
               gap: 1,
               background: "#1A222C",
               border: "1px solid #1A222C",
@@ -509,7 +530,7 @@ export default function Dashboard() {
           >
             {sections.map((sec, i) => (
               <Link
-                key={sec.title}
+                key={sec.key}
                 to={sec.href}
                 className="ig-section-tile"
                 data-reveal
@@ -560,6 +581,70 @@ export default function Dashboard() {
                 <span style={{ font: "500 12.5px 'IBM Plex Sans',sans-serif", color: "#8FA6BC", marginTop: 4 }}>
                   Open index
                 </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* Highest-classification records from across the archive. A command
+            view should lead with what is sensitive, not with what is numerous. */}
+        <section style={{ padding: "0 clamp(20px,3vw,40px) clamp(38px,5vw,58px)" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "baseline",
+              justifyContent: "space-between",
+              gap: 16,
+              marginBottom: 16,
+            }}
+          >
+            <Eyebrow>Critical records</Eyebrow>
+            <Link to="/search" style={{ font: "500 12.5px 'IBM Plex Sans',sans-serif", textDecoration: "none" }}>
+              Search all divisions
+            </Link>
+          </div>
+          <div
+            ref={criticalReveal}
+            style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(300px,1fr))", gap: "1px 28px" }}
+          >
+            {criticalRecords.map((r, i) => (
+              <Link
+                key={`${r.kind}:${r.id}`}
+                to={r.href}
+                className="ig-index-row"
+                data-reveal
+                style={{
+                  ...stagger(i),
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 13,
+                  padding: "12px 0",
+                  borderBottom: "1px solid #161D26",
+                  textDecoration: "none",
+                  color: "inherit",
+                }}
+              >
+                <span
+                  className="ig-row-marker"
+                  style={{ width: 2, alignSelf: "stretch", background: "#D2564D", flex: "none" }}
+                />
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div
+                    style={{
+                      font: "600 13.5px 'IBM Plex Sans',sans-serif",
+                      color: "#E4E9EF",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
+                    {r.name}
+                  </div>
+                  <div style={{ marginTop: 4 }}>
+                    <StatusInk status={r.status} />
+                  </div>
+                </div>
+                <SecurityBadge level={r.security} />
               </Link>
             ))}
           </div>
@@ -634,7 +719,7 @@ export default function Dashboard() {
         </section>
       </main>
 
-      <Footer total={s.dTotal + s.pTotal} />
+      <Footer total={counts.total} />
     </Page>
   );
 }

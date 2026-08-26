@@ -2,6 +2,10 @@
  * Fails the build if any record points at an image that is not on disk, or if
  * an image on disk is not referenced by any record. Both directions matter: a
  * missing file breaks a dossier, an orphan file ships dead weight.
+ *
+ * Only the specimen and personnel divisions carry photography. Locations,
+ * facilities, botanical records and operational files render a technical plate
+ * by design, so they are not expected here.
  */
 import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
