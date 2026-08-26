@@ -19,7 +19,7 @@ const locationImages = JSON.parse(readFileSync(join(root, "src/data/location-ima
 const referenced = new Set([
   ...Object.values(data.specimenImages),
   ...Object.values(data.personnelImages),
-  ...Object.values(locationImages),
+  ...Object.values(locationImages).map((e) => e.src),
 ]);
 
 const missing = [...referenced].filter((p) => !existsSync(join(root, "public", p)));

@@ -10,6 +10,7 @@ import locations from "../src/data/locations.json";
 import flora from "../src/data/flora.json";
 import facilities from "../src/data/facilities.json";
 import operations from "../src/data/operations.json";
+import locationImages from "../src/data/location-images.json";
 import type { Facility, Flora, Incident, Location } from "../src/data/types";
 
 const renderAt = (path: string) =>
@@ -284,19 +285,37 @@ describe("navigation covers every division", () => {
 });
 
 describe("record imagery is drawn according to its division", () => {
-  it("shows a map or photograph plate whole on the card, never cropped", async () => {
-    // Portrait survey charts were being cropped by a landscape well, cutting
-    // the legend off the very thing the plate exists to show.
+  it("fills the card frame with the whole plate — no crop, no margin", async () => {
+    // Both at once is only possible if the frame matches the image, so the
+    // test checks the frame's ratio against the plate's real dimensions.
     renderAt("/locations");
     await screen.findByRole("heading", { level: 1 });
-    for (const name of ["Isla Nublar", "Jurassic World", "Jurassic Park"]) {
+
+    for (const [id, name] of [
+      ["isla-nublar", "Isla Nublar"],
+      ["jurassic-world", "Jurassic World"],
+      ["jurassic-park", "Jurassic Park"],
+      ["lockwood-estate", "Lockwood Estate"],
+    ] as const) {
       const img = (await screen.findByAltText(name)) as HTMLImageElement;
-      expect(img.style.objectFit, name).toBe("contain");
-      expect(img.style.maxWidth, name).toBe("100%");
-      expect(img.style.maxHeight, name).toBe("100%");
-      // Fixed width/height would reintroduce the crop via the box, not the fit.
-      expect(img.style.width, name).toBe("auto");
-      expect(img.style.height, name).toBe("auto");
+      // Fills: the image covers its frame edge to edge.
+      expect(img.style.objectFit, name).toBe("cover");
+      expect(img.style.width, name).toBe("100%");
+      expect(img.style.height, name).toBe("100%");
+
+      // Whole: the frame is the plate's own shape, so cover crops nothing.
+      const plate = (locationImages as Record<string, { w: number; h: number }>)[id];
+      const frame = img.parentElement as HTMLElement;
+      expect(Number(frame.style.aspectRatio), name).toBeCloseTo(plate.w / plate.h, 5);
+    }
+  });
+
+  it("knows the real proportions of every plate it ships", async () => {
+    // A frame can only match a plate it has measured; a missing ratio silently
+    // falls back to a fixed frame, which is the crop this all came from.
+    for (const entry of getRecordsByType("location")) {
+      if (!entry.img) continue;
+      expect(entry.imgRatio, `${entry.fileId} has no recorded ratio`).toBeGreaterThan(0);
     }
   });
 
@@ -315,8 +334,10 @@ describe("record imagery is drawn according to its division", () => {
     renderAt("/locations/isla-sorna");
     await screen.findByRole("heading", { level: 1 });
     const img = (await screen.findByAltText(/Isla Sorna — /)) as HTMLImageElement;
+    expect(img.style.width).toBe("100%");
     expect(img.style.height).toBe("auto");
-    expect(img.style.objectFit).toBe("contain");
+    // No max-height: a cap would letterbox the tall charts it was meant to fit.
+    expect(img.style.maxHeight).toBe("");
   });
 
   it("declares an imagery treatment for every division", () => {

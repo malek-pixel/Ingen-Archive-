@@ -221,6 +221,9 @@ export function IndexScreen<T>(props: IndexScreenProps<T>) {
           padding: `18px clamp(20px,3vw,40px) 48px`,
           display: "grid",
           gridTemplateColumns: `repeat(auto-fill,minmax(${props.gridMin}px,1fr))`,
+          // Cards whose plate sets its own height must not be stretched to the
+          // tallest in the row; that would reopen a gap under the shorter ones.
+          alignItems: "start",
           gap: 16,
         }}
       >

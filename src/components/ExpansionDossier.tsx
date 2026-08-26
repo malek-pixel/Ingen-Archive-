@@ -173,13 +173,7 @@ export function ExpansionDossier({
                   src={img}
                   alt={`${name} — ${plateCaption ?? "reference plate"}`}
                   loading="eager"
-                  style={{
-                    width: "100%",
-                    height: "auto",
-                    maxHeight: 520,
-                    objectFit: "contain",
-                    display: "block",
-                  }}
+                  style={{ width: "100%", height: "auto", display: "block" }}
                 />
                 <span
                   style={{

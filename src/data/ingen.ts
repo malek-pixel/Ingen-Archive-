@@ -69,11 +69,11 @@ function build(
   // Locations can carry photography per record — coverage is partial by design,
   // so this is resolved per id rather than per division.
   const noImg = <T extends object>(list: T[]): WithImage<T>[] => list.map((rec) => ({ ...rec, img: "" }));
-  const locationPlates = locationImages as Record<string, string>;
-  const locationRecords: WithImage<Location>[] = locations.map((rec) => ({
-    ...rec,
-    img: locationPlates[rec.id] ?? "",
-  }));
+  const locationPlates = locationImages as Record<string, { src: string; w: number; h: number }>;
+  const locationRecords: WithImage<Location>[] = locations.map((rec) => {
+    const plate = locationPlates[rec.id];
+    return { ...rec, img: plate?.src ?? "", imgRatio: plate ? plate.w / plate.h : undefined };
+  });
   const floraRecords = noImg(flora);
   const facilityRecords = noImg(facilities);
   const incidentRecords = noImg(incidents);
@@ -124,6 +124,7 @@ function build(
       status: l.status,
       security: l.security,
       img: l.img,
+      imgRatio: l.imgRatio,
       href: recordHref("location", l.id),
       haystack: lower([
         l.name,

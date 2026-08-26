@@ -1,12 +1,52 @@
 {
-  "biosyn-valley": "/media/locations/biosyn-valley.webp",
-  "ile-saint-hubert": "/media/locations/ile-saint-hubert.webp",
-  "ingen-hq": "/media/locations/ingen-hq.webp",
-  "isla-nublar": "/media/locations/isla-nublar.webp",
-  "isla-sorna": "/media/locations/isla-sorna.webp",
-  "jurassic-park": "/media/locations/jurassic-park.webp",
-  "jurassic-world": "/media/locations/jurassic-world.webp",
-  "lockwood-estate": "/media/locations/lockwood-estate.webp",
-  "mantah-corp-island": "/media/locations/mantah-corp-island.webp",
-  "nublar-lagoon": "/media/locations/nublar-lagoon.webp"
+  "biosyn-valley": {
+    "src": "/media/locations/biosyn-valley.webp",
+    "w": 632,
+    "h": 316
+  },
+  "ile-saint-hubert": {
+    "src": "/media/locations/ile-saint-hubert.webp",
+    "w": 321,
+    "h": 157
+  },
+  "ingen-hq": {
+    "src": "/media/locations/ingen-hq.webp",
+    "w": 246,
+    "h": 157
+  },
+  "isla-nublar": {
+    "src": "/media/locations/isla-nublar.webp",
+    "w": 471,
+    "h": 651
+  },
+  "isla-sorna": {
+    "src": "/media/locations/isla-sorna.webp",
+    "w": 636,
+    "h": 482
+  },
+  "jurassic-park": {
+    "src": "/media/locations/jurassic-park.webp",
+    "w": 196,
+    "h": 258
+  },
+  "jurassic-world": {
+    "src": "/media/locations/jurassic-world.webp",
+    "w": 183,
+    "h": 275
+  },
+  "lockwood-estate": {
+    "src": "/media/locations/lockwood-estate.webp",
+    "w": 694,
+    "h": 288
+  },
+  "mantah-corp-island": {
+    "src": "/media/locations/mantah-corp-island.webp",
+    "w": 738,
+    "h": 414
+  },
+  "nublar-lagoon": {
+    "src": "/media/locations/nublar-lagoon.webp",
+    "w": 230,
+    "h": 125
+  }
 }

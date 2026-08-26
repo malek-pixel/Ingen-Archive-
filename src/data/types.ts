@@ -181,7 +181,7 @@ export interface DivisionCounts {
 /* ------------------------------------------------------------------ runtime */
 
 /** A record with its image path resolved. Empty string means no plate on file. */
-export type WithImage<T> = T & { img: string };
+export type WithImage<T> = T & { img: string; imgRatio?: number };
 
 /**
  * The uniform view of any record, used by global search, cross-links and the
@@ -197,6 +197,12 @@ export interface ArchiveEntry {
   status: string;
   security: SecurityLevel;
   img: string;
+  /**
+   * The plate's own width ÷ height, when known. The frame takes its shape from
+   * this so the image fills it exactly: no crop, no margin. Absent for records
+   * whose imagery predates dimension tracking, which fall back to a fixed frame.
+   */
+  imgRatio?: number;
   /** Route to this record's dossier. */
   href: string;
   /** Lowercased haystack for global search. */

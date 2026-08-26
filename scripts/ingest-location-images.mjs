@@ -40,18 +40,29 @@ for (const file of files) {
   const src = join(inbox, file);
   const out = join(outDir, `${id}.webp`);
   before += statSync(src).size;
-  await sharp(src)
+  // The written dimensions are recorded, not the source's: the frame that
+  // displays this plate takes its shape from the image, so the ratio has to be
+  // the one that actually ships.
+  const { width, height } = await sharp(src)
     .resize({ width: 1200, height: 1200, fit: "inside", withoutEnlargement: true })
     .webp({ quality: 82, effort: 6 })
     .toFile(out);
   after += statSync(out).size;
-  map[id] = `/media/locations/${id}.webp`;
+  map[id] = { src: `/media/locations/${id}.webp`, w: width, h: height };
   unlinkSync(src);
 }
 
 // Drop entries whose file has since been deleted, so the map never lies.
-for (const [id, p] of Object.entries(map)) {
-  if (!existsSync(join(root, "public", p))) delete map[id];
+for (const [id, entry] of Object.entries(map)) {
+  if (!existsSync(join(root, "public", entry.src))) delete map[id];
+}
+
+// Repair entries written before dimensions were recorded, so an existing
+// archive picks them up without re-ingesting every source file.
+for (const [id, entry] of Object.entries(map)) {
+  if (entry.w && entry.h) continue;
+  const meta = await sharp(join(root, "public", entry.src)).metadata();
+  map[id] = { src: entry.src, w: meta.width, h: meta.height };
 }
 
 writeFileSync(mapPath, `${JSON.stringify(map, null, 2)}\n`);
