@@ -12,6 +12,28 @@ import { SecurityBadge, StatusInk } from "./RecordChrome";
  * is richer and the designs are frozen — so this covers locations, flora,
  * facilities, operations, and mixed global search results.
  */
+/**
+ * The drafting ground a photographic plate is mounted on.
+ *
+ * The same engineering grid the technical plates use, retuned for the dark
+ * card well — the light-ground values are invisible against it.
+ */
+function PlateGround() {
+  return (
+    <span
+      aria-hidden="true"
+      style={{
+        position: "absolute",
+        inset: 0,
+        backgroundImage:
+          "linear-gradient(rgba(108,150,188,.07) 1px,transparent 1px)," +
+          "linear-gradient(90deg,rgba(108,150,188,.07) 1px,transparent 1px)",
+        backgroundSize: "22px 22px",
+      }}
+    />
+  );
+}
+
 export function ArchiveCard({
   entry,
   index = 0,
@@ -46,30 +68,49 @@ export function ArchiveCard({
       <div
         style={{
           position: "relative",
-          aspectRatio: "16/10",
+          aspectRatio: "4/3",
           overflow: "hidden",
-          background: fills ? "#0A0E13" : "#E3E8ED",
+          background: fills ? "#090D12" : "#E3E8ED",
           flex: "none",
         }}
       >
         {entry.img ? (
           <>
             {fills ? (
-              // A map or photograph is opaque to its own edges: filling the
-              // frame is the whole image, not a crop of a subject.
-              <RecordImage
-                className="ig-zoom"
-                src={entry.img}
-                alt={entry.name}
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  display: "block",
-                }}
-              />
+              // These plates run from 2.4:1 panoramas to portrait survey
+              // charts, and a chart cropped past its legend is worth less than
+              // no chart. So the whole image is always shown, mounted on the
+              // archive's own drafting grid rather than floating on a slab —
+              // the margin a portrait map leaves reads as the sheet it is
+              // pinned to.
+              <>
+                <PlateGround />
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: 14,
+                  }}
+                >
+                  <RecordImage
+                    className="ig-zoom"
+                    src={entry.img}
+                    alt={entry.name}
+                    style={{
+                      maxWidth: "100%",
+                      maxHeight: "100%",
+                      width: "auto",
+                      height: "auto",
+                      objectFit: "contain",
+                      display: "block",
+                      border: "1px solid rgba(120,160,196,.22)",
+                    }}
+                  />
+                </div>
+              </>
             ) : (
               <div
                 style={{

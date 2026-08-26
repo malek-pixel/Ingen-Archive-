@@ -284,15 +284,20 @@ describe("navigation covers every division", () => {
 });
 
 describe("record imagery is drawn according to its division", () => {
-  it("fills the card frame for map and photograph plates", async () => {
-    // Letterboxing a survey chart inside a padded light well was the bug:
-    // the card read as a small image floating on a pale slab.
+  it("shows a map or photograph plate whole on the card, never cropped", async () => {
+    // Portrait survey charts were being cropped by a landscape well, cutting
+    // the legend off the very thing the plate exists to show.
     renderAt("/locations");
     await screen.findByRole("heading", { level: 1 });
-    const img = await screen.findByAltText("Isla Nublar");
-    expect(img.style.objectFit).toBe("cover");
-    expect(img.style.width).toBe("100%");
-    expect(img.style.height).toBe("100%");
+    for (const name of ["Isla Nublar", "Jurassic World", "Jurassic Park"]) {
+      const img = (await screen.findByAltText(name)) as HTMLImageElement;
+      expect(img.style.objectFit, name).toBe("contain");
+      expect(img.style.maxWidth, name).toBe("100%");
+      expect(img.style.maxHeight, name).toBe("100%");
+      // Fixed width/height would reintroduce the crop via the box, not the fit.
+      expect(img.style.width, name).toBe("auto");
+      expect(img.style.height, name).toBe("auto");
+    }
   });
 
   it("keeps the specimen cutout letterboxed whole, uncropped", async () => {
