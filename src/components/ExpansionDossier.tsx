@@ -162,35 +162,46 @@ export function ExpansionDossier({
           style={{ position: "sticky", top: 20, display: "flex", flexDirection: "column", gap: 26 }}
         >
           <div data-enter="plate" style={{ ...step(2), border: "1px solid #1A222C" }}>
-            <div style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden", background: "#E3E8ED" }}>
-              {img ? (
-                <>
-                  <RecordImage
-                    src={img}
-                    alt={`${name} — ${plateCaption ?? "reference plate"}`}
-                    loading="eager"
-                    plate
-                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                  />
-                  <span
-                    style={{
-                      position: "absolute",
-                      left: 16,
-                      bottom: 13,
-                      padding: "3px 8px",
-                      background: "rgba(11,15,20,.72)",
-                      font: "500 11px 'IBM Plex Mono',monospace",
-                      letterSpacing: ".06em",
-                      color: "#BAC6D2",
-                    }}
-                  >
-                    {plateCaption ?? "Reference plate"} · {fileId}
-                  </span>
-                </>
-              ) : (
+            {img ? (
+              // No fixed aspect here. These plates are survey charts and site
+              // maps whose proportions run from 2.4:1 panoramas to 1:1.5
+              // portraits; forcing them into one frame either crops the legend
+              // off a map or strands it in a wide pale margin. The frame takes
+              // the image's shape instead.
+              <div style={{ position: "relative", overflow: "hidden", background: "#0A0E13", lineHeight: 0 }}>
+                <RecordImage
+                  src={img}
+                  alt={`${name} — ${plateCaption ?? "reference plate"}`}
+                  loading="eager"
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                    maxHeight: 520,
+                    objectFit: "contain",
+                    display: "block",
+                  }}
+                />
+                <span
+                  style={{
+                    position: "absolute",
+                    left: 16,
+                    bottom: 13,
+                    padding: "3px 8px",
+                    background: "rgba(11,15,20,.72)",
+                    font: "500 11px 'IBM Plex Mono',monospace",
+                    letterSpacing: ".06em",
+                    lineHeight: 1.5,
+                    color: "#BAC6D2",
+                  }}
+                >
+                  {plateCaption ?? "Reference plate"} · {fileId}
+                </span>
+              </div>
+            ) : (
+              <div style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden", background: "#E3E8ED" }}>
                 <TechnicalPlate kind={kind} fileId={fileId} caption={plateCaption} />
-              )}
-            </div>
+              </div>
+            )}
           </div>
 
           <FactRows facts={facts} />

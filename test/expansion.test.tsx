@@ -282,3 +282,52 @@ describe("navigation covers every division", () => {
     }
   });
 });
+
+describe("record imagery is drawn according to its division", () => {
+  it("fills the card frame for map and photograph plates", async () => {
+    // Letterboxing a survey chart inside a padded light well was the bug:
+    // the card read as a small image floating on a pale slab.
+    renderAt("/locations");
+    await screen.findByRole("heading", { level: 1 });
+    const img = await screen.findByAltText("Isla Nublar");
+    expect(img.style.objectFit).toBe("cover");
+    expect(img.style.width).toBe("100%");
+    expect(img.style.height).toBe("100%");
+  });
+
+  it("keeps the specimen cutout letterboxed whole, uncropped", async () => {
+    // Cropping a cutout severs the subject, so specimens keep `contain`.
+    renderAt("/assets");
+    await screen.findByRole("heading", { level: 1 });
+    const imgs = screen.getAllByRole("img").filter((el) => el.tagName === "IMG");
+    const specimen = imgs.find((el) => (el as HTMLImageElement).style.objectFit === "contain");
+    expect(specimen, "no specimen image is drawn with object-fit: contain").toBeTruthy();
+  });
+
+  it("shows a location plate at its own proportions on the dossier", async () => {
+    // These run from 2.4:1 panoramas to 1:1.5 portraits; a fixed frame would
+    // crop the legend off a map.
+    renderAt("/locations/isla-sorna");
+    await screen.findByRole("heading", { level: 1 });
+    const img = (await screen.findByAltText(/Isla Sorna — /)) as HTMLImageElement;
+    expect(img.style.height).toBe("auto");
+    expect(img.style.objectFit).toBe("contain");
+  });
+
+  it("declares an imagery treatment for every division", () => {
+    for (const d of DIVISIONS) {
+      expect(["cutout", "plate", "none"], d.label).toContain(d.imagery);
+    }
+  });
+
+  it("never marks a division 'none' while its records carry images", () => {
+    for (const d of DIVISIONS) {
+      if (d.imagery !== "none") continue;
+      const withImg = getRecordsByType(d.kind).filter((e) => e.img);
+      expect(
+        withImg.map((e) => e.fileId),
+        `${d.label} has imagery but is marked "none"`
+      ).toEqual([]);
+    }
+  });
+});

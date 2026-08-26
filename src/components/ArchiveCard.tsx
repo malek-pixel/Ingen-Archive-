@@ -23,6 +23,7 @@ export function ArchiveCard({
   meta?: { label: string; value: string }[];
 }) {
   const d = division(entry.kind);
+  const fills = d.imagery === "plate";
 
   return (
     <Link
@@ -42,27 +43,53 @@ export function ArchiveCard({
         fontFamily: "'IBM Plex Sans',system-ui,sans-serif",
       }}
     >
-      <div style={{ position: "relative", height: 148, overflow: "hidden", background: "#E3E8ED", flex: "none" }}>
+      <div
+        style={{
+          position: "relative",
+          aspectRatio: "16/10",
+          overflow: "hidden",
+          background: fills ? "#0A0E13" : "#E3E8ED",
+          flex: "none",
+        }}
+      >
         {entry.img ? (
           <>
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "18px 16px",
-              }}
-            >
+            {fills ? (
+              // A map or photograph is opaque to its own edges: filling the
+              // frame is the whole image, not a crop of a subject.
               <RecordImage
                 className="ig-zoom"
                 src={entry.img}
                 alt={entry.name}
-                plate
-                style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
+                }}
               />
-            </div>
+            ) : (
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "18px 16px",
+                }}
+              >
+                <RecordImage
+                  className="ig-zoom"
+                  src={entry.img}
+                  alt={entry.name}
+                  plate
+                  style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
+                />
+              </div>
+            )}
             <span className="ig-scanline" aria-hidden="true" />
           </>
         ) : (

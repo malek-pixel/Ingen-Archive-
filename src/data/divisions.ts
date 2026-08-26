@@ -19,8 +19,19 @@ export interface Division {
   prefix: string;
   /** Navigation grouping. */
   group: "biological" | "organization" | "infrastructure" | "operations";
-  /** Whether records in this division carry photographic plates. */
-  hasImagery: boolean;
+  /**
+   * How a division's imagery is drawn.
+   *
+   * "cutout" — a subject rendered on a neutral ground, as the specimen plates
+   *            are. It is letterboxed whole on the light engineering plate:
+   *            cropping a cutout severs the subject.
+   * "plate"  — an opaque photograph, survey chart or site map, edge to edge.
+   *            It fills the card frame, and the dossier shows it uncropped at
+   *            its own proportions, because a map loses its meaning the moment
+   *            a corner is cut off.
+   * "none"   — never photographed; the drawn technical plate stands in.
+   */
+  imagery: "cutout" | "plate" | "none";
   blurb: string;
 }
 
@@ -33,7 +44,7 @@ export const DIVISIONS: Division[] = [
     badge: "GENETIC ASSET",
     prefix: "ING-DIN",
     group: "biological",
-    hasImagery: true,
+    imagery: "cutout",
     blurb: "Every specimen indexed under InGen custodianship.",
   },
   {
@@ -44,7 +55,7 @@ export const DIVISIONS: Division[] = [
     badge: "PALEOBOTANY",
     prefix: "ING-FLR",
     group: "biological",
-    hasImagery: false,
+    imagery: "none",
     blurb: "Reconstructed and cultivated flora held under botanical research.",
   },
   {
@@ -55,7 +66,7 @@ export const DIVISIONS: Division[] = [
     badge: "PERSONNEL",
     prefix: "ING-CHR",
     group: "organization",
-    hasImagery: true,
+    imagery: "plate",
     blurb: "Employment records, consultants and persons of interest.",
   },
   {
@@ -66,7 +77,7 @@ export const DIVISIONS: Division[] = [
     badge: "LOCATION",
     prefix: "ING-LOC",
     group: "infrastructure",
-    hasImagery: false,
+    imagery: "plate",
     blurb: "Sites, islands and operational territories on record.",
   },
   {
@@ -77,7 +88,7 @@ export const DIVISIONS: Division[] = [
     badge: "FACILITY",
     prefix: "ING-FAC",
     group: "infrastructure",
-    hasImagery: false,
+    imagery: "none",
     blurb: "Laboratories, enclosures and structures within recorded sites.",
   },
   {
@@ -88,7 +99,7 @@ export const DIVISIONS: Division[] = [
     badge: "OPERATION",
     prefix: "ING-OPS",
     group: "operations",
-    hasImagery: false,
+    imagery: "none",
     blurb: "Incidents, expeditions and events of operational significance.",
   },
 ];
