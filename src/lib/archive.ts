@@ -14,13 +14,22 @@ export const archive = (): Archive => loadArchive();
 
 export const getAllRecords = (): ArchiveEntry[] => archive().entries;
 
-export const getRecordsByType = (kind: RecordKind): ArchiveEntry[] => archive().entries.filter((e) => e.kind === kind);
+/**
+ * Records of one division.
+ *
+ * Cached by kind: this feeds the `records` prop of every index screen, and a
+ * fresh array on each call would change identity every render and defeat the
+ * memoised filter/sort inside it.
+ */
+const byKindCache = new Map<RecordKind, ArchiveEntry[]>();
+export const getRecordsByType = (kind: RecordKind): ArchiveEntry[] => {
+  let list = byKindCache.get(kind);
+  if (!list) byKindCache.set(kind, (list = archive().entries.filter((e) => e.kind === kind)));
+  return list;
+};
 
 export const getRecordById = (kind: RecordKind, id: string): ArchiveEntry | undefined =>
   archive().entryByKey.get(entryKey(kind, id));
-
-/** Finds a record in any division by id — used when a link omits its kind. */
-export const findRecord = (id: string): ArchiveEntry | undefined => archive().entries.find((e) => e.id === id);
 
 export const getArchiveStats = () => archive().counts;
 
@@ -188,8 +197,3 @@ export const getPerson = (id: string) => archive().personById.get(id);
 export const getFlora = (id: string) => archive().floraById.get(id);
 
 export { division, DIVISIONS };
-
-/** Test hook — the reverse index is cached for the life of the module. */
-export const __resetRelationCache = () => {
-  reverse = null;
-};

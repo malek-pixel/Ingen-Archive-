@@ -160,7 +160,7 @@ export function Header({ descriptor, icons = true }: { descriptor?: string; icon
             const items = DIVISIONS.filter((d) => d.group === group.key);
             if (!items.length) return null;
             return (
-              <span key={group.key} className="ig-nav-group" title={group.label}>
+              <span key={group.key} className="ig-nav-group" role="group" aria-label={group.label}>
                 {items.map((d) => {
                   const current = isCurrent(d.path);
                   const Icon = ICONS[d.kind];

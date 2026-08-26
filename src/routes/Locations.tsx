@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { ArchiveCard } from "../components/ArchiveCard";
 import { IndexScreen } from "../components/IndexScreen";
@@ -19,7 +20,9 @@ export default function Locations() {
   const entries = getRecordsByType("location");
   const active = locations.filter((l) => /ACTIVE/i.test(l.status)).length;
   const lost = locations.filter((l) => /DESTROYED|ABANDONED/i.test(l.status)).length;
-  const byId = new Map(locations.map((l) => [l.id, l]));
+  // Memoised: the index screen re-renders on every keystroke and this map
+  // only changes when the data does.
+  const byId = useMemo(() => new Map(locations.map((l) => [l.id, l])), [locations]);
 
   return (
     <IndexScreen

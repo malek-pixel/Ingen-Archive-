@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import type { ArchiveEntry, SecurityLevel } from "../data/types";
-import { division } from "../data/divisions";
+import type { SecurityLevel } from "../data/types";
 import type { RelatedGroup } from "../lib/archive";
 import { stagger, useReveal } from "../lib/motion";
 
@@ -41,7 +40,7 @@ export function SecurityBadge({ level, size = "sm" }: { level: SecurityLevel; si
  * Status wording across the expansion divisions. Green reads operational, amber
  * conditional, red terminal — the same semantics the specimen cards already use.
  */
-export function statusInk(status: string): string {
+function statusInk(status: string): string {
   const s = (status || "").toUpperCase();
   if (/ACTIVE|OPERATIONAL|CULTIVATED|NATURALISED/.test(s)) return "#7ACB9A";
   if (/DESTROYED|LOST|EXTINCT|CLOSED|DECOMMISSIONED/.test(s)) return "#E08A84";
@@ -65,42 +64,6 @@ export function StatusInk({ status }: { status: string }) {
       <span style={{ width: 6, height: 6, background: ink, flex: "none" }} />
       {status.charAt(0) + status.slice(1).toLowerCase()}
     </span>
-  );
-}
-
-/** A labelled fact grid — the spec block used on specimen dossiers. */
-export function FactGrid({ facts, min = 150 }: { facts: { label: string; value?: string }[]; min?: number }) {
-  const present = facts.filter((f) => f.value?.trim());
-  const reveal = useReveal();
-  if (!present.length) return null;
-  return (
-    <div
-      ref={reveal}
-      style={{
-        display: "grid",
-        gridTemplateColumns: `repeat(auto-fit,minmax(${min}px,1fr))`,
-        gap: "24px 28px",
-        paddingBottom: 28,
-        borderBottom: "1px solid #1A222C",
-      }}
-    >
-      {present.map((f, i) => (
-        <div key={f.label} data-reveal style={stagger(i)}>
-          <div
-            style={{
-              font: "500 10.5px 'IBM Plex Sans',sans-serif",
-              letterSpacing: ".11em",
-              color: "#788D9F",
-              textTransform: "uppercase",
-              marginBottom: 8,
-            }}
-          >
-            {f.label}
-          </div>
-          <div style={{ font: "600 15px/1.35 'IBM Plex Sans',sans-serif", color: "#E4E9EF" }}>{f.value}</div>
-        </div>
-      ))}
-    </div>
   );
 }
 
@@ -306,21 +269,5 @@ export function RelatedRecords({ groups }: { groups: RelatedGroup[] }) {
         ))}
       </div>
     </div>
-  );
-}
-
-/** Division badge used in global search results and cross-links. */
-export function DivisionBadge({ entry }: { entry: ArchiveEntry }) {
-  return (
-    <span
-      style={{
-        font: "500 10px 'IBM Plex Sans',sans-serif",
-        letterSpacing: ".13em",
-        color: "#788D9F",
-        textTransform: "uppercase",
-      }}
-    >
-      {division(entry.kind).badge}
-    </span>
   );
 }

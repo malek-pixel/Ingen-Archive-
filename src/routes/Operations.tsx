@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { ArchiveCard } from "../components/ArchiveCard";
 import { IndexScreen } from "../components/IndexScreen";
@@ -27,7 +28,9 @@ export default function Operations() {
   const entries = getRecordsByType("incident");
   const catastrophic = incidents.filter((i) => i.severity >= 5).length;
   const open = incidents.filter((i) => /OPEN|SEALED/i.test(i.status)).length;
-  const byId = new Map(incidents.map((i) => [i.id, i]));
+  // Memoised: the index screen re-renders on every keystroke and this map
+  // only changes when the data does.
+  const byId = useMemo(() => new Map(incidents.map((i) => [i.id, i])), [incidents]);
 
   return (
     <IndexScreen

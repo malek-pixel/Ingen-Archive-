@@ -1,5 +1,5 @@
 import { describe, expect, it, beforeEach, vi } from "vitest";
-import { render, screen, waitFor, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import App from "../src/App";
 import { loadArchive } from "../src/data/ingen";
@@ -89,6 +89,13 @@ describe("expansion divisions", () => {
 });
 
 describe("global search", () => {
+  it("returns a stable array per division so index screens can memoise", () => {
+    // A fresh array each call changes the `records` prop identity every render
+    // and defeats the memoised filter/sort inside the index screen.
+    expect(getRecordsByType("location")).toBe(getRecordsByType("location"));
+    expect(getRecordsByType("flora")).toBe(getRecordsByType("flora"));
+  });
+
   it("reaches every division", () => {
     for (const d of DIVISIONS) {
       expect(getRecordsByType(d.kind).length, d.label).toBeGreaterThan(0);
@@ -214,6 +221,37 @@ describe("expansion routes", () => {
     renderAt("/search?q=nublar");
     await waitFor(() => expect(screen.getByText(/records matching/)).toBeTruthy());
     expect(await screen.findByText("ING-LOC-001")).toBeTruthy();
+  });
+
+  it("keeps the division filter in the URL, in both directions", async () => {
+    // The whole search must be shareable, not just the query. Holding the
+    // divisions in component state let the URL and the chips drift apart.
+    renderAt("/search?q=isla&in=location");
+    await screen.findByText(/records matching/);
+
+    const pressed = () =>
+      screen.getAllByRole("button", { pressed: true }).map((b) => b.textContent?.replace(/\d+$/, "").trim());
+    expect(pressed()).toEqual(["Locations"]);
+
+    // Toggling a chip writes to the URL.
+    fireEvent.click(screen.getByRole("button", { name: /^Facilities/ }));
+    await waitFor(() => expect(pressed()).toContain("Facilities"));
+  });
+
+  it("reads multiple divisions from the URL", async () => {
+    renderAt("/search?q=isla&in=location&in=facility");
+    await screen.findByText(/records matching/);
+    const pressed = screen
+      .getAllByRole("button", { pressed: true })
+      .map((b) => b.textContent?.replace(/\d+$/, "").trim());
+    expect(pressed).toEqual(expect.arrayContaining(["Locations", "Facilities"]));
+  });
+
+  it("ignores an unknown division in the URL rather than filtering to nothing", async () => {
+    renderAt("/search?q=isla&in=dragons");
+    await screen.findByText(/records matching/);
+    expect(screen.queryAllByRole("button", { pressed: true })).toHaveLength(0);
+    expect(await screen.findByText("ING-LOC-002")).toBeTruthy();
   });
 
   it("shows the designed empty state when nothing matches", async () => {

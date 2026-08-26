@@ -204,4 +204,3 @@ export const personThreatLabel = (threat: string) => {
 };
 
 export type Specimens = WithImage<Specimen>[];
-export type People = WithImage<Person>[];

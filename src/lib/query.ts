@@ -222,12 +222,3 @@ export const OPERATION_SORTS: SortDef<ArchiveEntry>[] = [
   { label: "Classification", dir: "↓", cmp: bySecurity },
   { label: "Name", dir: "↑", cmp: byEntryName },
 ];
-
-export const queryEntries = (
-  records: ArchiveEntry[],
-  query: string,
-  filter: string,
-  sortIndex: number,
-  filters: FilterDef<ArchiveEntry>[],
-  sorts: SortDef<ArchiveEntry>[]
-) => runQuery({ records, query, filter, sortIndex, filters, sorts, haystack: entryHaystack });

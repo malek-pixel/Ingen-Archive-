@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Header } from "../components/Header";
 import { Page } from "../components/Chrome";
@@ -21,11 +21,17 @@ import { useDocumentTitle } from "../lib/useDocumentTitle";
 export default function Search() {
   const [params, setParams] = useSearchParams();
   const query = params.get("q") ?? "";
-  const kindParam = params.get("in") as RecordKind | null;
-  const [kinds, setKinds] = useState<RecordKind[]>(kindParam ? [kindParam] : []);
   const inputRef = useRef<HTMLInputElement>(null);
   const reveal = useReveal();
   const counts = getArchiveStats();
+
+  // Both the query and the division filter live in the URL — a search is only
+  // a shareable address if the whole search is in it. Holding the divisions in
+  // component state instead let the two drift apart in both directions.
+  const kinds = useMemo(() => {
+    const valid = new Set<string>(DIVISIONS.map((d) => d.kind));
+    return params.getAll("in").filter((k): k is RecordKind => valid.has(k));
+  }, [params]);
 
   useDocumentTitle(
     query ? `“${query}” — InGen Archive search` : "Search — InGen Archive",
@@ -37,6 +43,13 @@ export default function Search() {
     if (value) next.set("q", value);
     else next.delete("q");
     setParams(next, { replace: true });
+  };
+
+  const setKinds = (next: RecordKind[]) => {
+    const p = new URLSearchParams(params);
+    p.delete("in");
+    for (const k of next) p.append("in", k);
+    setParams(p, { replace: true });
   };
 
   useSearchHotkeys(inputRef, () => setQuery(""));
@@ -51,7 +64,7 @@ export default function Search() {
   }, [query]);
 
   const toggle = (kind: RecordKind) =>
-    setKinds((current) => (current.includes(kind) ? current.filter((k) => k !== kind) : [...current, kind]));
+    setKinds(kinds.includes(kind) ? kinds.filter((k) => k !== kind) : [...kinds, kind]);
 
   return (
     <Page minHeight>

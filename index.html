@@ -6,8 +6,10 @@
     <title>InGen Archive</title>
     <meta name="description" content="International Genetic Technologies — internal records infrastructure." />
     <link rel="icon" href="/assets/ingen-mark.png" />
+    <!-- Only the two-tone mark is preloaded: it is in the header on every page.
+         The mono mark is a decorative watermark that several routes never
+         render, so preloading it cost a request and a console warning. -->
     <link rel="preload" as="image" href="/assets/ingen-mark.png" />
-    <link rel="preload" as="image" href="/assets/ingen-mark-mono.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

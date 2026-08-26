@@ -293,9 +293,11 @@
     "primaryFunction": "Private asset holding and behavioural experimentation",
     "description": "A competitor site holding InGen-derived assets acquired outside any transfer agreement. What distinguishes it is the engineering: the island is partitioned into climate-controlled biomes, allowing the same species to be observed under conditions it would never encounter naturally. The purpose of that work has never been established from open sources.",
     "inGenInvolvement": "None. Assets present are believed to originate from Isla Sorna without authorisation.",
-    "historicalNotes": "Behavioural manipulation using implanted control devices is documented in recovered material. No InGen programme has ever authorised such work.",
+    "historicalNotes": "Behavioural manipulation using implanted control devices is documented in recovered material. No InGen programme has ever authorised such work. The assets held here are assessed as Site B stock removed without agreement, which is the only established link between this site and InGen.",
     "notes": "Intelligence file. Contents are assessed, not verified. Position unconfirmed.",
     "tags": ["island", "competitor", "mantah", "unverified", "intelligence"],
-    "relations": {}
+    "relations": {
+      "locations": ["isla-sorna"]
+    }
   }
 ]

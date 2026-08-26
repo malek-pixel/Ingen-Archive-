@@ -101,15 +101,12 @@ export const NAV_GROUPS: { key: Division["group"]; label: string }[] = [
 ];
 
 const byKind = new Map(DIVISIONS.map((d) => [d.kind, d]));
-const byPath = new Map(DIVISIONS.map((d) => [d.path, d]));
 
 export const division = (kind: RecordKind): Division => {
   const found = byKind.get(kind);
   if (!found) throw new Error(`Unknown archive division: ${kind}`);
   return found;
 };
-
-export const divisionByPath = (path: string): Division | undefined => byPath.get(path);
 
 /** Route to a record's dossier. */
 export const recordHref = (kind: RecordKind, id: string) => `/${division(kind).path}/${id}`;

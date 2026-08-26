@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { ArchiveCard } from "../components/ArchiveCard";
 import { IndexScreen } from "../components/IndexScreen";
@@ -23,7 +24,9 @@ export default function Paleobotany() {
   const entries = getRecordsByType("flora");
   const reconstructed = flora.filter((f) => f.genome != null).length;
   const toxic = flora.filter((f) => !/^none/i.test(f.toxicity)).length;
-  const byId = new Map(flora.map((f) => [f.id, f]));
+  // Memoised: the index screen re-renders on every keystroke and this map
+  // only changes when the data does.
+  const byId = useMemo(() => new Map(flora.map((f) => [f.id, f])), [flora]);
 
   return (
     <IndexScreen
