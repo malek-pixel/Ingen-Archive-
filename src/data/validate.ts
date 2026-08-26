@@ -103,22 +103,6 @@ const PERSON_FIELDS: [string, Kind, boolean?][] = [
   ["quote", "string", true],
 ];
 
-const STAT_KEYS = [
-  "dTotal",
-  "dActive",
-  "dDeceased",
-  "dFailed",
-  "dStable",
-  "dPartial",
-  "dExtreme",
-  "dHigh",
-  "pTotal",
-  "pAlive",
-  "pDeceased",
-  "pL5",
-  "pL4plus",
-];
-
 export function validateArchive(raw: unknown): string[] {
   const issues: string[] = [];
   if (typeof raw !== "object" || raw === null) return ["root: expected an object"];
@@ -152,14 +136,8 @@ export function validateArchive(raw: unknown): string[] {
     });
   }
 
-  const stats = r.stats;
-  if (typeof stats !== "object" || stats === null) {
-    issues.push("stats: expected an object");
-  } else {
-    for (const k of STAT_KEYS) {
-      if (typeof (stats as Record<string, unknown>)[k] !== "number") issues.push(`stats: "${k}" expected number`);
-    }
-  }
+  // The summary figures are counted from the records at load, not stored, so
+  // there is nothing here to validate — they cannot disagree with the data.
   return issues;
 }
 
@@ -303,7 +281,8 @@ export function validateDivisions(data: DivisionData): string[] {
               continue;
             }
             // Only divisions defined here can be checked; specimen and personnel
-            // ids are verified against the base archive in validateCrossLinks.
+            // ids are verified against the base archive by validateCrossLinks,
+            // which runs alongside this and needs both datasets to do it.
             const target = sets[key];
             if (!target) continue;
             for (const id of ids as string[]) {
@@ -331,6 +310,74 @@ export function validateDivisions(data: DivisionData): string[] {
     if (typeof i.severity === "number" && (i.severity < 1 || i.severity > 5)) {
       issues.push(`incidents[${i.id}]: severity out of range 1-5 (got ${i.severity})`);
     }
+  }
+
+  return issues;
+}
+
+/**
+ * Referential integrity across the two datasets.
+ *
+ * `validateDivisions` can only resolve ids within the expansion divisions,
+ * because it never sees the base archive. Everything pointing the other way —
+ * a location crediting a person, an operation citing a specimen, and the
+ * optional link arrays the base records themselves carry — is checked here.
+ *
+ * This matters more than it looks: `getRelatedRecords` silently drops ids it
+ * cannot resolve, so a typo does not throw or render a dead link. It just
+ * quietly removes a relationship from the archive, which is exactly the kind
+ * of rot that is invisible until someone notices a dossier is missing a link
+ * it should have. Failing here makes that impossible.
+ */
+export function validateCrossLinks(
+  base: { specimens: { id: string }[]; personnel: { id: string }[] },
+  data: DivisionData
+): string[] {
+  const issues: string[] = [];
+
+  const known: Record<string, Set<string>> = {
+    specimens: new Set(base.specimens.map((r) => r.id)),
+    personnel: new Set(base.personnel.map((r) => r.id)),
+    locations: new Set(data.locations.map((r) => r.id)),
+    flora: new Set(data.flora.map((r) => r.id)),
+    facilities: new Set(data.facilities.map((r) => r.id)),
+    incidents: new Set(data.incidents.map((r) => r.id)),
+  };
+
+  const resolve = (where: string, key: string, ids: unknown) => {
+    if (ids == null) return;
+    if (!Array.isArray(ids) || !ids.every((v) => typeof v === "string")) {
+      issues.push(`${where}: "${key}" expected string[]`);
+      return;
+    }
+    const target = known[key];
+    if (!target) {
+      issues.push(`${where}: unknown relation "${key}"`);
+      return;
+    }
+    for (const id of ids as string[]) {
+      if (!target.has(id)) issues.push(`${where}: "${key}" points at unknown record "${id}"`);
+    }
+  };
+
+  // Expansion records reaching into the base archive.
+  for (const [name, list] of Object.entries(data) as [keyof DivisionData, { id: string; relations?: unknown }[]][]) {
+    for (const rec of list) {
+      const rel = rec.relations;
+      if (rel == null || typeof rel !== "object" || Array.isArray(rel)) continue;
+      const r = rel as Record<string, unknown>;
+      resolve(`${name}[${rec.id}]`, "specimens", r.specimens);
+      resolve(`${name}[${rec.id}]`, "personnel", r.personnel);
+    }
+  }
+
+  // The optional link arrays the base records carry. These are plain fields
+  // rather than a `relations` object, so nothing else looks at them at all.
+  for (const d of base.specimens as { id: string; [k: string]: unknown }[]) {
+    for (const key of ["locations", "facilities", "personnel"]) resolve(`specimens[${d.id}]`, key, d[key]);
+  }
+  for (const p of base.personnel as { id: string; [k: string]: unknown }[]) {
+    for (const key of ["locations", "facilities", "specimens"]) resolve(`personnel[${p.id}]`, key, p[key]);
   }
 
   return issues;

@@ -21,7 +21,7 @@ export default function PersonDetail() {
 
   return (
     <Page>
-      <Header icons={false} />
+      <Header />
       <Breadcrumb
         trail={[
           { label: "Archive", to: "/dashboard" },

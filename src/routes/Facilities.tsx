@@ -87,7 +87,7 @@ export function FacilityDetail() {
 
   return (
     <Page>
-      <Header icons={false} />
+      <Header />
       <Breadcrumb
         trail={[
           { label: "Archive", to: "/dashboard" },
@@ -108,7 +108,6 @@ export function FacilityDetail() {
             status={record.status}
             security={record.security}
             tags={record.tags}
-            relations={record.relations}
             plateCaption="Structure elevation"
             badges={[{ label: record.type }]}
             facts={[

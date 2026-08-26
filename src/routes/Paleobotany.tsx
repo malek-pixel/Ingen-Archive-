@@ -86,7 +86,7 @@ export function FloraDetail() {
 
   return (
     <Page>
-      <Header icons={false} />
+      <Header />
       <Breadcrumb
         trail={[
           { label: "Archive", to: "/dashboard" },
@@ -107,7 +107,6 @@ export function FloraDetail() {
             status={record.status}
             security={record.security}
             tags={record.tags}
-            relations={record.relations}
             plateCaption="Botanical figure"
             badges={[{ label: record.era }]}
             facts={[

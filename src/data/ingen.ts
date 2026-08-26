@@ -5,7 +5,7 @@ import facilitiesRaw from "./facilities.json";
 import operationsRaw from "./operations.json";
 import locationImages from "./location-images.json";
 
-import { ArchiveDataError, validateArchive, validateDivisions } from "./validate";
+import { ArchiveDataError, validateArchive, validateCrossLinks, validateDivisions } from "./validate";
 import { recordHref } from "./divisions";
 import type {
   Archive,
@@ -30,7 +30,6 @@ interface RawArchive {
   personnel: Person[];
   specimenImages: Record<string, string>;
   personnelImages: Record<string, string>;
-  stats: ArchiveStats;
 }
 
 /** Key for the flat entry index — ids are only unique within a division. */
@@ -48,6 +47,36 @@ const personSecurity = (p: Person): SecurityLevel =>
 
 const lower = (parts: unknown[]) => parts.filter(Boolean).join(" ").toLowerCase();
 
+/**
+ * The archive summary figures.
+ *
+ * Counted from the records every load rather than stored alongside them. The
+ * dataset used to carry a written-down copy of these thirteen numbers, which
+ * meant every added record silently made them wrong — and nothing rendered
+ * them, so nothing would have caught it. Derivation is the only version that
+ * stays true as the archive grows.
+ */
+function summarise(specimens: Specimen[], personnel: Person[]): ArchiveStats {
+  const contain = (d: Specimen) => (d.contain || "").toUpperCase();
+  const count = <T>(list: T[], match: (v: T) => boolean) => list.filter(match).length;
+
+  return {
+    dTotal: specimens.length,
+    dActive: count(specimens, (d) => /^ACTIVE|^ALIVE/.test((d.status || "").toUpperCase())),
+    dDeceased: count(specimens, (d) => /DECEASED/.test((d.status || "").toUpperCase())),
+    dFailed: count(specimens, (d) => /FAIL|BREACH/.test(contain(d))),
+    dStable: count(specimens, (d) => /^STABLE/.test(contain(d))),
+    dPartial: count(specimens, (d) => /PARTIAL/.test(contain(d))),
+    dExtreme: count(specimens, (d) => Number(d.threat) >= 5),
+    dHigh: count(specimens, (d) => Number(d.threat) === 4),
+    pTotal: personnel.length,
+    pAlive: count(personnel, (p) => /ALIVE/.test((p.status || "").toUpperCase())),
+    pDeceased: count(personnel, (p) => /DECEASED/.test((p.status || "").toUpperCase())),
+    pL5: count(personnel, (p) => Number(p.clearance) >= 5),
+    pL4plus: count(personnel, (p) => Number(p.clearance) >= 4),
+  };
+}
+
 function build(
   source: unknown,
   locations: Location[],
@@ -55,7 +84,15 @@ function build(
   facilities: Facility[],
   incidents: Incident[]
 ): Archive {
-  const issues = [...validateArchive(source), ...validateDivisions({ locations, flora, facilities, incidents })];
+  const divisions = { locations, flora, facilities, incidents };
+  const issues = [...validateArchive(source), ...validateDivisions(divisions)];
+
+  // Cross-dataset links are only checkable once both halves are known to be
+  // structurally sound — running it on a malformed payload would bury the real
+  // failure under a cascade of unresolved-id noise.
+  if (!issues.length) {
+    issues.push(...validateCrossLinks(source as { specimens: Specimen[]; personnel: Person[] }, divisions));
+  }
   if (issues.length) throw new ArchiveDataError(issues);
 
   const r = source as RawArchive;
@@ -204,7 +241,7 @@ function build(
     facilities: facilityRecords,
     incidents: incidentRecords,
 
-    stats: r.stats,
+    stats: summarise(r.specimens, r.personnel),
     counts: {
       specimen: specimens.length,
       person: personnel.length,

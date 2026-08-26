@@ -8,6 +8,7 @@ import { stagger, step, useCountUp, useReveal } from "../lib/motion";
 import { DIVISIONS } from "../data/divisions";
 import { SecurityBadge, StatusInk } from "../components/RecordChrome";
 import { RecordImage } from "../components/RecordImage";
+import { PlateMark } from "../components/TechnicalPlate";
 
 /** Hero figures roll up once, when the lockup first reveals. */
 function HeroStat({ value, label }: { value: number; label: string }) {
@@ -493,19 +494,23 @@ export default function Dashboard() {
                   }}
                 >
                   <div style={{ width: 24, height: 30, overflow: "hidden", flex: "none", background: "#0E131A" }}>
-                    <RecordImage
-                      src={r.img}
-                      width={24}
-                      height={30}
-                      alt={r.name}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        objectPosition: "center 18%",
-                        display: "block",
-                      }}
-                    />
+                    {r.img ? (
+                      <RecordImage
+                        src={r.img}
+                        width={24}
+                        height={30}
+                        alt={r.name}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          objectPosition: "center 18%",
+                          display: "block",
+                        }}
+                      />
+                    ) : (
+                      <PlateMark kind="person" />
+                    )}
                   </div>
                   <span style={{ font: "500 12.5px 'IBM Plex Sans',sans-serif", whiteSpace: "nowrap" }}>{r.name}</span>
                 </Link>

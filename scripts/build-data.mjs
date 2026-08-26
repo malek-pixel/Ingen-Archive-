@@ -24,13 +24,24 @@ const remap = (map, folder) =>
     })
   );
 
+/**
+ * Not every record was photographed. The archive covers those with a drawn
+ * technical plate, which is a designed state rather than a gap — so an absent
+ * plate is recorded as an empty path rather than left undefined, and the
+ * loader's "every record has an image mapping" rule still holds.
+ */
+const withGaps = (images, records) => Object.fromEntries(records.map((r) => [r.id, images[r.id] ?? ""]));
+
 const out = {
   specimens: raw.D,
   personnel: raw.P,
-  specimenImages: remap(raw.dImg, "dinos"),
-  personnelImages: remap(raw.pImg, "personnel"),
-  stats: raw.s,
+  specimenImages: withGaps(remap(raw.dImg, "dinos"), raw.D),
+  personnelImages: withGaps(remap(raw.pImg, "personnel"), raw.P),
 };
 
 writeFileSync(join(root, "src/data/ingen.json"), JSON.stringify(out, null, 2));
-console.log(`wrote ${out.specimens.length} specimens, ${out.personnel.length} personnel`);
+const plated = (m) => Object.values(m).filter(Boolean).length;
+console.log(
+  `wrote ${out.specimens.length} specimens (${plated(out.specimenImages)} with photography), ` +
+    `${out.personnel.length} personnel (${plated(out.personnelImages)} with photography)`
+);

@@ -14,17 +14,14 @@ import {
 } from "../lib/derive";
 import { stagger, step, useReveal } from "../lib/motion";
 import { RecordImage } from "./RecordImage";
+import { TechnicalPlate } from "./TechnicalPlate";
 import { RelatedRecords } from "./RecordChrome";
 import { getRelatedRecords } from "../lib/archive";
 
 /** The asset dossier body — shared by the detail route and the full-run gallery. */
 export function SpecimenDossier({ d }: { d: WithImage<Specimen> }) {
   const specsReveal = useReveal();
-  const related = getRelatedRecords("specimen", d.id, undefined, {
-    locations: d.locations,
-    facilities: d.facilities,
-    personnel: d.personnel,
-  });
+  const related = getRelatedRecords("specimen", d.id);
   const threatReveal = useReveal();
   const t = Number(d.threat) || 0;
   const ink = threatInk(t, true);
@@ -170,45 +167,50 @@ export function SpecimenDossier({ d }: { d: WithImage<Specimen> }) {
         >
           <div data-enter="plate" style={{ ...step(2), border: "1px solid #1A222C" }}>
             <div style={{ position: "relative", aspectRatio: "1/1", overflow: "hidden", background: "#E3E8ED" }}>
-              <PlateFrame grid={36} inset={90}>
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    padding: "clamp(28px,4vw,48px)",
-                  }}
-                >
-                  <RecordImage
-                    src={d.img}
-                    alt={`${d.name} reference plate`}
-                    plate
+              {d.img ? (
+                <PlateFrame grid={36} inset={90}>
+                  <div
                     style={{
-                      maxWidth: "100%",
-                      maxHeight: "100%",
-                      width: "auto",
-                      height: "auto",
-                      objectFit: "contain",
-                      mixBlendMode: plateBlend(d.id),
-                      display: "block",
+                      position: "absolute",
+                      inset: 0,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      padding: "clamp(28px,4vw,48px)",
                     }}
-                  />
-                </div>
-                <div
-                  style={{
-                    position: "absolute",
-                    left: 16,
-                    bottom: 13,
-                    font: "500 11px 'IBM Plex Mono',monospace",
-                    letterSpacing: ".06em",
-                    color: "#5A7085",
-                  }}
-                >
-                  Reference plate · {d.fileId}
-                </div>
-              </PlateFrame>
+                  >
+                    <RecordImage
+                      src={d.img}
+                      alt={`${d.name} reference plate`}
+                      plate
+                      style={{
+                        maxWidth: "100%",
+                        maxHeight: "100%",
+                        width: "auto",
+                        height: "auto",
+                        objectFit: "contain",
+                        mixBlendMode: plateBlend(d.id),
+                        display: "block",
+                      }}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: 16,
+                      bottom: 13,
+                      font: "500 11px 'IBM Plex Mono',monospace",
+                      letterSpacing: ".06em",
+                      color: "#5A7085",
+                    }}
+                  >
+                    Reference plate · {d.fileId}
+                  </div>
+                </PlateFrame>
+              ) : (
+                // Same frame, same caption line — drawn rather than photographed.
+                <TechnicalPlate kind="specimen" fileId={d.fileId} />
+              )}
             </div>
           </div>
 

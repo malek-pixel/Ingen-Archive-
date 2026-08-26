@@ -19,15 +19,26 @@ const byName = (a: { name?: string }, b: { name?: string }) => (a.name || "").lo
 
 /* ---------- Specimens ---------- */
 
-const taxon = (d: Specimen) => `${d.classification || ""} ${d.diet || ""} ${d.species || ""}`;
+/**
+ * The taxonomic register a specimen is filed under, read from its file id:
+ * ING-AIR (aerial), ING-MAR (marine), ING-HYB (engineered), ING-DIN otherwise.
+ *
+ * These filters used to pattern-match the classification, diet and species
+ * prose instead, which was wrong in both directions. "Flying" tested for
+ * "Ptero" and so returned Pteranodon alone, leaving out every other aerial
+ * asset; "Marine" tested for "marine" anywhere and so caught Geosternbergia,
+ * a pterosaur, because its diet line mentions marine surface prey. The
+ * register is the archive's own classification and cannot drift with wording.
+ */
+const register = (d: Specimen) => (d.fileId || "").split("-")[1] || "";
 
 export const SPECIMEN_FILTERS: FilterDef<Specimen>[] = [
   { key: "all", label: "All", match: () => true },
   { key: "carn", label: "Carnivore", match: (d) => /Carn/i.test(d.diet || "") },
   { key: "herb", label: "Herbivore", match: (d) => /Herb/i.test(d.diet || "") },
-  { key: "mar", label: "Marine", match: (d) => /Marine|Mosasaur|Plesiosaur|Aquatic/i.test(taxon(d)) },
-  { key: "fly", label: "Flying", match: (d) => /Ptero|Flying|Avian|Volant/i.test(taxon(d)) },
-  { key: "hyb", label: "Hybrid", match: (d) => /Hybrid|Transgenic/i.test(taxon(d)) },
+  { key: "mar", label: "Marine", match: (d) => register(d) === "MAR" },
+  { key: "fly", label: "Flying", match: (d) => register(d) === "AIR" },
+  { key: "hyb", label: "Hybrid", match: (d) => register(d) === "HYB" },
   { key: "threat", label: "Threat 4+", dotInk: "#E0B36A", match: (d) => Number(d.threat) >= 4 },
   { key: "failed", label: "Breached", dotInk: "#D2564D", match: (d) => /FAIL|BREACH/i.test(d.contain || "") },
 ];

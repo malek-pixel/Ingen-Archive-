@@ -69,19 +69,16 @@ input::placeholder {
   }
 }
 
-/* Responsive header behaviour — replicated from the mockups, with the
-   descriptor yielding earlier than the original 860px. The bar now carries
-   seven registers instead of three, and the descriptor line is the widest
-   part of the lockup; holding it to 860 clipped the last division. */
-@media (max-width: 1120px) {
-  .ig-sub {
-    display: none;
-  }
-}
-/* The nav drops to its own full-width row. The mockups do this at 640 for
-   three registers; with seven it has to happen sooner, or the last division is
-   squeezed out of the bar. Same mechanism, earlier trigger. */
-@media (max-width: 960px) {
+/* Responsive header behaviour — replicated from the mockups. The strapline is
+   dropped by the 1440px band below, which is the widest of these thresholds;
+   it needs no rule of its own here.
+
+   The nav drops to its own full-width row. The mockups do this at 640 for
+   three registers; with seven, each carrying an icon, it has to happen sooner
+   or the last division is squeezed out of the bar. Same mechanism, earlier
+   trigger: the tab row measures 749px, and below roughly 1240 the shared row
+   no longer has that to give once the lockup and session block are seated. */
+@media (max-width: 1240px) {
   .ig-hdr {
     height: auto !important;
     flex-wrap: wrap;
@@ -290,19 +287,30 @@ input::placeholder {
   border-color: var(--ig-blue-border);
 }
 
-/* The page column is capped at 1440px, so these thresholds are about how much
-   room the bar has rather than how wide the screen is — anything above 1440
-   lays out identically. Things are dropped in order of how little they cost
-   the reader: the division icons first, then the session wording, then the
-   nav takes its own row. The search control is icon-only at every width; its
-   label alone cost more bar than an entire division tab. */
+/* The bar is full-bleed, so these thresholds are about how much room it has
+   rather than how wide the screen is. Things are dropped in order of how
+   little they cost the reader, and the division icons are no longer first to
+   go: they carry the taxonomy at a glance, so what yields ahead of them is the
+   8px strapline under the wordmark, which is decorative and repeats a name the
+   wordmark already gives. Order is now: the strapline, the session wording,
+   then the nav takes its own row. The search control is icon-only at every
+   width; its label alone cost more bar than an entire division tab.
+
+   Icons are never hidden — below the wrap the nav has a full row to itself and
+   the space stops being contested at all. In the shared-row band the tabs tuck
+   in instead: the measured content is 749px, so the wrap has to happen while
+   the bar still has that much to give. */
 @media (max-width: 1440px) {
-  .ig-nav a svg {
+  /* The strapline yields to the icons, not the other way round. */
+  .ig-sub {
     display: none;
   }
+  .ig-nav a svg {
+    margin-right: 6px;
+  }
   .ig-nav a {
-    padding-left: 9px !important;
-    padding-right: 9px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
   }
   .ig-nav-group {
     margin-left: 5px;
@@ -316,11 +324,23 @@ input::placeholder {
   }
 }
 
-@media (max-width: 640px) {
+/* Narrow: the nav already has a row of its own here, so the last thing to give
+   is the grouping hairline. The mockups drop it at 640; with an icon on every
+   tab it has to go sooner, or the tab row starts scrolling on a tablet and the
+   final divisions sit off-screen behind a hidden scrollbar. The grouping is
+   still carried for assistive tech by the role="group" label on each set. */
+@media (max-width: 900px) {
   .ig-nav-group {
     border-left: none;
     margin-left: 0;
     padding-left: 0;
+  }
+  .ig-nav a {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+  .ig-nav a svg {
+    margin-right: 5px;
   }
 }
 

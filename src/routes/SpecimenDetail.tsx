@@ -76,7 +76,7 @@ export default function SpecimenDetail() {
 
   return (
     <Page>
-      <Header icons={false} />
+      <Header />
       <Breadcrumb
         trail={[
           { label: "Archive", to: "/dashboard" },

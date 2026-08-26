@@ -1,6 +1,10 @@
 import { describe, expect, it, beforeEach, afterEach, vi } from "vitest";
 import { render, screen, waitFor, act } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { loadArchive } from "../src/data/ingen";
+
+// Derived, not written down — see routes.test.tsx.
+const nSpec = loadArchive().specimens.length;
 
 /**
  * The motion layer is allowed to fail; the archive is not. These tests pin the
@@ -166,7 +170,7 @@ describe("revealed content stays reachable", () => {
         <App />
       </MemoryRouter>
     );
-    await screen.findByText("Showing all 21 records");
+    await screen.findByText(`Showing all ${nSpec} records`);
 
     // The grid registers with the observer in a passive effect, which may not
     // have flushed when the text query resolves. Retry firing until it has,
@@ -193,6 +197,6 @@ describe("revealed content stays reachable", () => {
         <App />
       </MemoryRouter>
     );
-    await waitFor(() => expect(screen.getAllByText("Open record")).toHaveLength(21));
+    await waitFor(() => expect(screen.getAllByText("Open record")).toHaveLength(nSpec));
   });
 });

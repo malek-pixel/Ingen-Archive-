@@ -16,11 +16,15 @@ const data = JSON.parse(readFileSync(join(root, "src/data/ingen.json"), "utf8"))
 
 const locationImages = JSON.parse(readFileSync(join(root, "src/data/location-images.json"), "utf8"));
 
-const referenced = new Set([
-  ...Object.values(data.specimenImages),
-  ...Object.values(data.personnelImages),
-  ...Object.values(locationImages).map((e) => e.src),
-]);
+// An empty path is a record with no photography on file, which renders the
+// drawn technical plate instead. That is a designed state, not a missing file.
+const referenced = new Set(
+  [
+    ...Object.values(data.specimenImages),
+    ...Object.values(data.personnelImages),
+    ...Object.values(locationImages).map((e) => e.src),
+  ].filter(Boolean)
+);
 
 const missing = [...referenced].filter((p) => !existsSync(join(root, "public", p)));
 

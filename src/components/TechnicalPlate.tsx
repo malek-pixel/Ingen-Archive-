@@ -55,8 +55,32 @@ const GLYPHS: Record<RecordKind, { title: string; draw: () => JSX.Element }> = {
       </>
     ),
   },
-  specimen: { title: "Reference plate", draw: () => <circle cx="48" cy="44" r="24" /> },
-  person: { title: "Personnel plate", draw: () => <circle cx="48" cy="44" r="24" /> },
+  // Most specimens and personnel carry photography; these stand in for the
+  // ones that do not, in the same drafting language as the divisions that were
+  // never photographed at all.
+  specimen: {
+    title: "Reference plate",
+    draw: () => (
+      <>
+        <path d="M18 60 C26 40 40 30 56 30 C68 30 76 36 80 44" />
+        <path d="M80 44 C74 46 68 45 64 42" />
+        <path d="M56 30 C52 22 44 18 36 20" />
+        <path d="M18 60 C24 64 34 66 44 64" />
+        <path d="M44 64 l6 12 M58 60 l5 13" />
+        <circle cx="72" cy="39" r="1.6" />
+      </>
+    ),
+  },
+  person: {
+    title: "Personnel plate",
+    draw: () => (
+      <>
+        <circle cx="48" cy="32" r="12" />
+        <path d="M26 74 C26 58 36 50 48 50 C60 50 70 58 70 74" />
+        <path d="M30 74 h36" />
+      </>
+    ),
+  },
 };
 
 export function TechnicalPlate({
@@ -113,5 +137,44 @@ export function TechnicalPlate({
         {caption ?? glyph.title} · {fileId}
       </div>
     </PlateFrame>
+  );
+}
+
+/**
+ * The plate reduced to a mark, for places too small to carry a caption — the
+ * 24×30 portrait cells in the overview and dashboard lists.
+ *
+ * Those cells used to render RecordImage's "image unavailable" state for any
+ * record without photography, which put a shouted line of monospace into a
+ * thumbnail barely wide enough for three characters. This says the same thing
+ * quietly: the drafting ground, the division's glyph, nothing else.
+ */
+export function PlateMark({ kind }: { kind: RecordKind }) {
+  return (
+    <span
+      aria-hidden="true"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+        height: "100%",
+        background: "#D8DEE4",
+      }}
+    >
+      <svg
+        width="70%"
+        height="70%"
+        viewBox="0 0 96 88"
+        fill="none"
+        stroke="#7C8FA1"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        opacity="0.65"
+      >
+        {GLYPHS[kind].draw()}
+      </svg>
+    </span>
   );
 }

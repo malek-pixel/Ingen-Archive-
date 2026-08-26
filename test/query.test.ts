@@ -4,6 +4,7 @@ import { PERSON_SORTS, SPECIMEN_SORTS, queryPersonnel, querySpecimens } from "..
 import {
   containment,
   deptShort,
+  dietLabel,
   parseSlug,
   plateBlend,
   specimenStatusShort,
@@ -17,6 +18,27 @@ const q = (query = "", filter = "all", sort = 0) => querySpecimens(specimens, qu
 describe("specimen search", () => {
   it("returns everything with no query or filter", () => {
     expect(q().results).toHaveLength(specimens.length);
+  });
+
+  // The taxonomy chips used to pattern-match prose, which put a pterosaur in
+  // the marine results (its diet line mentions marine prey) and returned only
+  // Pteranodon for "Flying". They read the file-id register now; this pins
+  // each chip to exactly the assets filed under that register.
+  it.each([
+    ["mar", "MAR"],
+    ["fly", "AIR"],
+    ["hyb", "HYB"],
+  ])("filters %s to the %s register alone", (filter, prefix) => {
+    const expected = specimens.filter((d) => d.fileId.split("-")[1] === prefix);
+    const got = q("", filter).results;
+    expect(got.length).toBe(expected.length);
+    expect(got.length).toBeGreaterThan(0);
+    expect(got.every((d) => d.fileId.split("-")[1] === prefix)).toBe(true);
+  });
+
+  it("keeps the diet chips agreeing with the label a dossier prints", () => {
+    for (const d of q("", "carn").results) expect(dietLabel(d.diet)).toBe("Carnivore");
+    for (const d of q("", "herb").results) expect(dietLabel(d.diet)).toBe("Herbivore");
   });
 
   it("matches on name, species, file id and incident slug", () => {

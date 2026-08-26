@@ -4,6 +4,7 @@ import type { Specimen, WithImage } from "../data/types";
 import { cells, containmentShort, plateBlend, specimenStatusShort, threatInk } from "../lib/derive";
 import { Meter } from "./Chrome";
 import { RecordImage } from "./RecordImage";
+import { TechnicalPlate } from "./TechnicalPlate";
 
 export function DinoCard({ d, index = 0 }: { d: WithImage<Specimen>; index?: number }) {
   const t = Number(d.threat) || 0;
@@ -30,43 +31,52 @@ export function DinoCard({ d, index = 0 }: { d: WithImage<Specimen>; index?: num
       }}
     >
       <div style={{ position: "relative", height: 184, overflow: "hidden", background: "#E3E8ED", flex: "none" }}>
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage:
-              "linear-gradient(rgba(40,70,96,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(40,70,96,.05) 1px,transparent 1px)",
-            backgroundSize: "28px 28px",
-          }}
-        />
-        <div style={{ position: "absolute", inset: 0, boxShadow: "inset 0 0 44px rgba(20,36,52,.14)" }} />
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "22px 20px",
-          }}
-        >
-          <RecordImage
-            className="ig-zoom"
-            src={d.img}
-            width={248}
-            height={140}
-            alt={d.name}
-            plate
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
-              objectPosition: "center",
-              mixBlendMode: plateBlend(d.id),
-              display: "block",
-            }}
-          />
-        </div>
+        {d.img ? (
+          <>
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                backgroundImage:
+                  "linear-gradient(rgba(40,70,96,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(40,70,96,.05) 1px,transparent 1px)",
+                backgroundSize: "28px 28px",
+              }}
+            />
+            <div style={{ position: "absolute", inset: 0, boxShadow: "inset 0 0 44px rgba(20,36,52,.14)" }} />
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "22px 20px",
+              }}
+            >
+              <RecordImage
+                className="ig-zoom"
+                src={d.img}
+                width={248}
+                height={140}
+                alt={d.name}
+                plate
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                  objectPosition: "center",
+                  mixBlendMode: plateBlend(d.id),
+                  display: "block",
+                }}
+              />
+            </div>
+          </>
+        ) : (
+          // Never photographed — the drawn plate, as every unphotographed
+          // division uses. Reserving "image unavailable" for a plate that was
+          // meant to load and did not keeps that message meaningful.
+          <TechnicalPlate kind="specimen" fileId={d.fileId} grid={28} compact />
+        )}
         <span className="ig-scanline" aria-hidden="true" />
         <span
           style={{ position: "absolute", top: 12, right: 12, width: 7, height: 7, background: status.ink }}

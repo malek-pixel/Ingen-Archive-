@@ -10,12 +10,12 @@ transcribed from the mockups. The only deliberate departures are documented unde
 
 | Division       | Route          | Records | Identifier                                    |
 | -------------- | -------------- | ------- | --------------------------------------------- |
-| Genetic assets | `/assets`      | 21      | `ING-DIN` / `ING-MAR` / `ING-HYB` / `ING-AIR` |
+| Genetic assets | `/assets`      | 36      | `ING-DIN` / `ING-MAR` / `ING-HYB` / `ING-AIR` |
 | Paleobotany    | `/paleobotany` | 15      | `ING-FLR`                                     |
-| Personnel      | `/personnel`   | 22      | `ING-CHR`                                     |
+| Personnel      | `/personnel`   | 34      | `ING-CHR`                                     |
 | Locations      | `/locations`   | 12      | `ING-LOC`                                     |
-| Facilities     | `/facilities`  | 14      | `ING-FAC`                                     |
-| Operations     | `/operations`  | 10      | `ING-OPS`                                     |
+| Facilities     | `/facilities`  | 20      | `ING-FAC`                                     |
+| Operations     | `/operations`  | 12      | `ING-OPS`                                     |
 
 Counts are illustrative of the current data — the application never hardcodes
 them. `src/data/divisions.ts` is the single source of truth for the taxonomy:
@@ -77,22 +77,28 @@ the responsive header rules, and every hover/focus state.
 
 ## Data
 
-`src/data/ingen.json` holds the original 43 dossiers (21 specimens, 22 personnel),
-generated from the source export by `scripts/build-data.mjs`, which only rewrites
-image paths onto `public/media/`. **That file is not hand-edited.**
+`src/data/ingen.json` holds the specimen and personnel dossiers (36 and 34),
+generated from `scripts/_ingen_data.raw.json` by `scripts/build-data.mjs`, which
+rewrites image paths onto `public/media/` and records an empty path for any
+record with no photography. **That file is not hand-edited — edit the raw export
+and re-run `npm run data`.**
+
+The archive summary figures are counted from the records at load
+(`summarise()` in `src/data/ingen.ts`) rather than stored, so adding a record
+cannot leave a published total behind.
 
 The expansion divisions live alongside it as `locations.json`, `flora.json`,
 `facilities.json` and `operations.json`.
 
 ### Relationships
 
-Records link across divisions. Links are declared once — on the expansion record
-— and read in both directions through a lazily built reverse index in
-`src/lib/archive.ts`, so a specimen dossier shows the incidents and facilities
-that reference it without its own record changing. The seven incident slugs the
-original specimen and personnel records already carried are resolved into the
-Operations division the same way, which is why the two oldest divisions gained a
-full set of cross-links with no edits to their data.
+Records link across divisions. Every link is declared once, on whichever record
+is its natural home, and read in both directions through a lazily built reverse
+index in `src/lib/archive.ts`. `getRelatedRecords(kind, id)` reads a record's own
+links itself rather than taking them as arguments — the two base divisions store
+theirs as plain fields and cite operations by slug, and those are folded into the
+same index, so a specimen's island lists the specimen back. Every record in the
+archive resolves to at least one other; `test/expansion.test.tsx` pins that.
 
 Validation is referential: a link pointing at a record that does not exist, or a
 facility sited at an unknown location, fails at load rather than rendering a dead
@@ -134,7 +140,7 @@ added ~35 kB gzipped for capability that is not needed.
 | ------------------ | -------------------------------------------------------------------------------------------------------------- |
 | Page entry         | `data-enter` + `--ig-step`: eyebrow → heading → text → controls, 55ms apart                                    |
 | Scroll reveal      | `data-reveal` + one shared `IntersectionObserver`; unobserved once revealed, so nothing replays                |
-| Card / row stagger | `--i` per item, 26ms step capped at 11 (a 21-card grid completes in ~290ms)                                    |
+| Card / row stagger | `--i` per item, 26ms step capped at 11 (a 36-card grid completes in ~290ms)                                    |
 | Cards              | 2px lift, border, restrained blue bloom, one-shot cyan read head over the media well                           |
 | Controls           | Hover lift + press (`scale(.984)`, 90ms); search glow; sort arrow and filter dots react                        |
 | Nav                | Active rule scales in rather than snapping between items                                                       |
@@ -203,23 +209,37 @@ too, so a missing or orphaned location plate fails the build like any other.
 
 ## Imagery across divisions
 
-Only genetic assets and personnel carry photography. The four expansion divisions
-render a **technical plate** instead — the engineering grid already used behind
-specimen plates, with a division glyph and the record identifier. This is a
-designed state, not a fallback: those records were never photographed for the
-archive, and drafting language is a more honest answer than a stand-in image.
-`hasImagery` on each division records which is which, and `verify:assets` only
-demands files for the divisions that have them.
+Photography is partial, by division and by record. Genetic assets, personnel and
+locations carry plates where one exists; paleobotany, facilities and operations
+never do. Anything without one renders a **technical plate** — the engineering
+grid already used behind specimen plates, with a division glyph and the record
+identifier.
+
+This is a designed state, not a fallback: those records were never photographed
+for the archive, and drafting language is a more honest answer than a stand-in
+image or an invented path. The `imagery` field on each division in
+`src/data/divisions.ts` records how a plate is drawn when there is one
+(`cutout`, `plate`, `none`), and `verify:assets` demands a file only for paths
+that are actually declared — an empty path is a record with no photography, not
+a missing asset.
+
+In the smallest cells — the 24×30 portraits in the overview and dashboard lists
+— the plate reduces to `PlateMark`: the same ground and glyph with no caption,
+because a thumbnail three characters wide cannot carry one.
 
 ## Media pipeline
 
 Record imagery is WebP, capped at 1200px on the long edge (`npm run images`).
-The 43 referenced files total ~325 KB, down from ~1.37 MB of source JPG/PNG.
+The 53 referenced files total ~325 KB, down from ~1.37 MB of source JPG/PNG.
+Records with no photography reference no file and render the drawn technical plate.
 `npm run verify:assets` fails the build in both directions — a missing file
 breaks a dossier, an orphan file ships dead weight — and runs in CI.
 
-A plate that fails to load renders a labelled `IMAGE UNAVAILABLE` placeholder
-rather than an empty box, so an absent asset is reported, not hidden.
+A plate that was declared and then fails to load renders a labelled
+`IMAGE UNAVAILABLE` placeholder rather than an empty box, so a broken asset is
+reported, not hidden. That message is reserved for exactly that case — a record
+that was never photographed shows the technical plate instead, which says
+something true rather than reporting a failure that did not happen.
 
 ## Known limitations
 
@@ -232,5 +252,5 @@ rather than an empty box, so an absent asset is reported, not hidden.
   a host-level rule.
 - **Full-run galleries are not windowed.** They rely on `content-visibility:
 auto` with a reserved intrinsic size, which skips layout and paint for
-  off-screen records. That is enough here at 21/22 records; a much larger
+  off-screen records. That is enough here at 36/34 records; a much larger
   archive would want real virtualisation.

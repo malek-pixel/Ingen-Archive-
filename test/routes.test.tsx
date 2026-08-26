@@ -2,6 +2,14 @@ import { describe, expect, it, beforeEach, vi } from "vitest";
 import { render, screen, waitFor, within, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import App from "../src/App";
+import { loadArchive } from "../src/data/ingen";
+
+// Counts come from the archive, never from a literal: a written-down total
+// turns every added record into a test edit, and the number in the test stops
+// proving anything about the number on the screen.
+const { specimens, personnel, counts } = loadArchive();
+const nSpec = specimens.length;
+const nPers = personnel.length;
 
 const renderAt = (path: string) =>
   render(
@@ -22,8 +30,8 @@ describe("route smoke tests", () => {
     expect(await screen.findByRole("heading", { level: 1 })).toHaveTextContent(
       "Central biological and operations record."
     );
-    expect(screen.getByText("21 indexed specimens")).toBeTruthy();
-    expect(screen.getByText("22 files on record")).toBeTruthy();
+    expect(screen.getByText(`${nSpec} indexed specimens`)).toBeTruthy();
+    expect(screen.getByText(`${nPers} files on record`)).toBeTruthy();
   });
 
   it("renders the dashboard with derived metrics", async () => {
@@ -32,20 +40,20 @@ describe("route smoke tests", () => {
       "Master index of the InGen record system."
     );
     expect(screen.getByText("Incident chronology")).toBeTruthy();
-    expect(screen.getByText("94 records indexed")).toBeTruthy();
+    expect(screen.getByText(`${counts.total} records indexed`)).toBeTruthy();
   });
 
   it("renders the genetic asset index with every card", async () => {
     renderAt("/assets");
     expect(await screen.findByRole("heading", { level: 1 })).toHaveTextContent("Genetic assets");
-    expect(screen.getByText("Showing all 21 records")).toBeTruthy();
-    expect(screen.getAllByText("Open record")).toHaveLength(21);
+    expect(screen.getByText(`Showing all ${nSpec} records`)).toBeTruthy();
+    expect(screen.getAllByText("Open record")).toHaveLength(nSpec);
   });
 
   it("renders the personnel index", async () => {
     renderAt("/personnel");
-    expect(await screen.findByText("Showing all 22 files")).toBeTruthy();
-    expect(screen.getAllByText("Open file")).toHaveLength(22);
+    expect(await screen.findByText(`Showing all ${nPers} files`)).toBeTruthy();
+    expect(screen.getAllByText("Open file")).toHaveLength(nPers);
   });
 
   it("renders an asset dossier by deep link", async () => {
@@ -85,16 +93,20 @@ describe("route smoke tests", () => {
     expect(screen.getByText(/Access denied/)).toBeTruthy();
   });
 
-  it("renders the full asset run with every dossier", async () => {
+  // The full runs mount every dossier in the division at once — the whole point
+  // of the screen. In jsdom that is several thousand nodes with no layout
+  // engine to help, so these two get a wider budget than the 5s default. The
+  // assertion is unchanged: every record still has to render.
+  it("renders the full asset run with every dossier", { timeout: 20000 }, async () => {
     renderAt("/assets/all");
-    await screen.findByText("21 records");
-    expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(21);
+    await screen.findByText(`${nSpec} records`, undefined, { timeout: 15000 });
+    expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(nSpec);
   });
 
-  it("renders the full personnel run", async () => {
+  it("renders the full personnel run", { timeout: 20000 }, async () => {
     renderAt("/personnel/all");
-    await screen.findByText("22 files");
-    expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(22);
+    await screen.findByText(`${nPers} files`, undefined, { timeout: 15000 });
+    expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(nPers);
   });
 });
 
@@ -114,14 +126,14 @@ describe("accessibility landmarks", () => {
         <App />
       </MemoryRouter>
     );
-    await screen.findByText("Showing all 21 records");
+    await screen.findByText(`Showing all ${nSpec} records`);
     // First paint must leave the browser's own starting point alone.
     expect(document.activeElement).toBe(document.body);
 
     // Navigating hands focus to the route wrapper so assistive tech follows the
     // page change instead of staying parked on the link that was activated.
     fireEvent.click(screen.getByRole("link", { name: /Personnel/ }));
-    await screen.findByText("Showing all 22 files");
+    await screen.findByText(`Showing all ${nPers} files`);
     await waitFor(() => {
       expect(document.activeElement).toBe(container.querySelector("#ig-route-root"));
     });

@@ -93,8 +93,20 @@ export const threatLabel = (t: number) =>
 export const cells = (value: number, ink: string, track = "#1F2833") =>
   Array.from({ length: 5 }, (_, i) => (i < value ? ink : track));
 
-export const dietLabel = (diet: string) =>
-  /Carn/i.test(diet || "") ? "Carnivore" : /Herb/i.test(diet || "") ? "Herbivore" : "Omnivore";
+/**
+ * The one-word diet shown on a dossier.
+ *
+ * Piscivores are named rather than folded into "Omnivore": the aerial assets
+ * live on fish and carrion, and calling a Pteranodon an omnivore contradicted
+ * the diet line printed directly beneath it.
+ */
+export const dietLabel = (diet: string) => {
+  const d = diet || "";
+  if (/Carn/i.test(d)) return "Carnivore";
+  if (/Herb/i.test(d)) return "Herbivore";
+  if (/Fish|Pisc/i.test(d)) return "Piscivore";
+  return "Omnivore";
+};
 
 /** Alpha cutouts composite normally; white-plate sources multiply onto the plate. */
 const ALPHA_CUTOUTS = new Set(["ankylosaurus", "mosasaurus"]);

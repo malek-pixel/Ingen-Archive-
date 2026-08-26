@@ -457,5 +457,85 @@
       "personnel": ["dennis-nedry", "lewis-dodgson", "henry-wu", "john-hammond"],
       "incidents": ["isla-nublar-1993"]
     }
+  },
+  {
+    "id": "mantah-programme-exposure",
+    "slug": "mantah-programme-exposure-2016",
+    "fileId": "ING-OPS-011",
+    "name": "Mantah Corp Programme Exposure",
+    "date": "2016",
+    "year": "2016",
+    "type": "Competitor programme — unauthorised asset conditioning",
+    "severity": 4,
+    "classification": "MAJOR — COMPETITOR ACTIVITY CONFIRMED",
+    "status": "CLOSED",
+    "security": "CLASSIFIED",
+    "summary": "A privately operated island facility was found to be holding assets derived from InGen genetic material and conducting behavioural control research on them using implanted hardware. The programme had run for over a year without appearing in any regulatory filing.",
+    "timeline": [
+      {
+        "label": "Acquisition",
+        "detail": "Assets of InGen origin are moved to privately held territory through intermediaries. No transfer is recorded."
+      },
+      {
+        "label": "Conditioning trials",
+        "detail": "Control implants are trialled on live assets across engineered biomes built to hold incompatible species."
+      },
+      {
+        "label": "Exposure",
+        "detail": "The programme is documented from inside and its control systems are disabled."
+      },
+      {
+        "label": "Assets stranded",
+        "detail": "Conditioning hardware is removed. The animals remain on the island with no operator and no containment plan."
+      }
+    ],
+    "outcome": "Programme terminated and control systems destroyed. The assets were neither recovered nor rehomed, and the island remains occupied by animals InGen created and does not control.",
+    "notes": "Filed under Operations because the material is InGen's even though the programme was not. It is the earliest confirmed case of InGen genetics being run by a third party at scale.",
+    "tags": ["competitor", "mantah", "conditioning", "assets", "closed"],
+    "relations": {
+      "locations": ["mantah-corp-island"],
+      "facilities": ["mantah-bio-compound"]
+    }
+  },
+  {
+    "id": "nublar-asset-recovery-2015",
+    "slug": "nublar-asset-recovery-2015",
+    "fileId": "ING-OPS-012",
+    "name": "Post-Closure Asset Recovery Survey",
+    "date": "December 2015",
+    "year": "2015",
+    "type": "Survey — post-incident asset accounting",
+    "severity": 3,
+    "classification": "SERIOUS — RECONCILIATION INCOMPLETE",
+    "status": "CLOSED",
+    "security": "CONFIDENTIAL",
+    "summary": "The accounting survey run after Jurassic World closed, intended to reconcile the asset register against the animals actually alive on Isla Nublar. It established that the register had been wrong for years, and that the island held both fewer and more animals than recorded.",
+    "timeline": [
+      {
+        "label": "Register pulled",
+        "detail": "The operating asset register is compared against paddock records and veterinary logs for the first time since 2013."
+      },
+      {
+        "label": "Field survey",
+        "detail": "Aerial and ground counts are run across accessible sectors. The northern sector is not surveyed."
+      },
+      {
+        "label": "Discrepancies logged",
+        "detail": "Animals appear in the field that appear in no register. Registered animals cannot be located at all."
+      },
+      {
+        "label": "Survey closed",
+        "detail": "The survey is closed without reconciliation. The register is archived rather than corrected."
+      }
+    ],
+    "outcome": "No accurate figure for the Isla Nublar population was ever produced. Every later evacuation estimate is built on a register this survey had already shown to be unreliable.",
+    "notes": "The single most consequential document in the archive for anything that follows: every 2018 evacuation decision rests on numbers this survey demonstrated were wrong.",
+    "tags": ["survey", "2015", "register", "nublar", "reconciliation"],
+    "relations": {
+      "locations": ["isla-nublar", "jurassic-world", "nublar-north", "nublar-lagoon"],
+      "personnel": ["claire-dearing", "lowery-cruthers", "gerry-harding"],
+      "specimens": ["tyrannosaurus-rex", "apatosaurus", "mosasaurus", "stegosaurus"],
+      "incidents": ["jurassic-world-2015", "nublar-eruption-2018"]
+    }
   }
 ]

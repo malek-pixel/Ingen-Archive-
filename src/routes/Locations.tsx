@@ -82,7 +82,7 @@ export function LocationDetail() {
 
   return (
     <Page>
-      <Header icons={false} />
+      <Header />
       <Breadcrumb
         trail={[
           { label: "Archive", to: "/dashboard" },
@@ -103,7 +103,6 @@ export function LocationDetail() {
             status={record.status}
             security={record.security}
             tags={record.tags}
-            relations={record.relations}
             plateCaption={record.img ? "Site survey" : "Site plan"}
             img={record.img}
             badges={[{ label: record.type }]}

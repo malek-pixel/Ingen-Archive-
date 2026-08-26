@@ -79,10 +79,15 @@ const RELATION_KIND: Record<keyof Relations, RecordKind> = {
 /**
  * Reverse index.
  *
- * The two original divisions predate the relationship system and declare no
- * links, so the connections are stated once — on the newer record — and read in
- * both directions from here. Built lazily and cached, so a dossier that asks
- * "what references me?" costs a map lookup rather than a scan.
+ * Every link in the archive is stated once, on whichever record is its natural
+ * home, and read in both directions from here. Built lazily and cached, so a
+ * dossier that asks "what references me?" costs a map lookup rather than a scan.
+ *
+ * The two original divisions predate the `relations` object and carry their
+ * links as plain fields instead. Those are folded in below rather than left
+ * out: without them a specimen's dossier would list the island it was held on
+ * while the island's own dossier listed no specimens, and the archive would be
+ * connected in one direction only.
  */
 let reverse: Map<string, Set<string>> | null = null;
 
@@ -103,6 +108,17 @@ function reverseIndex(): Map<string, Set<string>> {
     ...a.flora.map((r) => ({ kind: "flora" as const, id: r.id, relations: r.relations })),
     ...a.facilities.map((r) => ({ kind: "facility" as const, id: r.id, relations: r.relations })),
     ...a.incidents.map((r) => ({ kind: "incident" as const, id: r.id, relations: r.relations })),
+    // Flat fields on the base records, read into the same shape.
+    ...a.specimens.map((r) => ({
+      kind: "specimen" as const,
+      id: r.id,
+      relations: { locations: r.locations, facilities: r.facilities, personnel: r.personnel },
+    })),
+    ...a.personnel.map((r) => ({
+      kind: "person" as const,
+      id: r.id,
+      relations: { locations: r.locations, facilities: r.facilities, specimens: r.specimens },
+    })),
   ];
 
   for (const record of declared) {
@@ -145,31 +161,77 @@ export interface RelatedGroup {
   entries: ArchiveEntry[];
 }
 
+/** Incident slug → incident record id. Slugs are what the base records cite. */
+let incidentIds: Map<string, string> | null = null;
+const incidentsBySlug = (slugs: string[] | undefined): string[] => {
+  if (!slugs?.length) return [];
+  if (!incidentIds) incidentIds = new Map(archive().incidents.map((i) => [i.slug, i.id]));
+  return slugs.map((s) => incidentIds!.get(s)).filter((v): v is string => Boolean(v));
+};
+
+/**
+ * The links a record states itself, whatever shape its division stores them in.
+ * The expansion divisions carry a `relations` object; the two original ones
+ * carry the same information as plain fields, and cite operations by slug
+ * rather than by record id — resolved here so both ends of that link agree.
+ */
+function declaredLinks(kind: RecordKind, id: string): Relations | undefined {
+  const a = archive();
+  switch (kind) {
+    case "specimen": {
+      const r = a.specimenById.get(id);
+      return (
+        r && {
+          locations: r.locations,
+          facilities: r.facilities,
+          personnel: r.personnel,
+          incidents: incidentsBySlug(r.incidents),
+        }
+      );
+    }
+    case "person": {
+      const r = a.personById.get(id);
+      return (
+        r && {
+          locations: r.locations,
+          facilities: r.facilities,
+          specimens: r.specimens,
+          incidents: incidentsBySlug(r.history),
+        }
+      );
+    }
+    case "location":
+      return a.locationById.get(id)?.relations;
+    case "flora":
+      return a.floraById.get(id)?.relations;
+    case "facility":
+      return a.facilityById.get(id)?.relations;
+    case "incident":
+      return a.incidentById.get(id)?.relations;
+  }
+}
+
 /**
  * Every record connected to this one, in either direction, grouped by division.
- * Unresolvable ids are dropped rather than rendered as dead links — validation
+ *
+ * The record's own links are read here rather than passed in by the caller.
+ * They used to be handed over as arguments, which meant a dossier that forgot
+ * to pass them rendered as though the record were unconnected — a silent,
+ * per-screen way for the archive to lose half its links.
+ *
+ * Unresolvable ids are dropped rather than rendered as dead links; validation
  * already fails the build on those, so this is belt and braces.
  */
-export function getRelatedRecords(
-  kind: RecordKind,
-  id: string,
-  declared?: Relations,
-  extra?: { specimens?: string[]; personnel?: string[]; locations?: string[]; facilities?: string[] }
-): RelatedGroup[] {
+export function getRelatedRecords(kind: RecordKind, id: string): RelatedGroup[] {
   const a = archive();
   const self = entryKey(kind, id);
   const keys = new Set<string>();
 
-  const addAll = (relations: Relations | undefined) => {
-    for (const [key, ids] of Object.entries(relations ?? {})) {
-      const target = RELATION_KIND[key as keyof Relations];
-      if (!target || !Array.isArray(ids)) continue;
-      for (const rid of ids) keys.add(entryKey(target, rid));
-    }
-  };
-
-  addAll(declared);
-  addAll(extra as Relations | undefined);
+  for (const [key, ids] of Object.entries(declaredLinks(kind, id) ?? {})) {
+    const target = RELATION_KIND[key as keyof Relations];
+    if (!target || !Array.isArray(ids)) continue;
+    for (const rid of ids) keys.add(entryKey(target, rid));
+  }
   for (const key of reverseIndex().get(self) ?? []) keys.add(key);
   keys.delete(self);
 

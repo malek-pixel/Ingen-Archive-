@@ -318,5 +318,141 @@
       "incidents": ["ile-saint-hubert-2010"],
       "locations": ["ile-saint-hubert"]
     }
+  },
+  {
+    "id": "ingen-archive-vault",
+    "fileId": "ING-FAC-015",
+    "name": "Corporate Records Vault",
+    "designation": "Central Archive",
+    "type": "Secure document and specimen-record storage",
+    "status": "ACTIVE",
+    "security": "CLASSIFIED",
+    "location": "ingen-hq",
+    "established": "1985",
+    "function": "Custody of the complete asset, personnel and operational record",
+    "description": "The physical archive this index is drawn from. Holds the original creation logs, containment specifications and incident files for every InGen programme, including material never entered into any digital system. Access is logged individually and retained indefinitely.",
+    "capacity": "Climate-controlled stacks, cold storage annexe, reading room",
+    "condition": "Operational. Holdings intact; several 1993-era files remain sealed.",
+    "notes": "The only facility on record whose function is the record itself. Its 1993 sealing order has never been lifted or explained.",
+    "tags": ["archive", "records", "headquarters", "classified"],
+    "relations": {
+      "personnel": ["john-hammond", "henry-wu", "peter-ludlow"],
+      "incidents": ["embryo-loss-1993"],
+      "locations": ["ingen-hq"]
+    }
+  },
+  {
+    "id": "palo-alto-genetics",
+    "fileId": "ING-FAC-016",
+    "name": "Palo Alto Genetics Division",
+    "designation": "Mainland Research Division",
+    "type": "Genetic research and sequencing laboratory",
+    "status": "ACTIVE",
+    "security": "CONFIDENTIAL",
+    "location": "ingen-hq",
+    "established": "1984",
+    "function": "Genome sequencing, gap-sequence research and programme oversight",
+    "description": "Where the reconstruction method was developed before any island existed. The amber extraction technique, the amphibian gap-sequence protocol and every viability threshold still quoted in asset files were established in these laboratories, and the results were sent to Site B to be grown.",
+    "capacity": "Sequencing suites, amber preparation, cold storage, computation floor",
+    "condition": "Operational. Research scope narrowed substantially after 1997.",
+    "notes": "The amphibian sequence chosen here to close genome gaps is the direct cause of the unplanned breeding observed on Isla Nublar.",
+    "tags": ["laboratory", "genetics", "headquarters", "sequencing"],
+    "relations": {
+      "personnel": ["henry-wu", "john-hammond", "lewis-dodgson"],
+      "specimens": ["velociraptor", "tyrannosaurus-rex"],
+      "locations": ["ingen-hq"]
+    }
+  },
+  {
+    "id": "mantah-bio-compound",
+    "fileId": "ING-FAC-017",
+    "name": "Mantah Corp Bio-Engineering Compound",
+    "designation": "Competitor Facility — Unauthorised Programme",
+    "type": "Concealed genetic engineering and behavioural conditioning site",
+    "status": "COMPROMISED",
+    "security": "CRITICAL",
+    "location": "mantah-corp-island",
+    "established": "2015",
+    "function": "Behavioural conditioning and control-implant research on live assets",
+    "description": "A privately built compound operating outside every regulatory framework that governs InGen sites. Work here centred on controlling asset behaviour directly through implanted hardware rather than through containment, across biomes engineered to hold incompatible species on one island.",
+    "capacity": "Conditioning arenas, implant laboratory, control centre, artificial biome plant",
+    "condition": "Compromised. Programme exposed and control systems disabled.",
+    "notes": "The archive holds this record because the assets involved originate from InGen genetic material. The programme itself was never InGen's.",
+    "tags": ["competitor", "mantah", "conditioning", "unauthorised", "critical"],
+    "relations": {
+      "locations": ["mantah-corp-island"],
+      "incidents": ["mantah-programme-exposure"]
+    }
+  },
+  {
+    "id": "lagoon-containment-grid",
+    "fileId": "ING-FAC-018",
+    "name": "Lagoon Containment Grid",
+    "designation": "Marine Containment Works",
+    "type": "Submerged barrier and water management system",
+    "status": "COMPROMISED",
+    "security": "CLASSIFIED",
+    "location": "nublar-lagoon",
+    "established": "2004",
+    "function": "Retention of the marine asset within the engineered lagoon",
+    "description": "The engineering beneath the exhibition stadium: a submerged gate system, depth-graded barrier nets and the pumps that held the lagoon at working level. Designed for an animal substantially smaller than the one it ended up containing, and never revised upward.",
+    "capacity": "Sea gate, three barrier tiers, pump house, feeding rig",
+    "condition": "Compromised. Sea gate left open during the 2015 evacuation and never closed.",
+    "notes": "The gate remained open through the 2018 eruption. The marine asset's departure to open ocean required no breach of any kind.",
+    "tags": ["marine", "containment", "lagoon", "compromised"],
+    "relations": {
+      "specimens": ["mosasaurus"],
+      "locations": ["nublar-lagoon", "isla-nublar"],
+      "incidents": ["jurassic-world-2015", "nublar-eruption-2018"],
+      "facilities": ["lagoon"]
+    }
+  },
+  {
+    "id": "sorna-field-station",
+    "fileId": "ING-FAC-019",
+    "name": "Site B Interior Field Station",
+    "designation": "Forward Observation Post",
+    "type": "Field observation and sample collection station",
+    "status": "ABANDONED",
+    "security": "RESTRICTED",
+    "location": "sorna-interior",
+    "established": "1992",
+    "decommissioned": "1995",
+    "function": "Population observation and sample collection in the uncontrolled interior",
+    "description": "A light prefabricated post pushed into the interior basin to monitor animals released from the hatchery. Abandoned during the Hurricane Clarissa evacuation with equipment and logbooks in place, which is why it remains the best surviving record of Site B population behaviour before the island was left to itself.",
+    "capacity": "Two observation huts, sample store, radio mast",
+    "condition": "Abandoned. Structures standing but overgrown; interior reclaimed.",
+    "notes": "The station logs end mid-entry. Nothing in them anticipates that the populations would sustain themselves without intervention.",
+    "tags": ["site-b", "abandoned", "observation", "interior"],
+    "relations": {
+      "personnel": ["sarah-harding", "roland-tembo"],
+      "locations": ["sorna-interior", "isla-sorna"],
+      "incidents": ["isla-sorna-1995", "isla-sorna-1997"]
+    }
+  },
+  {
+    "id": "nublar-north-station",
+    "fileId": "ING-FAC-020",
+    "name": "Northern Sector Perimeter Station",
+    "designation": "Restricted Zone Control Post",
+    "type": "Perimeter monitoring and access control station",
+    "status": "DECOMMISSIONED",
+    "security": "CLASSIFIED",
+    "location": "nublar-north",
+    "established": "2012",
+    "decommissioned": "2015",
+    "function": "Access control and monitoring for the closed northern sector",
+    "description": "The only staffed position in the sector kept off the park map. Controlled road access to the restricted paddocks north of the resort and logged every vehicle through it, which is how the archive can establish who visited Paddock 11 and when.",
+    "capacity": "Gatehouse, monitoring room, vehicle inspection bay",
+    "condition": "Decommissioned. Overrun during the 2015 containment failure; not reoccupied.",
+    "notes": "Access logs recovered from this station contradict the official account of how frequently the Indominus enclosure was entered.",
+    "tags": ["perimeter", "restricted", "nublar", "decommissioned"],
+    "relations": {
+      "personnel": ["vic-hoskins", "owen-grady", "claire-dearing"],
+      "specimens": ["indominus-rex"],
+      "locations": ["nublar-north", "isla-nublar"],
+      "facilities": ["indominus-paddock"],
+      "incidents": ["jurassic-world-2015"]
+    }
   }
 ]

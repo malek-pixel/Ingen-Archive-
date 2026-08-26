@@ -1,1 +1,2211 @@
-{"D":[{"id":"ankylosaurus","fileId":"ING-DIN-013","name":"Ankylosaurus","species":"Ankylosaurus magniventris","codename":"Living Tank","status":"ACTIVE","classification":"Heavy Defense Herbivore","threat":4,"contain":"PARTIALLY STABLE","length":"6–8 meters","weight":"6–8 tons","diet":"Herbivorous","habitat":"Forests, dense jungle edges, mixed terrain","genome":91,"incidents":["fallen-kingdom-2018","dominion-2022"],"stats":{"strength":5,"defense":5,"speed":2,"intelligence":3,"aggression":4},"notes":"Non-aggressive until provoked. Defensive response force exceeds most predator attack thresholds. Relies on armor rather than speed.","classified":"Risk assessment: MEDIUM-HIGH. Extreme retaliation capability. Subject is non-aggressive until provoked.","tag":"It doesn't fight often — but when it does, the ground remembers."},{"id":"baryonyx","fileId":"ING-DIN-019","name":"Baryonyx","species":"Baryonyx walkeri","codename":"River Fang","status":"ACTIVE","classification":"Semi-Aquatic Predator / River Apex Specialist","threat":4,"contain":"FAILED","length":"7.5–10 meters","weight":"1.5–3 tons","diet":"Carnivorous — fish-heavy, opportunistic","habitat":"Rivers, swamps, marshlands, lakesides","genome":87,"incidents":["fallen-kingdom-2018"],"stats":{"strength":4,"defense":3,"speed":4,"stealth":5,"aggression":4},"notes":"Semi-aquatic ambush hunter. Patient stalking in shallow water. Solitary territorial predator. Highly reactive when defending water zones.","classified":"Risk assessment: HIGH. Most dangerous in water proximity zones where visibility is limited.","tag":"It doesn't chase prey — it waits for the river to bring it."},{"id":"carnotaurus","fileId":"ING-DIN-003","name":"Carnotaurus","species":"Carnotaurus sastrei","codename":"Horned Pursuer","status":"ACTIVE","classification":"Fast Pursuit Predator","threat":4,"contain":"FAILED","length":"7.5–9 meters","weight":"1–2 tons","diet":"Carnivorous — medium-large prey specialist","habitat":"Open terrain, forest edges, semi-arid zones","genome":83,"incidents":["fallen-kingdom-2018","dominion-2022"],"stats":{"strength":4,"defense":3,"speed":5,"intelligence":3,"aggression":4},"notes":"High-speed pursuit predator. Short burst acceleration specialist. Territorial but less dominant than apex titans. Aggressive when cornered or hungry.","classified":"Risk assessment: HIGH. Rapid ambush predator confirmed in human-inhabited zones. More dangerous in coordinated hunting conditions.","tag":"It doesn't rule the ecosystem — it outruns it."},{"id":"attenborosaurus","fileId":"ING-MAR-002","name":"Attenborosaurus","species":"Attenborosaurus conybeari","codename":"Deepwater Glide","status":"ACTIVE","classification":"Open-Water Hunter / Mid Apex Marine Predator","threat":3,"contain":"FAILED","length":"6–8 meters","weight":"1–3 tons","diet":"Carnivorous — fish, squid, small marine reptiles","habitat":"Open ocean, deep coastal waters","genome":76,"incidents":["jurassic-world-2015"],"stats":{"strength":3,"defense":3,"speed":4,"stealth":5,"aggression":2},"notes":"Agile underwater swimmer. Solitary hunter in deep water. Prefers stealth over brute force. Avoids confrontation with apex marine predators.","classified":"Risk assessment: MEDIUM. Avoids apex encounters. Silent hunter rather than dominant force.","tag":"It doesn't rule the ocean — it moves through it unseen."},{"id":"charlie","fileId":"ING-DIN-009","name":"Charlie","species":"Velociraptor (engineered strain)","codename":"Raptor Squad — Charlie Unit","status":"DECEASED","classification":"Pack Hunter / Tactical Support Predator","threat":4,"contain":"FAILED","length":"~2 meters","weight":"~20 kg","diet":"Carnivorous","habitat":"Isla Nublar","genome":92,"incidents":["jurassic-world-2015"],"stats":{"strength":3,"defense":2,"speed":5,"intelligence":4,"aggression":5},"notes":"Highly reactive and fast-moving. Specialized in distraction and disruption tactics. Strong pack synchronization. Aggressive when isolated from squad.","classified":"Risk assessment: HIGH. Peak effectiveness only within structured pack hierarchy. Isolated behavior becomes unstable.","tag":"Fastest strike in the pack — gone before the target even reacts."},{"id":"distortus-rex","fileId":"ING-HYB-003","name":"Distortus rex","species":"Tyrannosaurus rex (severely mutated — designation D-REX V.23.111)","codename":"The Broken Titan","status":"ACTIVE — UNCONTAINED","classification":"Apex Abomination / Kaiju-Class Anomaly","threat":5,"contain":"FAILED PERMANENTLY","length":"~14.5 meters","weight":"~9,000 kg","diet":"Carnivorous — opportunistic apex predation","habitat":"Île Saint-Hubert — presumed feral island range","genome":0,"incidents":["ile-saint-hubert-2010"],"stats":{"strength":5,"defense":5,"speed":3,"intelligence":3,"aggression":5},"notes":"Result of the 26th engineering attempt at experimental hybrid T. rex modification. Designated D-REX V.23.111. Exhibits polymelia — six limbs including two hind legs and four arms. Moves on large primary arms and hind legs in ape-like gait. Highly aggressive with no observable restraint. Attacks without clear hunting strategy.","classified":"Containment failure: Île Saint-Hubert facility, 2010. Cause: ventilation obstruction triggering facility-wide door lock failure. All personnel evacuated. One casualty confirmed. Subject deemed non-recoverable. Do not attempt capture.","tag":"It wasn't built to live. It was built to dominate — and it broke everything trying."},{"id":"compsognathus","fileId":"ING-DIN-018","name":"Compsognathus","species":"Compsognathus longipes","codename":"Swarm Unit","status":"ACTIVE","classification":"Swarm Predator / Pack Scavenger","threat":3,"contain":"FAILED","length":"0.6–1 meter","weight":"1–3 kg","diet":"Carnivorous — small prey, carrion, swarm hunting","habitat":"Forest floors, beaches, dense undergrowth","genome":88,"incidents":["isla-sorna-1997","isla-sorna-2001"],"stats":{"strength":1,"defense":1,"speed":4,"intelligence":4,"aggression":4},"notes":"Highly social swarm species. Opportunistic scavengers. Attack in coordinated groups. Highly reactive to blood and movement. Persistent pursuit in packs.","classified":"Risk assessment: MEDIUM. Danger level increases exponentially with group size. Cannot be fully controlled due to size and numbers.","tag":"Individually harmless. Collectively unstoppable."},{"id":"delta","fileId":"ING-DIN-008","name":"Delta","species":"Velociraptor (engineered strain)","codename":"Raptor Squad — Delta Unit","status":"DECEASED","classification":"Pack Hunter / Military Test Asset","threat":4,"contain":"FAILED","length":"~2 meters","weight":"~20 kg","diet":"Carnivorous","habitat":"Isla Nublar","genome":92,"incidents":["jurassic-world-2015"],"stats":{"strength":3,"defense":2,"speed":5,"intelligence":4,"aggression":5},"notes":"Coordinated pack hunter. Specializes in flanking maneuvers and environmental pressure tactics. Aggressive when squad hierarchy is disrupted.","classified":"Risk assessment: HIGH. Performance depended heavily on squad cohesion. Breakdown of hierarchy resulted in rapid loss of control.","tag":"When the pack worked, it was precise. When it broke, it was unstoppable chaos."},{"id":"blue","fileId":"ING-DIN-007","name":"Blue","species":"Velociraptor (engineered strain)","codename":"Alpha Blue","status":"ACTIVE","classification":"Alpha Pack Predator / Enhanced Cognitive Subject","threat":5,"contain":"FAILED — SELF-RELEASED","length":"~2 meters","weight":"~20–25 kg","diet":"Carnivorous","habitat":"Variable — confirmed wild survival post-2022","genome":97,"incidents":["jurassic-world-2015","fallen-kingdom-2018","dominion-2022"],"stats":{"strength":4,"defense":3,"speed":5,"intelligence":5,"aggression":4},"notes":"Highly intelligent and emotionally responsive. Strong loyalty imprint toward Owen Grady. Independent decision-making in combat situations. Capable of adapting tactics in real time. Selective alliance formation confirmed.","classified":"Risk assessment: EXTREME. Exhibits non-standard raptor cognition including emotional response tracking. Cannot be safely contained long-term.","tag":"Not just trained — understood."},{"id":"brachiosaurus","fileId":"ING-DIN-015","name":"Brachiosaurus","species":"Brachiosaurus altithorax","codename":"Sky Giant","status":"ACTIVE","classification":"Colossal Canopy Grazer / Titan Herbivore","threat":2,"contain":"FAILED","length":"22–26 meters","weight":"30–50 tons","diet":"Herbivorous — high canopy browsing","habitat":"Forest canopies, river valleys, open woodland","genome":95,"incidents":["isla-nublar-1993","jurassic-world-2015","dominion-2022"],"stats":{"strength":5,"defense":3,"speed":2,"intelligence":3,"aggression":1},"notes":"Extremely calm and slow-moving. High canopy feeding specialist. Strong herd-based social behavior. Non-aggressive unless severely threatened.","classified":"Risk assessment: LOW. Non-aggressive ecosystem species. Accidental damage possible in dense environments due to size.","tag":"Before the fear — there was wonder."},{"id":"dilophosaurus","fileId":"ING-DIN-024","name":"Dilophosaurus","species":"Dilophosaurus wetherilli","codename":"Venom Spitter","status":"ACTIVE","classification":"Ambush Predator / Toxic Display Specialist","threat":3,"contain":"PARTIALLY STABLE","length":"6–7 meters","weight":"400–900 kg","diet":"Carnivorous — small prey, scavenging, ambush hunting","habitat":"Forest floors, swamp edges, dense jungle zones","genome":79,"incidents":["isla-nublar-1993"],"stats":{"strength":2,"defense":2,"speed":4,"stealth":5,"aggression":3},"notes":"Ambush-based hunting style. Uses frill display to intimidate prey. Venom-spitting capability confirmed — immobilizing agent. Highly cautious. Avoids direct confrontation. Prefers solitary hunting.","classified":"Risk assessment: MEDIUM. Danger comes from deception, not power. Significantly more dangerous psychologically than physically.","tag":"It doesn't need to be strong — just believed to be dangerous."},{"id":"dimorphodon","fileId":"ING-AIR-003","name":"Dimorphodon","species":"Dimorphodon macronyx","codename":"Cliff Swarm","status":"ACTIVE","classification":"Aerial Swarm Predator / Cliff Hunter","threat":2,"contain":"FAILED","length":"N/A","weight":"Very light","diet":"Insects, fish, small prey, carrion","habitat":"Cliffs, forests, coastal caves","genome":81,"incidents":["jurassic-world-2015"],"stats":{"strength":1,"defense":2,"speed":4,"stealth":3,"aggression":3},"notes":"Small flock or colony-based species. Fast, erratic flight patterns. Highly reactive when nesting sites are threatened. Often scavenges from other species.","classified":"Risk assessment: LOW-MEDIUM. Most dangerous when colonies are disturbed or food sources are limited.","tag":"Small wings. Fast chaos."},{"id":"echo","fileId":"ING-DIN-010","name":"Echo","species":"Velociraptor (engineered strain)","codename":"Raptor Squad — Echo Unit","status":"DECEASED","classification":"Pack Hunter / Heavy Pressure Unit","threat":4,"contain":"FAILED","length":"~2 meters","weight":"~20 kg","diet":"Carnivorous","habitat":"Isla Nublar","genome":92,"incidents":["jurassic-world-2015"],"stats":{"strength":3,"defense":2,"speed":5,"intelligence":4,"aggression":5},"notes":"Strong frontline attacker in pack formation. High aggression during direct combat. Less reliant on stealth, more on forceful engagement. Highly responsive to pack leader cues.","classified":"Risk assessment: HIGH. Consistent obedience to pack hierarchy. Became uncontrollable once external command systems failed.","tag":"The line breaker of the pack — built for impact, lost in the collapse."},{"id":"diplodocus","fileId":"ING-DIN-014","name":"Diplodocus","species":"Diplodocus longus","codename":"Skyreach Grazer","status":"ACTIVE","classification":"Colossal Herbivore / Environmental Grazer","threat":2,"contain":"FAILED","length":"24–27 meters","weight":"10–16 tons","diet":"Herbivorous — high vegetation browsing","habitat":"Open plains, forest clearings, river valleys","genome":89,"incidents":["dominion-2022"],"stats":{"strength":5,"defense":4,"speed":2,"intelligence":3,"aggression":1},"notes":"Extremely calm, non-aggressive grazer. Strong herd-based social structure. Defensive tail swing when threatened. Migratory feeding patterns.","classified":"Risk assessment: LOW. Not a threat to humans unless provoked indirectly via herd panic or predator disruption.","tag":"It doesn't defend territory — it is the territory."},{"id":"geosternbergia","fileId":"ING-AIR-004","name":"Geosternbergia","species":"Geosternbergia sternbergi","codename":"Sky Monarch","status":"ACTIVE","classification":"High-Altitude Aerial Hunter / Coastal Soarer","threat":3,"contain":"FAILED","length":"N/A","weight":"10–20 kg","diet":"Fish, small animals, marine surface prey","habitat":"Open skies, coastal cliffs, ocean thermals","genome":77,"incidents":["jurassic-world-2015"],"stats":{"strength":2,"defense":2,"speed":4,"stealth":4,"aggression":2},"notes":"Long-distance soaring specialist. Coastal and ocean thermal rider. Solitary or small flock behavior. Highly energy-efficient flight patterns.","classified":"Risk assessment: MEDIUM. Low aggression but wide territorial range. Rarely observed due to altitude preference.","tag":"It doesn't hunt the world — it crosses it."},{"id":"indominus-rex","fileId":"ING-HYB-001","name":"Indominus rex","species":"Hybrid — T. rex / Velociraptor / classified additional genomes","codename":"White Death","status":"DECEASED — CONTAINMENT BREACH RECORD ACTIVE","classification":"Apex Bio-Weapon / Ecosystem Annihilator","threat":5,"contain":"FAILED PERMANENTLY","length":"15+ meters","weight":"8–10+ tons","diet":"Carnivorous — hyper-apex predation","habitat":"Jurassic World R&D paddock — escaped","genome":100,"incidents":["jurassic-world-2015"],"stats":{"strength":5,"defense":5,"speed":4,"stealth":5,"aggression":5},"notes":"Capable of camouflage via adaptive coloration. Uses deception to lure or mislead prey. Understands containment boundaries. Able to manipulate environmental objects. Demonstrates strategic thinking, not just instinct.","classified":"Cannot be trained, predicted, or ethically deployed. All control models failed within initial testing phase. Risk assessment: EXTREME / GLOBAL THREAT CLASS.","tag":"It was never a dinosaur. It was a mistake that learned how to think."},{"id":"gallimimus","fileId":"ING-DIN-017","name":"Gallimimus","species":"Gallimimus bullatus","codename":"Desert Stampede Unit","status":"ACTIVE","classification":"High-Speed Herd Runner / Evasion Species","threat":1,"contain":"FAILED","length":"4–6 meters","weight":"150–450 kg","diet":"Omnivorous — plants, small prey, insects","habitat":"Open plains, deserts, wide grasslands","genome":93,"incidents":["isla-nublar-1993","dominion-2022"],"stats":{"strength":2,"defense":1,"speed":5,"intelligence":3,"aggression":1},"notes":"Extremely fast runner — open terrain specialist. Highly social herd species. Panic-driven coordinated escape behavior. Strong visual alert response system. Avoids all confrontation.","classified":"Risk assessment: LOW. Non-aggressive species. Survival depends entirely on herd cohesion and early predator detection.","tag":"It doesn't fight the danger — it outruns the moment it appears."},{"id":"giganotosaurus","fileId":"ING-DIN-004","name":"Giganotosaurus","species":"Giganotosaurus carolinii","codename":"Titan Rival","status":"DECEASED — CONFIRMED","classification":"Apex Megatheropod","threat":5,"contain":"FAILED","length":"13–14 meters","weight":"7–9 tons","diet":"Carnivorous — large apex prey specialist","habitat":"Forest biomes, cold-temperate containment zones","genome":86,"incidents":["dominion-2022"],"stats":{"strength":5,"defense":5,"speed":3,"intelligence":3,"aggression":5},"notes":"Extreme territorial dominance. Highly aggressive toward competing apex predators. Slow but powerful pursuit predator. Displays intimidation-based hunting strategy.","classified":"Risk assessment: EXTREME. Multi-apex ecosystem destabilizer. Not a stealth predator — confrontation-based dominance species.","tag":"It didn't hunt to survive — it fought to decide who survived."},{"id":"kentrosaurus","fileId":"ING-DIN-021","name":"Kentrosaurus","species":"Kentrosaurus aethiopicus","codename":"Spikeback Warden","status":"ACTIVE","classification":"Light Armored Defense Herbivore","threat":3,"contain":"PARTIALLY STABLE","length":"4–5 meters","weight":"1–2 tons","diet":"Herbivorous — low vegetation grazer","habitat":"Forest edges, plains, semi-dry environments","genome":84,"incidents":["dominion-2022"],"stats":{"strength":3,"defense":4,"speed":3,"intelligence":3,"aggression":3},"notes":"Small herd or family-group behavior. Highly alert and reactive to movement. Uses tail spikes for rapid defensive strikes. Generally non-aggressive unless threatened.","classified":"Risk assessment: MEDIUM. Localized defensive hazard. Relies on quick defensive retaliation rather than sustained combat.","tag":"Small frame. Sharp defense. Fast response."},{"id":"mosasaurus","fileId":"ING-MAR-001","name":"Mosasaurus","species":"Mosasaurus hoffmannii","codename":"Abyss Monarch","status":"ACTIVE — UNCONFIRMED LOCATION","classification":"Ocean Apex Predator","threat":5,"contain":"FAILED","length":"15–20+ meters","weight":"15–30+ tons","diet":"Carnivorous — large marine prey specialist","habitat":"Open ocean, coastal zones, deep water regions","genome":96,"incidents":["jurassic-world-2015","fallen-kingdom-2018","dominion-2022"],"stats":{"strength":5,"defense":5,"speed":5,"stealth":5,"aggression":5},"notes":"Apex ambush predator. Extremely powerful bite force and jaw extension. Surface breach hunting from below. Highly territorial in enclosed water zones.","classified":"Risk assessment: EXTREME. Oceanic apex predator with unrestricted mobility. Most dangerous in deep water where detection is impossible until attack initiation.","tag":"In the ocean, there is no escape — only depth."},{"id":"pteranodon","fileId":"ING-AIR-002","name":"Pteranodon","species":"Pteranodon (commonly misidentified as Pterodactyl)","codename":"Sky Swarm Predator","status":"ACTIVE","classification":"Aerial Opportunistic Predator","threat":4,"contain":"FAILED","length":"N/A","weight":"Light — flight-adapted skeleton","diet":"Fish, small animals, carrion","habitat":"Skies, cliffs, coasts, islands","genome":90,"incidents":["isla-sorna-1997","jurassic-world-2015"],"stats":{"strength":2,"defense":2,"speed":5,"stealth":4,"aggression":4},"notes":"Highly mobile aerial predator. Flock-based movement, sometimes chaotic swarms. Coastal dive hunter behavior. Strong nesting aggression. Opportunistic feeding habits.","classified":"Risk assessment: HIGH. Unrestricted mobility and sudden attack angles. Significantly more dangerous in flocks or during nesting periods.","tag":"You don't see it coming — you see it leaving."}],"P":[{"id":"owen-grady","fileId":"ING-CHR-001","name":"Owen Grady","status":"ALIVE","clearance":4,"dept":"Animal Behavior & Containment","role":"Velociraptor Trainer / Animal Behavior Specialist","aff":"Jurassic World Operations (Former) / Independent","nat":"American","history":["jurassic-world-2015","fallen-kingdom-2018","dominion-2022"],"stats":{"intelligence":4,"survivalSkills":5,"leadership":5,"combatAbility":5,"animalHandling":5},"threat":"MODERATE","psych":"Exceptional adaptability. Unprecedented trust-building with engineered predators. Independent — does not respond well to institutional authority.","classified":"Traditional containment methods less effective than subject's behavioral approach. Subject displays unprecedented ability to establish trust with genetically engineered predators.","tag":"He didn't command them — he understood them.","quote":"They're thinking, I gotta eat. I gotta hunt."},{"id":"claire-dearing","fileId":"ING-CHR-002","name":"Claire Dearing","status":"ALIVE","clearance":5,"dept":"Park Operations (Former) / Dinosaur Protection Group","role":"Operations Manager (Former) / Dinosaur Rights Advocate","aff":"Jurassic World (Former) / Dinosaur Protection Group","nat":"American","history":["jurassic-world-2015","fallen-kingdom-2018","dominion-2022"],"stats":{"intelligence":5,"survivalSkills":4,"leadership":5,"combatAbility":3,"animalHandling":3},"threat":"LOW","psych":"Initially motivated by corporate success. Evolved into one of the foremost defenders of de-extinct species. Exceptional leadership during crisis situations.","classified":"HIGH VALUE PERSON OF INTEREST. Subject now actively opposes InGen-affiliated operations.","tag":"From Park Administrator to Protector of a New World.","quote":"These creatures were here before us. And if we're not careful, they're going to be here after."},{"id":"simon-masrani","fileId":"ING-CHR-003","name":"Simon Masrani","status":"DECEASED","clearance":5,"dept":"Executive Leadership","role":"CEO — Masrani Global Corporation / Owner — Jurassic World","aff":"Masrani Global Corporation / Jurassic World","nat":"Indian","history":["jurassic-world-2015"],"stats":{"intelligence":5,"survivalSkills":2,"leadership":5,"combatAbility":1,"animalHandling":2},"threat":"MINIMAL","psych":"Extraordinary vision and optimism. Genuinely admired dinosaurs rather than viewing them as assets. Inability to foresee consequences of hybrid experimentation contributed to 2015 incident.","classified":"Cause of death: helicopter crash during 2015 Isla Nublar Incident. FILE CLOSED.","tag":"A dreamer who brought dinosaurs back to the world — and paid the ultimate price for believing he could control them.","quote":"Creation is an act of sheer will."},{"id":"henry-wu","fileId":"ING-CHR-004","name":"Dr. Henry Wu","status":"ALIVE","clearance":5,"dept":"Genetic Research","role":"Chief Geneticist","aff":"InGen (Former) / Biosyn Genetics (Former) / Independent","nat":"American","history":["isla-nublar-1993","jurassic-world-2015","fallen-kingdom-2018","dominion-2022"],"stats":{"intelligence":5,"survivalSkills":2,"leadership":3,"combatAbility":1,"animalHandling":2},"threat":"EXTREME","psych":"Brilliant. Ambitious. Morally complex. Perfectionist. Secretive. Later sought to reverse ecological damage caused by earlier work.","classified":"Subject responsible for genome reconstruction of all de-extinct InGen species. Creator of Indominus rex and Indoraptor. Considered the single most consequential individual in InGen's scientific history.","tag":"Nothing in Jurassic World exists in nature.","quote":"Nothing in Jurassic World exists in nature."},{"id":"vic-hoskins","fileId":"ING-CHR-005","name":"Vic Hoskins","status":"DECEASED","clearance":4,"dept":"InGen Security Division","role":"Head of Security","aff":"International Genetic Technologies","nat":"American","history":["jurassic-world-2015"],"stats":{"intelligence":4,"survivalSkills":2,"leadership":4,"combatAbility":4,"animalHandling":1},"threat":"EXTREME","psych":"Ambitious. Ruthless. Manipulative. Viewed dinosaurs as military assets rather than living creatures.","classified":"Cause of death: fatal Velociraptor attack, 2015 Isla Nublar Incident. Subject repeatedly advocated for militarization of genetically engineered organisms despite ethical and operational objections. FILE CLOSED.","tag":"He believed dinosaurs could be controlled. The dinosaurs disagreed.","quote":"Imagine that one of these things in Tora Bora."},{"id":"john-hammond","fileId":"ING-CHR-006","name":"John Hammond","status":"DECEASED","clearance":5,"dept":"Executive Leadership","role":"Founder & CEO — InGen","aff":"International Genetic Technologies","nat":"Scottish","history":["isla-nublar-1993","isla-sorna-1997"],"stats":{"intelligence":4,"survivalSkills":2,"leadership":5,"combatAbility":1,"animalHandling":2},"threat":"MINIMAL","psych":"Charismatic. Optimistic. Idealistic. Extraordinary ambition. Inability to foresee consequences contributed to greatest disaster in InGen's history. Later opposed further exploitation of dinosaurs.","classified":"PERMANENTLY ARCHIVED. Founder of InGen. Initiated the de-extinction era. FILE CLOSED.","tag":"Spared no expense.","quote":"Welcome to Jurassic Park."},{"id":"ian-malcolm","fileId":"ING-CHR-007","name":"Dr. Ian Malcolm","status":"ALIVE","clearance":2,"dept":"External Consultant (Former)","role":"Mathematician / Chaos Theorist / Author","aff":"Independent","nat":"American","history":["isla-nublar-1993","isla-sorna-1997","dominion-2022"],"stats":{"intelligence":5,"survivalSkills":3,"leadership":3,"combatAbility":2,"animalHandling":2},"threat":"LOW","psych":"Highly intelligent. Charismatic. Witty. Skeptical. Subject's public influence and criticism of corporate genetics significantly affects public opinion.","classified":"Subject repeatedly warned InGen executives of unpredictable consequences of genetic engineering. Initial warnings dismissed. Later events confirmed his theories correct. Monitor public communications.","tag":"Life finds a way.","quote":"Your scientists were so preoccupied with whether they could, they didn't stop to think if they should."},{"id":"alan-grant","fileId":"ING-CHR-008","name":"Dr. Alan Grant","status":"ALIVE","clearance":2,"dept":"External Consultant (Former)","role":"Paleontologist","aff":"Independent Researcher","nat":"American","history":["isla-nublar-1993","isla-sorna-2001","dominion-2022"],"stats":{"intelligence":5,"survivalSkills":5,"leadership":4,"combatAbility":3,"animalHandling":4},"threat":"LOW","psych":"Intelligent. Courageous. Resourceful. Calm under pressure. One of the foremost authorities on dinosaur behavior and prehistoric ecosystems.","classified":"Security risk: minimal. Subject survived multiple dinosaur-related incidents through intelligence, adaptability, and field expertise. ARCHIVE CLASSIFICATION: LEVEL ALPHA — HISTORICAL FIGURE.","tag":"Some of the worst things imaginable have been done with the best intentions.","quote":"Dinosaurs lived 65 million years ago. What is left of them is fossilized in the rocks."},{"id":"ellie-sattler","fileId":"ING-CHR-009","name":"Dr. Ellie Sattler","status":"ALIVE","clearance":2,"dept":"External Consultant (Former)","role":"Paleobotanist / Environmental Consultant","aff":"Independent Researcher","nat":"American","history":["isla-nublar-1993","dominion-2022"],"stats":{"intelligence":5,"survivalSkills":4,"leadership":4,"combatAbility":3,"animalHandling":3},"threat":"LOW","psych":"Intelligent. Fearless. Compassionate. Principled. Analyses were critical in identifying early failures within Jurassic Park ecosystem.","classified":"Security risk: minimal. Subject is a leading voice in environmental conservation and ethical scientific research. Whistleblower — multiple InGen-related incidents.","tag":"She saw the system fail before anyone else understood it was even breaking.","quote":"God creates dinosaurs. God destroys dinosaurs. God creates man. Man destroys God. Man creates dinosaurs."},{"id":"dennis-nedry","fileId":"ING-CHR-010","name":"Dennis Nedry","status":"DECEASED","clearance":3,"dept":"Systems Engineering","role":"Lead Systems Programmer","aff":"International Genetic Technologies","nat":"American","history":["isla-nublar-1993"],"stats":{"intelligence":4,"survivalSkills":2,"leadership":1,"combatAbility":1,"animalHandling":1},"threat":"EXTREME — INTERNAL SABOTAGE","psych":"Intelligent. Greedy. Cynical. Disgruntled. Overconfident. Impulsive. Became dissatisfied with compensation and working conditions.","classified":"Subject's compromise of park systems is considered the primary catalyst for the Jurassic Park containment failure. Cause of death: Dilophosaurus attack during escape attempt, 1993. FILE CLOSED.","tag":"The system didn't fail — it was shut down from the inside.","quote":"Ah-ah-ah! You didn't say the magic word!"},{"id":"lewis-dodgson","fileId":"ING-CHR-011","name":"Lewis Dodgson","status":"DECEASED","clearance":1,"dept":"External — Biosyn Genetics","role":"CEO — Biosyn Genetics","aff":"Biosyn Genetics","nat":"American","history":["isla-nublar-1993","dominion-2022"],"stats":{"intelligence":4,"survivalSkills":1,"leadership":4,"combatAbility":1,"animalHandling":1},"threat":"EXTREME — CORPORATE + GENETIC EXPLOITATION","psych":"Ambitious. Manipulative. Calculated. Ruthless. Opportunistic. Engaged in long-term corporate espionage against InGen.","classified":"Recruited Dennis Nedry to steal embryonic dinosaur data from InGen, 1993. Later became CEO of Biosyn Genetics and expanded unethical genetic experimentation globally. Cause of death: containment failure, Biosyn Valley, 2022. FILE CLOSED.","tag":"From stolen secrets to global control — ambition without limits.","quote":"No one cares."},{"id":"benjamin-lockwood","fileId":"ING-CHR-012","name":"Benjamin Lockwood","status":"DECEASED","clearance":5,"dept":"Founding Directorate","role":"Co-Founder of InGen / Philanthropist","aff":"International Genetic Technologies (Former)","nat":"American","history":["fallen-kingdom-2018"],"stats":{"intelligence":4,"survivalSkills":1,"leadership":4,"combatAbility":1,"animalHandling":1},"threat":"LOW","psych":"Compassionate. Reflective. Morally conflicted. Idealistic. Regretful in later life. Opposed misuse of his work.","classified":"Co-financed early genetic research with John Hammond. Separated from Hammond due to ideological differences. His estate became center of illegal dinosaur transfer operation. Cause of death: Lockwood Estate incident, 2018. FILE CLOSED.","tag":"He helped create the miracle — then spent his life fearing what it became.","quote":"There are things on this island that should never leave it."},{"id":"maisie-lockwood","fileId":"ING-CHR-013","name":"Maisie Lockwood","status":"ALIVE","clearance":1,"dept":"CLASSIFIED — GENETIC SUBJECT","role":"Civilian / Genetic Anomaly","aff":"Independent","nat":"American","history":["fallen-kingdom-2018","dominion-2022"],"stats":{"intelligence":4,"survivalSkills":3,"leadership":2,"combatAbility":1,"animalHandling":2},"threat":"HIGH — GENETIC VALUE","psych":"Curious. Emotionally sensitive. Brave. Conflicted. Intelligent. Independent.","classified":"CLASSIFIED — LEVEL 5 CLEARANCE REQUIRED. Subject is first confirmed human clone tied to InGen-related genetic experiments. Ethical implications of subject's existence remain highly controversial. Multiple organizations have attempted acquisition.","tag":"She wasn't created to be a weapon — she became a question humanity can't answer.","quote":"I'm not a clone… I'm just me."},{"id":"robert-muldoon","fileId":"ING-CHR-014","name":"Robert Muldoon","status":"DECEASED","clearance":4,"dept":"Park Security & Containment","role":"Game Warden / Head of Animal Containment","aff":"International Genetic Technologies","nat":"British","history":["isla-nublar-1993"],"stats":{"intelligence":4,"survivalSkills":5,"leadership":4,"combatAbility":4,"animalHandling":5},"threat":"HIGH — OPERATIONAL FIELD EXPOSURE","psych":"Experienced. Cautious. Serious. Highly skilled. Practical. No-nonsense. Warnings regarding raptor intelligence were accurate but insufficiently acted upon by management.","classified":"Cause of death: Velociraptor ambush, 1993. Containment breach occurred due to systemic park-wide power failure, not procedural incompetence. FILE CLOSED.","tag":"He knew exactly what they were — and it still wasn't enough.","quote":"Clever girl."},{"id":"ray-arnold","fileId":"ING-CHR-015","name":"Ray Arnold","status":"DECEASED","clearance":4,"dept":"Systems Engineering","role":"Chief Engineer — Jurassic Park","aff":"International Genetic Technologies","nat":"American","history":["isla-nublar-1993"],"stats":{"intelligence":5,"survivalSkills":2,"leadership":4,"combatAbility":1,"animalHandling":1},"threat":"LOW","psych":"Intelligent. Calm under pressure. Responsible. Focused. Technically skilled. Loyal to mission.","classified":"Cause of death: Velociraptor attack during manual system recovery attempt, 1993. Final actions delayed total system failure long enough for partial evacuations. FILE CLOSED.","tag":"When the systems failed, he didn't panic — he worked.","quote":"Hold on to your butts."},{"id":"sarah-harding","fileId":"ING-CHR-016","name":"Dr. Sarah Harding","status":"ALIVE","clearance":2,"dept":"Field Research (Former Consultant)","role":"Field Paleontologist / Wildlife Researcher","aff":"Independent Researcher","nat":"American","history":["isla-sorna-1997"],"stats":{"intelligence":5,"survivalSkills":4,"leadership":3,"combatAbility":2,"animalHandling":5},"threat":"LOW","psych":"Intelligent. Independent. Brave. Determined. Compassionate toward animals. Strong-willed. Prefers direct field observation.","classified":"Threat level: LOW. Subject provides critical insight into dinosaur behavior in natural ecosystems. Witnessed corporate exploitation of dinosaurs firsthand on Isla Sorna.","tag":"She studied them not as creations, but as living systems.","quote":"They're not monsters. They're animals."},{"id":"nick-van-owen","fileId":"ING-CHR-017","name":"Nick Van Owen","status":"ALIVE","clearance":1,"dept":"External — Field Operative","role":"Field Activist / Photojournalist","aff":"Independent","nat":"American","history":["isla-sorna-1997"],"stats":{"intelligence":4,"survivalSkills":4,"leadership":3,"combatAbility":2,"animalHandling":3},"threat":"MEDIUM — OPERATIONAL INTERFERENCE","psych":"Idealistic. Rebellious. Protective. Bold. Impulsive. Morally driven. Took direct action to sabotage InGen's dinosaur capture efforts on Isla Sorna.","classified":"Subject directly undermined containment and extraction objectives during Site B operations. Released captured dinosaurs from containment. Flag for monitoring.","tag":"He didn't just document the chaos — he joined it.","quote":"They're not ours to take."},{"id":"peter-ludlow","fileId":"ING-CHR-018","name":"Peter Ludlow","status":"DECEASED","clearance":5,"dept":"Executive Leadership","role":"Chairman / Executive Director — InGen","aff":"International Genetic Technologies","nat":"American","history":["isla-sorna-1997"],"stats":{"intelligence":3,"survivalSkills":1,"leadership":4,"combatAbility":1,"animalHandling":1},"threat":"EXTREME — CORPORATE + OPERATIONAL MISMANAGEMENT","psych":"Ambitious. Ruthless. Short-sighted. Corporate-focused. Authoritarian. Prioritized monetization of dinosaur assets over systemic risk management.","classified":"Authorized mass dinosaur capture on Isla Sorna and transport of live T. rex to mainland San Diego facility. Cause of death: T. rex containment collapse, San Diego, 1997. FILE CLOSED.","tag":"He tried to control the asset. The asset controlled everything.","quote":"We're not making the same mistakes again. We're fixing them."},{"id":"zia-rodriguez","fileId":"ING-CHR-019","name":"Dr. Zia Rodriguez","status":"ALIVE","clearance":2,"dept":"Veterinary Medicine (External)","role":"Paleoveterinarian / Medical Specialist","aff":"Dinosaur Protection Group","nat":"American","history":["fallen-kingdom-2018","dominion-2022"],"stats":{"intelligence":5,"survivalSkills":4,"leadership":3,"combatAbility":2,"animalHandling":5},"threat":"MEDIUM — FIELD EXPOSURE","psych":"Brave. Direct. Compassionate toward animals. Strong-willed. Ethical. Independent. Refuses participation in illegal or unethical animal exploitation.","classified":"Subject is considered essential for dinosaur welfare operations. Pioneer in paleoveterinary medicine. Actively opposes InGen-affiliated operations.","tag":"She treated the creatures others only saw as threats.","quote":"They're not monsters — they're patients."},{"id":"franklin-webb","fileId":"ING-CHR-020","name":"Franklin Webb","status":"ALIVE","clearance":2,"dept":"IT Systems (Former — Jurassic World)","role":"Systems Analyst / IT Specialist","aff":"Dinosaur Protection Group","nat":"American","history":["fallen-kingdom-2018","dominion-2022"],"stats":{"intelligence":5,"survivalSkills":2,"leadership":2,"combatAbility":1,"animalHandling":1},"threat":"LOW","psych":"Intelligent but anxious under pressure. Loyal to team objectives. Strong technical problem-solver. Prefers digital environments over field operations. Grows more confident across missions.","classified":"Threat level: LOW. Non-combat support role. High-level technical competence in system analysis and cybersecurity. Limited field endurance.","tag":"Not every hero is in the field — some keep the system alive from behind the screen.","quote":"I was not built for this… but I'm still here, so that counts for something."},{"id":"barry-sembene","fileId":"ING-CHR-021","name":"Barry Sembène","status":"ALIVE","clearance":3,"dept":"Animal Behavior & Containment","role":"Raptor Trainer / Animal Handler","aff":"Jurassic World Operations (Former) / Independent Contractor","nat":"French / Senegalese","history":["jurassic-world-2015"],"stats":{"intelligence":4,"survivalSkills":4,"leadership":3,"combatAbility":2,"animalHandling":5},"threat":"MEDIUM — PREDATOR PROXIMITY","psych":"Calm. Skilled. Professional. Loyal. Disciplined. Practical. Developed close working relationship with raptor pack through trust-based conditioning rather than force.","classified":"High competency in controlled predator handling environments. Methods align with behavioral reinforcement strategies rather than coercive training.","tag":"He didn't command them — he worked with them.","quote":"They're not weapons… they're partners."},{"id":"kayla-watts","fileId":"ING-CHR-022","name":"Kayla Watts","status":"ALIVE","clearance":1,"dept":"External — Aviation Contractor","role":"Pilot / Cargo Transport Specialist","aff":"Independent Contractor (Former illegal transport operator)","nat":"American","history":["dominion-2022"],"stats":{"intelligence":4,"survivalSkills":4,"leadership":3,"combatAbility":2,"animalHandling":1},"threat":"MEDIUM — LOGISTICAL EXPOSURE","psych":"Skilled. Independent. Resourceful. Morally conflicted initially. Adaptable under pressure. Pragmatic.","classified":"Subject demonstrates high-level aviation capability in extreme and ethically complex transport operations. Previously involved in illegal biological cargo operations. Demonstrated ethical shift from profit-driven to responsible action.","tag":"She didn't choose the cargo — she chose what to do once she knew what it was.","quote":"I fly what I'm paid to fly… until I know what I'm really carrying."}],"dImg":{"ankylosaurus":"uploads/Ingen Archive Dinosaurs/ankylosaurus-v4.png","baryonyx":"uploads/Ingen Archive Dinosaurs/baryonyx.jpg","carnotaurus":"uploads/Ingen Archive Dinosaurs/carnotaurus.jpg","attenborosaurus":"uploads/Ingen Archive Dinosaurs/attenborosaurus-v2.png","charlie":"uploads/Ingen Archive Dinosaurs/charlie.jpg","distortus-rex":"uploads/Ingen Archive Dinosaurs/distortus-rex.jpg","compsognathus":"uploads/Ingen Archive Dinosaurs/compsognathus.jpg","delta":"uploads/Ingen Archive Dinosaurs/delta.jpg","blue":"uploads/Ingen Archive Dinosaurs/blue.jpg","brachiosaurus":"uploads/Ingen Archive Dinosaurs/brachiosaurus.jpg","dilophosaurus":"uploads/Ingen Archive Dinosaurs/dilophosaurus.jpg","dimorphodon":"uploads/Ingen Archive Dinosaurs/dimorphodon.jpg","echo":"uploads/Ingen Archive Dinosaurs/echo.jpg","diplodocus":"uploads/Ingen Archive Dinosaurs/diplodocus.jpg","geosternbergia":"uploads/Ingen Archive Dinosaurs/geosternbergia.jpg","indominus-rex":"uploads/Ingen Archive Dinosaurs/indominus-rex.jpg","gallimimus":"uploads/Ingen Archive Dinosaurs/gallimimus.jpg","giganotosaurus":"uploads/Ingen Archive Dinosaurs/giganotosaurus.jpg","kentrosaurus":"uploads/Ingen Archive Dinosaurs/kentrosaurus.jpg","mosasaurus":"uploads/Ingen Archive Dinosaurs/mosasaurus.webp","pteranodon":"uploads/Ingen Archive Dinosaurs/pteranodon.jpg"},"pImg":{"owen-grady":"uploads/Ingen Archive Character files/owen-grady.png","claire-dearing":"uploads/Ingen Archive Character files/claire-dearing.png","simon-masrani":"uploads/Ingen Archive Character files/simon-masrani.jpg","henry-wu":"uploads/Ingen Archive Character files/henry-wu.png","vic-hoskins":"uploads/Ingen Archive Character files/vic-hoskins.png","john-hammond":"uploads/Ingen Archive Character files/john-hammond.jpg","ian-malcolm":"uploads/Ingen Archive Character files/ian-malcolm.png","alan-grant":"uploads/Ingen Archive Character files/alan-grant.png","ellie-sattler":"uploads/Ingen Archive Character files/ellie-sattler.png","dennis-nedry":"uploads/Ingen Archive Character files/dennis-nedry.jpg","lewis-dodgson":"uploads/Ingen Archive Character files/lewis-dodgson.jpg","benjamin-lockwood":"uploads/Ingen Archive Character files/benjamin-lockwood.png","maisie-lockwood":"uploads/Ingen Archive Character files/maisie-lockwood.jpg","robert-muldoon":"uploads/Ingen Archive Character files/robert-muldoon.jpg","ray-arnold":"uploads/Ingen Archive Character files/ray-arnold.jpg","sarah-harding":"uploads/Ingen Archive Character files/sarah-harding.jpg","nick-van-owen":"uploads/Ingen Archive Character files/nick-van-owen.jpg","peter-ludlow":"uploads/Ingen Archive Character files/peter-ludlow.jpg","zia-rodriguez":"uploads/Ingen Archive Character files/zia-rodriguez.jpg","franklin-webb":"uploads/Ingen Archive Character files/franklin-webb.jpg","barry-sembene":"uploads/Ingen Archive Character files/barry-sembene.png","kayla-watts":"uploads/Ingen Archive Character files/kayla-watts.jpg"},"s":{"dTotal":21,"dActive":16,"dDeceased":5,"dFailed":18,"dStable":0,"dPartial":3,"dExtreme":5,"dHigh":7,"pTotal":22,"pAlive":13,"pDeceased":9,"pL5":6,"pL4plus":10}}
+{
+  "D": [
+    {
+      "id": "quetzalcoatlus",
+      "fileId": "ING-AIR-001",
+      "name": "Quetzalcoatlus",
+      "species": "Quetzalcoatlus northropi",
+      "codename": "Shadow",
+      "status": "ACTIVE",
+      "classification": "Apex Aerial Predator / Continental Range",
+      "threat": 5,
+      "contain": "FAILED PERMANENTLY",
+      "length": "10–11 meter wingspan",
+      "weight": "200–250 kilograms",
+      "diet": "Carnivorous",
+      "habitat": "Open sky, cliff roosts, unrestricted continental range",
+      "genome": 72,
+      "incidents": [
+        "fallen-kingdom-2018",
+        "dominion-2022"
+      ],
+      "stats": {
+        "strength": 4,
+        "defense": 2,
+        "speed": 4,
+        "intelligence": 3,
+        "aggression": 5
+      },
+      "notes": "The largest flying asset ever brought to term. Post-dispersal roosting has been confirmed on structures never surveyed for biological occupancy, and the animal is capable of taking prey in the low tens of kilograms in flight.",
+      "classified": "Risk assessment: EXTREME. No containment specification exists for this animal outside a fully enclosed aviary, and no such structure survives. Range is now continental and cannot be bounded.",
+      "tag": "There is no fence with a roof this animal has not already flown over.",
+      "locations": [
+        "ile-saint-hubert",
+        "biosyn-valley"
+      ]
+    },
+    {
+      "id": "pteranodon",
+      "fileId": "ING-AIR-002",
+      "name": "Pteranodon",
+      "species": "Pteranodon (commonly misidentified as Pterodactyl)",
+      "codename": "Sky Swarm Predator",
+      "status": "ACTIVE",
+      "classification": "Aerial Opportunistic Predator",
+      "threat": 4,
+      "contain": "FAILED",
+      "length": "N/A",
+      "weight": "Light — flight-adapted skeleton",
+      "diet": "Fish, small animals, carrion",
+      "habitat": "Skies, cliffs, coasts, islands",
+      "genome": 90,
+      "incidents": [
+        "isla-sorna-1997",
+        "jurassic-world-2015"
+      ],
+      "stats": {
+        "strength": 2,
+        "defense": 2,
+        "speed": 5,
+        "stealth": 4,
+        "aggression": 4
+      },
+      "notes": "Highly mobile aerial predator. Flock-based movement, sometimes chaotic swarms. Coastal dive hunter behavior. Strong nesting aggression. Opportunistic feeding habits.",
+      "classified": "Risk assessment: HIGH. Unrestricted mobility and sudden attack angles. Significantly more dangerous in flocks or during nesting periods.",
+      "tag": "You don't see it coming — you see it leaving."
+    },
+    {
+      "id": "dimorphodon",
+      "fileId": "ING-AIR-003",
+      "name": "Dimorphodon",
+      "species": "Dimorphodon macronyx",
+      "codename": "Cliff Swarm",
+      "status": "ACTIVE",
+      "classification": "Aerial Swarm Predator / Cliff Hunter",
+      "threat": 2,
+      "contain": "FAILED",
+      "length": "N/A",
+      "weight": "Very light",
+      "diet": "Insects, fish, small prey, carrion",
+      "habitat": "Cliffs, forests, coastal caves",
+      "genome": 81,
+      "incidents": [
+        "jurassic-world-2015"
+      ],
+      "stats": {
+        "strength": 1,
+        "defense": 2,
+        "speed": 4,
+        "stealth": 3,
+        "aggression": 3
+      },
+      "notes": "Small flock or colony-based species. Fast, erratic flight patterns. Highly reactive when nesting sites are threatened. Often scavenges from other species.",
+      "classified": "Risk assessment: LOW-MEDIUM. Most dangerous when colonies are disturbed or food sources are limited.",
+      "tag": "Small wings. Fast chaos."
+    },
+    {
+      "id": "geosternbergia",
+      "fileId": "ING-AIR-004",
+      "name": "Geosternbergia",
+      "species": "Geosternbergia sternbergi",
+      "codename": "Sky Monarch",
+      "status": "ACTIVE",
+      "classification": "High-Altitude Aerial Hunter / Coastal Soarer",
+      "threat": 3,
+      "contain": "FAILED",
+      "length": "N/A",
+      "weight": "10–20 kg",
+      "diet": "Fish, small animals, marine surface prey",
+      "habitat": "Open skies, coastal cliffs, ocean thermals",
+      "genome": 77,
+      "incidents": [
+        "jurassic-world-2015"
+      ],
+      "stats": {
+        "strength": 2,
+        "defense": 2,
+        "speed": 4,
+        "stealth": 4,
+        "aggression": 2
+      },
+      "notes": "Long-distance soaring specialist. Coastal and ocean thermal rider. Solitary or small flock behavior. Highly energy-efficient flight patterns.",
+      "classified": "Risk assessment: MEDIUM. Low aggression but wide territorial range. Rarely observed due to altitude preference.",
+      "tag": "It doesn't hunt the world — it crosses it."
+    },
+    {
+      "id": "tyrannosaurus-rex",
+      "fileId": "ING-DIN-001",
+      "name": "Tyrannosaurus rex",
+      "species": "Tyrannosaurus rex",
+      "codename": "Rexy",
+      "status": "ACTIVE",
+      "classification": "Apex Terrestrial Predator",
+      "threat": 5,
+      "contain": "FAILED",
+      "length": "12–13 meters",
+      "weight": "7–9 tons",
+      "diet": "Carnivorous",
+      "habitat": "Open woodland, river valleys, cleared plain",
+      "genome": 94,
+      "incidents": [
+        "isla-nublar-1993",
+        "jurassic-world-2015",
+        "nublar-eruption-2018",
+        "fallen-kingdom-2018",
+        "dominion-2022"
+      ],
+      "stats": {
+        "strength": 5,
+        "defense": 4,
+        "speed": 3,
+        "intelligence": 3,
+        "aggression": 5
+      },
+      "notes": "The first asset brought to term at Site B and the longest-surviving animal on record. Vision is motion-weighted rather than motion-dependent — the 1993 assessment on this point was wrong and cost lives. Has survived two island containment collapses and one continental release.",
+      "classified": "Risk assessment: EXTREME. Subject has defeated every containment specification written for it, including the 1993 perimeter and the 2015 paddock cordon. Recapture is not recommended; observation at distance is the standing posture.",
+      "tag": "Every fence InGen ever built was measured against this animal. None of them held.",
+      "locations": [
+        "isla-nublar",
+        "jurassic-park",
+        "jurassic-world",
+        "lockwood-estate",
+        "biosyn-valley"
+      ],
+      "facilities": [
+        "trex-paddock"
+      ]
+    },
+    {
+      "id": "velociraptor",
+      "fileId": "ING-DIN-002",
+      "name": "Velociraptor",
+      "species": "Velociraptor antirrhopus",
+      "codename": "Pack Asset",
+      "status": "DECEASED",
+      "classification": "Pack Hunter / Coordinated Predator",
+      "threat": 5,
+      "contain": "FAILED PERMANENTLY",
+      "length": "3–4 meters",
+      "weight": "90–160 kilograms",
+      "diet": "Carnivorous",
+      "habitat": "Dense cover, structured interiors, enclosed terrain",
+      "genome": 88,
+      "incidents": [
+        "isla-nublar-1993",
+        "isla-sorna-1997",
+        "isla-sorna-2001"
+      ],
+      "stats": {
+        "strength": 3,
+        "defense": 2,
+        "speed": 5,
+        "intelligence": 5,
+        "aggression": 5
+      },
+      "notes": "The original Nublar pack, distinct from the later Raptor Squad line. Demonstrated problem-solving well outside the projected range: coordinated flanking, door handle manipulation, and systematic testing of fence sections for weakness.",
+      "classified": "Risk assessment: EXTREME. Pack learned faster than containment could be revised. Muldoon's standing recommendation that the line be destroyed was filed and not actioned.",
+      "tag": "They were testing the fences for weaknesses. Systematically.",
+      "locations": [
+        "isla-nublar",
+        "isla-sorna",
+        "jurassic-park"
+      ],
+      "facilities": [
+        "raptor-paddock"
+      ],
+      "personnel": [
+        "robert-muldoon"
+      ]
+    },
+    {
+      "id": "carnotaurus",
+      "fileId": "ING-DIN-003",
+      "name": "Carnotaurus",
+      "species": "Carnotaurus sastrei",
+      "codename": "Horned Pursuer",
+      "status": "ACTIVE",
+      "classification": "Fast Pursuit Predator",
+      "threat": 4,
+      "contain": "FAILED",
+      "length": "7.5–9 meters",
+      "weight": "1–2 tons",
+      "diet": "Carnivorous — medium-large prey specialist",
+      "habitat": "Open terrain, forest edges, semi-arid zones",
+      "genome": 83,
+      "incidents": [
+        "fallen-kingdom-2018",
+        "dominion-2022"
+      ],
+      "stats": {
+        "strength": 4,
+        "defense": 3,
+        "speed": 5,
+        "intelligence": 3,
+        "aggression": 4
+      },
+      "notes": "High-speed pursuit predator. Short burst acceleration specialist. Territorial but less dominant than apex titans. Aggressive when cornered or hungry.",
+      "classified": "Risk assessment: HIGH. Rapid ambush predator confirmed in human-inhabited zones. More dangerous in coordinated hunting conditions.",
+      "tag": "It doesn't rule the ecosystem — it outruns it."
+    },
+    {
+      "id": "giganotosaurus",
+      "fileId": "ING-DIN-004",
+      "name": "Giganotosaurus",
+      "species": "Giganotosaurus carolinii",
+      "codename": "Titan Rival",
+      "status": "DECEASED — CONFIRMED",
+      "classification": "Apex Megatheropod",
+      "threat": 5,
+      "contain": "FAILED",
+      "length": "13–14 meters",
+      "weight": "7–9 tons",
+      "diet": "Carnivorous — large apex prey specialist",
+      "habitat": "Forest biomes, cold-temperate containment zones",
+      "genome": 86,
+      "incidents": [
+        "dominion-2022"
+      ],
+      "stats": {
+        "strength": 5,
+        "defense": 5,
+        "speed": 3,
+        "intelligence": 3,
+        "aggression": 5
+      },
+      "notes": "Extreme territorial dominance. Highly aggressive toward competing apex predators. Slow but powerful pursuit predator. Displays intimidation-based hunting strategy.",
+      "classified": "Risk assessment: EXTREME. Multi-apex ecosystem destabilizer. Not a stealth predator — confrontation-based dominance species.",
+      "tag": "It didn't hunt to survive — it fought to decide who survived."
+    },
+    {
+      "id": "spinosaurus",
+      "fileId": "ING-DIN-005",
+      "name": "Spinosaurus",
+      "species": "Spinosaurus aegyptiacus",
+      "codename": "Sail",
+      "status": "ACTIVE",
+      "classification": "Apex Semi-Aquatic Predator",
+      "threat": 5,
+      "contain": "FAILED",
+      "length": "15–16 meters",
+      "weight": "8–9 tons",
+      "diet": "Carnivorous",
+      "habitat": "River systems, coastal margin, flooded interior",
+      "genome": 79,
+      "incidents": [
+        "isla-sorna-2001"
+      ],
+      "stats": {
+        "strength": 5,
+        "defense": 4,
+        "speed": 3,
+        "intelligence": 3,
+        "aggression": 5
+      },
+      "notes": "Not present in any approved Site B manifest. Genome shows insertions absent from the logged breeding programme, indicating an unrecorded line brought to term outside the sanctioned schedule.",
+      "classified": "Risk assessment: EXTREME. Provenance unresolved. The absence of this animal from the manifest is itself the finding: an asset of this size was produced without appearing in any record InGen retained.",
+      "tag": "The manifest does not list it. The island does.",
+      "locations": [
+        "isla-sorna",
+        "sorna-interior"
+      ]
+    },
+    {
+      "id": "blue",
+      "fileId": "ING-DIN-007",
+      "name": "Blue",
+      "species": "Velociraptor (engineered strain)",
+      "codename": "Alpha Blue",
+      "status": "ACTIVE",
+      "classification": "Alpha Pack Predator / Enhanced Cognitive Subject",
+      "threat": 5,
+      "contain": "FAILED — SELF-RELEASED",
+      "length": "~2 meters",
+      "weight": "~20–25 kg",
+      "diet": "Carnivorous",
+      "habitat": "Variable — confirmed wild survival post-2022",
+      "genome": 97,
+      "incidents": [
+        "jurassic-world-2015",
+        "fallen-kingdom-2018",
+        "dominion-2022"
+      ],
+      "stats": {
+        "strength": 4,
+        "defense": 3,
+        "speed": 5,
+        "intelligence": 5,
+        "aggression": 4
+      },
+      "notes": "Highly intelligent and emotionally responsive. Strong loyalty imprint toward Owen Grady. Independent decision-making in combat situations. Capable of adapting tactics in real time. Selective alliance formation confirmed.",
+      "classified": "Risk assessment: EXTREME. Exhibits non-standard raptor cognition including emotional response tracking. Cannot be safely contained long-term.",
+      "tag": "Not just trained — understood."
+    },
+    {
+      "id": "delta",
+      "fileId": "ING-DIN-008",
+      "name": "Delta",
+      "species": "Velociraptor (engineered strain)",
+      "codename": "Raptor Squad — Delta Unit",
+      "status": "DECEASED",
+      "classification": "Pack Hunter / Military Test Asset",
+      "threat": 4,
+      "contain": "FAILED",
+      "length": "~2 meters",
+      "weight": "~20 kg",
+      "diet": "Carnivorous",
+      "habitat": "Isla Nublar",
+      "genome": 92,
+      "incidents": [
+        "jurassic-world-2015"
+      ],
+      "stats": {
+        "strength": 3,
+        "defense": 2,
+        "speed": 5,
+        "intelligence": 4,
+        "aggression": 5
+      },
+      "notes": "Coordinated pack hunter. Specializes in flanking maneuvers and environmental pressure tactics. Aggressive when squad hierarchy is disrupted.",
+      "classified": "Risk assessment: HIGH. Performance depended heavily on squad cohesion. Breakdown of hierarchy resulted in rapid loss of control.",
+      "tag": "When the pack worked, it was precise. When it broke, it was unstoppable chaos."
+    },
+    {
+      "id": "charlie",
+      "fileId": "ING-DIN-009",
+      "name": "Charlie",
+      "species": "Velociraptor (engineered strain)",
+      "codename": "Raptor Squad — Charlie Unit",
+      "status": "DECEASED",
+      "classification": "Pack Hunter / Tactical Support Predator",
+      "threat": 4,
+      "contain": "FAILED",
+      "length": "~2 meters",
+      "weight": "~20 kg",
+      "diet": "Carnivorous",
+      "habitat": "Isla Nublar",
+      "genome": 92,
+      "incidents": [
+        "jurassic-world-2015"
+      ],
+      "stats": {
+        "strength": 3,
+        "defense": 2,
+        "speed": 5,
+        "intelligence": 4,
+        "aggression": 5
+      },
+      "notes": "Highly reactive and fast-moving. Specialized in distraction and disruption tactics. Strong pack synchronization. Aggressive when isolated from squad.",
+      "classified": "Risk assessment: HIGH. Peak effectiveness only within structured pack hierarchy. Isolated behavior becomes unstable.",
+      "tag": "Fastest strike in the pack — gone before the target even reacts."
+    },
+    {
+      "id": "echo",
+      "fileId": "ING-DIN-010",
+      "name": "Echo",
+      "species": "Velociraptor (engineered strain)",
+      "codename": "Raptor Squad — Echo Unit",
+      "status": "DECEASED",
+      "classification": "Pack Hunter / Heavy Pressure Unit",
+      "threat": 4,
+      "contain": "FAILED",
+      "length": "~2 meters",
+      "weight": "~20 kg",
+      "diet": "Carnivorous",
+      "habitat": "Isla Nublar",
+      "genome": 92,
+      "incidents": [
+        "jurassic-world-2015"
+      ],
+      "stats": {
+        "strength": 3,
+        "defense": 2,
+        "speed": 5,
+        "intelligence": 4,
+        "aggression": 5
+      },
+      "notes": "Strong frontline attacker in pack formation. High aggression during direct combat. Less reliant on stealth, more on forceful engagement. Highly responsive to pack leader cues.",
+      "classified": "Risk assessment: HIGH. Consistent obedience to pack hierarchy. Became uncontrollable once external command systems failed.",
+      "tag": "The line breaker of the pack — built for impact, lost in the collapse."
+    },
+    {
+      "id": "atrociraptor",
+      "fileId": "ING-DIN-011",
+      "name": "Atrociraptor",
+      "species": "Atrociraptor marshalli",
+      "codename": "Trained Line",
+      "status": "ACTIVE",
+      "classification": "Pack Hunter / Directed Pursuit Asset",
+      "threat": 4,
+      "contain": "FAILED",
+      "length": "3 meters",
+      "weight": "80–120 kilograms",
+      "diet": "Carnivorous",
+      "habitat": "Urban and structured environments, mixed terrain",
+      "genome": 76,
+      "incidents": [
+        "dominion-2022"
+      ],
+      "stats": {
+        "strength": 3,
+        "defense": 2,
+        "speed": 5,
+        "intelligence": 4,
+        "aggression": 5
+      },
+      "notes": "Bred and conditioned outside InGen custody for private sale, trained to pursue a designated target on laser mark and to disengage on recall. The conditioning holds only while the handler is present; without one the animal reverts to unstructured hunting.",
+      "classified": "Risk assessment: HIGH. The specimen is not the finding — the training programme is. Directed-pursuit conditioning of a pack predator has been demonstrated outside any regulatory framework.",
+      "tag": "Someone taught them a name to hunt by.",
+      "locations": [
+        "biosyn-valley"
+      ]
+    },
+    {
+      "id": "pyroraptor",
+      "fileId": "ING-DIN-012",
+      "name": "Pyroraptor",
+      "species": "Pyroraptor olympius",
+      "codename": "Ember",
+      "status": "ACTIVE",
+      "classification": "Feathered Pursuit Predator / Cold-Water Hunter",
+      "threat": 4,
+      "contain": "FAILED",
+      "length": "2.5 meters",
+      "weight": "50–70 kilograms",
+      "diet": "Carnivorous",
+      "habitat": "Boreal forest, frozen lake margin, alpine cover",
+      "genome": 74,
+      "incidents": [
+        "dominion-2022"
+      ],
+      "stats": {
+        "strength": 3,
+        "defense": 2,
+        "speed": 5,
+        "intelligence": 4,
+        "aggression": 5
+      },
+      "notes": "Fully feathered and cold-adapted. Swims and hunts beneath surface ice, surfacing through fracture lines rather than at the water's edge — an approach vector no containment design in the valley anticipated.",
+      "classified": "Risk assessment: HIGH. Ice cover cannot be treated as a barrier. Any frozen surface within an enclosure is to be assessed as open water.",
+      "tag": "The ice is not a floor. It is a ceiling.",
+      "locations": [
+        "biosyn-valley"
+      ]
+    },
+    {
+      "id": "ankylosaurus",
+      "fileId": "ING-DIN-013",
+      "name": "Ankylosaurus",
+      "species": "Ankylosaurus magniventris",
+      "codename": "Living Tank",
+      "status": "ACTIVE",
+      "classification": "Heavy Defense Herbivore",
+      "threat": 4,
+      "contain": "PARTIALLY STABLE",
+      "length": "6–8 meters",
+      "weight": "6–8 tons",
+      "diet": "Herbivorous",
+      "habitat": "Forests, dense jungle edges, mixed terrain",
+      "genome": 91,
+      "incidents": [
+        "fallen-kingdom-2018",
+        "dominion-2022"
+      ],
+      "stats": {
+        "strength": 5,
+        "defense": 5,
+        "speed": 2,
+        "intelligence": 3,
+        "aggression": 4
+      },
+      "notes": "Non-aggressive until provoked. Defensive response force exceeds most predator attack thresholds. Relies on armor rather than speed.",
+      "classified": "Risk assessment: MEDIUM-HIGH. Extreme retaliation capability. Subject is non-aggressive until provoked.",
+      "tag": "It doesn't fight often — but when it does, the ground remembers."
+    },
+    {
+      "id": "diplodocus",
+      "fileId": "ING-DIN-014",
+      "name": "Diplodocus",
+      "species": "Diplodocus longus",
+      "codename": "Skyreach Grazer",
+      "status": "ACTIVE",
+      "classification": "Colossal Herbivore / Environmental Grazer",
+      "threat": 2,
+      "contain": "FAILED",
+      "length": "24–27 meters",
+      "weight": "10–16 tons",
+      "diet": "Herbivorous — high vegetation browsing",
+      "habitat": "Open plains, forest clearings, river valleys",
+      "genome": 89,
+      "incidents": [
+        "dominion-2022"
+      ],
+      "stats": {
+        "strength": 5,
+        "defense": 4,
+        "speed": 2,
+        "intelligence": 3,
+        "aggression": 1
+      },
+      "notes": "Extremely calm, non-aggressive grazer. Strong herd-based social structure. Defensive tail swing when threatened. Migratory feeding patterns.",
+      "classified": "Risk assessment: LOW. Not a threat to humans unless provoked indirectly via herd panic or predator disruption.",
+      "tag": "It doesn't defend territory — it is the territory."
+    },
+    {
+      "id": "brachiosaurus",
+      "fileId": "ING-DIN-015",
+      "name": "Brachiosaurus",
+      "species": "Brachiosaurus altithorax",
+      "codename": "Sky Giant",
+      "status": "ACTIVE",
+      "classification": "Colossal Canopy Grazer / Titan Herbivore",
+      "threat": 2,
+      "contain": "FAILED",
+      "length": "22–26 meters",
+      "weight": "30–50 tons",
+      "diet": "Herbivorous — high canopy browsing",
+      "habitat": "Forest canopies, river valleys, open woodland",
+      "genome": 95,
+      "incidents": [
+        "isla-nublar-1993",
+        "jurassic-world-2015",
+        "dominion-2022"
+      ],
+      "stats": {
+        "strength": 5,
+        "defense": 3,
+        "speed": 2,
+        "intelligence": 3,
+        "aggression": 1
+      },
+      "notes": "Extremely calm and slow-moving. High canopy feeding specialist. Strong herd-based social behavior. Non-aggressive unless severely threatened.",
+      "classified": "Risk assessment: LOW. Non-aggressive ecosystem species. Accidental damage possible in dense environments due to size.",
+      "tag": "Before the fear — there was wonder."
+    },
+    {
+      "id": "parasaurolophus",
+      "fileId": "ING-DIN-016",
+      "name": "Parasaurolophus",
+      "species": "Parasaurolophus walkeri",
+      "codename": "Crest Caller",
+      "status": "ACTIVE",
+      "classification": "Herd Herbivore / Acoustic Signaller",
+      "threat": 2,
+      "contain": "PARTIALLY STABLE",
+      "length": "9–10 meters",
+      "weight": "2.5–3 tons",
+      "diet": "Herbivorous",
+      "habitat": "Riverine plain, lake margin, open grazing",
+      "genome": 93,
+      "incidents": [
+        "isla-nublar-1993",
+        "jurassic-world-2015",
+        "nublar-eruption-2018",
+        "dominion-2022"
+      ],
+      "stats": {
+        "strength": 2,
+        "defense": 2,
+        "speed": 3,
+        "intelligence": 3,
+        "aggression": 1
+      },
+      "notes": "The cranial crest is a resonating chamber; herd calls carry several kilometres and shift measurably ahead of weather fronts and predator movement. Used informally by Site B staff as an early warning system.",
+      "classified": "Risk assessment: LOW. No recorded aggression toward personnel. Value to the archive is behavioural rather than containment-related.",
+      "tag": "Site B staff learned to read the herd before they read the instruments.",
+      "locations": [
+        "isla-nublar",
+        "isla-sorna",
+        "jurassic-world",
+        "biosyn-valley"
+      ]
+    },
+    {
+      "id": "gallimimus",
+      "fileId": "ING-DIN-017",
+      "name": "Gallimimus",
+      "species": "Gallimimus bullatus",
+      "codename": "Desert Stampede Unit",
+      "status": "ACTIVE",
+      "classification": "High-Speed Herd Runner / Evasion Species",
+      "threat": 1,
+      "contain": "FAILED",
+      "length": "4–6 meters",
+      "weight": "150–450 kg",
+      "diet": "Omnivorous — plants, small prey, insects",
+      "habitat": "Open plains, deserts, wide grasslands",
+      "genome": 93,
+      "incidents": [
+        "isla-nublar-1993",
+        "dominion-2022"
+      ],
+      "stats": {
+        "strength": 2,
+        "defense": 1,
+        "speed": 5,
+        "intelligence": 3,
+        "aggression": 1
+      },
+      "notes": "Extremely fast runner — open terrain specialist. Highly social herd species. Panic-driven coordinated escape behavior. Strong visual alert response system. Avoids all confrontation.",
+      "classified": "Risk assessment: LOW. Non-aggressive species. Survival depends entirely on herd cohesion and early predator detection.",
+      "tag": "It doesn't fight the danger — it outruns the moment it appears."
+    },
+    {
+      "id": "compsognathus",
+      "fileId": "ING-DIN-018",
+      "name": "Compsognathus",
+      "species": "Compsognathus longipes",
+      "codename": "Swarm Unit",
+      "status": "ACTIVE",
+      "classification": "Swarm Predator / Pack Scavenger",
+      "threat": 3,
+      "contain": "FAILED",
+      "length": "0.6–1 meter",
+      "weight": "1–3 kg",
+      "diet": "Carnivorous — small prey, carrion, swarm hunting",
+      "habitat": "Forest floors, beaches, dense undergrowth",
+      "genome": 88,
+      "incidents": [
+        "isla-sorna-1997",
+        "isla-sorna-2001"
+      ],
+      "stats": {
+        "strength": 1,
+        "defense": 1,
+        "speed": 4,
+        "intelligence": 4,
+        "aggression": 4
+      },
+      "notes": "Highly social swarm species. Opportunistic scavengers. Attack in coordinated groups. Highly reactive to blood and movement. Persistent pursuit in packs.",
+      "classified": "Risk assessment: MEDIUM. Danger level increases exponentially with group size. Cannot be fully controlled due to size and numbers.",
+      "tag": "Individually harmless. Collectively unstoppable."
+    },
+    {
+      "id": "baryonyx",
+      "fileId": "ING-DIN-019",
+      "name": "Baryonyx",
+      "species": "Baryonyx walkeri",
+      "codename": "River Fang",
+      "status": "ACTIVE",
+      "classification": "Semi-Aquatic Predator / River Apex Specialist",
+      "threat": 4,
+      "contain": "FAILED",
+      "length": "7.5–10 meters",
+      "weight": "1.5–3 tons",
+      "diet": "Carnivorous — fish-heavy, opportunistic",
+      "habitat": "Rivers, swamps, marshlands, lakesides",
+      "genome": 87,
+      "incidents": [
+        "fallen-kingdom-2018"
+      ],
+      "stats": {
+        "strength": 4,
+        "defense": 3,
+        "speed": 4,
+        "stealth": 5,
+        "aggression": 4
+      },
+      "notes": "Semi-aquatic ambush hunter. Patient stalking in shallow water. Solitary territorial predator. Highly reactive when defending water zones.",
+      "classified": "Risk assessment: HIGH. Most dangerous in water proximity zones where visibility is limited.",
+      "tag": "It doesn't chase prey — it waits for the river to bring it."
+    },
+    {
+      "id": "stegosaurus",
+      "fileId": "ING-DIN-020",
+      "name": "Stegosaurus",
+      "species": "Stegosaurus stenops",
+      "codename": "Plate Back",
+      "status": "ACTIVE",
+      "classification": "Armored Display Herbivore",
+      "threat": 3,
+      "contain": "PARTIALLY STABLE",
+      "length": "9 meters",
+      "weight": "4–5 tons",
+      "diet": "Herbivorous",
+      "habitat": "Fern prairie, open woodland margin",
+      "genome": 90,
+      "incidents": [
+        "isla-sorna-1997",
+        "jurassic-world-2015",
+        "nublar-eruption-2018",
+        "dominion-2022"
+      ],
+      "stats": {
+        "strength": 4,
+        "defense": 5,
+        "speed": 2,
+        "intelligence": 2,
+        "aggression": 3
+      },
+      "notes": "Herd-forming and intensely defensive of juveniles. The 1997 Site B encounter established the minimum approach distance still in force: proximity to a calf is read as threat regardless of intent.",
+      "classified": "Risk assessment: MODERATE. Tail spike strike carries sufficient force to penetrate vehicle panelling. Herd approach requires two-person observation.",
+      "tag": "Approach the young and the herd answers as one animal.",
+      "locations": [
+        "isla-sorna",
+        "jurassic-world",
+        "biosyn-valley"
+      ]
+    },
+    {
+      "id": "kentrosaurus",
+      "fileId": "ING-DIN-021",
+      "name": "Kentrosaurus",
+      "species": "Kentrosaurus aethiopicus",
+      "codename": "Spikeback Warden",
+      "status": "ACTIVE",
+      "classification": "Light Armored Defense Herbivore",
+      "threat": 3,
+      "contain": "PARTIALLY STABLE",
+      "length": "4–5 meters",
+      "weight": "1–2 tons",
+      "diet": "Herbivorous — low vegetation grazer",
+      "habitat": "Forest edges, plains, semi-dry environments",
+      "genome": 84,
+      "incidents": [
+        "dominion-2022"
+      ],
+      "stats": {
+        "strength": 3,
+        "defense": 4,
+        "speed": 3,
+        "intelligence": 3,
+        "aggression": 3
+      },
+      "notes": "Small herd or family-group behavior. Highly alert and reactive to movement. Uses tail spikes for rapid defensive strikes. Generally non-aggressive unless threatened.",
+      "classified": "Risk assessment: MEDIUM. Localized defensive hazard. Relies on quick defensive retaliation rather than sustained combat.",
+      "tag": "Small frame. Sharp defense. Fast response."
+    },
+    {
+      "id": "triceratops",
+      "fileId": "ING-DIN-022",
+      "name": "Triceratops",
+      "species": "Triceratops horridus",
+      "codename": "Three Horn",
+      "status": "ACTIVE",
+      "classification": "Heavy Ceratopsian Herbivore",
+      "threat": 3,
+      "contain": "PARTIALLY STABLE",
+      "length": "8–9 meters",
+      "weight": "6–8 tons",
+      "diet": "Herbivorous",
+      "habitat": "Open plain, low scrub, cycad stands",
+      "genome": 92,
+      "incidents": [
+        "isla-nublar-1993",
+        "jurassic-world-2015",
+        "nublar-eruption-2018"
+      ],
+      "stats": {
+        "strength": 4,
+        "defense": 5,
+        "speed": 2,
+        "intelligence": 2,
+        "aggression": 2
+      },
+      "notes": "Tolerant of close human presence and the only large herbivore approved for the petting enclosure programme. Early Nublar specimens suffered recurrent illness later traced to West Indian lilac browsing rather than pathogen.",
+      "classified": "Risk assessment: MODERATE. Docile under normal conditions; charge response at close range is unstoppable by available handling equipment.",
+      "tag": "The first animal a visitor was ever allowed to touch.",
+      "locations": [
+        "isla-nublar",
+        "jurassic-park",
+        "jurassic-world"
+      ]
+    },
+    {
+      "id": "sinoceratops",
+      "fileId": "ING-DIN-023",
+      "name": "Sinoceratops",
+      "species": "Sinoceratops zhuchengensis",
+      "codename": "Crown",
+      "status": "ACTIVE",
+      "classification": "Ceratopsian Herbivore",
+      "threat": 3,
+      "contain": "PARTIALLY STABLE",
+      "length": "6–7 meters",
+      "weight": "2–2.5 tons",
+      "diet": "Herbivorous",
+      "habitat": "Woodland margin, volcanic upland scrub",
+      "genome": 87,
+      "incidents": [
+        "nublar-eruption-2018",
+        "fallen-kingdom-2018",
+        "dominion-2022"
+      ],
+      "stats": {
+        "strength": 4,
+        "defense": 4,
+        "speed": 2,
+        "intelligence": 2,
+        "aggression": 2
+      },
+      "notes": "Recovered from Nublar during the Sibo evacuation and subsequently trafficked through the Lockwood auction. One of the few assets whose movement from island to mainland is documented end to end.",
+      "classified": "Risk assessment: MODERATE. Chain of custody is complete and damning — the record traces this animal from a volcanic evacuation directly to a private sale.",
+      "tag": "Its file is the clearest paper trail the auction ever left behind.",
+      "locations": [
+        "isla-nublar",
+        "lockwood-estate",
+        "biosyn-valley"
+      ],
+      "facilities": [
+        "lockwood-sublevel"
+      ]
+    },
+    {
+      "id": "dilophosaurus",
+      "fileId": "ING-DIN-024",
+      "name": "Dilophosaurus",
+      "species": "Dilophosaurus wetherilli",
+      "codename": "Venom Spitter",
+      "status": "ACTIVE",
+      "classification": "Ambush Predator / Toxic Display Specialist",
+      "threat": 3,
+      "contain": "PARTIALLY STABLE",
+      "length": "6–7 meters",
+      "weight": "400–900 kg",
+      "diet": "Carnivorous — small prey, scavenging, ambush hunting",
+      "habitat": "Forest floors, swamp edges, dense jungle zones",
+      "genome": 79,
+      "incidents": [
+        "isla-nublar-1993"
+      ],
+      "stats": {
+        "strength": 2,
+        "defense": 2,
+        "speed": 4,
+        "stealth": 5,
+        "aggression": 3
+      },
+      "notes": "Ambush-based hunting style. Uses frill display to intimidate prey. Venom-spitting capability confirmed — immobilizing agent. Highly cautious. Avoids direct confrontation. Prefers solitary hunting.",
+      "classified": "Risk assessment: MEDIUM. Danger comes from deception, not power. Significantly more dangerous psychologically than physically.",
+      "tag": "It doesn't need to be strong — just believed to be dangerous."
+    },
+    {
+      "id": "therizinosaurus",
+      "fileId": "ING-DIN-025",
+      "name": "Therizinosaurus",
+      "species": "Therizinosaurus cheloniformis",
+      "codename": "Scythe",
+      "status": "ACTIVE",
+      "classification": "Defensive Megaherbivore / Blind Ambusher",
+      "threat": 5,
+      "contain": "FAILED",
+      "length": "9–10 meters",
+      "weight": "4–5 tons",
+      "diet": "Herbivorous",
+      "habitat": "Dense forest, low-light valley interior",
+      "genome": 81,
+      "incidents": [
+        "dominion-2022"
+      ],
+      "stats": {
+        "strength": 5,
+        "defense": 5,
+        "speed": 2,
+        "intelligence": 2,
+        "aggression": 4
+      },
+      "notes": "Herbivorous and near-blind, hunting entirely by sound and by movement in the air. Forelimb claws approach a metre in length. Stillness is the only reliable defence; retreat is read as movement and answered.",
+      "classified": "Risk assessment: EXTREME. Threat rating is not predation — the animal is not feeding. It is defending an area, and the defended area is larger than any published figure.",
+      "tag": "It cannot see you. It does not need to.",
+      "locations": [
+        "biosyn-valley"
+      ],
+      "facilities": [
+        "biosyn-research-complex"
+      ]
+    },
+    {
+      "id": "apatosaurus",
+      "fileId": "ING-DIN-026",
+      "name": "Apatosaurus",
+      "species": "Apatosaurus louisae",
+      "codename": "Longneck",
+      "status": "DECEASED",
+      "classification": "Colossal Herbivore / Herd Grazer",
+      "threat": 2,
+      "contain": "PARTIALLY STABLE",
+      "length": "21–23 meters",
+      "weight": "18–22 tons",
+      "diet": "Herbivorous",
+      "habitat": "Open valley grazing, mixed canopy",
+      "genome": 89,
+      "incidents": [
+        "jurassic-world-2015",
+        "nublar-eruption-2018"
+      ],
+      "stats": {
+        "strength": 5,
+        "defense": 3,
+        "speed": 1,
+        "intelligence": 2,
+        "aggression": 1
+      },
+      "notes": "Gentle and habituated to handler contact, with a strong herd bond and audible distress vocalisation when separated. The Nublar herd was among the last groups still on the island when Sibo erupted.",
+      "classified": "Risk assessment: LOW. Recorded here chiefly as loss: the herd could not be moved within the evacuation window and was not recovered.",
+      "tag": "The herd stayed together to the end of the island.",
+      "locations": [
+        "isla-nublar",
+        "jurassic-world"
+      ]
+    },
+    {
+      "id": "nasutoceratops",
+      "fileId": "ING-DIN-027",
+      "name": "Nasutoceratops",
+      "species": "Nasutoceratops titusi",
+      "codename": "Bull Horn",
+      "status": "ACTIVE",
+      "classification": "Ceratopsian Herbivore / Herd Defender",
+      "threat": 3,
+      "contain": "PARTIALLY STABLE",
+      "length": "4.5–5 meters",
+      "weight": "1.5 tons",
+      "diet": "Herbivorous",
+      "habitat": "Open scrub, forest edge, valley floor",
+      "genome": 86,
+      "incidents": [
+        "nublar-eruption-2018",
+        "dominion-2022"
+      ],
+      "stats": {
+        "strength": 3,
+        "defense": 4,
+        "speed": 3,
+        "intelligence": 2,
+        "aggression": 3
+      },
+      "notes": "Forms tight defensive rings around juveniles when threatened, presenting horns outward. The behaviour is instinctive rather than learned and appears fully formed in first-generation animals with no adult model to copy.",
+      "classified": "Risk assessment: MODERATE. The archive's clearest evidence that complex social behaviour is carried in the reconstructed genome rather than taught.",
+      "tag": "No adult taught them the circle. They already knew it.",
+      "locations": [
+        "isla-nublar",
+        "biosyn-valley"
+      ]
+    },
+    {
+      "id": "stygimoloch",
+      "fileId": "ING-DIN-028",
+      "name": "Stygimoloch",
+      "species": "Stygimoloch spinifer",
+      "codename": "Stiggy",
+      "status": "ACTIVE",
+      "classification": "Pachycephalosaur / Impact Specialist",
+      "threat": 3,
+      "contain": "FAILED",
+      "length": "3 meters",
+      "weight": "200–300 kilograms",
+      "diet": "Herbivorous",
+      "habitat": "Rocky upland, forest margin, structured interiors",
+      "genome": 84,
+      "incidents": [
+        "nublar-eruption-2018",
+        "fallen-kingdom-2018"
+      ],
+      "stats": {
+        "strength": 4,
+        "defense": 4,
+        "speed": 3,
+        "intelligence": 3,
+        "aggression": 3
+      },
+      "notes": "Reinforced skull dome delivers repeated impact without concussion. Demonstrated a capacity to breach masonry and holding-pen walls under stress, and to repeat the behaviour deliberately once it produced a result.",
+      "classified": "Risk assessment: MODERATE. Herbivorous and non-predatory, but the only asset on record to have opened its own enclosure by structural demolition and then used the method again.",
+      "tag": "It learned that walls give way, and it did not forget.",
+      "locations": [
+        "isla-nublar",
+        "lockwood-estate"
+      ],
+      "facilities": [
+        "lockwood-sublevel"
+      ]
+    },
+    {
+      "id": "indominus-rex",
+      "fileId": "ING-HYB-001",
+      "name": "Indominus rex",
+      "species": "Hybrid — T. rex / Velociraptor / classified additional genomes",
+      "codename": "White Death",
+      "status": "DECEASED — CONTAINMENT BREACH RECORD ACTIVE",
+      "classification": "Apex Bio-Weapon / Ecosystem Annihilator",
+      "threat": 5,
+      "contain": "FAILED PERMANENTLY",
+      "length": "15+ meters",
+      "weight": "8–10+ tons",
+      "diet": "Carnivorous — hyper-apex predation",
+      "habitat": "Jurassic World R&D paddock — escaped",
+      "genome": 100,
+      "incidents": [
+        "jurassic-world-2015"
+      ],
+      "stats": {
+        "strength": 5,
+        "defense": 5,
+        "speed": 4,
+        "stealth": 5,
+        "aggression": 5
+      },
+      "notes": "Capable of camouflage via adaptive coloration. Uses deception to lure or mislead prey. Understands containment boundaries. Able to manipulate environmental objects. Demonstrates strategic thinking, not just instinct.",
+      "classified": "Cannot be trained, predicted, or ethically deployed. All control models failed within initial testing phase. Risk assessment: EXTREME / GLOBAL THREAT CLASS.",
+      "tag": "It was never a dinosaur. It was a mistake that learned how to think."
+    },
+    {
+      "id": "indoraptor",
+      "fileId": "ING-HYB-002",
+      "name": "Indoraptor",
+      "species": "Indoraptor (engineered hybrid)",
+      "codename": "Prototype 2",
+      "status": "DECEASED",
+      "classification": "Directed Bio-Weapon Prototype",
+      "threat": 5,
+      "contain": "FAILED PERMANENTLY",
+      "length": "5 meters",
+      "weight": "400–500 kilograms",
+      "diet": "Carnivorous",
+      "habitat": "Structured interiors — engineered for close-quarters deployment",
+      "genome": 67,
+      "incidents": [
+        "fallen-kingdom-2018"
+      ],
+      "stats": {
+        "strength": 4,
+        "defense": 3,
+        "speed": 5,
+        "intelligence": 5,
+        "aggression": 5
+      },
+      "notes": "Built from Indominus rex genetic material crossed against the Velociraptor line, and designed around a targeting system: the animal was conditioned to attack on a laser designator paired with an acoustic pulse. A single prototype was completed.",
+      "classified": "Risk assessment: EXTREME. Genome is unstable, and the temperament that followed was not a defect of the build but the point of it. Wu recorded the specimen as unfit for reproduction and recommended the line be closed after prototype evaluation.",
+      "tag": "It was not bred to survive. It was bred to be sold.",
+      "locations": [
+        "lockwood-estate"
+      ],
+      "facilities": [
+        "lockwood-sublevel"
+      ],
+      "personnel": [
+        "henry-wu",
+        "eli-mills"
+      ]
+    },
+    {
+      "id": "distortus-rex",
+      "fileId": "ING-HYB-003",
+      "name": "Distortus rex",
+      "species": "Tyrannosaurus rex (severely mutated — designation D-REX V.23.111)",
+      "codename": "The Broken Titan",
+      "status": "ACTIVE — UNCONTAINED",
+      "classification": "Apex Abomination / Kaiju-Class Anomaly",
+      "threat": 5,
+      "contain": "FAILED PERMANENTLY",
+      "length": "~14.5 meters",
+      "weight": "~9,000 kg",
+      "diet": "Carnivorous — opportunistic apex predation",
+      "habitat": "Île Saint-Hubert — presumed feral island range",
+      "genome": 0,
+      "incidents": [
+        "ile-saint-hubert-2010"
+      ],
+      "stats": {
+        "strength": 5,
+        "defense": 5,
+        "speed": 3,
+        "intelligence": 3,
+        "aggression": 5
+      },
+      "notes": "Result of the 26th engineering attempt at experimental hybrid T. rex modification. Designated D-REX V.23.111. Exhibits polymelia — six limbs including two hind legs and four arms. Moves on large primary arms and hind legs in ape-like gait. Highly aggressive with no observable restraint. Attacks without clear hunting strategy.",
+      "classified": "Containment failure: Île Saint-Hubert facility, 2010. Cause: ventilation obstruction triggering facility-wide door lock failure. All personnel evacuated. One casualty confirmed. Subject deemed non-recoverable. Do not attempt capture.",
+      "tag": "It wasn't built to live. It was built to dominate — and it broke everything trying."
+    },
+    {
+      "id": "mosasaurus",
+      "fileId": "ING-MAR-001",
+      "name": "Mosasaurus",
+      "species": "Mosasaurus hoffmannii",
+      "codename": "Abyss Monarch",
+      "status": "ACTIVE — UNCONFIRMED LOCATION",
+      "classification": "Ocean Apex Predator",
+      "threat": 5,
+      "contain": "FAILED",
+      "length": "15–20+ meters",
+      "weight": "15–30+ tons",
+      "diet": "Carnivorous — large marine prey specialist",
+      "habitat": "Open ocean, coastal zones, deep water regions",
+      "genome": 96,
+      "incidents": [
+        "jurassic-world-2015",
+        "fallen-kingdom-2018",
+        "dominion-2022"
+      ],
+      "stats": {
+        "strength": 5,
+        "defense": 5,
+        "speed": 5,
+        "stealth": 5,
+        "aggression": 5
+      },
+      "notes": "Apex ambush predator. Extremely powerful bite force and jaw extension. Surface breach hunting from below. Highly territorial in enclosed water zones.",
+      "classified": "Risk assessment: EXTREME. Oceanic apex predator with unrestricted mobility. Most dangerous in deep water where detection is impossible until attack initiation.",
+      "tag": "In the ocean, there is no escape — only depth."
+    },
+    {
+      "id": "attenborosaurus",
+      "fileId": "ING-MAR-002",
+      "name": "Attenborosaurus",
+      "species": "Attenborosaurus conybeari",
+      "codename": "Deepwater Glide",
+      "status": "ACTIVE",
+      "classification": "Open-Water Hunter / Mid Apex Marine Predator",
+      "threat": 3,
+      "contain": "FAILED",
+      "length": "6–8 meters",
+      "weight": "1–3 tons",
+      "diet": "Carnivorous — fish, squid, small marine reptiles",
+      "habitat": "Open ocean, deep coastal waters",
+      "genome": 76,
+      "incidents": [
+        "jurassic-world-2015"
+      ],
+      "stats": {
+        "strength": 3,
+        "defense": 3,
+        "speed": 4,
+        "stealth": 5,
+        "aggression": 2
+      },
+      "notes": "Agile underwater swimmer. Solitary hunter in deep water. Prefers stealth over brute force. Avoids confrontation with apex marine predators.",
+      "classified": "Risk assessment: MEDIUM. Avoids apex encounters. Silent hunter rather than dominant force.",
+      "tag": "It doesn't rule the ocean — it moves through it unseen."
+    }
+  ],
+  "P": [
+    {
+      "id": "owen-grady",
+      "fileId": "ING-CHR-001",
+      "name": "Owen Grady",
+      "status": "ALIVE",
+      "clearance": 4,
+      "dept": "Animal Behavior & Containment",
+      "role": "Velociraptor Trainer / Animal Behavior Specialist",
+      "aff": "Jurassic World Operations (Former) / Independent",
+      "nat": "American",
+      "history": [
+        "jurassic-world-2015",
+        "fallen-kingdom-2018",
+        "dominion-2022"
+      ],
+      "stats": {
+        "intelligence": 4,
+        "survivalSkills": 5,
+        "leadership": 5,
+        "combatAbility": 5,
+        "animalHandling": 5
+      },
+      "threat": "MODERATE",
+      "psych": "Exceptional adaptability. Unprecedented trust-building with engineered predators. Independent — does not respond well to institutional authority.",
+      "classified": "Traditional containment methods less effective than subject's behavioral approach. Subject displays unprecedented ability to establish trust with genetically engineered predators.",
+      "tag": "He didn't command them — he understood them.",
+      "quote": "They're thinking, I gotta eat. I gotta hunt."
+    },
+    {
+      "id": "claire-dearing",
+      "fileId": "ING-CHR-002",
+      "name": "Claire Dearing",
+      "status": "ALIVE",
+      "clearance": 5,
+      "dept": "Park Operations (Former) / Dinosaur Protection Group",
+      "role": "Operations Manager (Former) / Dinosaur Rights Advocate",
+      "aff": "Jurassic World (Former) / Dinosaur Protection Group",
+      "nat": "American",
+      "history": [
+        "jurassic-world-2015",
+        "fallen-kingdom-2018",
+        "dominion-2022"
+      ],
+      "stats": {
+        "intelligence": 5,
+        "survivalSkills": 4,
+        "leadership": 5,
+        "combatAbility": 3,
+        "animalHandling": 3
+      },
+      "threat": "LOW",
+      "psych": "Initially motivated by corporate success. Evolved into one of the foremost defenders of de-extinct species. Exceptional leadership during crisis situations.",
+      "classified": "HIGH VALUE PERSON OF INTEREST. Subject now actively opposes InGen-affiliated operations.",
+      "tag": "From Park Administrator to Protector of a New World.",
+      "quote": "These creatures were here before us. And if we're not careful, they're going to be here after."
+    },
+    {
+      "id": "simon-masrani",
+      "fileId": "ING-CHR-003",
+      "name": "Simon Masrani",
+      "status": "DECEASED",
+      "clearance": 5,
+      "dept": "Executive Leadership",
+      "role": "CEO — Masrani Global Corporation / Owner — Jurassic World",
+      "aff": "Masrani Global Corporation / Jurassic World",
+      "nat": "Indian",
+      "history": [
+        "jurassic-world-2015"
+      ],
+      "stats": {
+        "intelligence": 5,
+        "survivalSkills": 2,
+        "leadership": 5,
+        "combatAbility": 1,
+        "animalHandling": 2
+      },
+      "threat": "MINIMAL",
+      "psych": "Extraordinary vision and optimism. Genuinely admired dinosaurs rather than viewing them as assets. Inability to foresee consequences of hybrid experimentation contributed to 2015 incident.",
+      "classified": "Cause of death: helicopter crash during 2015 Isla Nublar Incident. FILE CLOSED.",
+      "tag": "A dreamer who brought dinosaurs back to the world — and paid the ultimate price for believing he could control them.",
+      "quote": "Creation is an act of sheer will."
+    },
+    {
+      "id": "henry-wu",
+      "fileId": "ING-CHR-004",
+      "name": "Dr. Henry Wu",
+      "status": "ALIVE",
+      "clearance": 5,
+      "dept": "Genetic Research",
+      "role": "Chief Geneticist",
+      "aff": "InGen (Former) / Biosyn Genetics (Former) / Independent",
+      "nat": "American",
+      "history": [
+        "isla-nublar-1993",
+        "jurassic-world-2015",
+        "fallen-kingdom-2018",
+        "dominion-2022"
+      ],
+      "stats": {
+        "intelligence": 5,
+        "survivalSkills": 2,
+        "leadership": 3,
+        "combatAbility": 1,
+        "animalHandling": 2
+      },
+      "threat": "EXTREME",
+      "psych": "Brilliant. Ambitious. Morally complex. Perfectionist. Secretive. Later sought to reverse ecological damage caused by earlier work.",
+      "classified": "Subject responsible for genome reconstruction of all de-extinct InGen species. Creator of Indominus rex and Indoraptor. Considered the single most consequential individual in InGen's scientific history.",
+      "tag": "Nothing in Jurassic World exists in nature.",
+      "quote": "Nothing in Jurassic World exists in nature."
+    },
+    {
+      "id": "vic-hoskins",
+      "fileId": "ING-CHR-005",
+      "name": "Vic Hoskins",
+      "status": "DECEASED",
+      "clearance": 4,
+      "dept": "InGen Security Division",
+      "role": "Head of Security",
+      "aff": "International Genetic Technologies",
+      "nat": "American",
+      "history": [
+        "jurassic-world-2015"
+      ],
+      "stats": {
+        "intelligence": 4,
+        "survivalSkills": 2,
+        "leadership": 4,
+        "combatAbility": 4,
+        "animalHandling": 1
+      },
+      "threat": "EXTREME",
+      "psych": "Ambitious. Ruthless. Manipulative. Viewed dinosaurs as military assets rather than living creatures.",
+      "classified": "Cause of death: fatal Velociraptor attack, 2015 Isla Nublar Incident. Subject repeatedly advocated for militarization of genetically engineered organisms despite ethical and operational objections. FILE CLOSED.",
+      "tag": "He believed dinosaurs could be controlled. The dinosaurs disagreed.",
+      "quote": "Imagine that one of these things in Tora Bora."
+    },
+    {
+      "id": "john-hammond",
+      "fileId": "ING-CHR-006",
+      "name": "John Hammond",
+      "status": "DECEASED",
+      "clearance": 5,
+      "dept": "Executive Leadership",
+      "role": "Founder & CEO — InGen",
+      "aff": "International Genetic Technologies",
+      "nat": "Scottish",
+      "history": [
+        "isla-nublar-1993",
+        "isla-sorna-1997"
+      ],
+      "stats": {
+        "intelligence": 4,
+        "survivalSkills": 2,
+        "leadership": 5,
+        "combatAbility": 1,
+        "animalHandling": 2
+      },
+      "threat": "MINIMAL",
+      "psych": "Charismatic. Optimistic. Idealistic. Extraordinary ambition. Inability to foresee consequences contributed to greatest disaster in InGen's history. Later opposed further exploitation of dinosaurs.",
+      "classified": "PERMANENTLY ARCHIVED. Founder of InGen. Initiated the de-extinction era. FILE CLOSED.",
+      "tag": "Spared no expense.",
+      "quote": "Welcome to Jurassic Park."
+    },
+    {
+      "id": "ian-malcolm",
+      "fileId": "ING-CHR-007",
+      "name": "Dr. Ian Malcolm",
+      "status": "ALIVE",
+      "clearance": 2,
+      "dept": "External Consultant (Former)",
+      "role": "Mathematician / Chaos Theorist / Author",
+      "aff": "Independent",
+      "nat": "American",
+      "history": [
+        "isla-nublar-1993",
+        "isla-sorna-1997",
+        "dominion-2022"
+      ],
+      "stats": {
+        "intelligence": 5,
+        "survivalSkills": 3,
+        "leadership": 3,
+        "combatAbility": 2,
+        "animalHandling": 2
+      },
+      "threat": "LOW",
+      "psych": "Highly intelligent. Charismatic. Witty. Skeptical. Subject's public influence and criticism of corporate genetics significantly affects public opinion.",
+      "classified": "Subject repeatedly warned InGen executives of unpredictable consequences of genetic engineering. Initial warnings dismissed. Later events confirmed his theories correct. Monitor public communications.",
+      "tag": "Life finds a way.",
+      "quote": "Your scientists were so preoccupied with whether they could, they didn't stop to think if they should."
+    },
+    {
+      "id": "alan-grant",
+      "fileId": "ING-CHR-008",
+      "name": "Dr. Alan Grant",
+      "status": "ALIVE",
+      "clearance": 2,
+      "dept": "External Consultant (Former)",
+      "role": "Paleontologist",
+      "aff": "Independent Researcher",
+      "nat": "American",
+      "history": [
+        "isla-nublar-1993",
+        "isla-sorna-2001",
+        "dominion-2022"
+      ],
+      "stats": {
+        "intelligence": 5,
+        "survivalSkills": 5,
+        "leadership": 4,
+        "combatAbility": 3,
+        "animalHandling": 4
+      },
+      "threat": "LOW",
+      "psych": "Intelligent. Courageous. Resourceful. Calm under pressure. One of the foremost authorities on dinosaur behavior and prehistoric ecosystems.",
+      "classified": "Security risk: minimal. Subject survived multiple dinosaur-related incidents through intelligence, adaptability, and field expertise. ARCHIVE CLASSIFICATION: LEVEL ALPHA — HISTORICAL FIGURE.",
+      "tag": "Some of the worst things imaginable have been done with the best intentions.",
+      "quote": "Dinosaurs lived 65 million years ago. What is left of them is fossilized in the rocks."
+    },
+    {
+      "id": "ellie-sattler",
+      "fileId": "ING-CHR-009",
+      "name": "Dr. Ellie Sattler",
+      "status": "ALIVE",
+      "clearance": 2,
+      "dept": "External Consultant (Former)",
+      "role": "Paleobotanist / Environmental Consultant",
+      "aff": "Independent Researcher",
+      "nat": "American",
+      "history": [
+        "isla-nublar-1993",
+        "dominion-2022"
+      ],
+      "stats": {
+        "intelligence": 5,
+        "survivalSkills": 4,
+        "leadership": 4,
+        "combatAbility": 3,
+        "animalHandling": 3
+      },
+      "threat": "LOW",
+      "psych": "Intelligent. Fearless. Compassionate. Principled. Analyses were critical in identifying early failures within Jurassic Park ecosystem.",
+      "classified": "Security risk: minimal. Subject is a leading voice in environmental conservation and ethical scientific research. Whistleblower — multiple InGen-related incidents.",
+      "tag": "She saw the system fail before anyone else understood it was even breaking.",
+      "quote": "God creates dinosaurs. God destroys dinosaurs. God creates man. Man destroys God. Man creates dinosaurs."
+    },
+    {
+      "id": "dennis-nedry",
+      "fileId": "ING-CHR-010",
+      "name": "Dennis Nedry",
+      "status": "DECEASED",
+      "clearance": 3,
+      "dept": "Systems Engineering",
+      "role": "Lead Systems Programmer",
+      "aff": "International Genetic Technologies",
+      "nat": "American",
+      "history": [
+        "isla-nublar-1993"
+      ],
+      "stats": {
+        "intelligence": 4,
+        "survivalSkills": 2,
+        "leadership": 1,
+        "combatAbility": 1,
+        "animalHandling": 1
+      },
+      "threat": "EXTREME — INTERNAL SABOTAGE",
+      "psych": "Intelligent. Greedy. Cynical. Disgruntled. Overconfident. Impulsive. Became dissatisfied with compensation and working conditions.",
+      "classified": "Subject's compromise of park systems is considered the primary catalyst for the Jurassic Park containment failure. Cause of death: Dilophosaurus attack during escape attempt, 1993. FILE CLOSED.",
+      "tag": "The system didn't fail — it was shut down from the inside.",
+      "quote": "Ah-ah-ah! You didn't say the magic word!"
+    },
+    {
+      "id": "lewis-dodgson",
+      "fileId": "ING-CHR-011",
+      "name": "Lewis Dodgson",
+      "status": "DECEASED",
+      "clearance": 1,
+      "dept": "External — Biosyn Genetics",
+      "role": "CEO — Biosyn Genetics",
+      "aff": "Biosyn Genetics",
+      "nat": "American",
+      "history": [
+        "isla-nublar-1993",
+        "dominion-2022"
+      ],
+      "stats": {
+        "intelligence": 4,
+        "survivalSkills": 1,
+        "leadership": 4,
+        "combatAbility": 1,
+        "animalHandling": 1
+      },
+      "threat": "EXTREME — CORPORATE + GENETIC EXPLOITATION",
+      "psych": "Ambitious. Manipulative. Calculated. Ruthless. Opportunistic. Engaged in long-term corporate espionage against InGen.",
+      "classified": "Recruited Dennis Nedry to steal embryonic dinosaur data from InGen, 1993. Later became CEO of Biosyn Genetics and expanded unethical genetic experimentation globally. Cause of death: containment failure, Biosyn Valley, 2022. FILE CLOSED.",
+      "tag": "From stolen secrets to global control — ambition without limits.",
+      "quote": "No one cares."
+    },
+    {
+      "id": "benjamin-lockwood",
+      "fileId": "ING-CHR-012",
+      "name": "Benjamin Lockwood",
+      "status": "DECEASED",
+      "clearance": 5,
+      "dept": "Founding Directorate",
+      "role": "Co-Founder of InGen / Philanthropist",
+      "aff": "International Genetic Technologies (Former)",
+      "nat": "American",
+      "history": [
+        "fallen-kingdom-2018"
+      ],
+      "stats": {
+        "intelligence": 4,
+        "survivalSkills": 1,
+        "leadership": 4,
+        "combatAbility": 1,
+        "animalHandling": 1
+      },
+      "threat": "LOW",
+      "psych": "Compassionate. Reflective. Morally conflicted. Idealistic. Regretful in later life. Opposed misuse of his work.",
+      "classified": "Co-financed early genetic research with John Hammond. Separated from Hammond due to ideological differences. His estate became center of illegal dinosaur transfer operation. Cause of death: Lockwood Estate incident, 2018. FILE CLOSED.",
+      "tag": "He helped create the miracle — then spent his life fearing what it became.",
+      "quote": "There are things on this island that should never leave it."
+    },
+    {
+      "id": "maisie-lockwood",
+      "fileId": "ING-CHR-013",
+      "name": "Maisie Lockwood",
+      "status": "ALIVE",
+      "clearance": 1,
+      "dept": "CLASSIFIED — GENETIC SUBJECT",
+      "role": "Civilian / Genetic Anomaly",
+      "aff": "Independent",
+      "nat": "American",
+      "history": [
+        "fallen-kingdom-2018",
+        "dominion-2022"
+      ],
+      "stats": {
+        "intelligence": 4,
+        "survivalSkills": 3,
+        "leadership": 2,
+        "combatAbility": 1,
+        "animalHandling": 2
+      },
+      "threat": "HIGH — GENETIC VALUE",
+      "psych": "Curious. Emotionally sensitive. Brave. Conflicted. Intelligent. Independent.",
+      "classified": "CLASSIFIED — LEVEL 5 CLEARANCE REQUIRED. Subject is first confirmed human clone tied to InGen-related genetic experiments. Ethical implications of subject's existence remain highly controversial. Multiple organizations have attempted acquisition.",
+      "tag": "She wasn't created to be a weapon — she became a question humanity can't answer.",
+      "quote": "I'm not a clone… I'm just me."
+    },
+    {
+      "id": "robert-muldoon",
+      "fileId": "ING-CHR-014",
+      "name": "Robert Muldoon",
+      "status": "DECEASED",
+      "clearance": 4,
+      "dept": "Park Security & Containment",
+      "role": "Game Warden / Head of Animal Containment",
+      "aff": "International Genetic Technologies",
+      "nat": "British",
+      "history": [
+        "isla-nublar-1993"
+      ],
+      "stats": {
+        "intelligence": 4,
+        "survivalSkills": 5,
+        "leadership": 4,
+        "combatAbility": 4,
+        "animalHandling": 5
+      },
+      "threat": "HIGH — OPERATIONAL FIELD EXPOSURE",
+      "psych": "Experienced. Cautious. Serious. Highly skilled. Practical. No-nonsense. Warnings regarding raptor intelligence were accurate but insufficiently acted upon by management.",
+      "classified": "Cause of death: Velociraptor ambush, 1993. Containment breach occurred due to systemic park-wide power failure, not procedural incompetence. FILE CLOSED.",
+      "tag": "He knew exactly what they were — and it still wasn't enough.",
+      "quote": "Clever girl."
+    },
+    {
+      "id": "ray-arnold",
+      "fileId": "ING-CHR-015",
+      "name": "Ray Arnold",
+      "status": "DECEASED",
+      "clearance": 4,
+      "dept": "Systems Engineering",
+      "role": "Chief Engineer — Jurassic Park",
+      "aff": "International Genetic Technologies",
+      "nat": "American",
+      "history": [
+        "isla-nublar-1993"
+      ],
+      "stats": {
+        "intelligence": 5,
+        "survivalSkills": 2,
+        "leadership": 4,
+        "combatAbility": 1,
+        "animalHandling": 1
+      },
+      "threat": "LOW",
+      "psych": "Intelligent. Calm under pressure. Responsible. Focused. Technically skilled. Loyal to mission.",
+      "classified": "Cause of death: Velociraptor attack during manual system recovery attempt, 1993. Final actions delayed total system failure long enough for partial evacuations. FILE CLOSED.",
+      "tag": "When the systems failed, he didn't panic — he worked.",
+      "quote": "Hold on to your butts."
+    },
+    {
+      "id": "sarah-harding",
+      "fileId": "ING-CHR-016",
+      "name": "Dr. Sarah Harding",
+      "status": "ALIVE",
+      "clearance": 2,
+      "dept": "Field Research (Former Consultant)",
+      "role": "Field Paleontologist / Wildlife Researcher",
+      "aff": "Independent Researcher",
+      "nat": "American",
+      "history": [
+        "isla-sorna-1997"
+      ],
+      "stats": {
+        "intelligence": 5,
+        "survivalSkills": 4,
+        "leadership": 3,
+        "combatAbility": 2,
+        "animalHandling": 5
+      },
+      "threat": "LOW",
+      "psych": "Intelligent. Independent. Brave. Determined. Compassionate toward animals. Strong-willed. Prefers direct field observation.",
+      "classified": "Threat level: LOW. Subject provides critical insight into dinosaur behavior in natural ecosystems. Witnessed corporate exploitation of dinosaurs firsthand on Isla Sorna.",
+      "tag": "She studied them not as creations, but as living systems.",
+      "quote": "They're not monsters. They're animals."
+    },
+    {
+      "id": "nick-van-owen",
+      "fileId": "ING-CHR-017",
+      "name": "Nick Van Owen",
+      "status": "ALIVE",
+      "clearance": 1,
+      "dept": "External — Field Operative",
+      "role": "Field Activist / Photojournalist",
+      "aff": "Independent",
+      "nat": "American",
+      "history": [
+        "isla-sorna-1997"
+      ],
+      "stats": {
+        "intelligence": 4,
+        "survivalSkills": 4,
+        "leadership": 3,
+        "combatAbility": 2,
+        "animalHandling": 3
+      },
+      "threat": "MEDIUM — OPERATIONAL INTERFERENCE",
+      "psych": "Idealistic. Rebellious. Protective. Bold. Impulsive. Morally driven. Took direct action to sabotage InGen's dinosaur capture efforts on Isla Sorna.",
+      "classified": "Subject directly undermined containment and extraction objectives during Site B operations. Released captured dinosaurs from containment. Flag for monitoring.",
+      "tag": "He didn't just document the chaos — he joined it.",
+      "quote": "They're not ours to take."
+    },
+    {
+      "id": "peter-ludlow",
+      "fileId": "ING-CHR-018",
+      "name": "Peter Ludlow",
+      "status": "DECEASED",
+      "clearance": 5,
+      "dept": "Executive Leadership",
+      "role": "Chairman / Executive Director — InGen",
+      "aff": "International Genetic Technologies",
+      "nat": "American",
+      "history": [
+        "isla-sorna-1997"
+      ],
+      "stats": {
+        "intelligence": 3,
+        "survivalSkills": 1,
+        "leadership": 4,
+        "combatAbility": 1,
+        "animalHandling": 1
+      },
+      "threat": "EXTREME — CORPORATE + OPERATIONAL MISMANAGEMENT",
+      "psych": "Ambitious. Ruthless. Short-sighted. Corporate-focused. Authoritarian. Prioritized monetization of dinosaur assets over systemic risk management.",
+      "classified": "Authorized mass dinosaur capture on Isla Sorna and transport of live T. rex to mainland San Diego facility. Cause of death: T. rex containment collapse, San Diego, 1997. FILE CLOSED.",
+      "tag": "He tried to control the asset. The asset controlled everything.",
+      "quote": "We're not making the same mistakes again. We're fixing them."
+    },
+    {
+      "id": "zia-rodriguez",
+      "fileId": "ING-CHR-019",
+      "name": "Dr. Zia Rodriguez",
+      "status": "ALIVE",
+      "clearance": 2,
+      "dept": "Veterinary Medicine (External)",
+      "role": "Paleoveterinarian / Medical Specialist",
+      "aff": "Dinosaur Protection Group",
+      "nat": "American",
+      "history": [
+        "fallen-kingdom-2018",
+        "dominion-2022"
+      ],
+      "stats": {
+        "intelligence": 5,
+        "survivalSkills": 4,
+        "leadership": 3,
+        "combatAbility": 2,
+        "animalHandling": 5
+      },
+      "threat": "MEDIUM — FIELD EXPOSURE",
+      "psych": "Brave. Direct. Compassionate toward animals. Strong-willed. Ethical. Independent. Refuses participation in illegal or unethical animal exploitation.",
+      "classified": "Subject is considered essential for dinosaur welfare operations. Pioneer in paleoveterinary medicine. Actively opposes InGen-affiliated operations.",
+      "tag": "She treated the creatures others only saw as threats.",
+      "quote": "They're not monsters — they're patients."
+    },
+    {
+      "id": "franklin-webb",
+      "fileId": "ING-CHR-020",
+      "name": "Franklin Webb",
+      "status": "ALIVE",
+      "clearance": 2,
+      "dept": "IT Systems (Former — Jurassic World)",
+      "role": "Systems Analyst / IT Specialist",
+      "aff": "Dinosaur Protection Group",
+      "nat": "American",
+      "history": [
+        "fallen-kingdom-2018",
+        "dominion-2022"
+      ],
+      "stats": {
+        "intelligence": 5,
+        "survivalSkills": 2,
+        "leadership": 2,
+        "combatAbility": 1,
+        "animalHandling": 1
+      },
+      "threat": "LOW",
+      "psych": "Intelligent but anxious under pressure. Loyal to team objectives. Strong technical problem-solver. Prefers digital environments over field operations. Grows more confident across missions.",
+      "classified": "Threat level: LOW. Non-combat support role. High-level technical competence in system analysis and cybersecurity. Limited field endurance.",
+      "tag": "Not every hero is in the field — some keep the system alive from behind the screen.",
+      "quote": "I was not built for this… but I'm still here, so that counts for something."
+    },
+    {
+      "id": "barry-sembene",
+      "fileId": "ING-CHR-021",
+      "name": "Barry Sembène",
+      "status": "ALIVE",
+      "clearance": 3,
+      "dept": "Animal Behavior & Containment",
+      "role": "Raptor Trainer / Animal Handler",
+      "aff": "Jurassic World Operations (Former) / Independent Contractor",
+      "nat": "French / Senegalese",
+      "history": [
+        "jurassic-world-2015"
+      ],
+      "stats": {
+        "intelligence": 4,
+        "survivalSkills": 4,
+        "leadership": 3,
+        "combatAbility": 2,
+        "animalHandling": 5
+      },
+      "threat": "MEDIUM — PREDATOR PROXIMITY",
+      "psych": "Calm. Skilled. Professional. Loyal. Disciplined. Practical. Developed close working relationship with raptor pack through trust-based conditioning rather than force.",
+      "classified": "High competency in controlled predator handling environments. Methods align with behavioral reinforcement strategies rather than coercive training.",
+      "tag": "He didn't command them — he worked with them.",
+      "quote": "They're not weapons… they're partners."
+    },
+    {
+      "id": "kayla-watts",
+      "fileId": "ING-CHR-022",
+      "name": "Kayla Watts",
+      "status": "ALIVE",
+      "clearance": 1,
+      "dept": "External — Aviation Contractor",
+      "role": "Pilot / Cargo Transport Specialist",
+      "aff": "Independent Contractor (Former illegal transport operator)",
+      "nat": "American",
+      "history": [
+        "dominion-2022"
+      ],
+      "stats": {
+        "intelligence": 4,
+        "survivalSkills": 4,
+        "leadership": 3,
+        "combatAbility": 2,
+        "animalHandling": 1
+      },
+      "threat": "MEDIUM — LOGISTICAL EXPOSURE",
+      "psych": "Skilled. Independent. Resourceful. Morally conflicted initially. Adaptable under pressure. Pragmatic.",
+      "classified": "Subject demonstrates high-level aviation capability in extreme and ethically complex transport operations. Previously involved in illegal biological cargo operations. Demonstrated ethical shift from profit-driven to responsible action.",
+      "tag": "She didn't choose the cargo — she chose what to do once she knew what it was.",
+      "quote": "I fly what I'm paid to fly… until I know what I'm really carrying."
+    },
+    {
+      "id": "eli-mills",
+      "fileId": "ING-CHR-023",
+      "name": "Eli Mills",
+      "status": "DECEASED",
+      "clearance": 4,
+      "dept": "Estate Administration / Lockwood Foundation",
+      "role": "Estate Manager / Foundation Operations Director",
+      "aff": "Lockwood Foundation (Former)",
+      "nat": "American",
+      "history": [
+        "nublar-eruption-2018",
+        "fallen-kingdom-2018"
+      ],
+      "stats": {
+        "intelligence": 4,
+        "survivalSkills": 2,
+        "leadership": 3,
+        "combatAbility": 2,
+        "animalHandling": 1
+      },
+      "threat": "HIGH",
+      "psych": "Presents as an administrator and operates as a broker. Rationalises each escalation as the logical extension of the last, which allowed a rescue operation to become an arms sale without any single decision that looked like one.",
+      "classified": "Subject converted a philanthropic evacuation into a private auction of live assets and directed the Indoraptor programme toward buyers. The Lockwood Foundation's own funds financed the operation for years before its founder was aware of it.",
+      "tag": "He did not steal the animals. He filed the paperwork that made them property.",
+      "quote": "You can't put it back in the box.",
+      "locations": [
+        "lockwood-estate",
+        "isla-nublar"
+      ],
+      "facilities": [
+        "lockwood-sublevel"
+      ],
+      "specimens": [
+        "indoraptor",
+        "sinoceratops"
+      ]
+    },
+    {
+      "id": "roland-tembo",
+      "fileId": "ING-CHR-024",
+      "name": "Roland Tembo",
+      "status": "ALIVE",
+      "clearance": 3,
+      "dept": "External / Contracted Field Operations",
+      "role": "Game Hunter / Expedition Field Leader",
+      "aff": "InGen Harvest Expedition (Contracted, 1997)",
+      "nat": "Kenyan",
+      "history": [
+        "isla-sorna-1997"
+      ],
+      "stats": {
+        "intelligence": 4,
+        "survivalSkills": 5,
+        "leadership": 5,
+        "combatAbility": 5,
+        "animalHandling": 3
+      },
+      "threat": "MODERATE",
+      "psych": "Professionally disciplined and immune to the commercial pressure that governed the rest of the expedition. Took the contract for a single quarry and walked away from the payment when it was concluded.",
+      "classified": "Subject's field judgement was the only element of the 1997 harvest operation that performed to specification. His recommendations on capture staging were overruled by Ludlow; every casualty in the operation followed from that reversal.",
+      "tag": "He came for one animal, took it, and never hunted again.",
+      "quote": "I believe I'll take my leave of this island.",
+      "locations": [
+        "isla-sorna",
+        "sorna-interior"
+      ],
+      "specimens": [
+        "tyrannosaurus-rex"
+      ]
+    },
+    {
+      "id": "donald-gennaro",
+      "fileId": "ING-CHR-025",
+      "name": "Donald Gennaro",
+      "status": "DECEASED",
+      "clearance": 4,
+      "dept": "External / Legal and Investor Representation",
+      "role": "Attorney — Cowan, Swain & Ross / Investor Counsel",
+      "aff": "InGen Investors (Retained, 1993)",
+      "nat": "American",
+      "history": [
+        "isla-nublar-1993"
+      ],
+      "stats": {
+        "intelligence": 4,
+        "survivalSkills": 1,
+        "leadership": 2,
+        "combatAbility": 1,
+        "animalHandling": 1
+      },
+      "threat": "LOW",
+      "psych": "Risk-averse in the financial sense and entirely unprepared for the physical kind. Arrived to value an asset and was the first to understand, correctly, that the liability exceeded it.",
+      "classified": "Subject's endorsement was the final approval required before the park could open to the public. The inspection he was sent to conduct concluded in the field rather than on paper.",
+      "tag": "He was sent to sign off on the park. He signed off on nothing.",
+      "locations": [
+        "isla-nublar",
+        "jurassic-park"
+      ],
+      "facilities": [
+        "visitor-centre",
+        "trex-paddock"
+      ]
+    },
+    {
+      "id": "lex-murphy",
+      "fileId": "ING-CHR-026",
+      "name": "Lex Murphy",
+      "status": "ALIVE",
+      "clearance": 2,
+      "dept": "External / Non-Personnel Visitor",
+      "role": "Endorsement Tour Visitor — Founder's Family",
+      "aff": "None (Hammond family)",
+      "nat": "American",
+      "history": [
+        "isla-nublar-1993"
+      ],
+      "stats": {
+        "intelligence": 5,
+        "survivalSkills": 3,
+        "leadership": 2,
+        "combatAbility": 1,
+        "animalHandling": 1
+      },
+      "threat": "LOW",
+      "psych": "Composed under sustained threat well beyond her age at the time of record. Self-taught in UNIX systems administration, which proved decisive.",
+      "classified": "Subject restored the park's security systems from a Visitor Centre terminal after every member of the technical staff was dead or evacuated. The archive holds no record of anyone else on the island capable of it that night.",
+      "tag": "The park was brought back online by someone who was not on the payroll.",
+      "quote": "It's a UNIX system. I know this.",
+      "locations": [
+        "isla-nublar",
+        "jurassic-park"
+      ],
+      "facilities": [
+        "visitor-centre"
+      ]
+    },
+    {
+      "id": "tim-murphy",
+      "fileId": "ING-CHR-027",
+      "name": "Tim Murphy",
+      "status": "ALIVE",
+      "clearance": 2,
+      "dept": "External / Non-Personnel Visitor",
+      "role": "Endorsement Tour Visitor — Founder's Family",
+      "aff": "None (Hammond family)",
+      "nat": "American",
+      "history": [
+        "isla-nublar-1993"
+      ],
+      "stats": {
+        "intelligence": 4,
+        "survivalSkills": 3,
+        "leadership": 1,
+        "combatAbility": 1,
+        "animalHandling": 2
+      },
+      "threat": "LOW",
+      "psych": "Detailed prior knowledge of the animals from published palaeontology, which produced accurate expectations where the operating staff held inaccurate ones.",
+      "classified": "Subject survived a tour vehicle attack, an electrified fence discharge and a kitchen pursuit within a single night. Injuries were consistent with the fence current and were not fatal only because the system was still in a failed state.",
+      "tag": "He had read more about the animals than most of the staff paid to keep them.",
+      "locations": [
+        "isla-nublar",
+        "jurassic-park"
+      ],
+      "facilities": [
+        "visitor-centre",
+        "trex-paddock"
+      ]
+    },
+    {
+      "id": "billy-brennan",
+      "fileId": "ING-CHR-028",
+      "name": "Billy Brennan",
+      "status": "ALIVE",
+      "clearance": 3,
+      "dept": "External / Field Research",
+      "role": "Palaeontology Graduate Assistant",
+      "aff": "Grant Research Team",
+      "nat": "American",
+      "history": [
+        "isla-sorna-2001"
+      ],
+      "stats": {
+        "intelligence": 4,
+        "survivalSkills": 4,
+        "leadership": 3,
+        "combatAbility": 2,
+        "animalHandling": 3
+      },
+      "threat": "LOW",
+      "psych": "Capable field researcher whose judgement failed once, decisively, under the pressure of a funding shortfall. Accepted full responsibility without qualification afterwards.",
+      "classified": "Subject removed two Pteranodon eggs from a Site B nest without authorisation. The theft is the direct cause of the aviary pursuit and of the expedition's near-total loss of equipment.",
+      "tag": "One decision, made for the right reasons, that nearly killed everyone with him.",
+      "locations": [
+        "isla-sorna",
+        "sorna-interior"
+      ],
+      "specimens": [
+        "pteranodon"
+      ]
+    },
+    {
+      "id": "paul-kirby",
+      "fileId": "ING-CHR-029",
+      "name": "Paul Kirby",
+      "status": "ALIVE",
+      "clearance": 2,
+      "dept": "External / Unauthorised Civilian Entry",
+      "role": "Civilian — Private Search Party",
+      "aff": "Kirby Enterprises",
+      "nat": "American",
+      "history": [
+        "isla-sorna-2001"
+      ],
+      "stats": {
+        "intelligence": 3,
+        "survivalSkills": 3,
+        "leadership": 3,
+        "combatAbility": 2,
+        "animalHandling": 1
+      },
+      "threat": "LOW",
+      "psych": "Misrepresented his resources and his intentions to secure expert guidance, then held the party together through the consequences. The deception was in service of a search for his son.",
+      "classified": "Subject chartered an illegal low-altitude landing on restricted territory under false pretences. The archive records the entry as unauthorised; it also records that the child was recovered alive.",
+      "tag": "He lied about everything except why he was there.",
+      "locations": [
+        "isla-sorna",
+        "sorna-interior"
+      ]
+    },
+    {
+      "id": "eric-kirby",
+      "fileId": "ING-CHR-030",
+      "name": "Eric Kirby",
+      "status": "ALIVE",
+      "clearance": 2,
+      "dept": "External / Unauthorised Civilian Entry",
+      "role": "Civilian — Recovered Survivor",
+      "aff": "None",
+      "nat": "American",
+      "history": [
+        "isla-sorna-2001"
+      ],
+      "stats": {
+        "intelligence": 4,
+        "survivalSkills": 5,
+        "leadership": 2,
+        "combatAbility": 1,
+        "animalHandling": 3
+      },
+      "threat": "LOW",
+      "psych": "Sustained solitary survival on uncontrolled territory for eight weeks as a minor. Adapted by observation: learned predator movement patterns and scavenged a defensible position rather than attempting to signal for rescue.",
+      "classified": "Subject holds the longest unassisted survival on record on any InGen island. Method included the field use of Tyrannosaur urine as a deterrent, which is now the only documented instance of a human applying asset biology defensively.",
+      "tag": "Eight weeks alone on Site B. No equipment, no training, no contact.",
+      "locations": [
+        "isla-sorna",
+        "sorna-interior"
+      ],
+      "specimens": [
+        "spinosaurus",
+        "tyrannosaurus-rex"
+      ]
+    },
+    {
+      "id": "lowery-cruthers",
+      "fileId": "ING-CHR-031",
+      "name": "Lowery Cruthers",
+      "status": "ALIVE",
+      "clearance": 3,
+      "dept": "Park Operations — Control Room",
+      "role": "Systems Analyst / Control Room Technician",
+      "aff": "Jurassic World Operations (Former)",
+      "nat": "American",
+      "history": [
+        "jurassic-world-2015"
+      ],
+      "stats": {
+        "intelligence": 5,
+        "survivalSkills": 2,
+        "leadership": 2,
+        "combatAbility": 1,
+        "animalHandling": 1
+      },
+      "threat": "LOW",
+      "psych": "Openly critical of park priorities and consistently correct about them. Institutionally powerless, which he understood and commented on rather than resolved.",
+      "classified": "Subject remained at the control desk after the general evacuation order and coordinated the asset containment response until the island was cleared. His logged objections to the Indominus paddock specification predate the breach by eleven months.",
+      "tag": "He wrote the objection eleven months early. It was filed and left there.",
+      "locations": [
+        "isla-nublar",
+        "jurassic-world"
+      ],
+      "facilities": [
+        "main-street",
+        "indominus-paddock"
+      ],
+      "specimens": [
+        "indominus-rex"
+      ]
+    },
+    {
+      "id": "gerry-harding",
+      "fileId": "ING-CHR-032",
+      "name": "Gerry Harding",
+      "status": "ALIVE",
+      "clearance": 4,
+      "dept": "Veterinary Services",
+      "role": "Chief Veterinarian",
+      "aff": "Jurassic Park Operations (Former)",
+      "nat": "American",
+      "history": [
+        "isla-nublar-1993"
+      ],
+      "stats": {
+        "intelligence": 5,
+        "survivalSkills": 3,
+        "leadership": 3,
+        "combatAbility": 1,
+        "animalHandling": 5
+      },
+      "threat": "LOW",
+      "psych": "Clinically rigorous and uninterested in the commercial framing of the animals. Treated every asset as a patient rather than an exhibit, which put him at odds with park scheduling more than once.",
+      "classified": "Subject established the veterinary protocols still referenced across every later facility, including the West Indian lilac finding that resolved the recurring Triceratops illness. Diagnosis was reached without precedent literature of any kind.",
+      "tag": "Every treatment protocol in the archive traces back to his notes.",
+      "locations": [
+        "isla-nublar",
+        "jurassic-park"
+      ],
+      "facilities": [
+        "visitor-centre"
+      ],
+      "specimens": [
+        "triceratops"
+      ]
+    },
+    {
+      "id": "ken-wheatley",
+      "fileId": "ING-CHR-033",
+      "name": "Ken Wheatley",
+      "status": "DECEASED",
+      "clearance": 3,
+      "dept": "External / Contracted Security",
+      "role": "Mercenary Team Leader — Asset Extraction",
+      "aff": "Contracted to Lockwood Foundation (2018)",
+      "nat": "American",
+      "history": [
+        "nublar-eruption-2018",
+        "fallen-kingdom-2018"
+      ],
+      "stats": {
+        "intelligence": 2,
+        "survivalSkills": 4,
+        "leadership": 3,
+        "combatAbility": 4,
+        "animalHandling": 2
+      },
+      "threat": "HIGH",
+      "psych": "Trophy-motivated and contemptuous of handling protocol. Collected teeth from sedated assets as souvenirs, a habit that required repeatedly entering enclosures he had been instructed to leave sealed.",
+      "classified": "Subject led the field extraction on Nublar during the Sibo evacuation and administered sedation doses without veterinary oversight, causing avoidable asset losses in transit. Death occurred inside a holding pen he had opened for a souvenir.",
+      "tag": "He was told not to open the pens. He kept the teeth in a pouch.",
+      "locations": [
+        "isla-nublar",
+        "lockwood-estate"
+      ],
+      "facilities": [
+        "lockwood-sublevel"
+      ],
+      "specimens": [
+        "indoraptor",
+        "sinoceratops"
+      ]
+    },
+    {
+      "id": "ramsay-cole",
+      "fileId": "ING-CHR-034",
+      "name": "Ramsay Cole",
+      "status": "ALIVE",
+      "clearance": 5,
+      "dept": "External / Competitor Executive",
+      "role": "Head of Communications — Biosyn Genetics",
+      "aff": "Biosyn Genetics",
+      "nat": "British",
+      "history": [
+        "dominion-2022"
+      ],
+      "stats": {
+        "intelligence": 5,
+        "survivalSkills": 3,
+        "leadership": 4,
+        "combatAbility": 2,
+        "animalHandling": 1
+      },
+      "threat": "LOW",
+      "psych": "Placed at executive level inside a competitor and acted against it from that position for the duration of his tenure. Sustained the appearance of loyalty long enough for the evidence to be worth something.",
+      "classified": "Subject supplied the internal documentation establishing Biosyn's knowledge of the locust programme's agricultural targeting. Without it the pathogen event would have been recorded as an accident rather than a design.",
+      "tag": "He kept the company's confidence for exactly as long as it took to end it.",
+      "locations": [
+        "biosyn-valley"
+      ],
+      "facilities": [
+        "biosyn-research-complex",
+        "biosyn-amber-mine"
+      ]
+    }
+  ],
+  "dImg": {
+    "ankylosaurus": "uploads/Ingen Archive Dinosaurs/ankylosaurus-v4.png",
+    "baryonyx": "uploads/Ingen Archive Dinosaurs/baryonyx.jpg",
+    "carnotaurus": "uploads/Ingen Archive Dinosaurs/carnotaurus.jpg",
+    "attenborosaurus": "uploads/Ingen Archive Dinosaurs/attenborosaurus-v2.png",
+    "charlie": "uploads/Ingen Archive Dinosaurs/charlie.jpg",
+    "distortus-rex": "uploads/Ingen Archive Dinosaurs/distortus-rex.jpg",
+    "compsognathus": "uploads/Ingen Archive Dinosaurs/compsognathus.jpg",
+    "delta": "uploads/Ingen Archive Dinosaurs/delta.jpg",
+    "blue": "uploads/Ingen Archive Dinosaurs/blue.jpg",
+    "brachiosaurus": "uploads/Ingen Archive Dinosaurs/brachiosaurus.jpg",
+    "dilophosaurus": "uploads/Ingen Archive Dinosaurs/dilophosaurus.jpg",
+    "dimorphodon": "uploads/Ingen Archive Dinosaurs/dimorphodon.jpg",
+    "echo": "uploads/Ingen Archive Dinosaurs/echo.jpg",
+    "diplodocus": "uploads/Ingen Archive Dinosaurs/diplodocus.jpg",
+    "geosternbergia": "uploads/Ingen Archive Dinosaurs/geosternbergia.jpg",
+    "indominus-rex": "uploads/Ingen Archive Dinosaurs/indominus-rex.jpg",
+    "gallimimus": "uploads/Ingen Archive Dinosaurs/gallimimus.jpg",
+    "giganotosaurus": "uploads/Ingen Archive Dinosaurs/giganotosaurus.jpg",
+    "kentrosaurus": "uploads/Ingen Archive Dinosaurs/kentrosaurus.jpg",
+    "mosasaurus": "uploads/Ingen Archive Dinosaurs/mosasaurus.webp",
+    "pteranodon": "uploads/Ingen Archive Dinosaurs/pteranodon.jpg"
+  },
+  "pImg": {
+    "owen-grady": "uploads/Ingen Archive Character files/owen-grady.png",
+    "claire-dearing": "uploads/Ingen Archive Character files/claire-dearing.png",
+    "simon-masrani": "uploads/Ingen Archive Character files/simon-masrani.jpg",
+    "henry-wu": "uploads/Ingen Archive Character files/henry-wu.png",
+    "vic-hoskins": "uploads/Ingen Archive Character files/vic-hoskins.png",
+    "john-hammond": "uploads/Ingen Archive Character files/john-hammond.jpg",
+    "ian-malcolm": "uploads/Ingen Archive Character files/ian-malcolm.png",
+    "alan-grant": "uploads/Ingen Archive Character files/alan-grant.png",
+    "ellie-sattler": "uploads/Ingen Archive Character files/ellie-sattler.png",
+    "dennis-nedry": "uploads/Ingen Archive Character files/dennis-nedry.jpg",
+    "lewis-dodgson": "uploads/Ingen Archive Character files/lewis-dodgson.jpg",
+    "benjamin-lockwood": "uploads/Ingen Archive Character files/benjamin-lockwood.png",
+    "maisie-lockwood": "uploads/Ingen Archive Character files/maisie-lockwood.jpg",
+    "robert-muldoon": "uploads/Ingen Archive Character files/robert-muldoon.jpg",
+    "ray-arnold": "uploads/Ingen Archive Character files/ray-arnold.jpg",
+    "sarah-harding": "uploads/Ingen Archive Character files/sarah-harding.jpg",
+    "nick-van-owen": "uploads/Ingen Archive Character files/nick-van-owen.jpg",
+    "peter-ludlow": "uploads/Ingen Archive Character files/peter-ludlow.jpg",
+    "zia-rodriguez": "uploads/Ingen Archive Character files/zia-rodriguez.jpg",
+    "franklin-webb": "uploads/Ingen Archive Character files/franklin-webb.jpg",
+    "barry-sembene": "uploads/Ingen Archive Character files/barry-sembene.png",
+    "kayla-watts": "uploads/Ingen Archive Character files/kayla-watts.jpg"
+  }
+}

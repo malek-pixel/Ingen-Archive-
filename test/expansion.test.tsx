@@ -1,10 +1,10 @@
 import { describe, expect, it, beforeEach, vi } from "vitest";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import App from "../src/App";
 import { loadArchive } from "../src/data/ingen";
 import { DIVISIONS } from "../src/data/divisions";
-import { getArchiveStats, getRecordsByType, getRelatedRecords, searchRecords } from "../src/lib/archive";
+import { getAllRecords, getArchiveStats, getRecordsByType, getRelatedRecords, searchRecords } from "../src/lib/archive";
 import { validateDivisions } from "../src/data/validate";
 import locations from "../src/data/locations.json";
 import flora from "../src/data/flora.json";
@@ -12,6 +12,11 @@ import facilities from "../src/data/facilities.json";
 import operations from "../src/data/operations.json";
 import locationImages from "../src/data/location-images.json";
 import type { Facility, Flora, Incident, Location } from "../src/data/types";
+
+const archive = loadArchive();
+
+/** "Catastrophic — site abandoned." — severity word, then consequence. */
+const SEVERITY_SENTENCE = /(Catastrophic|Major|Serious|Moderate|Minor) — ([^.]+)\./;
 
 const renderAt = (path: string) =>
   render(
@@ -154,6 +159,46 @@ describe("relationships resolve in both directions", () => {
     expect(groups.find((g) => g.kind === "incident")?.entries.length).toBeGreaterThan(0);
   });
 
+  // Regression guard. Links used to be handed to getRelatedRecords by each
+  // dossier, and the base divisions' own link fields were never read back into
+  // the reverse index — so a specimen listed its island while the island listed
+  // no specimens, and nine records were connected to nothing at all. Both ends
+  // of every link are now read from one place; this pins that.
+  it("connects every record to at least one other", () => {
+    const orphans = getAllRecords()
+      .filter((e) => getRelatedRecords(e.kind, e.id).length === 0)
+      .map((e) => e.fileId);
+    expect(orphans, `unconnected records: ${orphans.join(", ")}`).toHaveLength(0);
+  });
+
+  it("reads links in both directions", () => {
+    // Stated on the specimen as a plain field; must surface on the location.
+    const onLocation = getRelatedRecords("location", "isla-nublar").find((g) => g.kind === "specimen");
+    expect(onLocation?.entries.some((e) => e.id === "tyrannosaurus-rex")).toBe(true);
+    // Stated as an incident slug on the specimen; must surface on both records.
+    const onSpecimen = getRelatedRecords("specimen", "tyrannosaurus-rex").find((g) => g.kind === "incident");
+    expect(onSpecimen?.entries.some((e) => e.id === "isla-nublar-1993")).toBe(true);
+    const onIncident = getRelatedRecords("incident", "isla-nublar-1993").find((g) => g.kind === "specimen");
+    expect(onIncident?.entries.some((e) => e.id === "tyrannosaurus-rex")).toBe(true);
+  });
+
+  // Every classification opens with its own severity word, and the sentence
+  // under the severity meter prefixed that word again, so all twelve records
+  // read "Catastrophic — catastrophic — site abandoned." Only the
+  // consequence half belongs in that sentence.
+  it("does not repeat the severity word in an operation's classification line", async () => {
+    for (const rec of archive.incidents.slice(0, 3)) {
+      renderAt(`/operations/${rec.id}`);
+      // The sentence sits in the dossier sidebar, outside <main>.
+      await screen.findByText("Associated records", {}, { timeout: 10000 });
+      const sentence = (document.body.textContent ?? "").match(SEVERITY_SENTENCE);
+      expect(sentence, `${rec.fileId}: no severity sentence rendered`).toBeTruthy();
+      const [, severity, consequence] = sentence!;
+      expect(consequence.toLowerCase(), rec.fileId).not.toContain(severity.toLowerCase());
+      cleanup();
+    }
+  });
+
   it("never links a record to itself", () => {
     for (const kind of ["location", "facility", "incident", "flora"] as const) {
       for (const entry of getRecordsByType(kind)) {
@@ -178,11 +223,13 @@ describe("relationships resolve in both directions", () => {
 });
 
 describe("expansion routes", () => {
+  // The noun differs per division; the number comes from the data, so adding a
+  // record does not turn this into a test edit.
   it.each([
-    ["/locations", "Locations", "Showing all 12 sites"],
-    ["/paleobotany", "Paleobotany", "Showing all 15 records"],
-    ["/facilities", "Facilities", "Showing all 14 structures"],
-    ["/operations", "Operations", "Showing all 10 records"],
+    ["/locations", "Locations", `Showing all ${archive.locations.length} sites`],
+    ["/paleobotany", "Paleobotany", `Showing all ${archive.flora.length} records`],
+    ["/facilities", "Facilities", `Showing all ${archive.facilities.length} structures`],
+    ["/operations", "Operations", `Showing all ${archive.incidents.length} records`],
   ])("renders the %s index", async (path, heading, count) => {
     renderAt(path);
     expect(await screen.findByRole("heading", { level: 1 })).toHaveTextContent(heading);

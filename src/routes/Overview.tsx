@@ -7,6 +7,7 @@ import { clearanceRowInk, threatRowInk } from "../lib/derive";
 import { stagger, step, useCountUp, useReveal } from "../lib/motion";
 import { DIVISIONS } from "../data/divisions";
 import { RecordImage } from "../components/RecordImage";
+import { PlateMark } from "../components/TechnicalPlate";
 
 const RUNS = [
   {
@@ -315,19 +316,23 @@ export default function Overview() {
                 }}
               >
                 <div style={{ width: 24, height: 30, overflow: "hidden", flex: "none", background: "#0E131A" }}>
-                  <RecordImage
-                    src={p.img}
-                    width={24}
-                    height={30}
-                    alt={p.name}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      objectPosition: "center 18%",
-                      display: "block",
-                    }}
-                  />
+                  {p.img ? (
+                    <RecordImage
+                      src={p.img}
+                      width={24}
+                      height={30}
+                      alt={p.name}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        objectPosition: "center 18%",
+                        display: "block",
+                      }}
+                    />
+                  ) : (
+                    <PlateMark kind="person" />
+                  )}
                 </div>
                 <span
                   style={{

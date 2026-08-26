@@ -29,7 +29,6 @@ export function ExpansionDossier({
   facts,
   aside,
   children,
-  relations,
   plateCaption,
   img,
 }: {
@@ -48,12 +47,11 @@ export function ExpansionDossier({
   /** Optional extra sidebar content below the facts. */
   aside?: ReactNode;
   children: ReactNode;
-  relations?: Parameters<typeof getRelatedRecords>[2];
   plateCaption?: string;
   /** Real plate for records that have one; falls back to the technical plate. */
   img?: string;
 }) {
-  const groups = getRelatedRecords(kind, id, relations);
+  const groups = getRelatedRecords(kind, id);
 
   return (
     <>

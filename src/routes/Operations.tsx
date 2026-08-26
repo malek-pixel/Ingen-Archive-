@@ -18,6 +18,23 @@ import { useDocumentTitle } from "../lib/useDocumentTitle";
 const severityLabel = (n: number) =>
   n >= 5 ? "Catastrophic" : n >= 4 ? "Major" : n >= 3 ? "Serious" : n >= 2 ? "Moderate" : "Minor";
 
+/**
+ * The consequence half of a classification line.
+ *
+ * Every classification opens with its own severity word — "CATASTROPHIC — SITE
+ * ABANDONED" — and the sentence beneath the severity meter prefixes that word
+ * again, so all twelve operations read "Catastrophic — catastrophic — site
+ * abandoned." Only the tail belongs in that sentence; the meter has already
+ * said how severe it is.
+ */
+const consequence = (classification: string) => {
+  const tail = (classification || "")
+    .split(/\s*—\s*/)
+    .slice(1)
+    .join(" — ");
+  return (tail || classification || "").toLowerCase();
+};
+
 export default function Operations() {
   const { incidents, counts } = useArchive();
   useDocumentTitle(
@@ -91,7 +108,7 @@ export function IncidentDetail() {
 
   return (
     <Page>
-      <Header icons={false} />
+      <Header />
       <Breadcrumb
         trail={[
           { label: "Archive", to: "/dashboard" },
@@ -112,7 +129,6 @@ export function IncidentDetail() {
             status={record.status}
             security={record.security}
             tags={record.tags}
-            relations={record.relations}
             plateCaption="Event record"
             badges={[
               {
@@ -162,7 +178,7 @@ export function IncidentDetail() {
                     textWrap: "pretty",
                   }}
                 >
-                  {severityLabel(record.severity)} — {record.classification.toLowerCase()}.
+                  {severityLabel(record.severity)} — {consequence(record.classification)}.
                 </p>
               </div>
             }

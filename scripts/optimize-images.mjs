@@ -50,7 +50,13 @@ data.specimenImages = rewrite(data.specimenImages);
 data.personnelImages = rewrite(data.personnelImages);
 writeFileSync(dataPath, JSON.stringify(data, null, 2));
 
-for (const [id, p] of [...Object.entries(data.specimenImages), ...Object.entries(data.personnelImages)]) {
+// An empty path means the record has no photography and renders the drawn
+// technical plate. Skipped explicitly: joining "" would resolve to the public
+// directory itself, which exists, so the check would silently pass either way.
+const references = [...Object.entries(data.specimenImages), ...Object.entries(data.personnelImages)].filter(
+  ([, p]) => p
+);
+for (const [id, p] of references) {
   if (!existsSync(join(root, "public", p))) throw new Error(`broken image reference after convert: ${id} -> ${p}`);
 }
 
@@ -59,4 +65,4 @@ console.log(`converted ${converted} files`);
 console.log(
   `before ${kb(before)} → after ${kb(after)}  (${(100 - (after / (before || 1)) * 100).toFixed(0)}% smaller)`
 );
-console.log("all 43 references verified");
+console.log(`all ${references.length} references verified`);

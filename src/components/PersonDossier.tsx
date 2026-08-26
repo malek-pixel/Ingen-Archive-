@@ -3,17 +3,14 @@ import { ClassifiedBlock, Meter, StatRows, Timeline, Watermark } from "./Chrome"
 import { byYear, cells, clearance, humanizeStat, parseSlug, personStatus, personThreatLabel } from "../lib/derive";
 import { stagger, step, useReveal } from "../lib/motion";
 import { RecordImage } from "./RecordImage";
+import { TechnicalPlate } from "./TechnicalPlate";
 import { RelatedRecords } from "./RecordChrome";
 import { getRelatedRecords } from "../lib/archive";
 
 /** The personnel file body — shared by the detail route and the full-run gallery. */
 export function PersonDossier({ p }: { p: WithImage<Person> }) {
   const clearReveal = useReveal();
-  const related = getRelatedRecords("person", p.id, undefined, {
-    locations: p.locations,
-    facilities: p.facilities,
-    specimens: p.specimens,
-  });
+  const related = getRelatedRecords("person", p.id);
   const factsReveal = useReveal();
   const c = Number(p.clearance) || 0;
   const cl = clearance(c);
@@ -56,18 +53,23 @@ export function PersonDossier({ p }: { p: WithImage<Person> }) {
             border: "1px solid #1A222C",
           }}
         >
-          <RecordImage
-            src={p.img}
-            alt={p.name}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center 16%",
-              display: "block",
-              filter: "saturate(.85) contrast(1.03)",
-            }}
-          />
+          {p.img ? (
+            <RecordImage
+              src={p.img}
+              alt={p.name}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center 16%",
+                display: "block",
+                filter: "saturate(.85) contrast(1.03)",
+              }}
+            />
+          ) : (
+            // No portrait on file — the drawn plate rather than an error state.
+            <TechnicalPlate kind="person" fileId={p.fileId} grid={28} />
+          )}
         </div>
         <div>
           <div

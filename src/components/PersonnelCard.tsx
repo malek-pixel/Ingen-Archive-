@@ -3,6 +3,7 @@ import { stagger } from "../lib/motion";
 import type { Person, WithImage } from "../data/types";
 import { clearance, deptShort, personStatusShort } from "../lib/derive";
 import { RecordImage } from "./RecordImage";
+import { TechnicalPlate } from "./TechnicalPlate";
 
 export function PersonnelCard({ p, index = 0 }: { p: WithImage<Person>; index?: number }) {
   const status = personStatusShort(p.status);
@@ -38,21 +39,26 @@ export function PersonnelCard({ p, index = 0 }: { p: WithImage<Person>; index?: 
           }}
         >
           <span className="ig-scanline" aria-hidden="true" style={{ zIndex: 1 }} />
-          <RecordImage
-            className="ig-zoom"
-            src={p.img}
-            width={82}
-            height={104}
-            alt={p.name}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center 16%",
-              display: "block",
-              filter: "saturate(.82) contrast(1.03)",
-            }}
-          />
+          {p.img ? (
+            <RecordImage
+              className="ig-zoom"
+              src={p.img}
+              width={82}
+              height={104}
+              alt={p.name}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center 16%",
+                display: "block",
+                filter: "saturate(.82) contrast(1.03)",
+              }}
+            />
+          ) : (
+            // No portrait on file — the drawn plate rather than an error state.
+            <TechnicalPlate kind="person" fileId={p.fileId} grid={20} compact />
+          )}
           <span
             style={{
               position: "absolute",

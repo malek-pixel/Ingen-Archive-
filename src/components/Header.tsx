@@ -102,9 +102,8 @@ export function SessionMeta() {
  * the bar to 141px, and clipped the last division off the end.
  *
  * @param descriptor Replaces the nav with a single descriptor line.
- * @param icons      Detail screens render the nav without icons.
  */
-export function Header({ descriptor, icons = true }: { descriptor?: string; icons?: boolean }) {
+export function Header({ descriptor }: { descriptor?: string }) {
   const { pathname } = useLocation();
   const isCurrent = (path: string) => pathname === `/${path}` || pathname.startsWith(`/${path}/`);
   const onOverview = pathname === "/dashboard";
@@ -152,7 +151,7 @@ export function Header({ descriptor, icons = true }: { descriptor?: string; icon
             aria-current={onOverview ? "page" : undefined}
             style={tab(onOverview)}
           >
-            {icons && <OverviewIcon />}
+            <OverviewIcon />
             Overview
           </NavLink>
 
@@ -172,7 +171,7 @@ export function Header({ descriptor, icons = true }: { descriptor?: string; icon
                       aria-current={current ? "page" : undefined}
                       style={tab(current)}
                     >
-                      {icons && <Icon />}
+                      <Icon />
                       {d.label}
                     </NavLink>
                   );
