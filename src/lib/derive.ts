@@ -33,13 +33,24 @@ export function specimenStatusShort(status: string): Semantic {
   return { ...base, label };
 }
 
+const sentence = (s: string) => (s ? s.charAt(0) + s.slice(1).toLowerCase() : "");
+
+/**
+ * Green is a claim, not a fallback.
+ *
+ * Anything the archive does not positively record as held — an open-water
+ * population, a non-standard regime, a value nobody wrote down — reads amber.
+ * The previous version painted every unrecognised value green, which would
+ * have shown "Open-water / non-standard" in the same ink as a secured pen.
+ */
 export function containment(contain: string): Semantic {
   const cc = (contain || "").toUpperCase();
   const failed = /FAIL|BREACH/.test(cc);
   const partial = /PARTIAL/.test(cc);
+  const held = !failed && !partial && /STABLE|SECURE|CONTAINED/.test(cc);
   return {
-    ink: failed ? "#E08A84" : partial ? "#E0B36A" : "#7ACB9A",
-    border: failed ? "#4A2C2C" : partial ? "#4A3E28" : "#2C4A3A",
+    ink: failed ? "#E08A84" : held ? "#7ACB9A" : "#E0B36A",
+    border: failed ? "#4A2C2C" : held ? "#2C4A3A" : "#4A3E28",
     label: /FAILED PERMANENTLY/.test(cc)
       ? "Containment failed — permanent"
       : failed
@@ -47,7 +58,7 @@ export function containment(contain: string): Semantic {
         : partial
           ? "Partial containment"
           : cc
-            ? cc.charAt(0) + cc.slice(1).toLowerCase()
+            ? sentence(cc)
             : "Containment unknown",
   };
 }
@@ -57,10 +68,23 @@ export function containmentShort(contain: string): Semantic {
   const cc = (contain || "").toUpperCase();
   const failed = /FAIL|BREACH/.test(cc);
   const partial = /PARTIAL/.test(cc);
+  const held = !failed && !partial && /STABLE|SECURE|CONTAINED/.test(cc);
   return {
-    ink: failed ? "#D2564D" : partial ? "#C98A2E" : "#788BA0",
+    ink: failed ? "#D2564D" : held ? "#788BA0" : "#C98A2E",
     border: containment(contain).border,
-    label: failed ? "Containment failed" : partial ? "Partial containment" : "Contained",
+    // A card row is one line beside the status, so the long-form regimes are
+    // shortened here rather than wrapped; the dossier prints them in full.
+    label: failed
+      ? "Containment failed"
+      : partial
+        ? "Partial containment"
+        : held
+          ? "Contained"
+          : /NON-STANDARD|OPEN-WATER/.test(cc)
+            ? "Non-standard"
+            : cc
+              ? sentence(cc)
+              : "Containment unknown",
   };
 }
 
@@ -81,14 +105,28 @@ export function containmentTidy(contain: string): string {
 export const threatInk = (t: number, muted = false) =>
   t >= 5 ? "#D2564D" : t >= 4 ? "#C98A2E" : muted ? (t >= 3 ? "#8FA6BC" : "#6B7A8A") : "#8FA6BC";
 
+/**
+ * Threat 0 is "no rating on file", not "harmless".
+ *
+ * A group-level record covering an entire lineage cannot carry one figure, and
+ * the source dossier says so outright. Rendering that as a zero on the same
+ * five-cell meter would read as the safest asset in the archive, so the scale
+ * prints an em dash and says why instead.
+ */
+export const isThreatRated = (t: number) => Number(t) > 0;
+
+export const threatValue = (t: number) => (isThreatRated(t) ? String(t) : "—");
+
 export const threatLabel = (t: number) =>
-  t >= 5
-    ? "Extreme — lethal to personnel without full containment protocol."
-    : t >= 4
-      ? "High — armed escort required for all proximity work."
-      : t >= 3
-        ? "Moderate — standard handling precautions apply."
-        : "Low — routine keeper access permitted.";
+  !isThreatRated(t)
+    ? "Not assessed — species-specific records are required before a containment decision."
+    : t >= 5
+      ? "Extreme — lethal to personnel without full containment protocol."
+      : t >= 4
+        ? "High — armed escort required for all proximity work."
+        : t >= 3
+          ? "Moderate — standard handling precautions apply."
+          : "Low — routine keeper access permitted.";
 
 export const cells = (value: number, ink: string, track = "#1F2833") =>
   Array.from({ length: 5 }, (_, i) => (i < value ? ink : track));

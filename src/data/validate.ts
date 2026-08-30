@@ -76,7 +76,7 @@ const SPECIMEN_FIELDS: [string, Kind, boolean?][] = [
   ["weight", "string"],
   ["diet", "string"],
   ["habitat", "string"],
-  ["genome", "number"],
+  ["genome", "number", true],
   ["incidents", "string[]"],
   ["stats", "stats"],
   ["notes", "string"],
@@ -374,7 +374,12 @@ export function validateCrossLinks(
   // The optional link arrays the base records carry. These are plain fields
   // rather than a `relations` object, so nothing else looks at them at all.
   for (const d of base.specimens as { id: string; [k: string]: unknown }[]) {
-    for (const key of ["locations", "facilities", "personnel"]) resolve(`specimens[${d.id}]`, key, d[key]);
+    for (const key of ["locations", "facilities", "personnel", "specimens"]) {
+      resolve(`specimens[${d.id}]`, key, d[key]);
+    }
+    if (Array.isArray(d.specimens) && (d.specimens as string[]).includes(d.id)) {
+      issues.push(`specimens[${d.id}]: "specimens" links the record to itself`);
+    }
   }
   for (const p of base.personnel as { id: string; [k: string]: unknown }[]) {
     for (const key of ["locations", "facilities", "specimens"]) resolve(`personnel[${p.id}]`, key, p[key]);

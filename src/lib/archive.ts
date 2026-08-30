@@ -112,7 +112,7 @@ function reverseIndex(): Map<string, Set<string>> {
     ...a.specimens.map((r) => ({
       kind: "specimen" as const,
       id: r.id,
-      relations: { locations: r.locations, facilities: r.facilities, personnel: r.personnel },
+      relations: { locations: r.locations, facilities: r.facilities, personnel: r.personnel, specimens: r.specimens },
     })),
     ...a.personnel.map((r) => ({
       kind: "person" as const,
@@ -185,6 +185,7 @@ function declaredLinks(kind: RecordKind, id: string): Relations | undefined {
           locations: r.locations,
           facilities: r.facilities,
           personnel: r.personnel,
+          specimens: r.specimens,
           incidents: incidentsBySlug(r.incidents),
         }
       );

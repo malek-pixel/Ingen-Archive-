@@ -10,6 +10,7 @@ import {
   plateBlend,
   specimenStatus,
   threatInk,
+  threatValue,
   threatLabel,
 } from "../lib/derive";
 import { stagger, step, useReveal } from "../lib/motion";
@@ -227,7 +228,7 @@ export function SpecimenDossier({ d }: { d: WithImage<Specimen> }) {
                 Threat assessment
               </span>
               <span style={{ font: "700 21px 'Archivo',sans-serif", color: ink, fontVariantNumeric: "tabular-nums" }}>
-                {d.threat}
+                {threatValue(t)}
                 <span style={{ font: "500 12px 'IBM Plex Mono',monospace", color: "#6F859D" }}> / 5</span>
               </span>
             </div>

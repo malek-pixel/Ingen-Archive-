@@ -56,7 +56,12 @@ export interface Specimen {
   weight: string;
   diet: string;
   habitat: string;
-  genome: number;
+  /**
+   * Sequencing completion, where the file records one. Absent on records whose
+   * source dossier states no figure — the dossier prints "—" rather than a
+   * number nobody measured.
+   */
+  genome?: number;
   incidents: string[];
   stats: StatBlock;
   notes: string;
@@ -66,6 +71,8 @@ export interface Specimen {
   locations?: string[];
   facilities?: string[];
   personnel?: string[];
+  /** Other assets this one is filed against — shared range, rivalry, competition. */
+  specimens?: string[];
 }
 
 export interface Person {

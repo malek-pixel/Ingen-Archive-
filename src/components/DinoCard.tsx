@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { stagger } from "../lib/motion";
 import type { Specimen, WithImage } from "../data/types";
-import { cells, containmentShort, plateBlend, specimenStatusShort, threatInk } from "../lib/derive";
+import { cells, containmentShort, plateBlend, specimenStatusShort, threatInk, threatValue } from "../lib/derive";
 import { Meter } from "./Chrome";
 import { RecordImage } from "./RecordImage";
 import { TechnicalPlate } from "./TechnicalPlate";
@@ -117,7 +117,7 @@ export function DinoCard({ d, index = 0 }: { d: WithImage<Specimen>; index?: num
           <span
             style={{ font: "500 12.5px 'IBM Plex Mono',monospace", color: ink, fontVariantNumeric: "tabular-nums" }}
           >
-            {d.threat}
+            {threatValue(t)}
           </span>
         </div>
 
