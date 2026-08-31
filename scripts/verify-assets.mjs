@@ -3,9 +3,10 @@
  * an image on disk is not referenced by any record. Both directions matter: a
  * missing file breaks a dossier, an orphan file ships dead weight.
  *
- * Only the specimen and personnel divisions carry photography. Locations,
- * facilities, botanical records and operational files render a technical plate
- * by design, so they are not expected here.
+ * Specimens, personnel, locations and botanical records carry photography;
+ * facilities and operational files render a technical plate by design, so they
+ * are not expected here. Coverage within a division is partial by design too —
+ * an empty path is a record with no photography, not a missing asset.
  */
 import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
@@ -15,6 +16,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const data = JSON.parse(readFileSync(join(root, "src/data/ingen.json"), "utf8"));
 
 const locationImages = JSON.parse(readFileSync(join(root, "src/data/location-images.json"), "utf8"));
+const floraImages = JSON.parse(readFileSync(join(root, "src/data/flora-images.json"), "utf8"));
 
 // An empty path is a record with no photography on file, which renders the
 // drawn technical plate instead. That is a designed state, not a missing file.
@@ -23,13 +25,14 @@ const referenced = new Set(
     ...Object.values(data.specimenImages),
     ...Object.values(data.personnelImages),
     ...Object.values(locationImages).map((e) => e.src),
+    ...Object.values(floraImages).map((e) => e.src),
   ].filter(Boolean)
 );
 
 const missing = [...referenced].filter((p) => !existsSync(join(root, "public", p)));
 
 // Locations are optional and partially covered, so the folder may not exist yet.
-const onDisk = ["dinos", "personnel", "locations"].flatMap((folder) => {
+const onDisk = ["dinos", "personnel", "locations", "flora"].flatMap((folder) => {
   const dir = join(root, "public/media", folder);
   return existsSync(dir) ? readdirSync(dir).map((f) => `/media/${folder}/${f}`) : [];
 });

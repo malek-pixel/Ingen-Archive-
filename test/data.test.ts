@@ -1,7 +1,11 @@
 import { describe, expect, it } from "vitest";
 import raw from "../src/data/ingen.json";
 import { buildArchive, loadArchive } from "../src/data/ingen";
-import { ArchiveDataError, validateArchive } from "../src/data/validate";
+import { ArchiveDataError, validateArchive, validateCrossLinks } from "../src/data/validate";
+import locations from "../src/data/locations.json";
+import flora from "../src/data/flora.json";
+import facilities from "../src/data/facilities.json";
+import incidents from "../src/data/operations.json";
 
 describe("archive dataset", () => {
   it("validates the shipped data with no issues", () => {
@@ -77,5 +81,23 @@ describe("archive dataset", () => {
     const p = broken.personnel as Record<string, unknown>[];
     p[1].id = p[0].id;
     expect(validateArchive(broken).some((i) => i.includes("duplicate id"))).toBe(true);
+  });
+
+  // Operations are cited by slug rather than record id, so nothing else in the
+  // cross-link check can see them. A bad slug used to sever the link silently.
+  it("catches an operation slug that resolves to no incident", () => {
+    const divisions = { locations, flora, facilities, incidents } as never;
+    expect(validateCrossLinks(raw, divisions)).toEqual([]);
+
+    const broken = structuredClone(raw) as typeof raw;
+    broken.personnel[0].history = ["isla-nublar-1993", "no-such-operation-1999"];
+    broken.specimens[0].incidents = ["also-not-real-2001"];
+    const issues = validateCrossLinks(broken, divisions);
+    expect(issues).toContain(
+      `personnel[${broken.personnel[0].id}]: "history" cites unknown operation slug "no-such-operation-1999"`
+    );
+    expect(issues).toContain(
+      `specimens[${broken.specimens[0].id}]: "incidents" cites unknown operation slug "also-not-real-2001"`
+    );
   });
 });

@@ -10,8 +10,8 @@ transcribed from the mockups. The only deliberate departures are documented unde
 
 | Division       | Route          | Records | Identifier                                    |
 | -------------- | -------------- | ------- | --------------------------------------------- |
-| Genetic assets | `/assets`      | 36      | `ING-DIN` / `ING-MAR` / `ING-HYB` / `ING-AIR` |
-| Paleobotany    | `/paleobotany` | 15      | `ING-FLR`                                     |
+| Genetic assets | `/assets`      | 38      | `ING-DIN` / `ING-MAR` / `ING-HYB` / `ING-AIR` |
+| Paleobotany    | `/paleobotany` | 11      | `ING-FLR`                                     |
 | Personnel      | `/personnel`   | 34      | `ING-CHR`                                     |
 | Locations      | `/locations`   | 12      | `ING-LOC`                                     |
 | Facilities     | `/facilities`  | 20      | `ING-FAC`                                     |
@@ -207,11 +207,25 @@ are still on a technical plate. Re-running is safe; deleting a file and
 re-running removes it from the map. `npm run verify:assets` covers these paths
 too, so a missing or orphaned location plate fails the build like any other.
 
+## Adding botanical imagery
+
+Paleobotany works the same way as locations, with its own inbox and map:
+
+1. Drop images into `incoming/flora/`, named after the record id
+   (`microvictoria.png`, `wollemia-nobilis.jpg`, …). See the README in that
+   folder for the full id list.
+2. Run `npm run images:flora`.
+
+That converts to WebP at the 1200px cap, writes `public/media/flora/`, records
+the paths and dimensions in `src/data/flora-images.json`, and reports which
+records are still on a technical plate. Entries whose file has since been
+deleted are dropped from the map, so it never claims an image that is gone.
+
 ## Imagery across divisions
 
-Photography is partial, by division and by record. Genetic assets, personnel and
-locations carry plates where one exists; paleobotany, facilities and operations
-never do. Anything without one renders a **technical plate** — the engineering
+Photography is partial, by division and by record. Genetic assets, personnel,
+locations and paleobotany carry plates where one exists; facilities and
+operations never do. Anything without one renders a **technical plate** — the engineering
 grid already used behind specimen plates, with a division glyph and the record
 identifier.
 
@@ -230,7 +244,7 @@ because a thumbnail three characters wide cannot carry one.
 ## Media pipeline
 
 Record imagery is WebP, capped at 1200px on the long edge (`npm run images`).
-The 53 referenced files total ~325 KB, down from ~1.37 MB of source JPG/PNG.
+The 93 referenced files total ~1.5 MB, down from ~9 MB of source JPG/PNG.
 Records with no photography reference no file and render the drawn technical plate.
 `npm run verify:assets` fails the build in both directions — a missing file
 breaks a dossier, an orphan file ships dead weight — and runs in CI.
@@ -252,5 +266,5 @@ something true rather than reporting a failure that did not happen.
   a host-level rule.
 - **Full-run galleries are not windowed.** They rely on `content-visibility:
 auto` with a reserved intrinsic size, which skips layout and paint for
-  off-screen records. That is enough here at 36/34 records; a much larger
+  off-screen records. That is enough here at 38/34 records; a much larger
   archive would want real virtualisation.

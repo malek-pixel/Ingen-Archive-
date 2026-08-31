@@ -11,5 +11,9 @@ dist
 .claude
 
 # Source drops for the image pipeline; the WebP output is what ships.
-incoming/**
+# Ignore the files, not the directories: git will not look inside an excluded
+# directory, so "incoming/**" made the README negation below unreachable and
+# quietly dropped the drop instructions from the repo.
+incoming/**/*
+!incoming/**/
 !incoming/**/README.md

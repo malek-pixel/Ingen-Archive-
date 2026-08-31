@@ -4,6 +4,7 @@ import floraRaw from "./flora.json";
 import facilitiesRaw from "./facilities.json";
 import operationsRaw from "./operations.json";
 import locationImages from "./location-images.json";
+import floraImages from "./flora-images.json";
 
 import { ArchiveDataError, validateArchive, validateCrossLinks, validateDivisions } from "./validate";
 import { recordHref } from "./divisions";
@@ -103,15 +104,18 @@ function build(
   const personnel = withImg(r.personnel, r.personnelImages);
 
   // Expansion divisions render a technical plate unless a real plate exists.
-  // Locations can carry photography per record — coverage is partial by design,
-  // so this is resolved per id rather than per division.
+  // Locations and flora can carry photography per record — coverage is partial
+  // by design, so this is resolved per id rather than per division.
   const noImg = <T extends object>(list: T[]): WithImage<T>[] => list.map((rec) => ({ ...rec, img: "" }));
-  const locationPlates = locationImages as Record<string, { src: string; w: number; h: number }>;
-  const locationRecords: WithImage<Location>[] = locations.map((rec) => {
-    const plate = locationPlates[rec.id];
-    return { ...rec, img: plate?.src ?? "", imgRatio: plate ? plate.w / plate.h : undefined };
-  });
-  const floraRecords = noImg(flora);
+  type Plate = { src: string; w: number; h: number };
+  const platedBy =
+    <T extends { id: string }>(plates: Record<string, Plate>) =>
+    (rec: T): WithImage<T> => {
+      const plate = plates[rec.id];
+      return { ...rec, img: plate?.src ?? "", imgRatio: plate ? plate.w / plate.h : undefined };
+    };
+  const locationRecords: WithImage<Location>[] = locations.map(platedBy(locationImages as Record<string, Plate>));
+  const floraRecords: WithImage<Flora>[] = flora.map(platedBy(floraImages as Record<string, Plate>));
   const facilityRecords = noImg(facilities);
   const incidentRecords = noImg(incidents);
 
@@ -183,7 +187,8 @@ function build(
       subtitle: f.scientificName,
       status: f.status,
       security: f.security,
-      img: "",
+      img: f.img,
+      imgRatio: f.imgRatio,
       href: recordHref("flora", f.id),
       haystack: lower([
         f.name,

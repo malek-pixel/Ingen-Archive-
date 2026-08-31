@@ -2,7 +2,7 @@
   "specimens": [
     {
       "id": "quetzalcoatlus",
-      "fileId": "ING-AIR-001",
+      "fileId": "ING-AVI-003",
       "name": "Quetzalcoatlus",
       "species": "Quetzalcoatlus northropi",
       "codename": "Shadow",
@@ -168,7 +168,7 @@
     },
     {
       "id": "velociraptor",
-      "fileId": "ING-DIN-002",
+      "fileId": "ING-DIN-006",
       "name": "Velociraptor",
       "species": "Velociraptor antirrhopus",
       "codename": "Pack Asset",
@@ -269,7 +269,7 @@
     },
     {
       "id": "spinosaurus",
-      "fileId": "ING-DIN-005",
+      "fileId": "ING-DIN-002",
       "name": "Spinosaurus",
       "species": "Spinosaurus aegyptiacus",
       "codename": "Sail",
@@ -420,7 +420,7 @@
     },
     {
       "id": "atrociraptor",
-      "fileId": "ING-DIN-011",
+      "fileId": "ING-DIN-028",
       "name": "Atrociraptor",
       "species": "Atrociraptor marshalli",
       "codename": "Trained Line",
@@ -452,7 +452,7 @@
     },
     {
       "id": "pyroraptor",
-      "fileId": "ING-DIN-012",
+      "fileId": "ING-DIN-029",
       "name": "Pyroraptor",
       "species": "Pyroraptor olympius",
       "codename": "Ember",
@@ -702,7 +702,7 @@
     },
     {
       "id": "stegosaurus",
-      "fileId": "ING-DIN-020",
+      "fileId": "ING-DIN-012",
       "name": "Stegosaurus",
       "species": "Stegosaurus stenops",
       "codename": "Plate Back",
@@ -768,7 +768,7 @@
     },
     {
       "id": "triceratops",
-      "fileId": "ING-DIN-022",
+      "fileId": "ING-DIN-011",
       "name": "Triceratops",
       "species": "Triceratops horridus",
       "codename": "Three Horn",
@@ -872,7 +872,7 @@
     },
     {
       "id": "therizinosaurus",
-      "fileId": "ING-DIN-025",
+      "fileId": "ING-DIN-020",
       "name": "Therizinosaurus",
       "species": "Therizinosaurus cheloniformis",
       "codename": "Scythe",
@@ -907,7 +907,7 @@
     },
     {
       "id": "apatosaurus",
-      "fileId": "ING-DIN-026",
+      "fileId": "ING-DIN-035",
       "name": "Apatosaurus",
       "species": "Apatosaurus louisae",
       "codename": "Longneck",
@@ -944,7 +944,7 @@
     },
     {
       "id": "nasutoceratops",
-      "fileId": "ING-DIN-027",
+      "fileId": "ING-DIN-036",
       "name": "Nasutoceratops",
       "species": "Nasutoceratops titusi",
       "codename": "Bull Horn",
@@ -978,7 +978,7 @@
     },
     {
       "id": "stygimoloch",
-      "fileId": "ING-DIN-028",
+      "fileId": "ING-HRB-014",
       "name": "Stygimoloch",
       "species": "Stygimoloch spinifer",
       "codename": "Stiggy",
@@ -1341,7 +1341,7 @@
     {
       "id": "vic-hoskins",
       "fileId": "ING-CHR-005",
-      "name": "Vic Hoskins",
+      "name": "Victor \"Vic\" Hoskins",
       "status": "DECEASED",
       "clearance": 4,
       "dept": "InGen Security Division",
@@ -1367,7 +1367,7 @@
     {
       "id": "john-hammond",
       "fileId": "ING-CHR-006",
-      "name": "John Hammond",
+      "name": "John Alfred Hammond",
       "status": "DECEASED",
       "clearance": 5,
       "dept": "Executive Leadership",
@@ -1609,7 +1609,7 @@
     {
       "id": "ray-arnold",
       "fileId": "ING-CHR-015",
-      "name": "Ray Arnold",
+      "name": "Raymond \"Ray\" Arnold",
       "status": "DECEASED",
       "clearance": 4,
       "dept": "Systems Engineering",
@@ -1818,7 +1818,7 @@
     },
     {
       "id": "eli-mills",
-      "fileId": "ING-CHR-023",
+      "fileId": "ING-CHR-024",
       "name": "Eli Mills",
       "status": "DECEASED",
       "clearance": 4,
@@ -1856,7 +1856,7 @@
     },
     {
       "id": "roland-tembo",
-      "fileId": "ING-CHR-024",
+      "fileId": "ING-CHR-030",
       "name": "Roland Tembo",
       "status": "ALIVE",
       "clearance": 3,
@@ -1889,7 +1889,7 @@
     },
     {
       "id": "donald-gennaro",
-      "fileId": "ING-CHR-025",
+      "fileId": "ING-CHR-026",
       "name": "Donald Gennaro",
       "status": "DECEASED",
       "clearance": 4,
@@ -1922,8 +1922,8 @@
     },
     {
       "id": "lex-murphy",
-      "fileId": "ING-CHR-026",
-      "name": "Lex Murphy",
+      "fileId": "ING-CHR-032",
+      "name": "Alexis \"Lex\" Murphy",
       "status": "ALIVE",
       "clearance": 2,
       "dept": "External / Non-Personnel Visitor",
@@ -1955,8 +1955,8 @@
     },
     {
       "id": "tim-murphy",
-      "fileId": "ING-CHR-027",
-      "name": "Tim Murphy",
+      "fileId": "ING-CHR-034",
+      "name": "Timothy \"Tim\" Murphy",
       "status": "ALIVE",
       "clearance": 2,
       "dept": "External / Non-Personnel Visitor",
@@ -1988,7 +1988,7 @@
     },
     {
       "id": "billy-brennan",
-      "fileId": "ING-CHR-028",
+      "fileId": "ING-CHR-027",
       "name": "Billy Brennan",
       "status": "ALIVE",
       "clearance": 3,
@@ -2020,7 +2020,7 @@
     },
     {
       "id": "paul-kirby",
-      "fileId": "ING-CHR-029",
+      "fileId": "ING-CHR-033",
       "name": "Paul Kirby",
       "status": "ALIVE",
       "clearance": 2,
@@ -2049,7 +2049,7 @@
     },
     {
       "id": "eric-kirby",
-      "fileId": "ING-CHR-030",
+      "fileId": "ING-CHR-031",
       "name": "Eric Kirby",
       "status": "ALIVE",
       "clearance": 2,
@@ -2082,7 +2082,7 @@
     },
     {
       "id": "lowery-cruthers",
-      "fileId": "ING-CHR-031",
+      "fileId": "ING-CHR-029",
       "name": "Lowery Cruthers",
       "status": "ALIVE",
       "clearance": 3,
@@ -2118,7 +2118,7 @@
     },
     {
       "id": "gerry-harding",
-      "fileId": "ING-CHR-032",
+      "fileId": "ING-CHR-025",
       "name": "Gerry Harding",
       "status": "ALIVE",
       "clearance": 4,
@@ -2153,7 +2153,7 @@
     },
     {
       "id": "ken-wheatley",
-      "fileId": "ING-CHR-033",
+      "fileId": "ING-CHR-028",
       "name": "Ken Wheatley",
       "status": "DECEASED",
       "clearance": 3,
@@ -2190,7 +2190,7 @@
     },
     {
       "id": "ramsay-cole",
-      "fileId": "ING-CHR-034",
+      "fileId": "ING-CHR-023",
       "name": "Ramsay Cole",
       "status": "ALIVE",
       "clearance": 5,
@@ -2284,17 +2284,17 @@
     "franklin-webb": "/media/personnel/franklin-webb.webp",
     "barry-sembene": "/media/personnel/barry-sembene.webp",
     "kayla-watts": "/media/personnel/kayla-watts.webp",
-    "eli-mills": "",
-    "roland-tembo": "",
-    "donald-gennaro": "",
-    "lex-murphy": "",
-    "tim-murphy": "",
-    "billy-brennan": "",
-    "paul-kirby": "",
-    "eric-kirby": "",
-    "lowery-cruthers": "",
-    "gerry-harding": "",
-    "ken-wheatley": "",
-    "ramsay-cole": ""
+    "eli-mills": "/media/personnel/eli-mills.webp",
+    "roland-tembo": "/media/personnel/roland-tembo.webp",
+    "donald-gennaro": "/media/personnel/donald-gennaro.webp",
+    "lex-murphy": "/media/personnel/lex-murphy.webp",
+    "tim-murphy": "/media/personnel/tim-murphy.webp",
+    "billy-brennan": "/media/personnel/billy-brennan.webp",
+    "paul-kirby": "/media/personnel/paul-kirby.webp",
+    "eric-kirby": "/media/personnel/eric-kirby.webp",
+    "lowery-cruthers": "/media/personnel/lowery-cruthers.webp",
+    "gerry-harding": "/media/personnel/gerry-harding.webp",
+    "ken-wheatley": "/media/personnel/ken-wheatley.webp",
+    "ramsay-cole": "/media/personnel/ramsay-cole.webp"
   }
 }

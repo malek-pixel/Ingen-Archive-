@@ -55,7 +55,7 @@ export const DIVISIONS: Division[] = [
     badge: "PALEOBOTANY",
     prefix: "ING-FLR",
     group: "biological",
-    imagery: "none",
+    imagery: "plate",
     blurb: "Reconstructed and cultivated flora held under botanical research.",
   },
   {

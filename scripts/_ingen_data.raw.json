@@ -2,7 +2,7 @@
   "D": [
     {
       "id": "quetzalcoatlus",
-      "fileId": "ING-AIR-001",
+      "fileId": "ING-AVI-003",
       "name": "Quetzalcoatlus",
       "species": "Quetzalcoatlus northropi",
       "codename": "Shadow",
@@ -16,7 +16,6 @@
       "habitat": "Open sky, cliff roosts, unrestricted continental range",
       "genome": 72,
       "incidents": [
-        "fallen-kingdom-2018",
         "dominion-2022"
       ],
       "stats": {
@@ -44,8 +43,8 @@
       "classification": "Aerial Opportunistic Predator",
       "threat": 4,
       "contain": "FAILED",
-      "length": "N/A",
-      "weight": "Light — flight-adapted skeleton",
+      "length": "9.8 meter wingspan",
+      "weight": "Not documented",
       "diet": "Fish, small animals, carrion",
       "habitat": "Skies, cliffs, coasts, islands",
       "genome": 90,
@@ -74,8 +73,8 @@
       "classification": "Aerial Swarm Predator / Cliff Hunter",
       "threat": 2,
       "contain": "FAILED",
-      "length": "N/A",
-      "weight": "Very light",
+      "length": "~2.5 meter wingspan",
+      "weight": "Not documented",
       "diet": "Insects, fish, small prey, carrion",
       "habitat": "Cliffs, forests, coastal caves",
       "genome": 81,
@@ -103,14 +102,12 @@
       "classification": "High-Altitude Aerial Hunter / Coastal Soarer",
       "threat": 3,
       "contain": "FAILED",
-      "length": "N/A",
+      "length": "Not documented",
       "weight": "10–20 kg",
       "diet": "Fish, small animals, marine surface prey",
       "habitat": "Open skies, coastal cliffs, ocean thermals",
       "genome": 77,
-      "incidents": [
-        "jurassic-world-2015"
-      ],
+      "incidents": [],
       "stats": {
         "strength": 2,
         "defense": 2,
@@ -118,9 +115,13 @@
         "stealth": 4,
         "aggression": 2
       },
-      "notes": "Long-distance soaring specialist. Coastal and ocean thermal rider. Solitary or small flock behavior. Highly energy-efficient flight patterns.",
-      "classified": "Risk assessment: MEDIUM. Low aggression but wide territorial range. Rarely observed due to altitude preference.",
-      "tag": "It doesn't hunt the world — it crosses it."
+      "notes": "Long-distance soaring specialist. Coastal and ocean thermal rider. Solitary or small flock behavior. Highly energy-efficient flight patterns. Reared in the Site B aviary before transfer to Isla Nublar.",
+      "classified": "Risk assessment: MEDIUM. Low aggression but wide territorial range. Rarely observed due to altitude preference. No film-canon sighting is on record; InGen origin and aviary housing are documented from expanded material only.",
+      "tag": "It doesn't hunt the world — it crosses it.",
+      "locations": [
+        "isla-sorna",
+        "isla-nublar"
+      ]
     },
     {
       "id": "tyrannosaurus-rex",
@@ -167,11 +168,11 @@
     },
     {
       "id": "velociraptor",
-      "fileId": "ING-DIN-002",
+      "fileId": "ING-DIN-006",
       "name": "Velociraptor",
       "species": "Velociraptor antirrhopus",
       "codename": "Pack Asset",
-      "status": "DECEASED",
+      "status": "ACTIVE",
       "classification": "Pack Hunter / Coordinated Predator",
       "threat": 5,
       "contain": "FAILED PERMANENTLY",
@@ -193,7 +194,7 @@
         "aggression": 5
       },
       "notes": "The original Nublar pack, distinct from the later Raptor Squad line. Demonstrated problem-solving well outside the projected range: coordinated flanking, door handle manipulation, and systematic testing of fence sections for weakness.",
-      "classified": "Risk assessment: EXTREME. Pack learned faster than containment could be revised. Muldoon's standing recommendation that the line be destroyed was filed and not actioned.",
+      "classified": "Risk assessment: EXTREME. Pack learned faster than containment could be revised. Muldoon's standing recommendation that the line be destroyed was filed and not actioned. The original Nublar pack is accounted for; the line itself is not, and remained established on Isla Sorna.",
       "tag": "They were testing the fences for weaknesses. Systematically.",
       "locations": [
         "isla-nublar",
@@ -268,7 +269,7 @@
     },
     {
       "id": "spinosaurus",
-      "fileId": "ING-DIN-005",
+      "fileId": "ING-DIN-002",
       "name": "Spinosaurus",
       "species": "Spinosaurus aegyptiacus",
       "codename": "Sail",
@@ -276,8 +277,8 @@
       "classification": "Apex Semi-Aquatic Predator",
       "threat": 5,
       "contain": "FAILED",
-      "length": "15–16 meters",
-      "weight": "8–9 tons",
+      "length": "13.3 meters",
+      "weight": "8 tons",
       "diet": "Carnivorous",
       "habitat": "River systems, coastal margin, flooded interior",
       "genome": 79,
@@ -419,7 +420,7 @@
     },
     {
       "id": "atrociraptor",
-      "fileId": "ING-DIN-011",
+      "fileId": "ING-DIN-028",
       "name": "Atrociraptor",
       "species": "Atrociraptor marshalli",
       "codename": "Trained Line",
@@ -451,7 +452,7 @@
     },
     {
       "id": "pyroraptor",
-      "fileId": "ING-DIN-012",
+      "fileId": "ING-DIN-029",
       "name": "Pyroraptor",
       "species": "Pyroraptor olympius",
       "codename": "Ember",
@@ -558,6 +559,7 @@
       "incidents": [
         "isla-nublar-1993",
         "jurassic-world-2015",
+        "nublar-eruption-2018",
         "dominion-2022"
       ],
       "stats": {
@@ -700,7 +702,7 @@
     },
     {
       "id": "stegosaurus",
-      "fileId": "ING-DIN-020",
+      "fileId": "ING-DIN-012",
       "name": "Stegosaurus",
       "species": "Stegosaurus stenops",
       "codename": "Plate Back",
@@ -766,7 +768,7 @@
     },
     {
       "id": "triceratops",
-      "fileId": "ING-DIN-022",
+      "fileId": "ING-DIN-011",
       "name": "Triceratops",
       "species": "Triceratops horridus",
       "codename": "Three Horn",
@@ -849,8 +851,8 @@
       "classification": "Ambush Predator / Toxic Display Specialist",
       "threat": 3,
       "contain": "PARTIALLY STABLE",
-      "length": "6–7 meters",
-      "weight": "400–900 kg",
+      "length": "3 meters (Nublar specimen — juvenile); ~6 meters adult",
+      "weight": "Not documented",
       "diet": "Carnivorous — small prey, scavenging, ambush hunting",
       "habitat": "Forest floors, swamp edges, dense jungle zones",
       "genome": 79,
@@ -870,7 +872,7 @@
     },
     {
       "id": "therizinosaurus",
-      "fileId": "ING-DIN-025",
+      "fileId": "ING-DIN-020",
       "name": "Therizinosaurus",
       "species": "Therizinosaurus cheloniformis",
       "codename": "Scythe",
@@ -905,11 +907,11 @@
     },
     {
       "id": "apatosaurus",
-      "fileId": "ING-DIN-026",
+      "fileId": "ING-DIN-035",
       "name": "Apatosaurus",
       "species": "Apatosaurus louisae",
       "codename": "Longneck",
-      "status": "DECEASED",
+      "status": "ACTIVE",
       "classification": "Colossal Herbivore / Herd Grazer",
       "threat": 2,
       "contain": "PARTIALLY STABLE",
@@ -920,7 +922,9 @@
       "genome": 89,
       "incidents": [
         "jurassic-world-2015",
-        "nublar-eruption-2018"
+        "nublar-eruption-2018",
+        "fallen-kingdom-2018",
+        "dominion-2022"
       ],
       "stats": {
         "strength": 5,
@@ -929,17 +933,18 @@
         "intelligence": 2,
         "aggression": 1
       },
-      "notes": "Gentle and habituated to handler contact, with a strong herd bond and audible distress vocalisation when separated. The Nublar herd was among the last groups still on the island when Sibo erupted.",
-      "classified": "Risk assessment: LOW. Recorded here chiefly as loss: the herd could not be moved within the evacuation window and was not recovered.",
-      "tag": "The herd stayed together to the end of the island.",
+      "notes": "Gentle and habituated to handler contact, with a strong herd bond and audible distress vocalisation when separated. The Nublar herd was among the groups still on the island when Sibo erupted; part of the herd was not recovered, while animals taken off the island by ship were later released from the Lockwood estate. The species has since been recorded on the mainland.",
+      "classified": "Risk assessment: LOW. Recorded here in part as loss — animals that could not be moved within the evacuation window were not recovered — and in part as dispersal, the surviving stock having entered mainland ecosystems uncontrolled.",
+      "tag": "Part of the herd never left the island. The rest of it never came back under control.",
       "locations": [
         "isla-nublar",
-        "jurassic-world"
+        "jurassic-world",
+        "lockwood-estate"
       ]
     },
     {
       "id": "nasutoceratops",
-      "fileId": "ING-DIN-027",
+      "fileId": "ING-DIN-036",
       "name": "Nasutoceratops",
       "species": "Nasutoceratops titusi",
       "codename": "Bull Horn",
@@ -973,7 +978,7 @@
     },
     {
       "id": "stygimoloch",
-      "fileId": "ING-DIN-028",
+      "fileId": "ING-HRB-014",
       "name": "Stygimoloch",
       "species": "Stygimoloch spinifer",
       "codename": "Stiggy",
@@ -1090,7 +1095,6 @@
       "weight": "~9,000 kg",
       "diet": "Carnivorous — opportunistic apex predation",
       "habitat": "Île Saint-Hubert — presumed feral island range",
-      "genome": 0,
       "incidents": [
         "ile-saint-hubert-2010"
       ],
@@ -1122,6 +1126,7 @@
       "genome": 96,
       "incidents": [
         "jurassic-world-2015",
+        "nublar-eruption-2018",
         "fallen-kingdom-2018",
         "dominion-2022"
       ],
@@ -1151,9 +1156,7 @@
       "diet": "Carnivorous — fish, squid, small marine reptiles",
       "habitat": "Open ocean, deep coastal waters",
       "genome": 76,
-      "incidents": [
-        "jurassic-world-2015"
-      ],
+      "incidents": [],
       "stats": {
         "strength": 3,
         "defense": 3,
@@ -1162,8 +1165,65 @@
         "aggression": 2
       },
       "notes": "Agile underwater swimmer. Solitary hunter in deep water. Prefers stealth over brute force. Avoids confrontation with apex marine predators.",
-      "classified": "Risk assessment: MEDIUM. Avoids apex encounters. Silent hunter rather than dominant force.",
+      "classified": "Risk assessment: MEDIUM. Avoids apex encounters. Silent hunter rather than dominant force. No film-canon sighting is on record; the species is documented from expanded material only.",
       "tag": "It doesn't rule the ocean — it moves through it unseen."
+    },
+    {
+      "id": "plesiosaurus",
+      "fileId": "ING-MAR-003",
+      "name": "Plesiosaurus",
+      "species": "Plesiosaurus",
+      "status": "ALIVE / CONFIRMED IN MARINE RESTORATION RECORDS",
+      "classification": "Marine Reptile / Sauropterygian",
+      "threat": 3,
+      "contain": "MODERATE",
+      "length": "~3–5 meters",
+      "weight": "~450–900 kg (estimated)",
+      "diet": "Carnivorous / aquatic prey",
+      "habitat": "Coastal and open-water habitats",
+      "incidents": [],
+      "stats": {
+        "strength": 3,
+        "defense": 3,
+        "speed": 4,
+        "intelligence": 3,
+        "aggression": 3
+      },
+      "notes": "A smaller marine-reptile restoration project, filed separately from the giant marine predators maintained in the Jurassic World ecosystem and retained as a distinct marine taxon for research purposes. Origin is recorded against the InGen/Biosyn marine restoration programmes. The animal is an aquatic ambush predator, generally solitary, feeding on fish and small marine animals across coastal and open-water habitats, with strong swimming capability, aquatic manoeuvrability and underwater endurance on record.",
+      "classified": "Containment history: MODERATE. Risk assessment: MODERATE. Open-water containment is the principal operational challenge. Held on file as the representative small marine-reptile restoration and as a comparison specimen for the larger marine reptiles, demonstrating the diversity of restored aquatic taxa.",
+      "tag": "The ocean does not need fences to hide what lives beneath it.",
+      "specimens": [
+        "mosasaurus",
+        "attenborosaurus"
+      ]
+    },
+    {
+      "id": "ichthyosaurs",
+      "fileId": "ING-MAR-004",
+      "name": "Ichthyosaurs",
+      "species": "Ichthyosauria",
+      "status": "MARINE POPULATION / TAXONOMIC GROUP",
+      "classification": "Marine Reptiles / Ichthyosauria",
+      "threat": 0,
+      "contain": "OPEN-WATER / NON-STANDARD",
+      "length": "Species-dependent; approximately 1–20+ meters across known forms",
+      "weight": "Species-dependent",
+      "diet": "Carnivorous; primarily fish and marine prey",
+      "habitat": "Open ocean, across large geographic ranges",
+      "incidents": [],
+      "stats": {
+        "speed": 5,
+        "intelligence": 4,
+        "aggression": 4
+      },
+      "notes": "A diverse group of extinct marine reptiles resembling modern fish and dolphins in body shape. This is a group-level entry: Ichthyosauria is an entire evolutionary lineage rather than a single species, and any engineered population would require species-specific records for exact measurements and behaviour. Recorded traits are highly adapted aquatic locomotion, fast pursuit swimming, predatory specialisation and open-ocean movement; many species likely displayed schooling or group behaviour. Origin is recorded against the InGen/Biosyn marine restoration programmes.",
+      "classified": "Containment history: OPEN-WATER / NON-STANDARD. Risk assessment: SPECIES DEPENDENT. Group-level classification is insufficient for individual risk assessment; exact species and specimen data must be recorded before any containment decision. Monitoring must cover large geographic ranges because conventional terrestrial containment is impossible.",
+      "tag": "A species can be contained. An oceanic lineage cannot.",
+      "specimens": [
+        "mosasaurus",
+        "attenborosaurus",
+        "plesiosaurus"
+      ]
     }
   ],
   "P": [
@@ -1281,7 +1341,7 @@
     {
       "id": "vic-hoskins",
       "fileId": "ING-CHR-005",
-      "name": "Vic Hoskins",
+      "name": "Victor \"Vic\" Hoskins",
       "status": "DECEASED",
       "clearance": 4,
       "dept": "InGen Security Division",
@@ -1307,7 +1367,7 @@
     {
       "id": "john-hammond",
       "fileId": "ING-CHR-006",
-      "name": "John Hammond",
+      "name": "John Alfred Hammond",
       "status": "DECEASED",
       "clearance": 5,
       "dept": "Executive Leadership",
@@ -1549,7 +1609,7 @@
     {
       "id": "ray-arnold",
       "fileId": "ING-CHR-015",
-      "name": "Ray Arnold",
+      "name": "Raymond \"Ray\" Arnold",
       "status": "DECEASED",
       "clearance": 4,
       "dept": "Systems Engineering",
@@ -1758,7 +1818,7 @@
     },
     {
       "id": "eli-mills",
-      "fileId": "ING-CHR-023",
+      "fileId": "ING-CHR-024",
       "name": "Eli Mills",
       "status": "DECEASED",
       "clearance": 4,
@@ -1796,7 +1856,7 @@
     },
     {
       "id": "roland-tembo",
-      "fileId": "ING-CHR-024",
+      "fileId": "ING-CHR-030",
       "name": "Roland Tembo",
       "status": "ALIVE",
       "clearance": 3,
@@ -1829,7 +1889,7 @@
     },
     {
       "id": "donald-gennaro",
-      "fileId": "ING-CHR-025",
+      "fileId": "ING-CHR-026",
       "name": "Donald Gennaro",
       "status": "DECEASED",
       "clearance": 4,
@@ -1862,8 +1922,8 @@
     },
     {
       "id": "lex-murphy",
-      "fileId": "ING-CHR-026",
-      "name": "Lex Murphy",
+      "fileId": "ING-CHR-032",
+      "name": "Alexis \"Lex\" Murphy",
       "status": "ALIVE",
       "clearance": 2,
       "dept": "External / Non-Personnel Visitor",
@@ -1895,8 +1955,8 @@
     },
     {
       "id": "tim-murphy",
-      "fileId": "ING-CHR-027",
-      "name": "Tim Murphy",
+      "fileId": "ING-CHR-034",
+      "name": "Timothy \"Tim\" Murphy",
       "status": "ALIVE",
       "clearance": 2,
       "dept": "External / Non-Personnel Visitor",
@@ -1928,7 +1988,7 @@
     },
     {
       "id": "billy-brennan",
-      "fileId": "ING-CHR-028",
+      "fileId": "ING-CHR-027",
       "name": "Billy Brennan",
       "status": "ALIVE",
       "clearance": 3,
@@ -1960,7 +2020,7 @@
     },
     {
       "id": "paul-kirby",
-      "fileId": "ING-CHR-029",
+      "fileId": "ING-CHR-033",
       "name": "Paul Kirby",
       "status": "ALIVE",
       "clearance": 2,
@@ -1989,7 +2049,7 @@
     },
     {
       "id": "eric-kirby",
-      "fileId": "ING-CHR-030",
+      "fileId": "ING-CHR-031",
       "name": "Eric Kirby",
       "status": "ALIVE",
       "clearance": 2,
@@ -2022,7 +2082,7 @@
     },
     {
       "id": "lowery-cruthers",
-      "fileId": "ING-CHR-031",
+      "fileId": "ING-CHR-029",
       "name": "Lowery Cruthers",
       "status": "ALIVE",
       "clearance": 3,
@@ -2058,7 +2118,7 @@
     },
     {
       "id": "gerry-harding",
-      "fileId": "ING-CHR-032",
+      "fileId": "ING-CHR-025",
       "name": "Gerry Harding",
       "status": "ALIVE",
       "clearance": 4,
@@ -2093,7 +2153,7 @@
     },
     {
       "id": "ken-wheatley",
-      "fileId": "ING-CHR-033",
+      "fileId": "ING-CHR-028",
       "name": "Ken Wheatley",
       "status": "DECEASED",
       "clearance": 3,
@@ -2130,7 +2190,7 @@
     },
     {
       "id": "ramsay-cole",
-      "fileId": "ING-CHR-034",
+      "fileId": "ING-CHR-023",
       "name": "Ramsay Cole",
       "status": "ALIVE",
       "clearance": 5,
@@ -2162,50 +2222,79 @@
     }
   ],
   "dImg": {
-    "ankylosaurus": "uploads/Ingen Archive Dinosaurs/ankylosaurus-v4.png",
-    "baryonyx": "uploads/Ingen Archive Dinosaurs/baryonyx.jpg",
-    "carnotaurus": "uploads/Ingen Archive Dinosaurs/carnotaurus.jpg",
-    "attenborosaurus": "uploads/Ingen Archive Dinosaurs/attenborosaurus-v2.png",
-    "charlie": "uploads/Ingen Archive Dinosaurs/charlie.jpg",
-    "distortus-rex": "uploads/Ingen Archive Dinosaurs/distortus-rex.jpg",
-    "compsognathus": "uploads/Ingen Archive Dinosaurs/compsognathus.jpg",
-    "delta": "uploads/Ingen Archive Dinosaurs/delta.jpg",
-    "blue": "uploads/Ingen Archive Dinosaurs/blue.jpg",
-    "brachiosaurus": "uploads/Ingen Archive Dinosaurs/brachiosaurus.jpg",
-    "dilophosaurus": "uploads/Ingen Archive Dinosaurs/dilophosaurus.jpg",
-    "dimorphodon": "uploads/Ingen Archive Dinosaurs/dimorphodon.jpg",
-    "echo": "uploads/Ingen Archive Dinosaurs/echo.jpg",
-    "diplodocus": "uploads/Ingen Archive Dinosaurs/diplodocus.jpg",
-    "geosternbergia": "uploads/Ingen Archive Dinosaurs/geosternbergia.jpg",
-    "indominus-rex": "uploads/Ingen Archive Dinosaurs/indominus-rex.jpg",
-    "gallimimus": "uploads/Ingen Archive Dinosaurs/gallimimus.jpg",
-    "giganotosaurus": "uploads/Ingen Archive Dinosaurs/giganotosaurus.jpg",
-    "kentrosaurus": "uploads/Ingen Archive Dinosaurs/kentrosaurus.jpg",
-    "mosasaurus": "uploads/Ingen Archive Dinosaurs/mosasaurus.webp",
-    "pteranodon": "uploads/Ingen Archive Dinosaurs/pteranodon.jpg"
+    "ankylosaurus": "public/media/dinos/ankylosaurus-v4.webp",
+    "baryonyx": "public/media/dinos/baryonyx.webp",
+    "carnotaurus": "public/media/dinos/carnotaurus.webp",
+    "attenborosaurus": "public/media/dinos/attenborosaurus-v2.webp",
+    "charlie": "public/media/dinos/charlie.webp",
+    "distortus-rex": "public/media/dinos/distortus-rex.webp",
+    "compsognathus": "public/media/dinos/compsognathus.webp",
+    "delta": "public/media/dinos/delta.webp",
+    "blue": "public/media/dinos/blue.webp",
+    "brachiosaurus": "public/media/dinos/brachiosaurus.webp",
+    "dilophosaurus": "public/media/dinos/dilophosaurus.webp",
+    "dimorphodon": "public/media/dinos/dimorphodon.webp",
+    "echo": "public/media/dinos/echo.webp",
+    "diplodocus": "public/media/dinos/diplodocus.webp",
+    "geosternbergia": "public/media/dinos/geosternbergia.webp",
+    "indominus-rex": "public/media/dinos/indominus-rex.webp",
+    "gallimimus": "public/media/dinos/gallimimus.webp",
+    "giganotosaurus": "public/media/dinos/giganotosaurus.webp",
+    "kentrosaurus": "public/media/dinos/kentrosaurus.webp",
+    "mosasaurus": "public/media/dinos/mosasaurus.webp",
+    "pteranodon": "public/media/dinos/pteranodon.webp",
+    "quetzalcoatlus": "public/media/dinos/quetzalcoatlus.webp",
+    "tyrannosaurus-rex": "public/media/dinos/tyrannosaurus-rex.webp",
+    "velociraptor": "public/media/dinos/velociraptor.webp",
+    "spinosaurus": "public/media/dinos/spinosaurus.webp",
+    "atrociraptor": "public/media/dinos/atrociraptor.webp",
+    "pyroraptor": "public/media/dinos/pyroraptor.webp",
+    "parasaurolophus": "public/media/dinos/parasaurolophus.webp",
+    "stegosaurus": "public/media/dinos/stegosaurus.webp",
+    "triceratops": "public/media/dinos/triceratops.webp",
+    "sinoceratops": "public/media/dinos/sinoceratops.webp",
+    "therizinosaurus": "public/media/dinos/therizinosaurus.webp",
+    "apatosaurus": "public/media/dinos/apatosaurus.webp",
+    "nasutoceratops": "public/media/dinos/nasutoceratops.webp",
+    "stygimoloch": "public/media/dinos/stygimoloch.webp",
+    "indoraptor": "public/media/dinos/indoraptor.webp",
+    "plesiosaurus": "public/media/dinos/plesiosaurus.webp",
+    "ichthyosaurs": "public/media/dinos/ichthyosaurs.webp"
   },
   "pImg": {
-    "owen-grady": "uploads/Ingen Archive Character files/owen-grady.png",
-    "claire-dearing": "uploads/Ingen Archive Character files/claire-dearing.png",
-    "simon-masrani": "uploads/Ingen Archive Character files/simon-masrani.jpg",
-    "henry-wu": "uploads/Ingen Archive Character files/henry-wu.png",
-    "vic-hoskins": "uploads/Ingen Archive Character files/vic-hoskins.png",
-    "john-hammond": "uploads/Ingen Archive Character files/john-hammond.jpg",
-    "ian-malcolm": "uploads/Ingen Archive Character files/ian-malcolm.png",
-    "alan-grant": "uploads/Ingen Archive Character files/alan-grant.png",
-    "ellie-sattler": "uploads/Ingen Archive Character files/ellie-sattler.png",
-    "dennis-nedry": "uploads/Ingen Archive Character files/dennis-nedry.jpg",
-    "lewis-dodgson": "uploads/Ingen Archive Character files/lewis-dodgson.jpg",
-    "benjamin-lockwood": "uploads/Ingen Archive Character files/benjamin-lockwood.png",
-    "maisie-lockwood": "uploads/Ingen Archive Character files/maisie-lockwood.jpg",
-    "robert-muldoon": "uploads/Ingen Archive Character files/robert-muldoon.jpg",
-    "ray-arnold": "uploads/Ingen Archive Character files/ray-arnold.jpg",
-    "sarah-harding": "uploads/Ingen Archive Character files/sarah-harding.jpg",
-    "nick-van-owen": "uploads/Ingen Archive Character files/nick-van-owen.jpg",
-    "peter-ludlow": "uploads/Ingen Archive Character files/peter-ludlow.jpg",
-    "zia-rodriguez": "uploads/Ingen Archive Character files/zia-rodriguez.jpg",
-    "franklin-webb": "uploads/Ingen Archive Character files/franklin-webb.jpg",
-    "barry-sembene": "uploads/Ingen Archive Character files/barry-sembene.png",
-    "kayla-watts": "uploads/Ingen Archive Character files/kayla-watts.jpg"
+    "owen-grady": "public/media/personnel/owen-grady.webp",
+    "claire-dearing": "public/media/personnel/claire-dearing.webp",
+    "simon-masrani": "public/media/personnel/simon-masrani.webp",
+    "henry-wu": "public/media/personnel/henry-wu.webp",
+    "vic-hoskins": "public/media/personnel/vic-hoskins.webp",
+    "john-hammond": "public/media/personnel/john-hammond.webp",
+    "ian-malcolm": "public/media/personnel/ian-malcolm.webp",
+    "alan-grant": "public/media/personnel/alan-grant.webp",
+    "ellie-sattler": "public/media/personnel/ellie-sattler.webp",
+    "dennis-nedry": "public/media/personnel/dennis-nedry.webp",
+    "lewis-dodgson": "public/media/personnel/lewis-dodgson.webp",
+    "benjamin-lockwood": "public/media/personnel/benjamin-lockwood.webp",
+    "maisie-lockwood": "public/media/personnel/maisie-lockwood.webp",
+    "robert-muldoon": "public/media/personnel/robert-muldoon.webp",
+    "ray-arnold": "public/media/personnel/ray-arnold.webp",
+    "sarah-harding": "public/media/personnel/sarah-harding.webp",
+    "nick-van-owen": "public/media/personnel/nick-van-owen.webp",
+    "peter-ludlow": "public/media/personnel/peter-ludlow.webp",
+    "zia-rodriguez": "public/media/personnel/zia-rodriguez.webp",
+    "franklin-webb": "public/media/personnel/franklin-webb.webp",
+    "barry-sembene": "public/media/personnel/barry-sembene.webp",
+    "kayla-watts": "public/media/personnel/kayla-watts.webp",
+    "paul-kirby": "public/media/personnel/paul-kirby.webp",
+    "roland-tembo": "public/media/personnel/roland-tembo.webp",
+    "lowery-cruthers": "public/media/personnel/lowery-cruthers.webp",
+    "ken-wheatley": "public/media/personnel/ken-wheatley.webp",
+    "ramsay-cole": "public/media/personnel/ramsay-cole.webp",
+    "donald-gennaro": "public/media/personnel/donald-gennaro.webp",
+    "eli-mills": "public/media/personnel/eli-mills.webp",
+    "tim-murphy": "public/media/personnel/tim-murphy.webp",
+    "lex-murphy": "public/media/personnel/lex-murphy.webp",
+    "billy-brennan": "public/media/personnel/billy-brennan.webp",
+    "eric-kirby": "public/media/personnel/eric-kirby.webp",
+    "gerry-harding": "public/media/personnel/gerry-harding.webp"
   }
 }

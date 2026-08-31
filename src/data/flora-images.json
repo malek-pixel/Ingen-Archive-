@@ -1,0 +1,57 @@
+{
+  "araucaria-mirabilis": {
+    "src": "/media/flora/araucaria-mirabilis.webp",
+    "w": 445,
+    "h": 449
+  },
+  "bennettitales-composite": {
+    "src": "/media/flora/bennettitales-composite.webp",
+    "w": 519,
+    "h": 385
+  },
+  "cycadeoidea": {
+    "src": "/media/flora/cycadeoidea.webp",
+    "w": 438,
+    "h": 456
+  },
+  "cycas-revoluta-cultivar": {
+    "src": "/media/flora/cycas-revoluta-cultivar.webp",
+    "w": 678,
+    "h": 452
+  },
+  "dicksonia-antarctica": {
+    "src": "/media/flora/dicksonia-antarctica.webp",
+    "w": 530,
+    "h": 377
+  },
+  "equisetum-giganteum": {
+    "src": "/media/flora/equisetum-giganteum.webp",
+    "w": 452,
+    "h": 678
+  },
+  "ginkgo-adiantoides": {
+    "src": "/media/flora/ginkgo-adiantoides.webp",
+    "w": 225,
+    "h": 225
+  },
+  "microvictoria": {
+    "src": "/media/flora/microvictoria.webp",
+    "w": 638,
+    "h": 480
+  },
+  "pachypteris": {
+    "src": "/media/flora/pachypteris.webp",
+    "w": 300,
+    "h": 300
+  },
+  "serenna-veriformans": {
+    "src": "/media/flora/serenna-veriformans.webp",
+    "w": 259,
+    "h": 194
+  },
+  "wollemia-nobilis": {
+    "src": "/media/flora/wollemia-nobilis.webp",
+    "w": 365,
+    "h": 547
+  }
+}

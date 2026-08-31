@@ -385,5 +385,30 @@ export function validateCrossLinks(
     for (const key of ["locations", "facilities", "specimens"]) resolve(`personnel[${p.id}]`, key, p[key]);
   }
 
+  // Operations are cited by slug, not by record id: a specimen lists
+  // "isla-nublar-1993" and a person's assignment history does the same. Nothing
+  // above can catch those — `known` is keyed by record id — and both the reverse
+  // index and `getRelatedRecords` drop an unresolvable slug without a sound. A
+  // misspelt slug therefore severs the link to an operation silently while the
+  // dossier still prints the event in its timeline, which is exactly the rot
+  // this function exists to make impossible.
+  const slugs = new Set(data.incidents.map((i) => i.slug));
+  const resolveSlugs = (where: string, key: string, list: unknown) => {
+    if (list == null) return;
+    if (!Array.isArray(list) || !list.every((v) => typeof v === "string")) {
+      issues.push(`${where}: "${key}" expected string[]`);
+      return;
+    }
+    for (const slug of list as string[]) {
+      if (!slugs.has(slug)) issues.push(`${where}: "${key}" cites unknown operation slug "${slug}"`);
+    }
+  };
+  for (const d of base.specimens as { id: string; incidents?: unknown }[]) {
+    resolveSlugs(`specimens[${d.id}]`, "incidents", d.incidents);
+  }
+  for (const p of base.personnel as { id: string; history?: unknown }[]) {
+    resolveSlugs(`personnel[${p.id}]`, "history", p.history);
+  }
+
   return issues;
 }

@@ -45,7 +45,7 @@ describe("expansion divisions", () => {
   it("loads every division", () => {
     const a = loadArchive();
     expect(a.locations.length).toBeGreaterThanOrEqual(10);
-    expect(a.flora.length).toBeGreaterThanOrEqual(12);
+    expect(a.flora.length).toBeGreaterThanOrEqual(11);
     expect(a.facilities.length).toBeGreaterThanOrEqual(8);
     expect(a.incidents.length).toBeGreaterThanOrEqual(8);
   });

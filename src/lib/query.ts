@@ -21,7 +21,15 @@ const byName = (a: { name?: string }, b: { name?: string }) => (a.name || "").lo
 
 /**
  * The taxonomic register a specimen is filed under, read from its file id:
- * ING-AIR (aerial), ING-MAR (marine), ING-HYB (engineered), ING-DIN otherwise.
+ * ING-AIR/ING-AVI (aerial), ING-MAR (marine), ING-HYB (engineered), ING-DIN
+ * otherwise.
+ *
+ * Aerial assets carry two prefixes because the source archive does: the
+ * reference files number Quetzalcoatlus ING-AVI-003 while filing Pteranodon,
+ * Dimorphodon and Geosternbergia under ING-AIR. Both are folded to AIR here
+ * rather than normalised in the data, because the file id is the record's
+ * catalogue number and rewriting it to tidy a filter would put the archive out
+ * of step with its own paperwork.
  *
  * These filters used to pattern-match the classification, diet and species
  * prose instead, which was wrong in both directions. "Flying" tested for
@@ -30,7 +38,11 @@ const byName = (a: { name?: string }, b: { name?: string }) => (a.name || "").lo
  * a pterosaur, because its diet line mentions marine surface prey. The
  * register is the archive's own classification and cannot drift with wording.
  */
-const register = (d: Specimen) => (d.fileId || "").split("-")[1] || "";
+const AERIAL = new Set(["AIR", "AVI"]);
+const register = (d: Specimen) => {
+  const code = (d.fileId || "").split("-")[1] || "";
+  return AERIAL.has(code) ? "AIR" : code;
+};
 
 export const SPECIMEN_FILTERS: FilterDef<Specimen>[] = [
   { key: "all", label: "All", match: () => true },
