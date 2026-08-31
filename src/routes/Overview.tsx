@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "../components/Header";
 import { Page, Watermark } from "../components/Chrome";
@@ -6,6 +7,8 @@ import { useDocumentTitle } from "../lib/useDocumentTitle";
 import { clearanceRowInk, threatRowInk } from "../lib/derive";
 import { stagger, step, useCountUp, useReveal } from "../lib/motion";
 import { DIVISIONS } from "../data/divisions";
+import type { ArchiveEntry, RecordKind } from "../data/types";
+import { DivisionModule } from "../components/DivisionModule";
 import { RecordImage } from "../components/RecordImage";
 import { PlateMark } from "../components/TechnicalPlate";
 
@@ -77,7 +80,7 @@ export default function Overview() {
     "InGen Archive — master directory",
     "Master directory of every genetic asset and personnel file held under InGen custodianship."
   );
-  const { specimens, personnel, stats, counts } = useArchive();
+  const { specimens, personnel, stats, counts, entries } = useArchive();
   const tilesReveal = useReveal();
   const dinoReveal = useReveal();
   const peopleReveal = useReveal();
@@ -89,6 +92,19 @@ export default function Overview() {
     { value: counts.specimen, label: "Assets" },
     { value: counts.person, label: "Files" },
   ];
+
+  // One real record per division to back its module. Taken from the archive's
+  // own entries — the first with photography, in record order, so the choice is
+  // deterministic and always a genuine plate from that division. Divisions with
+  // no photography resolve to undefined and draw the technical plate instead.
+  const covers = useMemo(() => {
+    const map = new Map<RecordKind, ArchiveEntry>();
+    for (const entry of entries) {
+      if (!entry.img || map.has(entry.kind)) continue;
+      map.set(entry.kind, entry);
+    }
+    return map;
+  }, [entries]);
 
   const dinos = [...specimens].sort((a, b) => a.name.localeCompare(b.name));
   const people = [...personnel].sort((a, b) => a.name.localeCompare(b.name));
@@ -172,59 +188,12 @@ export default function Overview() {
               {counts.total} records across {DIVISIONS.length} divisions
             </span>
           </div>
-          <div
-            ref={tilesReveal}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill,minmax(280px,1fr))",
-              gap: 1,
-              background: "#1A222C",
-              border: "1px solid #1A222C",
-            }}
-          >
+          {/* Three across on desktop, two on tablet, one on phone — see
+              .ig-module-grid. Column counts are fixed rather than auto-fit so
+              the six modules always read as 3x2 and never as a five-wide strip. */}
+          <div ref={tilesReveal} className="ig-module-grid">
             {DIVISIONS.map((d, i) => (
-              <Link
-                key={d.kind}
-                to={`/${d.path}`}
-                className="ig-screen-tile"
-                data-reveal
-                style={{
-                  ...stagger(i),
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 10,
-                  padding: 22,
-                  background: "#0B0F14",
-                  textDecoration: "none",
-                  color: "inherit",
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span
-                    style={{
-                      font: "500 10.5px 'IBM Plex Sans',sans-serif",
-                      letterSpacing: ".11em",
-                      color: "#748899",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    {d.badge}
-                  </span>
-                  <span
-                    style={{
-                      font: "500 17px 'IBM Plex Mono',monospace",
-                      color: "#9FB2C4",
-                      fontVariantNumeric: "tabular-nums",
-                    }}
-                  >
-                    {counts[d.kind]}
-                  </span>
-                </div>
-                <div style={{ font: "700 18px 'Archivo',sans-serif", letterSpacing: "-.02em" }}>{d.label}</div>
-                <div style={{ font: "400 13px/1.55 'IBM Plex Sans',sans-serif", color: "#7E8C9C", textWrap: "pretty" }}>
-                  {d.blurb}
-                </div>
-              </Link>
+              <DivisionModule key={d.kind} division={d} count={counts[d.kind]} cover={covers.get(d.kind)} index={i} />
             ))}
           </div>
         </section>

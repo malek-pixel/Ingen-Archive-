@@ -1,5 +1,6 @@
 import type { Specimen, WithImage } from "../data/types";
 import { ArchiveSeal, ClassifiedBlock, Meter, PlateFrame, StatRows, Timeline, Watermark } from "./Chrome";
+import { GenomeReadout } from "./GenomeStrip";
 import {
   byYear,
   cells,
@@ -243,6 +244,13 @@ export function SpecimenDossier({ d }: { d: WithImage<Specimen> }) {
             >
               {threatLabel(t)}
             </p>
+            {/* The same instrument the index card carries, at dossier scale.
+                It repeats the genome figure already in the fact rows above
+                rather than adding a claim — the trace is the housing, the
+                percentage is the record. */}
+            <div style={{ marginTop: 16, paddingTop: 14, borderTop: "1px solid #161D26" }}>
+              <GenomeReadout d={d} />
+            </div>
           </div>
 
           <div>

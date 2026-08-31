@@ -22,6 +22,6 @@ Unlike locations, personnel imagery has no single ingest command. The steps are:
 1. Copy the source file into `public/media/personnel/`.
 2. Add its path to `pImg` in `scripts/_ingen_data.raw.json`, keyed by record id:
    `"gerry-harding": "public/media/personnel/gerry-harding.png"`
-3. `npm run data`     rebuilds src/data/ingen.json from the raw file
-4. `npm run images`   converts to WebP at the 1200px cap and rewrites the paths
-5. `npm run verify:assets`  confirms every reference resolves and nothing is orphaned
+3. `npm run data` rebuilds src/data/ingen.json from the raw file
+4. `npm run images` converts to WebP at the 1200px cap and rewrites the paths
+5. `npm run verify:assets` confirms every reference resolves and nothing is orphaned

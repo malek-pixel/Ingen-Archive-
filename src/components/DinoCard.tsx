@@ -5,6 +5,7 @@ import { cells, containmentShort, plateBlend, specimenStatusShort, threatInk, th
 import { Meter } from "./Chrome";
 import { RecordImage } from "./RecordImage";
 import { TechnicalPlate } from "./TechnicalPlate";
+import { GenomeStrip } from "./GenomeStrip";
 
 export function DinoCard({ d, index = 0 }: { d: WithImage<Specimen>; index?: number }) {
   const t = Number(d.threat) || 0;
@@ -82,6 +83,12 @@ export function DinoCard({ d, index = 0 }: { d: WithImage<Specimen>; index?: num
           style={{ position: "absolute", top: 12, right: 12, width: 7, height: 7, background: status.ink }}
           title={status.label}
         />
+        {/* Sequencing trace, pinned to the foot of the media well: it reads as
+            instrumentation on the plate without taking a line from the record
+            below it. The percentage it prints is the recorded genome figure. */}
+        <div style={{ position: "absolute", left: 0, right: 0, bottom: 0 }}>
+          <GenomeStrip d={d} compact />
+        </div>
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", flex: 1, padding: "16px 16px 14px" }}>
