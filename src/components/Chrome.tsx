@@ -14,6 +14,7 @@ export function Page({
   return (
     <div
       style={{
+        position: "relative",
         width: "100%",
         maxWidth: 1440,
         margin: "0 auto",
@@ -24,7 +25,13 @@ export function Page({
         ...style,
       }}
     >
-      {children}
+      {/* Shell atmosphere: one drifting engineering grid and one pool of light
+          from above, both fixed and both behind everything. They are the only
+          ambient layers in the product, and at 2.5% and 4.5% they give the page
+          depth without ever competing with a record for attention. */}
+      <div className="ig-shell-glow" aria-hidden="true" />
+      <div className="ig-shell-grid" aria-hidden="true" />
+      <div style={{ position: "relative", zIndex: 1 }}>{children}</div>
     </div>
   );
 }
@@ -239,7 +246,7 @@ export function ClassifiedBlock({ children }: { children: ReactNode }) {
   );
 }
 
-/** Timeline used by incident history and assignment history. */
+/** Timeline used by assignment history. */
 export function Timeline({ events }: { events: { year: string; label: string; slug: string }[] }) {
   const reveal = useReveal();
   return (

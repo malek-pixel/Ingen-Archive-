@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 import raw from "../src/data/ingen.json";
 import { buildArchive, loadArchive } from "../src/data/ingen";
-import { ArchiveDataError, validateArchive } from "../src/data/validate";
+import { ArchiveDataError, validateArchive, validateCrossLinks } from "../src/data/validate";
+import locations from "../src/data/locations.json";
+import flora from "../src/data/flora.json";
 
 describe("archive dataset", () => {
   it("validates the shipped data with no issues", () => {
@@ -19,14 +21,7 @@ describe("archive dataset", () => {
     expect(a.counts.specimen).toBe(a.specimens.length);
     expect(a.counts.person).toBe(a.personnel.length);
     expect(a.counts.total).toBe(a.entries.length);
-    expect(a.entries).toHaveLength(
-      a.specimens.length +
-        a.personnel.length +
-        a.locations.length +
-        a.flora.length +
-        a.facilities.length +
-        a.incidents.length
-    );
+    expect(a.entries).toHaveLength(a.specimens.length + a.personnel.length + a.locations.length + a.flora.length);
   });
 
   // Not every record was photographed — those render the drawn technical
@@ -77,5 +72,19 @@ describe("archive dataset", () => {
     const p = broken.personnel as Record<string, unknown>[];
     p[1].id = p[0].id;
     expect(validateArchive(broken).some((i) => i.includes("duplicate id"))).toBe(true);
+  });
+
+  // Cross-links are stated on one record and read from both ends, so an id
+  // that resolves to nothing quietly severs a relationship rather than failing.
+  it("resolves every cross-link the shipped data states", () => {
+    const divisions = { locations, flora } as never;
+    expect(validateCrossLinks(raw, divisions)).toEqual([]);
+
+    const broken = structuredClone(raw) as typeof raw;
+    broken.personnel[0].locations = ["no-such-location"];
+    const issues = validateCrossLinks(broken, divisions);
+    expect(issues).toContain(
+      `personnel[${broken.personnel[0].id}]: "locations" points at unknown record "no-such-location"`
+    );
   });
 });

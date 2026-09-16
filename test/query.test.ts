@@ -25,15 +25,25 @@ describe("specimen search", () => {
   // Pteranodon for "Flying". They read the file-id register now; this pins
   // each chip to exactly the assets filed under that register.
   it.each([
-    ["mar", "MAR"],
-    ["fly", "AIR"],
-    ["hyb", "HYB"],
-  ])("filters %s to the %s register alone", (filter, prefix) => {
-    const expected = specimens.filter((d) => d.fileId.split("-")[1] === prefix);
+    ["mar", ["MAR"]],
+    ["fly", ["AIR", "AVI"]],
+    ["hyb", ["HYB"]],
+  ])("filters %s to the %s register alone", (filter, prefixes) => {
+    const inRegister = (d: { fileId: string }) => prefixes.includes(d.fileId.split("-")[1]);
+    const expected = specimens.filter(inRegister);
     const got = q("", filter).results;
     expect(got.length).toBe(expected.length);
     expect(got.length).toBeGreaterThan(0);
-    expect(got.every((d) => d.fileId.split("-")[1] === prefix)).toBe(true);
+    expect(got.every(inRegister)).toBe(true);
+  });
+
+  // The reference files number Quetzalcoatlus ING-AVI-003 while the other three
+  // aerial assets are ING-AIR. Reading one prefix dropped a pterosaur out of
+  // "Flying" entirely, which is the failure the register was meant to end.
+  it("keeps both aerial prefixes in the Flying register", () => {
+    const names = q("", "fly").results.map((d) => d.name);
+    expect(names).toContain("Quetzalcoatlus");
+    expect(names).toContain("Pteranodon");
   });
 
   it("keeps the diet chips agreeing with the label a dossier prints", () => {
@@ -41,11 +51,10 @@ describe("specimen search", () => {
     for (const d of q("", "herb").results) expect(dietLabel(d.diet)).toBe("Herbivore");
   });
 
-  it("matches on name, species, file id and incident slug", () => {
+  it("matches on name, species and file id", () => {
     expect(q("indominus").results.map((d) => d.id)).toContain("indominus-rex");
     expect(q("ING-DIN-013").results).toHaveLength(1);
     expect(q("mosasaurus").results.length).toBeGreaterThan(0);
-    expect(q("fallen-kingdom-2018").results.length).toBeGreaterThan(0);
   });
 
   it("is case- and whitespace-insensitive", () => {
@@ -142,7 +151,7 @@ describe("derived semantics", () => {
     expect(specimenStatusShort("DECEASED").ink).toBe("#E08A84");
   });
 
-  it("parses incident slugs into year and label", () => {
+  it("parses assignment slugs into year and label", () => {
     expect(parseSlug("fallen-kingdom-2018")).toEqual({
       year: "2018",
       label: "Fallen Kingdom",

@@ -7,8 +7,8 @@ export type StatBlock = Record<string, number>;
 export const SECURITY_LEVELS = ["PUBLIC", "INTERNAL", "RESTRICTED", "CONFIDENTIAL", "CLASSIFIED", "CRITICAL"] as const;
 export type SecurityLevel = (typeof SECURITY_LEVELS)[number];
 
-/** The six archive divisions. */
-export const RECORD_KINDS = ["specimen", "person", "location", "flora", "facility", "incident"] as const;
+/** The four archive divisions. */
+export const RECORD_KINDS = ["specimen", "person", "location", "flora"] as const;
 export type RecordKind = (typeof RECORD_KINDS)[number];
 
 /**
@@ -31,8 +31,6 @@ export interface Relations {
   specimens?: string[];
   personnel?: string[];
   locations?: string[];
-  facilities?: string[];
-  incidents?: string[];
   flora?: string[];
 }
 
@@ -56,16 +54,21 @@ export interface Specimen {
   weight: string;
   diet: string;
   habitat: string;
-  genome: number;
-  incidents: string[];
+  /**
+   * Sequencing completion, where the file records one. Absent on records whose
+   * source dossier states no figure — the dossier prints "—" rather than a
+   * number nobody measured.
+   */
+  genome?: number;
   stats: StatBlock;
   notes: string;
   classified: string;
   tag?: string;
   /** Optional cross-division links; absent on the original records. */
   locations?: string[];
-  facilities?: string[];
   personnel?: string[];
+  /** Other assets this one is filed against — shared range, rivalry, competition. */
+  specimens?: string[];
 }
 
 export interface Person {
@@ -86,7 +89,6 @@ export interface Person {
   tag?: string;
   quote?: string;
   locations?: string[];
-  facilities?: string[];
   specimens?: string[];
 }
 
@@ -121,34 +123,6 @@ export interface Flora extends ArchiveCommon {
   relations: Relations;
 }
 
-export interface Facility extends ArchiveCommon {
-  designation: string;
-  type: string;
-  /** Location record id this facility sits within. */
-  location: string;
-  established: string;
-  decommissioned?: string;
-  function: string;
-  description: string;
-  capacity?: string;
-  condition: string;
-  relations: Relations;
-}
-
-export interface Incident extends ArchiveCommon {
-  /** Matches the slugs already referenced by specimen/personnel records. */
-  slug: string;
-  date: string;
-  year: string;
-  type: string;
-  severity: number;
-  classification: string;
-  summary: string;
-  timeline: { label: string; detail: string }[];
-  outcome: string;
-  relations: Relations;
-}
-
 /* -------------------------------------------------------------------- stats */
 
 export interface ArchiveStats {
@@ -173,8 +147,6 @@ export interface DivisionCounts {
   person: number;
   location: number;
   flora: number;
-  facility: number;
-  incident: number;
   total: number;
 }
 
@@ -214,8 +186,6 @@ export interface Archive {
   personnel: WithImage<Person>[];
   locations: WithImage<Location>[];
   flora: WithImage<Flora>[];
-  facilities: WithImage<Facility>[];
-  incidents: WithImage<Incident>[];
 
   stats: ArchiveStats;
   counts: DivisionCounts;
@@ -224,8 +194,6 @@ export interface Archive {
   personById: Map<string, WithImage<Person>>;
   locationById: Map<string, WithImage<Location>>;
   floraById: Map<string, WithImage<Flora>>;
-  facilityById: Map<string, WithImage<Facility>>;
-  incidentById: Map<string, WithImage<Incident>>;
   /** Every record, flattened, for global search and cross-links. */
   entries: ArchiveEntry[];
   entryByKey: Map<string, ArchiveEntry>;

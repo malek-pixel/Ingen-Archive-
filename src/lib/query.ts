@@ -21,7 +21,15 @@ const byName = (a: { name?: string }, b: { name?: string }) => (a.name || "").lo
 
 /**
  * The taxonomic register a specimen is filed under, read from its file id:
- * ING-AIR (aerial), ING-MAR (marine), ING-HYB (engineered), ING-DIN otherwise.
+ * ING-AIR/ING-AVI (aerial), ING-MAR (marine), ING-HYB (engineered), ING-DIN
+ * otherwise.
+ *
+ * Aerial assets carry two prefixes because the source archive does: the
+ * reference files number Quetzalcoatlus ING-AVI-003 while filing Pteranodon,
+ * Dimorphodon and Geosternbergia under ING-AIR. Both are folded to AIR here
+ * rather than normalised in the data, because the file id is the record's
+ * catalogue number and rewriting it to tidy a filter would put the archive out
+ * of step with its own paperwork.
  *
  * These filters used to pattern-match the classification, diet and species
  * prose instead, which was wrong in both directions. "Flying" tested for
@@ -30,7 +38,11 @@ const byName = (a: { name?: string }, b: { name?: string }) => (a.name || "").lo
  * a pterosaur, because its diet line mentions marine surface prey. The
  * register is the archive's own classification and cannot drift with wording.
  */
-const register = (d: Specimen) => (d.fileId || "").split("-")[1] || "";
+const AERIAL = new Set(["AIR", "AVI"]);
+const register = (d: Specimen) => {
+  const code = (d.fileId || "").split("-")[1] || "";
+  return AERIAL.has(code) ? "AIR" : code;
+};
 
 export const SPECIMEN_FILTERS: FilterDef<Specimen>[] = [
   { key: "all", label: "All", match: () => true },
@@ -51,18 +63,7 @@ export const SPECIMEN_SORTS: SortDef<Specimen>[] = [
 ];
 
 const specimenHaystack = (d: Specimen) =>
-  [
-    d.name,
-    d.species,
-    d.fileId,
-    d.diet,
-    d.classification,
-    d.threat,
-    d.contain,
-    d.status,
-    d.notes,
-    (d.incidents || []).join(" "),
-  ]
+  [d.name, d.species, d.fileId, d.diet, d.classification, d.threat, d.contain, d.status, d.notes]
     .filter(Boolean)
     .join(" ")
     .toLowerCase();
@@ -196,40 +197,3 @@ export const FLORA_FILTERS: FilterDef<ArchiveEntry>[] = [
   { key: "naturalised", label: "Naturalised", dotInk: "#7ACB9A", match: statusIs(/NATURALISED/) },
 ];
 export const FLORA_SORTS = ENTRY_SORTS;
-
-export const FACILITY_FILTERS: FilterDef<ArchiveEntry>[] = [
-  { key: "all", label: "All", match: () => true },
-  { key: "lab", label: "Laboratories", match: tagged("laboratory") },
-  {
-    key: "containment",
-    label: "Containment",
-    match: (e) => e.haystack.includes("paddock") || e.haystack.includes("containment"),
-  },
-  {
-    key: "guest",
-    label: "Guest",
-    match: (e) => e.haystack.includes("resort") || e.haystack.includes("visitor") || e.haystack.includes("exhibition"),
-  },
-  { key: "operational", label: "Operational", dotInk: "#7ACB9A", match: statusIs(/ACTIVE/) },
-  { key: "lost", label: "Lost", dotInk: "#E08A84", match: statusIs(/DESTROYED|ABANDONED|DERELICT/) },
-];
-export const FACILITY_SORTS = ENTRY_SORTS;
-
-export const OPERATION_FILTERS: FilterDef<ArchiveEntry>[] = [
-  { key: "all", label: "All", match: () => true },
-  { key: "containment", label: "Containment", match: tagged("containment-failure") },
-  {
-    key: "dispersal",
-    label: "Dispersal",
-    match: (e) => e.haystack.includes("dispersal") || e.haystack.includes("release"),
-  },
-  { key: "catastrophic", label: "Catastrophic", dotInk: "#D2564D", match: (e) => e.haystack.includes("catastrophic") },
-  { key: "open", label: "Open files", dotInk: "#E0B36A", match: statusIs(/OPEN|SEALED/) },
-];
-/** Operations lead with chronology; an incident archive reads by date. */
-export const OPERATION_SORTS: SortDef<ArchiveEntry>[] = [
-  { label: "Chronological", dir: "↑", cmp: (a, b) => a.subtitle.localeCompare(b.subtitle) || byEntryName(a, b) },
-  { label: "Record ID", dir: "↑", cmp: byFileId },
-  { label: "Classification", dir: "↓", cmp: bySecurity },
-  { label: "Name", dir: "↑", cmp: byEntryName },
-];

@@ -8,8 +8,7 @@ import { RecordImage } from "./RecordImage";
 import { FactRows, RelatedRecords, SecurityBadge, StatusInk, TagRow } from "./RecordChrome";
 
 /**
- * The dossier shell shared by locations, facilities, botanical records and
- * operational files.
+ * The dossier shell shared by locations and botanical records.
  *
  * It is the specimen dossier's layout with the specimen-specific parts swapped
  * out: same identity block, same archival seal, same sticky aside, same

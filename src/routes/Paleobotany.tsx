@@ -107,7 +107,8 @@ export function FloraDetail() {
             status={record.status}
             security={record.security}
             tags={record.tags}
-            plateCaption="Botanical figure"
+            plateCaption={record.img ? "Botanical plate" : "Botanical figure"}
+            img={record.img}
             badges={[{ label: record.era }]}
             facts={[
               { label: "Scientific name", value: record.scientificName },

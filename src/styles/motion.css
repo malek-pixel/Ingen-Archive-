@@ -608,3 +608,293 @@
     --ig-stagger: 14ms;
   }
 }
+
+/* ==========================================================================
+   Database instrumentation layer
+   --------------------------------------------------------------------------
+   Added after the frozen system, and built from it: every colour below is an
+   existing token, every animation moves only transform or opacity, and each
+   effect is scoped to a surface that already earns it. Nothing here runs on
+   more than one layer at a time — the brief for this pass was depth, not
+   noise, and the page has to still read as an archive with motion paused.
+   ========================================================================== */
+
+/* ------------------------------------------------------------ genome strip */
+
+/* One tile of travel, looped. The SVG is drawn two tiles wide, so translating
+   by exactly -50% lands the seam on the repeat and the join is invisible.
+   ~7s per period: present when watched, ignorable when not. */
+@keyframes ig-helix-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-48px, 0, 0);
+  }
+}
+
+.ig-genome-track {
+  position: absolute;
+  inset: 0 -48px 0 0;
+  animation: ig-helix-drift 7s linear infinite;
+  transition: opacity var(--ig-t-hover) var(--ig-ease-out);
+}
+
+/* Hover lifts the trace toward full strength without ever reaching it: the
+   integrity figure still has to be legible as a difference between records. */
+.ig-card:hover .ig-genome-track,
+.ig-card:focus-visible .ig-genome-track {
+  opacity: 0.85 !important;
+}
+
+/* An unsequenced specimen must not animate. There is nothing to show. */
+.ig-genome[data-sequenced="false"] .ig-genome-track {
+  animation: none;
+}
+
+/* ------------------------------------------------------- corner brackets */
+
+/* Targeting marks on the four corners of a module. Present but nearly unlit
+   at rest, so the frame reads as engineered rather than decorated; they take
+   ink on hover. Drawn with borders on a pseudo-element pair — no extra nodes. */
+.ig-bracket::before,
+.ig-bracket::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--ig-line-strong);
+  transition:
+    border-color var(--ig-t-hover) var(--ig-ease-out),
+    opacity var(--ig-t-hover) var(--ig-ease-out);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.ig-bracket::before {
+  top: 7px;
+  left: 7px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.ig-bracket::after {
+  bottom: 7px;
+  right: 7px;
+  border-left: 0;
+  border-top: 0;
+}
+
+.ig-module:hover .ig-bracket::before,
+.ig-module:hover .ig-bracket::after,
+.ig-module:focus-visible .ig-bracket::before,
+.ig-module:focus-visible .ig-bracket::after {
+  border-color: var(--ig-blue-border);
+  opacity: 1;
+}
+
+/* --------------------------------------------------------- status indicator */
+
+/* The one genuinely ambient pulse in the product. Opacity only, 3.2s, and it
+   sits on a 6px dot — it cannot dominate anything. */
+@keyframes ig-status-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.ig-status-dot {
+  animation: ig-status-pulse 3.2s var(--ig-ease-soft) infinite;
+}
+
+/* ---------------------------------------------------------- division module */
+
+.ig-module {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    border-color var(--ig-t-hover) var(--ig-ease-out),
+    background-color var(--ig-t-hover) var(--ig-ease-out),
+    transform var(--ig-t-hover) var(--ig-ease-out),
+    box-shadow var(--ig-t-hover) var(--ig-ease-out);
+}
+
+.ig-module:hover,
+.ig-module:focus-visible {
+  transform: translate3d(0, -2px, 0);
+  border-color: var(--ig-line-hover);
+  box-shadow:
+    var(--ig-lift-shadow),
+    0 0 0 1px var(--ig-glow-blue-soft);
+}
+
+.ig-module:active {
+  transform: translate3d(0, -1px, 0) scale(0.997);
+  transition-duration: var(--ig-t-press);
+}
+
+/* The module's imagery sits behind its text at low opacity and takes a hair of
+   scale on hover. Backgrounds move; the label never does. */
+.ig-module-media {
+  transition:
+    transform var(--ig-t-plate) var(--ig-ease-out),
+    opacity var(--ig-t-plate) var(--ig-ease-out);
+  transform: scale(1.01);
+}
+
+.ig-module:hover .ig-module-media,
+.ig-module:focus-visible .ig-module-media {
+  transform: scale(1.06);
+  opacity: 0.5;
+}
+
+/* The accent rule under a module label draws itself on hover. */
+.ig-module-rule {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--ig-t-hover) var(--ig-ease-out);
+}
+
+.ig-module:hover .ig-module-rule,
+.ig-module:focus-visible .ig-module-rule {
+  transform: scaleX(1);
+}
+
+/* One read-head pass over the module on hover, reusing the card keyframe so
+   both surfaces sweep at the same speed and in the same direction. */
+.ig-module .ig-scanline::before {
+  width: 26%;
+}
+
+.ig-module:hover .ig-scanline,
+.ig-module:focus-visible .ig-scanline {
+  opacity: 1;
+}
+
+.ig-module:hover .ig-scanline::before,
+.ig-module:focus-visible .ig-scanline::before {
+  animation: ig-readhead 1.25s var(--ig-ease-soft);
+}
+
+/* ------------------------------------------------------ ambient background */
+
+/* Depth for the shell: one faint engineering grid, fixed, drifting slower than
+   anything else on screen (~90s for 60px). It is behind every surface and
+   below every z-index, and at 2.5% it is felt rather than seen. */
+@keyframes ig-shell-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-60px, -60px, 0);
+  }
+}
+
+/* The frame is exactly the viewport and clips; the drifting sheet inside it
+   is the oversized one. Bleeding the sheet itself past the viewport edge —
+   which is the obvious way to write this — extends the scrollable overflow
+   area even though the element is fixed, and the page gains a horizontal
+   scrollbar. The wrapper is what keeps that contained. */
+.ig-shell-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ig-shell-grid::before {
+  content: "";
+  position: absolute;
+  inset: -60px;
+  background-image:
+    linear-gradient(rgba(59, 167, 224, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 167, 224, 0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: ig-shell-drift 90s linear infinite;
+}
+
+/* A single soft pool of light at the top of the shell, so the page has a
+   direction to it. No gradient anywhere else. */
+.ig-shell-glow {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 60vh;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(120% 100% at 50% 0%, rgba(59, 167, 224, 0.045) 0%, transparent 62%);
+}
+
+/* ==========================================================================
+   Reduced motion — instrumentation layer.
+   The genome trace goes still but stays visible: it carries a real reading,
+   so hiding it would remove information rather than movement.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .ig-genome-track,
+  .ig-status-dot,
+  .ig-shell-grid::before {
+    animation: none !important;
+  }
+
+  .ig-module:hover,
+  .ig-module:active {
+    transform: none !important;
+  }
+
+  .ig-module-media,
+  .ig-module:hover .ig-module-media {
+    transform: none !important;
+  }
+
+  .ig-module-rule {
+    transform: scaleX(1) !important;
+  }
+}
+
+/* ==========================================================================
+   Touch — instrumentation layer.
+   The trace keeps running (it is ambient, not hover-driven), but everything
+   that depends on a cursor is dropped rather than left stuck after a tap.
+   ========================================================================== */
+
+@media (hover: none) {
+  .ig-module:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--ig-line);
+  }
+
+  .ig-module:hover .ig-module-media {
+    transform: scale(1.01);
+  }
+}
+
+/* -------------------------------------------------------- module grid
+   Six modules read as a command grid at 3x2, not as a strip. Fixed column
+   counts rather than auto-fit: auto-fit would give five across on a wide
+   viewport and break the pairing the layout depends on. */
+
+.ig-module-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 620px) {
+  .ig-module-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  .ig-module-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

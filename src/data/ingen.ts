@@ -1,9 +1,8 @@
 import raw from "./ingen.json";
 import locationsRaw from "./locations.json";
 import floraRaw from "./flora.json";
-import facilitiesRaw from "./facilities.json";
-import operationsRaw from "./operations.json";
 import locationImages from "./location-images.json";
+import floraImages from "./flora-images.json";
 
 import { ArchiveDataError, validateArchive, validateCrossLinks, validateDivisions } from "./validate";
 import { recordHref } from "./divisions";
@@ -11,9 +10,7 @@ import type {
   Archive,
   ArchiveEntry,
   ArchiveStats,
-  Facility,
   Flora,
-  Incident,
   Location,
   Person,
   RecordKind,
@@ -77,14 +74,8 @@ function summarise(specimens: Specimen[], personnel: Person[]): ArchiveStats {
   };
 }
 
-function build(
-  source: unknown,
-  locations: Location[],
-  flora: Flora[],
-  facilities: Facility[],
-  incidents: Incident[]
-): Archive {
-  const divisions = { locations, flora, facilities, incidents };
+function build(source: unknown, locations: Location[], flora: Flora[]): Archive {
+  const divisions = { locations, flora };
   const issues = [...validateArchive(source), ...validateDivisions(divisions)];
 
   // Cross-dataset links are only checkable once both halves are known to be
@@ -103,17 +94,17 @@ function build(
   const personnel = withImg(r.personnel, r.personnelImages);
 
   // Expansion divisions render a technical plate unless a real plate exists.
-  // Locations can carry photography per record — coverage is partial by design,
-  // so this is resolved per id rather than per division.
-  const noImg = <T extends object>(list: T[]): WithImage<T>[] => list.map((rec) => ({ ...rec, img: "" }));
-  const locationPlates = locationImages as Record<string, { src: string; w: number; h: number }>;
-  const locationRecords: WithImage<Location>[] = locations.map((rec) => {
-    const plate = locationPlates[rec.id];
-    return { ...rec, img: plate?.src ?? "", imgRatio: plate ? plate.w / plate.h : undefined };
-  });
-  const floraRecords = noImg(flora);
-  const facilityRecords = noImg(facilities);
-  const incidentRecords = noImg(incidents);
+  // Locations and flora can carry photography per record — coverage is partial
+  // by design, so this is resolved per id rather than per division.
+  type Plate = { src: string; w: number; h: number };
+  const platedBy =
+    <T extends { id: string }>(plates: Record<string, Plate>) =>
+    (rec: T): WithImage<T> => {
+      const plate = plates[rec.id];
+      return { ...rec, img: plate?.src ?? "", imgRatio: plate ? plate.w / plate.h : undefined };
+    };
+  const locationRecords: WithImage<Location>[] = locations.map(platedBy(locationImages as Record<string, Plate>));
+  const floraRecords: WithImage<Flora>[] = flora.map(platedBy(floraImages as Record<string, Plate>));
 
   const entries: ArchiveEntry[] = [
     ...specimens.map((d) => ({
@@ -137,7 +128,6 @@ function build(
         d.contain,
         d.status,
         d.notes,
-        (d.incidents ?? []).join(" "),
       ]),
     })),
     ...personnel.map((p) => ({
@@ -183,7 +173,8 @@ function build(
       subtitle: f.scientificName,
       status: f.status,
       security: f.security,
-      img: "",
+      img: f.img,
+      imgRatio: f.imgRatio,
       href: recordHref("flora", f.id),
       haystack: lower([
         f.name,
@@ -197,40 +188,6 @@ function build(
         f.tags.join(" "),
       ]),
     })),
-    ...facilityRecords.map((f) => ({
-      kind: "facility" as const,
-      id: f.id,
-      fileId: f.fileId,
-      name: f.name,
-      subtitle: f.designation,
-      status: f.status,
-      security: f.security,
-      img: "",
-      href: recordHref("facility", f.id),
-      haystack: lower([f.name, f.designation, f.fileId, f.type, f.function, f.status, f.description, f.tags.join(" ")]),
-    })),
-    ...incidentRecords.map((i) => ({
-      kind: "incident" as const,
-      id: i.id,
-      fileId: i.fileId,
-      name: i.name,
-      subtitle: `${i.year} · ${i.type}`,
-      status: i.status,
-      security: i.security,
-      img: "",
-      href: recordHref("incident", i.id),
-      haystack: lower([
-        i.name,
-        i.fileId,
-        i.type,
-        i.year,
-        i.date,
-        i.classification,
-        i.status,
-        i.summary,
-        i.tags.join(" "),
-      ]),
-    })),
   ];
 
   return {
@@ -238,8 +195,6 @@ function build(
     personnel,
     locations: locationRecords,
     flora: floraRecords,
-    facilities: facilityRecords,
-    incidents: incidentRecords,
 
     stats: summarise(r.specimens, r.personnel),
     counts: {
@@ -247,8 +202,6 @@ function build(
       person: personnel.length,
       location: locationRecords.length,
       flora: floraRecords.length,
-      facility: facilityRecords.length,
-      incident: incidentRecords.length,
       total: entries.length,
     },
 
@@ -256,25 +209,14 @@ function build(
     personById: new Map(personnel.map((p) => [p.id, p])),
     locationById: new Map(locationRecords.map((l) => [l.id, l])),
     floraById: new Map(floraRecords.map((f) => [f.id, f])),
-    facilityById: new Map(facilityRecords.map((f) => [f.id, f])),
-    incidentById: new Map(incidentRecords.map((i) => [i.id, i])),
     entries,
     entryByKey: new Map(entries.map((e) => [entryKey(e.kind, e.id), e])),
   };
 }
 
 /** Parses and validates an arbitrary payload — exported for tests. */
-export const buildArchive = (
-  source: unknown,
-  divisions?: { locations?: Location[]; flora?: Flora[]; facilities?: Facility[]; incidents?: Incident[] }
-) =>
-  build(
-    source,
-    divisions?.locations ?? (locationsRaw as Location[]),
-    divisions?.flora ?? (floraRaw as Flora[]),
-    divisions?.facilities ?? (facilitiesRaw as Facility[]),
-    divisions?.incidents ?? (operationsRaw as Incident[])
-  );
+export const buildArchive = (source: unknown, divisions?: { locations?: Location[]; flora?: Flora[] }) =>
+  build(source, divisions?.locations ?? (locationsRaw as Location[]), divisions?.flora ?? (floraRaw as Flora[]));
 
 let cached: Archive | null = null;
 let failure: ArchiveDataError | null = null;
@@ -287,13 +229,7 @@ export function loadArchive(): Archive {
   if (cached) return cached;
   if (failure) throw failure;
   try {
-    cached = build(
-      raw,
-      locationsRaw as Location[],
-      floraRaw as Flora[],
-      facilitiesRaw as Facility[],
-      operationsRaw as Incident[]
-    );
+    cached = build(raw, locationsRaw as Location[], floraRaw as Flora[]);
     return cached;
   } catch (err) {
     failure = err as ArchiveDataError;

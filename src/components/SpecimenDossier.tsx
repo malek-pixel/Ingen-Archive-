@@ -1,15 +1,15 @@
 import type { Specimen, WithImage } from "../data/types";
-import { ArchiveSeal, ClassifiedBlock, Meter, PlateFrame, StatRows, Timeline, Watermark } from "./Chrome";
+import { ArchiveSeal, ClassifiedBlock, Meter, PlateFrame, StatRows, Watermark } from "./Chrome";
+import { GenomeReadout } from "./GenomeStrip";
 import {
-  byYear,
   cells,
   containment,
   dietLabel,
   humanizeStat,
-  parseSlug,
   plateBlend,
   specimenStatus,
   threatInk,
+  threatValue,
   threatLabel,
 } from "../lib/derive";
 import { stagger, step, useReveal } from "../lib/motion";
@@ -38,7 +38,6 @@ export function SpecimenDossier({ d }: { d: WithImage<Specimen> }) {
     { label: "Habitat", value: d.habitat || "—" },
     { label: "Genome completion", value: d.genome != null ? `${d.genome}%` : "—" },
   ];
-  const incidents = (d.incidents ?? []).map(parseSlug).sort(byYear);
 
   return (
     <>
@@ -227,7 +226,7 @@ export function SpecimenDossier({ d }: { d: WithImage<Specimen> }) {
                 Threat assessment
               </span>
               <span style={{ font: "700 21px 'Archivo',sans-serif", color: ink, fontVariantNumeric: "tabular-nums" }}>
-                {d.threat}
+                {threatValue(t)}
                 <span style={{ font: "500 12px 'IBM Plex Mono',monospace", color: "#6F859D" }}> / 5</span>
               </span>
             </div>
@@ -242,6 +241,13 @@ export function SpecimenDossier({ d }: { d: WithImage<Specimen> }) {
             >
               {threatLabel(t)}
             </p>
+            {/* The same instrument the index card carries, at dossier scale.
+                It repeats the genome figure already in the fact rows above
+                rather than adding a claim — the trace is the housing, the
+                percentage is the record. */}
+            <div style={{ marginTop: 16, paddingTop: 14, borderTop: "1px solid #161D26" }}>
+              <GenomeReadout d={d} />
+            </div>
           </div>
 
           <div>
@@ -323,22 +329,6 @@ export function SpecimenDossier({ d }: { d: WithImage<Specimen> }) {
               {d.notes}
             </p>
           </div>
-
-          {incidents.length > 0 && (
-            <div style={{ padding: "28px 0", borderBottom: "1px solid #1A222C" }}>
-              <div
-                style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 22 }}
-              >
-                <h2 style={{ margin: 0, font: "700 17px 'Archivo',sans-serif", letterSpacing: "-.015em" }}>
-                  Incident history
-                </h2>
-                <span style={{ font: "400 12.5px 'IBM Plex Sans',sans-serif", color: "#788BA0" }}>
-                  {incidents.length} on record
-                </span>
-              </div>
-              <Timeline events={incidents} />
-            </div>
-          )}
 
           <RelatedRecords groups={related} />
 

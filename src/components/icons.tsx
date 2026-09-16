@@ -47,16 +47,6 @@ export const SiteIcon = () => (
   </svg>
 );
 
-/** Structure elevation — the Facilities division. */
-export const StructureIcon = () => (
-  <svg {...base} strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 21h18" />
-    <path d="M5 21V9l7-5 7 5v12" />
-    <rect x="10" y="14" width="4" height="7" />
-    <path d="M8.5 10.5h2M13.5 10.5h2" />
-  </svg>
-);
-
 /** Frond — the Paleobotany division. */
 export const LeafIcon = () => (
   <svg {...base} strokeLinecap="round" strokeLinejoin="round">
@@ -66,12 +56,12 @@ export const LeafIcon = () => (
   </svg>
 );
 
-/** Event marker — the Operations division. */
-export const EventIcon = () => (
+/** Padlock — the Level 5 clearance layer. */
+export const ClassifiedIcon = () => (
   <svg {...base} strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 3.5 21.5 20H2.5z" />
-    <path d="M12 10v4.5" />
-    <path d="M12 17.4h.01" />
+    <rect x="4" y="10.5" width="16" height="9.5" rx="1" />
+    <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+    <path d="M12 14v2.5" />
   </svg>
 );
 

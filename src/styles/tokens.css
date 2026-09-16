@@ -61,6 +61,10 @@
   --ig-classified-bg: #12141a;
   --ig-classified-ink: #c8524b;
   --ig-classified-text: #b7aba9;
+  /* Level 5 layer. --ig-l5-ink is the text-safe lift of --ig-classified-ink,
+     which is kept for rules and stamp edges where the 3:1 floor applies. */
+  --ig-l5-ink: #d2726b;
+  --ig-l5-line: #1e2732;
 
   /* Type */
   --ig-display: "Archivo", sans-serif;

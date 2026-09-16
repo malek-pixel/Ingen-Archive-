@@ -2,7 +2,7 @@
   "specimens": [
     {
       "id": "quetzalcoatlus",
-      "fileId": "ING-AIR-001",
+      "fileId": "ING-AVI-003",
       "name": "Quetzalcoatlus",
       "species": "Quetzalcoatlus northropi",
       "codename": "Shadow",
@@ -15,10 +15,6 @@
       "diet": "Carnivorous",
       "habitat": "Open sky, cliff roosts, unrestricted continental range",
       "genome": 72,
-      "incidents": [
-        "fallen-kingdom-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 4,
         "defense": 2,
@@ -44,15 +40,11 @@
       "classification": "Aerial Opportunistic Predator",
       "threat": 4,
       "contain": "FAILED",
-      "length": "N/A",
-      "weight": "Light — flight-adapted skeleton",
+      "length": "9.8 meter wingspan",
+      "weight": "Not documented",
       "diet": "Fish, small animals, carrion",
       "habitat": "Skies, cliffs, coasts, islands",
       "genome": 90,
-      "incidents": [
-        "isla-sorna-1997",
-        "jurassic-world-2015"
-      ],
       "stats": {
         "strength": 2,
         "defense": 2,
@@ -74,14 +66,11 @@
       "classification": "Aerial Swarm Predator / Cliff Hunter",
       "threat": 2,
       "contain": "FAILED",
-      "length": "N/A",
-      "weight": "Very light",
+      "length": "~2.5 meter wingspan",
+      "weight": "Not documented",
       "diet": "Insects, fish, small prey, carrion",
       "habitat": "Cliffs, forests, coastal caves",
       "genome": 81,
-      "incidents": [
-        "jurassic-world-2015"
-      ],
       "stats": {
         "strength": 1,
         "defense": 2,
@@ -103,14 +92,11 @@
       "classification": "High-Altitude Aerial Hunter / Coastal Soarer",
       "threat": 3,
       "contain": "FAILED",
-      "length": "N/A",
+      "length": "Not documented",
       "weight": "10–20 kg",
       "diet": "Fish, small animals, marine surface prey",
       "habitat": "Open skies, coastal cliffs, ocean thermals",
       "genome": 77,
-      "incidents": [
-        "jurassic-world-2015"
-      ],
       "stats": {
         "strength": 2,
         "defense": 2,
@@ -118,9 +104,13 @@
         "stealth": 4,
         "aggression": 2
       },
-      "notes": "Long-distance soaring specialist. Coastal and ocean thermal rider. Solitary or small flock behavior. Highly energy-efficient flight patterns.",
-      "classified": "Risk assessment: MEDIUM. Low aggression but wide territorial range. Rarely observed due to altitude preference.",
-      "tag": "It doesn't hunt the world — it crosses it."
+      "notes": "Long-distance soaring specialist. Coastal and ocean thermal rider. Solitary or small flock behavior. Highly energy-efficient flight patterns. Reared in the Site B aviary before transfer to Isla Nublar.",
+      "classified": "Risk assessment: MEDIUM. Low aggression but wide territorial range. Rarely observed due to altitude preference. No film-canon sighting is on record; InGen origin and aviary housing are documented from expanded material only.",
+      "tag": "It doesn't hunt the world — it crosses it.",
+      "locations": [
+        "isla-sorna",
+        "isla-nublar"
+      ]
     },
     {
       "id": "tyrannosaurus-rex",
@@ -137,13 +127,6 @@
       "diet": "Carnivorous",
       "habitat": "Open woodland, river valleys, cleared plain",
       "genome": 94,
-      "incidents": [
-        "isla-nublar-1993",
-        "jurassic-world-2015",
-        "nublar-eruption-2018",
-        "fallen-kingdom-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 5,
         "defense": 4,
@@ -160,18 +143,15 @@
         "jurassic-world",
         "lockwood-estate",
         "biosyn-valley"
-      ],
-      "facilities": [
-        "trex-paddock"
       ]
     },
     {
       "id": "velociraptor",
-      "fileId": "ING-DIN-002",
+      "fileId": "ING-DIN-006",
       "name": "Velociraptor",
       "species": "Velociraptor antirrhopus",
       "codename": "Pack Asset",
-      "status": "DECEASED",
+      "status": "ACTIVE",
       "classification": "Pack Hunter / Coordinated Predator",
       "threat": 5,
       "contain": "FAILED PERMANENTLY",
@@ -180,11 +160,6 @@
       "diet": "Carnivorous",
       "habitat": "Dense cover, structured interiors, enclosed terrain",
       "genome": 88,
-      "incidents": [
-        "isla-nublar-1993",
-        "isla-sorna-1997",
-        "isla-sorna-2001"
-      ],
       "stats": {
         "strength": 3,
         "defense": 2,
@@ -193,15 +168,12 @@
         "aggression": 5
       },
       "notes": "The original Nublar pack, distinct from the later Raptor Squad line. Demonstrated problem-solving well outside the projected range: coordinated flanking, door handle manipulation, and systematic testing of fence sections for weakness.",
-      "classified": "Risk assessment: EXTREME. Pack learned faster than containment could be revised. Muldoon's standing recommendation that the line be destroyed was filed and not actioned.",
+      "classified": "Risk assessment: EXTREME. Pack learned faster than containment could be revised. Muldoon's standing recommendation that the line be destroyed was filed and not actioned. The original Nublar pack is accounted for; the line itself is not, and remained established on Isla Sorna.",
       "tag": "They were testing the fences for weaknesses. Systematically.",
       "locations": [
         "isla-nublar",
         "isla-sorna",
         "jurassic-park"
-      ],
-      "facilities": [
-        "raptor-paddock"
       ],
       "personnel": [
         "robert-muldoon"
@@ -222,10 +194,6 @@
       "diet": "Carnivorous — medium-large prey specialist",
       "habitat": "Open terrain, forest edges, semi-arid zones",
       "genome": 83,
-      "incidents": [
-        "fallen-kingdom-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 4,
         "defense": 3,
@@ -252,9 +220,6 @@
       "diet": "Carnivorous — large apex prey specialist",
       "habitat": "Forest biomes, cold-temperate containment zones",
       "genome": 86,
-      "incidents": [
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 5,
         "defense": 5,
@@ -268,7 +233,7 @@
     },
     {
       "id": "spinosaurus",
-      "fileId": "ING-DIN-005",
+      "fileId": "ING-DIN-002",
       "name": "Spinosaurus",
       "species": "Spinosaurus aegyptiacus",
       "codename": "Sail",
@@ -276,14 +241,11 @@
       "classification": "Apex Semi-Aquatic Predator",
       "threat": 5,
       "contain": "FAILED",
-      "length": "15–16 meters",
-      "weight": "8–9 tons",
+      "length": "13.3 meters",
+      "weight": "8 tons",
       "diet": "Carnivorous",
       "habitat": "River systems, coastal margin, flooded interior",
       "genome": 79,
-      "incidents": [
-        "isla-sorna-2001"
-      ],
       "stats": {
         "strength": 5,
         "defense": 4,
@@ -314,11 +276,6 @@
       "diet": "Carnivorous",
       "habitat": "Variable — confirmed wild survival post-2022",
       "genome": 97,
-      "incidents": [
-        "jurassic-world-2015",
-        "fallen-kingdom-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 4,
         "defense": 3,
@@ -345,9 +302,6 @@
       "diet": "Carnivorous",
       "habitat": "Isla Nublar",
       "genome": 92,
-      "incidents": [
-        "jurassic-world-2015"
-      ],
       "stats": {
         "strength": 3,
         "defense": 2,
@@ -374,9 +328,6 @@
       "diet": "Carnivorous",
       "habitat": "Isla Nublar",
       "genome": 92,
-      "incidents": [
-        "jurassic-world-2015"
-      ],
       "stats": {
         "strength": 3,
         "defense": 2,
@@ -403,9 +354,6 @@
       "diet": "Carnivorous",
       "habitat": "Isla Nublar",
       "genome": 92,
-      "incidents": [
-        "jurassic-world-2015"
-      ],
       "stats": {
         "strength": 3,
         "defense": 2,
@@ -419,7 +367,7 @@
     },
     {
       "id": "atrociraptor",
-      "fileId": "ING-DIN-011",
+      "fileId": "ING-DIN-028",
       "name": "Atrociraptor",
       "species": "Atrociraptor marshalli",
       "codename": "Trained Line",
@@ -432,9 +380,6 @@
       "diet": "Carnivorous",
       "habitat": "Urban and structured environments, mixed terrain",
       "genome": 76,
-      "incidents": [
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 3,
         "defense": 2,
@@ -451,7 +396,7 @@
     },
     {
       "id": "pyroraptor",
-      "fileId": "ING-DIN-012",
+      "fileId": "ING-DIN-029",
       "name": "Pyroraptor",
       "species": "Pyroraptor olympius",
       "codename": "Ember",
@@ -464,9 +409,6 @@
       "diet": "Carnivorous",
       "habitat": "Boreal forest, frozen lake margin, alpine cover",
       "genome": 74,
-      "incidents": [
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 3,
         "defense": 2,
@@ -496,10 +438,6 @@
       "diet": "Herbivorous",
       "habitat": "Forests, dense jungle edges, mixed terrain",
       "genome": 91,
-      "incidents": [
-        "fallen-kingdom-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 5,
         "defense": 5,
@@ -526,9 +464,6 @@
       "diet": "Herbivorous — high vegetation browsing",
       "habitat": "Open plains, forest clearings, river valleys",
       "genome": 89,
-      "incidents": [
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 5,
         "defense": 4,
@@ -555,11 +490,6 @@
       "diet": "Herbivorous — high canopy browsing",
       "habitat": "Forest canopies, river valleys, open woodland",
       "genome": 95,
-      "incidents": [
-        "isla-nublar-1993",
-        "jurassic-world-2015",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 5,
         "defense": 3,
@@ -586,12 +516,6 @@
       "diet": "Herbivorous",
       "habitat": "Riverine plain, lake margin, open grazing",
       "genome": 93,
-      "incidents": [
-        "isla-nublar-1993",
-        "jurassic-world-2015",
-        "nublar-eruption-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 2,
         "defense": 2,
@@ -624,10 +548,6 @@
       "diet": "Omnivorous — plants, small prey, insects",
       "habitat": "Open plains, deserts, wide grasslands",
       "genome": 93,
-      "incidents": [
-        "isla-nublar-1993",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 2,
         "defense": 1,
@@ -654,10 +574,6 @@
       "diet": "Carnivorous — small prey, carrion, swarm hunting",
       "habitat": "Forest floors, beaches, dense undergrowth",
       "genome": 88,
-      "incidents": [
-        "isla-sorna-1997",
-        "isla-sorna-2001"
-      ],
       "stats": {
         "strength": 1,
         "defense": 1,
@@ -684,9 +600,6 @@
       "diet": "Carnivorous — fish-heavy, opportunistic",
       "habitat": "Rivers, swamps, marshlands, lakesides",
       "genome": 87,
-      "incidents": [
-        "fallen-kingdom-2018"
-      ],
       "stats": {
         "strength": 4,
         "defense": 3,
@@ -700,7 +613,7 @@
     },
     {
       "id": "stegosaurus",
-      "fileId": "ING-DIN-020",
+      "fileId": "ING-DIN-012",
       "name": "Stegosaurus",
       "species": "Stegosaurus stenops",
       "codename": "Plate Back",
@@ -713,12 +626,6 @@
       "diet": "Herbivorous",
       "habitat": "Fern prairie, open woodland margin",
       "genome": 90,
-      "incidents": [
-        "isla-sorna-1997",
-        "jurassic-world-2015",
-        "nublar-eruption-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 4,
         "defense": 5,
@@ -750,9 +657,6 @@
       "diet": "Herbivorous — low vegetation grazer",
       "habitat": "Forest edges, plains, semi-dry environments",
       "genome": 84,
-      "incidents": [
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 3,
         "defense": 4,
@@ -766,7 +670,7 @@
     },
     {
       "id": "triceratops",
-      "fileId": "ING-DIN-022",
+      "fileId": "ING-DIN-011",
       "name": "Triceratops",
       "species": "Triceratops horridus",
       "codename": "Three Horn",
@@ -779,11 +683,6 @@
       "diet": "Herbivorous",
       "habitat": "Open plain, low scrub, cycad stands",
       "genome": 92,
-      "incidents": [
-        "isla-nublar-1993",
-        "jurassic-world-2015",
-        "nublar-eruption-2018"
-      ],
       "stats": {
         "strength": 4,
         "defense": 5,
@@ -815,11 +714,6 @@
       "diet": "Herbivorous",
       "habitat": "Woodland margin, volcanic upland scrub",
       "genome": 87,
-      "incidents": [
-        "nublar-eruption-2018",
-        "fallen-kingdom-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 4,
         "defense": 4,
@@ -834,9 +728,6 @@
         "isla-nublar",
         "lockwood-estate",
         "biosyn-valley"
-      ],
-      "facilities": [
-        "lockwood-sublevel"
       ]
     },
     {
@@ -849,14 +740,11 @@
       "classification": "Ambush Predator / Toxic Display Specialist",
       "threat": 3,
       "contain": "PARTIALLY STABLE",
-      "length": "6–7 meters",
-      "weight": "400–900 kg",
+      "length": "3 meters (Nublar specimen — juvenile); ~6 meters adult",
+      "weight": "Not documented",
       "diet": "Carnivorous — small prey, scavenging, ambush hunting",
       "habitat": "Forest floors, swamp edges, dense jungle zones",
       "genome": 79,
-      "incidents": [
-        "isla-nublar-1993"
-      ],
       "stats": {
         "strength": 2,
         "defense": 2,
@@ -870,7 +758,7 @@
     },
     {
       "id": "therizinosaurus",
-      "fileId": "ING-DIN-025",
+      "fileId": "ING-DIN-020",
       "name": "Therizinosaurus",
       "species": "Therizinosaurus cheloniformis",
       "codename": "Scythe",
@@ -883,9 +771,6 @@
       "diet": "Herbivorous",
       "habitat": "Dense forest, low-light valley interior",
       "genome": 81,
-      "incidents": [
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 5,
         "defense": 5,
@@ -898,18 +783,15 @@
       "tag": "It cannot see you. It does not need to.",
       "locations": [
         "biosyn-valley"
-      ],
-      "facilities": [
-        "biosyn-research-complex"
       ]
     },
     {
       "id": "apatosaurus",
-      "fileId": "ING-DIN-026",
+      "fileId": "ING-DIN-035",
       "name": "Apatosaurus",
       "species": "Apatosaurus louisae",
       "codename": "Longneck",
-      "status": "DECEASED",
+      "status": "ACTIVE",
       "classification": "Colossal Herbivore / Herd Grazer",
       "threat": 2,
       "contain": "PARTIALLY STABLE",
@@ -918,10 +800,6 @@
       "diet": "Herbivorous",
       "habitat": "Open valley grazing, mixed canopy",
       "genome": 89,
-      "incidents": [
-        "jurassic-world-2015",
-        "nublar-eruption-2018"
-      ],
       "stats": {
         "strength": 5,
         "defense": 3,
@@ -929,17 +807,18 @@
         "intelligence": 2,
         "aggression": 1
       },
-      "notes": "Gentle and habituated to handler contact, with a strong herd bond and audible distress vocalisation when separated. The Nublar herd was among the last groups still on the island when Sibo erupted.",
-      "classified": "Risk assessment: LOW. Recorded here chiefly as loss: the herd could not be moved within the evacuation window and was not recovered.",
-      "tag": "The herd stayed together to the end of the island.",
+      "notes": "Gentle and habituated to handler contact, with a strong herd bond and audible distress vocalisation when separated. The Nublar herd was among the groups still on the island when Sibo erupted; part of the herd was not recovered, while animals taken off the island by ship were later released from the Lockwood estate. The species has since been recorded on the mainland.",
+      "classified": "Risk assessment: LOW. Recorded here in part as loss — animals that could not be moved within the evacuation window were not recovered — and in part as dispersal, the surviving stock having entered mainland ecosystems uncontrolled.",
+      "tag": "Part of the herd never left the island. The rest of it never came back under control.",
       "locations": [
         "isla-nublar",
-        "jurassic-world"
+        "jurassic-world",
+        "lockwood-estate"
       ]
     },
     {
       "id": "nasutoceratops",
-      "fileId": "ING-DIN-027",
+      "fileId": "ING-DIN-036",
       "name": "Nasutoceratops",
       "species": "Nasutoceratops titusi",
       "codename": "Bull Horn",
@@ -952,10 +831,6 @@
       "diet": "Herbivorous",
       "habitat": "Open scrub, forest edge, valley floor",
       "genome": 86,
-      "incidents": [
-        "nublar-eruption-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 3,
         "defense": 4,
@@ -973,7 +848,7 @@
     },
     {
       "id": "stygimoloch",
-      "fileId": "ING-DIN-028",
+      "fileId": "ING-HRB-014",
       "name": "Stygimoloch",
       "species": "Stygimoloch spinifer",
       "codename": "Stiggy",
@@ -986,10 +861,6 @@
       "diet": "Herbivorous",
       "habitat": "Rocky upland, forest margin, structured interiors",
       "genome": 84,
-      "incidents": [
-        "nublar-eruption-2018",
-        "fallen-kingdom-2018"
-      ],
       "stats": {
         "strength": 4,
         "defense": 4,
@@ -1003,9 +874,6 @@
       "locations": [
         "isla-nublar",
         "lockwood-estate"
-      ],
-      "facilities": [
-        "lockwood-sublevel"
       ]
     },
     {
@@ -1023,9 +891,6 @@
       "diet": "Carnivorous — hyper-apex predation",
       "habitat": "Jurassic World R&D paddock — escaped",
       "genome": 100,
-      "incidents": [
-        "jurassic-world-2015"
-      ],
       "stats": {
         "strength": 5,
         "defense": 5,
@@ -1052,9 +917,6 @@
       "diet": "Carnivorous",
       "habitat": "Structured interiors — engineered for close-quarters deployment",
       "genome": 67,
-      "incidents": [
-        "fallen-kingdom-2018"
-      ],
       "stats": {
         "strength": 4,
         "defense": 3,
@@ -1067,9 +929,6 @@
       "tag": "It was not bred to survive. It was bred to be sold.",
       "locations": [
         "lockwood-estate"
-      ],
-      "facilities": [
-        "lockwood-sublevel"
       ],
       "personnel": [
         "henry-wu",
@@ -1090,10 +949,6 @@
       "weight": "~9,000 kg",
       "diet": "Carnivorous — opportunistic apex predation",
       "habitat": "Île Saint-Hubert — presumed feral island range",
-      "genome": 0,
-      "incidents": [
-        "ile-saint-hubert-2010"
-      ],
       "stats": {
         "strength": 5,
         "defense": 5,
@@ -1120,11 +975,6 @@
       "diet": "Carnivorous — large marine prey specialist",
       "habitat": "Open ocean, coastal zones, deep water regions",
       "genome": 96,
-      "incidents": [
-        "jurassic-world-2015",
-        "fallen-kingdom-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 5,
         "defense": 5,
@@ -1151,9 +1001,6 @@
       "diet": "Carnivorous — fish, squid, small marine reptiles",
       "habitat": "Open ocean, deep coastal waters",
       "genome": 76,
-      "incidents": [
-        "jurassic-world-2015"
-      ],
       "stats": {
         "strength": 3,
         "defense": 3,
@@ -1162,8 +1009,63 @@
         "aggression": 2
       },
       "notes": "Agile underwater swimmer. Solitary hunter in deep water. Prefers stealth over brute force. Avoids confrontation with apex marine predators.",
-      "classified": "Risk assessment: MEDIUM. Avoids apex encounters. Silent hunter rather than dominant force.",
+      "classified": "Risk assessment: MEDIUM. Avoids apex encounters. Silent hunter rather than dominant force. No film-canon sighting is on record; the species is documented from expanded material only.",
       "tag": "It doesn't rule the ocean — it moves through it unseen."
+    },
+    {
+      "id": "plesiosaurus",
+      "fileId": "ING-MAR-003",
+      "name": "Plesiosaurus",
+      "species": "Plesiosaurus",
+      "status": "ALIVE / CONFIRMED IN MARINE RESTORATION RECORDS",
+      "classification": "Marine Reptile / Sauropterygian",
+      "threat": 3,
+      "contain": "MODERATE",
+      "length": "~3–5 meters",
+      "weight": "~450–900 kg (estimated)",
+      "diet": "Carnivorous / aquatic prey",
+      "habitat": "Coastal and open-water habitats",
+      "stats": {
+        "strength": 3,
+        "defense": 3,
+        "speed": 4,
+        "intelligence": 3,
+        "aggression": 3
+      },
+      "notes": "A smaller marine-reptile restoration project, filed separately from the giant marine predators maintained in the Jurassic World ecosystem and retained as a distinct marine taxon for research purposes. Origin is recorded against the InGen/Biosyn marine restoration programmes. The animal is an aquatic ambush predator, generally solitary, feeding on fish and small marine animals across coastal and open-water habitats, with strong swimming capability, aquatic manoeuvrability and underwater endurance on record.",
+      "classified": "Containment history: MODERATE. Risk assessment: MODERATE. Open-water containment is the principal operational challenge. Held on file as the representative small marine-reptile restoration and as a comparison specimen for the larger marine reptiles, demonstrating the diversity of restored aquatic taxa.",
+      "tag": "The ocean does not need fences to hide what lives beneath it.",
+      "specimens": [
+        "mosasaurus",
+        "attenborosaurus"
+      ]
+    },
+    {
+      "id": "ichthyosaurs",
+      "fileId": "ING-MAR-004",
+      "name": "Ichthyosaurs",
+      "species": "Ichthyosauria",
+      "status": "MARINE POPULATION / TAXONOMIC GROUP",
+      "classification": "Marine Reptiles / Ichthyosauria",
+      "threat": 0,
+      "contain": "OPEN-WATER / NON-STANDARD",
+      "length": "Species-dependent; approximately 1–20+ meters across known forms",
+      "weight": "Species-dependent",
+      "diet": "Carnivorous; primarily fish and marine prey",
+      "habitat": "Open ocean, across large geographic ranges",
+      "stats": {
+        "speed": 5,
+        "intelligence": 4,
+        "aggression": 4
+      },
+      "notes": "A diverse group of extinct marine reptiles resembling modern fish and dolphins in body shape. This is a group-level entry: Ichthyosauria is an entire evolutionary lineage rather than a single species, and any engineered population would require species-specific records for exact measurements and behaviour. Recorded traits are highly adapted aquatic locomotion, fast pursuit swimming, predatory specialisation and open-ocean movement; many species likely displayed schooling or group behaviour. Origin is recorded against the InGen/Biosyn marine restoration programmes.",
+      "classified": "Containment history: OPEN-WATER / NON-STANDARD. Risk assessment: SPECIES DEPENDENT. Group-level classification is insufficient for individual risk assessment; exact species and specimen data must be recorded before any containment decision. Monitoring must cover large geographic ranges because conventional terrestrial containment is impossible.",
+      "tag": "A species can be contained. An oceanic lineage cannot.",
+      "specimens": [
+        "mosasaurus",
+        "attenborosaurus",
+        "plesiosaurus"
+      ]
     }
   ],
   "personnel": [
@@ -1281,7 +1183,7 @@
     {
       "id": "vic-hoskins",
       "fileId": "ING-CHR-005",
-      "name": "Vic Hoskins",
+      "name": "Victor \"Vic\" Hoskins",
       "status": "DECEASED",
       "clearance": 4,
       "dept": "InGen Security Division",
@@ -1307,7 +1209,7 @@
     {
       "id": "john-hammond",
       "fileId": "ING-CHR-006",
-      "name": "John Hammond",
+      "name": "John Alfred Hammond",
       "status": "DECEASED",
       "clearance": 5,
       "dept": "Executive Leadership",
@@ -1549,7 +1451,7 @@
     {
       "id": "ray-arnold",
       "fileId": "ING-CHR-015",
-      "name": "Ray Arnold",
+      "name": "Raymond \"Ray\" Arnold",
       "status": "DECEASED",
       "clearance": 4,
       "dept": "Systems Engineering",
@@ -1758,7 +1660,7 @@
     },
     {
       "id": "eli-mills",
-      "fileId": "ING-CHR-023",
+      "fileId": "ING-CHR-024",
       "name": "Eli Mills",
       "status": "DECEASED",
       "clearance": 4,
@@ -1786,9 +1688,6 @@
         "lockwood-estate",
         "isla-nublar"
       ],
-      "facilities": [
-        "lockwood-sublevel"
-      ],
       "specimens": [
         "indoraptor",
         "sinoceratops"
@@ -1796,7 +1695,7 @@
     },
     {
       "id": "roland-tembo",
-      "fileId": "ING-CHR-024",
+      "fileId": "ING-CHR-030",
       "name": "Roland Tembo",
       "status": "ALIVE",
       "clearance": 3,
@@ -1829,7 +1728,7 @@
     },
     {
       "id": "donald-gennaro",
-      "fileId": "ING-CHR-025",
+      "fileId": "ING-CHR-026",
       "name": "Donald Gennaro",
       "status": "DECEASED",
       "clearance": 4,
@@ -1854,16 +1753,12 @@
       "locations": [
         "isla-nublar",
         "jurassic-park"
-      ],
-      "facilities": [
-        "visitor-centre",
-        "trex-paddock"
       ]
     },
     {
       "id": "lex-murphy",
-      "fileId": "ING-CHR-026",
-      "name": "Lex Murphy",
+      "fileId": "ING-CHR-032",
+      "name": "Alexis \"Lex\" Murphy",
       "status": "ALIVE",
       "clearance": 2,
       "dept": "External / Non-Personnel Visitor",
@@ -1888,15 +1783,12 @@
       "locations": [
         "isla-nublar",
         "jurassic-park"
-      ],
-      "facilities": [
-        "visitor-centre"
       ]
     },
     {
       "id": "tim-murphy",
-      "fileId": "ING-CHR-027",
-      "name": "Tim Murphy",
+      "fileId": "ING-CHR-034",
+      "name": "Timothy \"Tim\" Murphy",
       "status": "ALIVE",
       "clearance": 2,
       "dept": "External / Non-Personnel Visitor",
@@ -1920,15 +1812,11 @@
       "locations": [
         "isla-nublar",
         "jurassic-park"
-      ],
-      "facilities": [
-        "visitor-centre",
-        "trex-paddock"
       ]
     },
     {
       "id": "billy-brennan",
-      "fileId": "ING-CHR-028",
+      "fileId": "ING-CHR-027",
       "name": "Billy Brennan",
       "status": "ALIVE",
       "clearance": 3,
@@ -1960,7 +1848,7 @@
     },
     {
       "id": "paul-kirby",
-      "fileId": "ING-CHR-029",
+      "fileId": "ING-CHR-033",
       "name": "Paul Kirby",
       "status": "ALIVE",
       "clearance": 2,
@@ -1989,7 +1877,7 @@
     },
     {
       "id": "eric-kirby",
-      "fileId": "ING-CHR-030",
+      "fileId": "ING-CHR-031",
       "name": "Eric Kirby",
       "status": "ALIVE",
       "clearance": 2,
@@ -2022,7 +1910,7 @@
     },
     {
       "id": "lowery-cruthers",
-      "fileId": "ING-CHR-031",
+      "fileId": "ING-CHR-029",
       "name": "Lowery Cruthers",
       "status": "ALIVE",
       "clearance": 3,
@@ -2048,17 +1936,13 @@
         "isla-nublar",
         "jurassic-world"
       ],
-      "facilities": [
-        "main-street",
-        "indominus-paddock"
-      ],
       "specimens": [
         "indominus-rex"
       ]
     },
     {
       "id": "gerry-harding",
-      "fileId": "ING-CHR-032",
+      "fileId": "ING-CHR-025",
       "name": "Gerry Harding",
       "status": "ALIVE",
       "clearance": 4,
@@ -2084,16 +1968,13 @@
         "isla-nublar",
         "jurassic-park"
       ],
-      "facilities": [
-        "visitor-centre"
-      ],
       "specimens": [
         "triceratops"
       ]
     },
     {
       "id": "ken-wheatley",
-      "fileId": "ING-CHR-033",
+      "fileId": "ING-CHR-028",
       "name": "Ken Wheatley",
       "status": "DECEASED",
       "clearance": 3,
@@ -2120,9 +2001,6 @@
         "isla-nublar",
         "lockwood-estate"
       ],
-      "facilities": [
-        "lockwood-sublevel"
-      ],
       "specimens": [
         "indoraptor",
         "sinoceratops"
@@ -2130,7 +2008,7 @@
     },
     {
       "id": "ramsay-cole",
-      "fileId": "ING-CHR-034",
+      "fileId": "ING-CHR-023",
       "name": "Ramsay Cole",
       "status": "ALIVE",
       "clearance": 5,
@@ -2154,50 +2032,48 @@
       "tag": "He kept the company's confidence for exactly as long as it took to end it.",
       "locations": [
         "biosyn-valley"
-      ],
-      "facilities": [
-        "biosyn-research-complex",
-        "biosyn-amber-mine"
       ]
     }
   ],
   "specimenImages": {
-    "quetzalcoatlus": "",
+    "quetzalcoatlus": "/media/dinos/quetzalcoatlus.webp",
     "pteranodon": "/media/dinos/pteranodon.webp",
     "dimorphodon": "/media/dinos/dimorphodon.webp",
     "geosternbergia": "/media/dinos/geosternbergia.webp",
-    "tyrannosaurus-rex": "",
-    "velociraptor": "",
+    "tyrannosaurus-rex": "/media/dinos/tyrannosaurus-rex.webp",
+    "velociraptor": "/media/dinos/velociraptor.webp",
     "carnotaurus": "/media/dinos/carnotaurus.webp",
     "giganotosaurus": "/media/dinos/giganotosaurus.webp",
-    "spinosaurus": "",
+    "spinosaurus": "/media/dinos/spinosaurus.webp",
     "blue": "/media/dinos/blue.webp",
     "delta": "/media/dinos/delta.webp",
     "charlie": "/media/dinos/charlie.webp",
     "echo": "/media/dinos/echo.webp",
-    "atrociraptor": "",
-    "pyroraptor": "",
+    "atrociraptor": "/media/dinos/atrociraptor.webp",
+    "pyroraptor": "/media/dinos/pyroraptor.webp",
     "ankylosaurus": "/media/dinos/ankylosaurus-v4.webp",
     "diplodocus": "/media/dinos/diplodocus.webp",
     "brachiosaurus": "/media/dinos/brachiosaurus.webp",
-    "parasaurolophus": "",
+    "parasaurolophus": "/media/dinos/parasaurolophus.webp",
     "gallimimus": "/media/dinos/gallimimus.webp",
     "compsognathus": "/media/dinos/compsognathus.webp",
     "baryonyx": "/media/dinos/baryonyx.webp",
-    "stegosaurus": "",
+    "stegosaurus": "/media/dinos/stegosaurus.webp",
     "kentrosaurus": "/media/dinos/kentrosaurus.webp",
-    "triceratops": "",
-    "sinoceratops": "",
+    "triceratops": "/media/dinos/triceratops.webp",
+    "sinoceratops": "/media/dinos/sinoceratops.webp",
     "dilophosaurus": "/media/dinos/dilophosaurus.webp",
-    "therizinosaurus": "",
-    "apatosaurus": "",
-    "nasutoceratops": "",
-    "stygimoloch": "",
+    "therizinosaurus": "/media/dinos/therizinosaurus.webp",
+    "apatosaurus": "/media/dinos/apatosaurus.webp",
+    "nasutoceratops": "/media/dinos/nasutoceratops.webp",
+    "stygimoloch": "/media/dinos/stygimoloch.webp",
     "indominus-rex": "/media/dinos/indominus-rex.webp",
-    "indoraptor": "",
+    "indoraptor": "/media/dinos/indoraptor.webp",
     "distortus-rex": "/media/dinos/distortus-rex.webp",
     "mosasaurus": "/media/dinos/mosasaurus.webp",
-    "attenborosaurus": "/media/dinos/attenborosaurus-v2.webp"
+    "attenborosaurus": "/media/dinos/attenborosaurus-v2.webp",
+    "plesiosaurus": "/media/dinos/plesiosaurus.webp",
+    "ichthyosaurs": "/media/dinos/ichthyosaurs.webp"
   },
   "personnelImages": {
     "owen-grady": "/media/personnel/owen-grady.webp",
@@ -2222,17 +2098,17 @@
     "franklin-webb": "/media/personnel/franklin-webb.webp",
     "barry-sembene": "/media/personnel/barry-sembene.webp",
     "kayla-watts": "/media/personnel/kayla-watts.webp",
-    "eli-mills": "",
-    "roland-tembo": "",
-    "donald-gennaro": "",
-    "lex-murphy": "",
-    "tim-murphy": "",
-    "billy-brennan": "",
-    "paul-kirby": "",
-    "eric-kirby": "",
-    "lowery-cruthers": "",
-    "gerry-harding": "",
-    "ken-wheatley": "",
-    "ramsay-cole": ""
+    "eli-mills": "/media/personnel/eli-mills.webp",
+    "roland-tembo": "/media/personnel/roland-tembo.webp",
+    "donald-gennaro": "/media/personnel/donald-gennaro.webp",
+    "lex-murphy": "/media/personnel/lex-murphy.webp",
+    "tim-murphy": "/media/personnel/tim-murphy.webp",
+    "billy-brennan": "/media/personnel/billy-brennan.webp",
+    "paul-kirby": "/media/personnel/paul-kirby.webp",
+    "eric-kirby": "/media/personnel/eric-kirby.webp",
+    "lowery-cruthers": "/media/personnel/lowery-cruthers.webp",
+    "gerry-harding": "/media/personnel/gerry-harding.webp",
+    "ken-wheatley": "/media/personnel/ken-wheatley.webp",
+    "ramsay-cole": "/media/personnel/ramsay-cole.webp"
   }
 }

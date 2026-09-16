@@ -76,8 +76,7 @@ const SPECIMEN_FIELDS: [string, Kind, boolean?][] = [
   ["weight", "string"],
   ["diet", "string"],
   ["habitat", "string"],
-  ["genome", "number"],
-  ["incidents", "string[]"],
+  ["genome", "number", true],
   ["stats", "stats"],
   ["notes", "string"],
   ["classified", "string"],
@@ -146,7 +145,7 @@ export function validateArchive(raw: unknown): string[] {
 /* ========================================================================== */
 
 import { SECURITY_LEVELS } from "./types";
-import type { Facility, Flora, Incident, Location } from "./types";
+import type { Flora, Location } from "./types";
 
 const SECURITY = new Set<string>(SECURITY_LEVELS);
 
@@ -191,38 +190,11 @@ const FLORA_FIELDS: [string, Kind, boolean?][] = [
   ["genome", "number", true],
 ];
 
-const FACILITY_FIELDS: [string, Kind, boolean?][] = [
-  ...COMMON,
-  ["designation", "string"],
-  ["type", "string"],
-  ["location", "string"],
-  ["established", "string"],
-  ["decommissioned", "string", true],
-  ["function", "string"],
-  ["description", "string"],
-  ["capacity", "string", true],
-  ["condition", "string"],
-];
-
-const INCIDENT_FIELDS: [string, Kind, boolean?][] = [
-  ...COMMON,
-  ["slug", "string"],
-  ["date", "string"],
-  ["year", "string"],
-  ["type", "string"],
-  ["severity", "number"],
-  ["classification", "string"],
-  ["summary", "string"],
-  ["outcome", "string"],
-];
-
-const RELATION_KEYS = ["specimens", "personnel", "locations", "facilities", "incidents", "flora"];
+const RELATION_KEYS = ["specimens", "personnel", "locations", "flora"];
 
 export interface DivisionData {
   locations: Location[];
   flora: Flora[];
-  facilities: Facility[];
-  incidents: Incident[];
 }
 
 /**
@@ -236,8 +208,6 @@ export function validateDivisions(data: DivisionData): string[] {
   const sets: Record<string, Set<string>> = {
     locations: new Set(data.locations.map((r) => r.id)),
     flora: new Set(data.flora.map((r) => r.id)),
-    facilities: new Set(data.facilities.map((r) => r.id)),
-    incidents: new Set(data.incidents.map((r) => r.id)),
   };
 
   const check = (name: keyof DivisionData, list: unknown[], fields: [string, Kind, boolean?][], prefix: string) => {
@@ -296,21 +266,6 @@ export function validateDivisions(data: DivisionData): string[] {
 
   check("locations", data.locations, LOCATION_FIELDS, "ING-LOC");
   check("flora", data.flora, FLORA_FIELDS, "ING-FLR");
-  check("facilities", data.facilities, FACILITY_FIELDS, "ING-FAC");
-  check("incidents", data.incidents, INCIDENT_FIELDS, "ING-OPS");
-
-  // Every facility must sit at a real location.
-  for (const f of data.facilities) {
-    if (typeof f.location === "string" && !sets.locations.has(f.location)) {
-      issues.push(`facilities[${f.id}]: location "${f.location}" is not a known location record`);
-    }
-  }
-
-  for (const i of data.incidents) {
-    if (typeof i.severity === "number" && (i.severity < 1 || i.severity > 5)) {
-      issues.push(`incidents[${i.id}]: severity out of range 1-5 (got ${i.severity})`);
-    }
-  }
 
   return issues;
 }
@@ -320,8 +275,8 @@ export function validateDivisions(data: DivisionData): string[] {
  *
  * `validateDivisions` can only resolve ids within the expansion divisions,
  * because it never sees the base archive. Everything pointing the other way —
- * a location crediting a person, an operation citing a specimen, and the
- * optional link arrays the base records themselves carry — is checked here.
+ * a location crediting a person, and the optional link arrays the base records
+ * themselves carry — is checked here.
  *
  * This matters more than it looks: `getRelatedRecords` silently drops ids it
  * cannot resolve, so a typo does not throw or render a dead link. It just
@@ -340,8 +295,6 @@ export function validateCrossLinks(
     personnel: new Set(base.personnel.map((r) => r.id)),
     locations: new Set(data.locations.map((r) => r.id)),
     flora: new Set(data.flora.map((r) => r.id)),
-    facilities: new Set(data.facilities.map((r) => r.id)),
-    incidents: new Set(data.incidents.map((r) => r.id)),
   };
 
   const resolve = (where: string, key: string, ids: unknown) => {
@@ -374,10 +327,15 @@ export function validateCrossLinks(
   // The optional link arrays the base records carry. These are plain fields
   // rather than a `relations` object, so nothing else looks at them at all.
   for (const d of base.specimens as { id: string; [k: string]: unknown }[]) {
-    for (const key of ["locations", "facilities", "personnel"]) resolve(`specimens[${d.id}]`, key, d[key]);
+    for (const key of ["locations", "personnel", "specimens"]) {
+      resolve(`specimens[${d.id}]`, key, d[key]);
+    }
+    if (Array.isArray(d.specimens) && (d.specimens as string[]).includes(d.id)) {
+      issues.push(`specimens[${d.id}]: "specimens" links the record to itself`);
+    }
   }
   for (const p of base.personnel as { id: string; [k: string]: unknown }[]) {
-    for (const key of ["locations", "facilities", "specimens"]) resolve(`personnel[${p.id}]`, key, p[key]);
+    for (const key of ["locations", "specimens"]) resolve(`personnel[${p.id}]`, key, p[key]);
   }
 
   return issues;

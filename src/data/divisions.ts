@@ -18,7 +18,7 @@ export interface Division {
   /** Identifier segment, e.g. ING-LOC-001 */
   prefix: string;
   /** Navigation grouping. */
-  group: "biological" | "organization" | "infrastructure" | "operations";
+  group: "biological" | "organization" | "infrastructure";
   /**
    * How a division's imagery is drawn.
    *
@@ -55,7 +55,7 @@ export const DIVISIONS: Division[] = [
     badge: "PALEOBOTANY",
     prefix: "ING-FLR",
     group: "biological",
-    imagery: "none",
+    imagery: "plate",
     blurb: "Reconstructed and cultivated flora held under botanical research.",
   },
   {
@@ -80,35 +80,12 @@ export const DIVISIONS: Division[] = [
     imagery: "plate",
     blurb: "Sites, islands and operational territories on record.",
   },
-  {
-    kind: "facility",
-    path: "facilities",
-    label: "Facilities",
-    singular: "Facility",
-    badge: "FACILITY",
-    prefix: "ING-FAC",
-    group: "infrastructure",
-    imagery: "none",
-    blurb: "Laboratories, enclosures and structures within recorded sites.",
-  },
-  {
-    kind: "incident",
-    path: "operations",
-    label: "Operations",
-    singular: "Operational record",
-    badge: "OPERATION",
-    prefix: "ING-OPS",
-    group: "operations",
-    imagery: "none",
-    blurb: "Incidents, expeditions and events of operational significance.",
-  },
 ];
 
 export const NAV_GROUPS: { key: Division["group"]; label: string }[] = [
   { key: "biological", label: "Biological" },
   { key: "organization", label: "Organization" },
   { key: "infrastructure", label: "Infrastructure" },
-  { key: "operations", label: "Operations" },
 ];
 
 const byKind = new Map(DIVISIONS.map((d) => [d.kind, d]));

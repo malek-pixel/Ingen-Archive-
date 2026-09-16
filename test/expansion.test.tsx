@@ -1,5 +1,5 @@
 import { describe, expect, it, beforeEach, vi } from "vitest";
-import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import App from "../src/App";
 import { loadArchive } from "../src/data/ingen";
@@ -8,15 +8,10 @@ import { getAllRecords, getArchiveStats, getRecordsByType, getRelatedRecords, se
 import { validateDivisions } from "../src/data/validate";
 import locations from "../src/data/locations.json";
 import flora from "../src/data/flora.json";
-import facilities from "../src/data/facilities.json";
-import operations from "../src/data/operations.json";
 import locationImages from "../src/data/location-images.json";
-import type { Facility, Flora, Incident, Location } from "../src/data/types";
+import type { Flora, Location } from "../src/data/types";
 
 const archive = loadArchive();
-
-/** "Catastrophic — site abandoned." — severity word, then consequence. */
-const SEVERITY_SENTENCE = /(Catastrophic|Major|Serious|Moderate|Minor) — ([^.]+)\./;
 
 const renderAt = (path: string) =>
   render(
@@ -33,8 +28,6 @@ beforeEach(() => {
 const divisionData = {
   locations: locations as Location[],
   flora: flora as Flora[],
-  facilities: facilities as Facility[],
-  incidents: operations as Incident[],
 };
 
 describe("expansion divisions", () => {
@@ -45,9 +38,7 @@ describe("expansion divisions", () => {
   it("loads every division", () => {
     const a = loadArchive();
     expect(a.locations.length).toBeGreaterThanOrEqual(10);
-    expect(a.flora.length).toBeGreaterThanOrEqual(12);
-    expect(a.facilities.length).toBeGreaterThanOrEqual(8);
-    expect(a.incidents.length).toBeGreaterThanOrEqual(8);
+    expect(a.flora.length).toBeGreaterThanOrEqual(11);
   });
 
   it("derives counts from the data rather than a literal", () => {
@@ -56,16 +47,7 @@ describe("expansion divisions", () => {
     expect(counts.specimen).toBe(a.specimens.length);
     expect(counts.location).toBe(a.locations.length);
     expect(counts.flora).toBe(a.flora.length);
-    expect(counts.facility).toBe(a.facilities.length);
-    expect(counts.incident).toBe(a.incidents.length);
-    expect(counts.total).toBe(
-      a.specimens.length +
-        a.personnel.length +
-        a.locations.length +
-        a.flora.length +
-        a.facilities.length +
-        a.incidents.length
-    );
+    expect(counts.total).toBe(a.specimens.length + a.personnel.length + a.locations.length + a.flora.length);
   });
 
   it("keeps every record identifier unique across the whole archive", () => {
@@ -77,20 +59,12 @@ describe("expansion divisions", () => {
     const a = loadArchive();
     for (const rec of a.locations) expect(rec.fileId).toMatch(/^ING-LOC-/);
     for (const rec of a.flora) expect(rec.fileId).toMatch(/^ING-FLR-/);
-    for (const rec of a.facilities) expect(rec.fileId).toMatch(/^ING-FAC-/);
-    for (const rec of a.incidents) expect(rec.fileId).toMatch(/^ING-OPS-/);
   });
 
   it("rejects a relation pointing at a record that does not exist", () => {
     const broken = structuredClone(divisionData);
-    broken.facilities[0].relations = { locations: ["atlantis"] };
+    broken.locations[0].relations = { flora: ["nothing-grows-here"] };
     expect(validateDivisions(broken).some((i) => i.includes("unknown record"))).toBe(true);
-  });
-
-  it("rejects a facility sited at an unknown location", () => {
-    const broken = structuredClone(divisionData);
-    broken.facilities[0].location = "nowhere";
-    expect(validateDivisions(broken).some((i) => i.includes("not a known location"))).toBe(true);
   });
 });
 
@@ -110,7 +84,6 @@ describe("global search", () => {
 
   it("ranks an exact record identifier first", () => {
     expect(searchRecords("ING-LOC-002")[0].name).toBe("Isla Sorna");
-    expect(searchRecords("ING-OPS-001")[0].fileId).toBe("ING-OPS-001");
   });
 
   it("returns results from more than one division for a shared term", () => {
@@ -134,38 +107,15 @@ describe("global search", () => {
 });
 
 describe("relationships resolve in both directions", () => {
-  it("reaches a specimen from the incident that names it", () => {
-    const groups = getRelatedRecords("incident", "jurassic-world-2015");
-    const specimens = groups.find((g) => g.kind === "specimen");
-    expect(specimens?.entries.some((e) => e.id === "indominus-rex")).toBe(true);
-  });
-
-  it("reaches the incident back from the specimen, which declares nothing", () => {
-    const groups = getRelatedRecords("specimen", "indominus-rex");
-    const incidents = groups.find((g) => g.kind === "incident");
-    expect(incidents?.entries.some((e) => e.id === "jurassic-world-2015")).toBe(true);
-  });
-
-  it("links a facility to the location it sits in, and back", () => {
-    const fromFacility = getRelatedRecords("facility", "raptor-paddock");
-    expect(fromFacility.find((g) => g.kind === "location")?.entries.some((e) => e.id === "isla-nublar")).toBe(true);
-
-    const fromLocation = getRelatedRecords("location", "isla-nublar");
-    expect(fromLocation.find((g) => g.kind === "facility")?.entries.some((e) => e.id === "raptor-paddock")).toBe(true);
-  });
-
-  it("resolves personnel links through the original history slugs", () => {
-    const groups = getRelatedRecords("person", "owen-grady");
-    expect(groups.find((g) => g.kind === "incident")?.entries.length).toBeGreaterThan(0);
-  });
-
   // Regression guard. Links used to be handed to getRelatedRecords by each
   // dossier, and the base divisions' own link fields were never read back into
   // the reverse index — so a specimen listed its island while the island listed
-  // no specimens, and nine records were connected to nothing at all. Both ends
-  // of every link are now read from one place; this pins that.
-  it("connects every record to at least one other", () => {
+  // no specimens. Both ends of every link are now read from one place; this
+  // pins that for the divisions that state links on every record. Assets and
+  // personnel carry theirs optionally, so some are genuinely unconnected.
+  it("connects every location and botanical record to at least one other", () => {
     const orphans = getAllRecords()
+      .filter((e) => e.kind === "location" || e.kind === "flora")
       .filter((e) => getRelatedRecords(e.kind, e.id).length === 0)
       .map((e) => e.fileId);
     expect(orphans, `unconnected records: ${orphans.join(", ")}`).toHaveLength(0);
@@ -175,32 +125,12 @@ describe("relationships resolve in both directions", () => {
     // Stated on the specimen as a plain field; must surface on the location.
     const onLocation = getRelatedRecords("location", "isla-nublar").find((g) => g.kind === "specimen");
     expect(onLocation?.entries.some((e) => e.id === "tyrannosaurus-rex")).toBe(true);
-    // Stated as an incident slug on the specimen; must surface on both records.
-    const onSpecimen = getRelatedRecords("specimen", "tyrannosaurus-rex").find((g) => g.kind === "incident");
-    expect(onSpecimen?.entries.some((e) => e.id === "isla-nublar-1993")).toBe(true);
-    const onIncident = getRelatedRecords("incident", "isla-nublar-1993").find((g) => g.kind === "specimen");
-    expect(onIncident?.entries.some((e) => e.id === "tyrannosaurus-rex")).toBe(true);
-  });
-
-  // Every classification opens with its own severity word, and the sentence
-  // under the severity meter prefixed that word again, so all twelve records
-  // read "Catastrophic — catastrophic — site abandoned." Only the
-  // consequence half belongs in that sentence.
-  it("does not repeat the severity word in an operation's classification line", async () => {
-    for (const rec of archive.incidents.slice(0, 3)) {
-      renderAt(`/operations/${rec.id}`);
-      // The sentence sits in the dossier sidebar, outside <main>.
-      await screen.findByText("Associated records", {}, { timeout: 10000 });
-      const sentence = (document.body.textContent ?? "").match(SEVERITY_SENTENCE);
-      expect(sentence, `${rec.fileId}: no severity sentence rendered`).toBeTruthy();
-      const [, severity, consequence] = sentence!;
-      expect(consequence.toLowerCase(), rec.fileId).not.toContain(severity.toLowerCase());
-      cleanup();
-    }
+    const onSpecimen = getRelatedRecords("specimen", "tyrannosaurus-rex").find((g) => g.kind === "location");
+    expect(onSpecimen?.entries.some((e) => e.id === "isla-nublar")).toBe(true);
   });
 
   it("never links a record to itself", () => {
-    for (const kind of ["location", "facility", "incident", "flora"] as const) {
+    for (const kind of ["location", "flora"] as const) {
       for (const entry of getRecordsByType(kind)) {
         const groups = getRelatedRecords(kind, entry.id);
         const self = groups.flatMap((g) => g.entries).filter((e) => e.kind === kind && e.id === entry.id);
@@ -228,8 +158,6 @@ describe("expansion routes", () => {
   it.each([
     ["/locations", "Locations", `Showing all ${archive.locations.length} sites`],
     ["/paleobotany", "Paleobotany", `Showing all ${archive.flora.length} records`],
-    ["/facilities", "Facilities", `Showing all ${archive.facilities.length} structures`],
-    ["/operations", "Operations", `Showing all ${archive.incidents.length} records`],
   ])("renders the %s index", async (path, heading, count) => {
     renderAt(path);
     expect(await screen.findByRole("heading", { level: 1 })).toHaveTextContent(heading);
@@ -239,8 +167,6 @@ describe("expansion routes", () => {
   it.each([
     ["/locations/isla-nublar", "Isla Nublar"],
     ["/paleobotany/serenna-veriformans", "Serenna veriformans"],
-    ["/facilities/raptor-paddock", "Velociraptor Research Paddock"],
-    ["/operations/isla-nublar-1993", "Isla Nublar Containment Failure"],
   ])("renders the dossier at %s", async (path, name) => {
     renderAt(path);
     expect(await screen.findByRole("heading", { level: 1 })).toHaveTextContent(name);
@@ -250,8 +176,6 @@ describe("expansion routes", () => {
   it.each([
     ["/locations/atlantis", "No location record for “atlantis”"],
     ["/paleobotany/triffid", "No botanical record for “triffid”"],
-    ["/facilities/nowhere", "No facility record for “nowhere”"],
-    ["/operations/never-happened", "No operational record for “never-happened”"],
   ])("surfaces the designed 404 at %s", async (path, message) => {
     renderAt(path);
     expect(await screen.findByText(message)).toBeTruthy();
@@ -282,17 +206,17 @@ describe("expansion routes", () => {
     expect(pressed()).toEqual(["Locations"]);
 
     // Toggling a chip writes to the URL.
-    fireEvent.click(screen.getByRole("button", { name: /^Facilities/ }));
-    await waitFor(() => expect(pressed()).toContain("Facilities"));
+    fireEvent.click(screen.getByRole("button", { name: /^Paleobotany/ }));
+    await waitFor(() => expect(pressed()).toContain("Paleobotany"));
   });
 
   it("reads multiple divisions from the URL", async () => {
-    renderAt("/search?q=isla&in=location&in=facility");
+    renderAt("/search?q=isla&in=location&in=flora");
     await screen.findByText(/records matching/);
     const pressed = screen
       .getAllByRole("button", { pressed: true })
       .map((b) => b.textContent?.replace(/\d+$/, "").trim());
-    expect(pressed).toEqual(expect.arrayContaining(["Locations", "Facilities"]));
+    expect(pressed).toEqual(expect.arrayContaining(["Locations", "Paleobotany"]));
   });
 
   it("ignores an unknown division in the URL rather than filtering to nothing", async () => {
@@ -321,7 +245,7 @@ describe("the dashboard reflects the whole archive", () => {
 });
 
 describe("navigation covers every division", () => {
-  it("links to all six registers", async () => {
+  it("links to every register", async () => {
     renderAt("/dashboard");
     const nav = await screen.findByRole("navigation", { name: "Primary" });
     for (const d of DIVISIONS) {

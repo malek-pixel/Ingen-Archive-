@@ -3,6 +3,7 @@ import { Header } from "../components/Header";
 import { Page } from "../components/Chrome";
 import { NotFoundBlock } from "../components/States";
 import { SpecimenDossier } from "../components/SpecimenDossier";
+import { isThreatRated } from "../lib/derive";
 import { useArchive } from "../lib/useArchive";
 import { useDocumentTitle } from "../lib/useDocumentTitle";
 
@@ -70,7 +71,9 @@ export default function SpecimenDetail() {
   useDocumentTitle(
     d ? `${d.name} · ${d.fileId} — InGen Archive` : "Record not found — InGen Archive",
     d
-      ? `${d.fileId} — ${d.species}. ${d.classification}. Threat level ${d.threat} of 5, ${d.status.toLowerCase()}.`
+      ? `${d.fileId} — ${d.species}. ${d.classification}. ${
+          isThreatRated(d.threat) ? `Threat level ${d.threat} of 5` : "Threat level not assessed"
+        }, ${d.status.toLowerCase()}.`
       : "The requested asset record could not be resolved."
   );
 

@@ -28,7 +28,7 @@ export default function Locations() {
     <IndexScreen
       eyebrow="Section 04 · Site register"
       title="Locations"
-      intro="Islands, estates and operational territories on record, with site status, security classification and the facilities and events attached to each."
+      intro="Islands, estates and operational territories on record, with site status, security classification and the records attached to each."
       summary={[
         { label: "On register", value: counts.location, ink: "#E4E9EF" },
         { label: "Operational", value: active, ink: "#7ACB9A" },

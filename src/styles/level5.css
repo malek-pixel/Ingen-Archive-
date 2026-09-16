@@ -1,0 +1,433 @@
+/* ============================================================================
+   Level 5 — classified layer.
+
+   An extension of the existing system, not a second one. Every colour is an
+   existing token; the difference in feel comes from density, hairlines and
+   restraint, plus one reserved accent: --ig-classified-ink, which the archive
+   already uses for classified blocks and nowhere else.
+
+   Every animation here moves only transform, opacity, box-shadow or
+   background-position, so none of it can shift layout, and all of it is
+   switched off under prefers-reduced-motion at the bottom of this file.
+   ========================================================================== */
+
+.ig-l5 {
+  --l5-line: #1e2732;
+  --l5-line-hot: #3a2228;
+  /* Rules, ticks and read heads — non-text, so the classified ink is fine. */
+  --l5-ink: var(--ig-classified-ink);
+  --l5-text: var(--ig-l5-ink);
+  --l5-panel: #0c1117;
+  --l5-panel-solid: #0c1117;
+  position: relative;
+}
+
+/* Two ambient layers, both decorative, both fixed behind the content: a fine
+   scan raster and a still grain. Together they are what makes the classified
+   area read as a different surface without changing a single colour. */
+.ig-l5::before,
+.ig-l5::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.ig-l5::before {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(200, 82, 75, 0.028) 0px,
+    rgba(200, 82, 75, 0.028) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+.ig-l5::after {
+  /* Static grain: one small SVG turbulence tile, no animation, no repaint. */
+  opacity: 0.32;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='120' height='120' filter='url(%23n)' opacity='0.035'/></svg>");
+}
+.ig-l5 > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ------------------------------------------------------------------ panels */
+
+/* Deliberately not backdrop-filter: over a ground this flat the blur is
+   invisible, and it costs a composited layer per panel — on a page that can
+   hold forty cards that is the difference between free and not. The raised
+   surface and the hairline do the same job. */
+.ig-l5-panel {
+  border: 1px solid var(--l5-line);
+  background: var(--l5-panel);
+}
+
+/* Corner ticks — the HUD register marks. Drawn with one gradient pair so a
+   panel costs no extra elements. */
+.ig-l5-ticked {
+  position: relative;
+}
+.ig-l5-ticked::before,
+.ig-l5-ticked::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  pointer-events: none;
+}
+.ig-l5-ticked::before {
+  top: -1px;
+  left: -1px;
+  border-top: 1px solid var(--l5-ink);
+  border-left: 1px solid var(--l5-ink);
+}
+.ig-l5-ticked::after {
+  right: -1px;
+  bottom: -1px;
+  border-right: 1px solid var(--l5-ink);
+  border-bottom: 1px solid var(--l5-ink);
+}
+
+/* ------------------------------------------------------------------- cards */
+
+.ig-l5-card {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform var(--ig-t-hover) var(--ig-ease-out),
+    border-color var(--ig-t-hover) var(--ig-ease-out),
+    box-shadow var(--ig-t-hover) var(--ig-ease-out);
+}
+.ig-l5-card:hover,
+.ig-l5-card:focus-visible {
+  transform: translate3d(0, -2px, 0);
+  border-color: #33414f;
+  box-shadow:
+    var(--ig-lift-shadow),
+    0 0 0 1px rgba(200, 82, 75, 0.12);
+}
+.ig-l5-card:active {
+  transform: translate3d(0, 0, 0);
+}
+
+/* The read head: a single pass down a card on hover. */
+.ig-l5-card .ig-l5-read {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200, 82, 75, 0.55), transparent);
+  opacity: 0;
+  transform: translate3d(0, 0, 0);
+  pointer-events: none;
+}
+.ig-l5-card:hover .ig-l5-read,
+.ig-l5-card:focus-visible .ig-l5-read {
+  animation: l5-read 900ms var(--ig-ease-soft) 1;
+}
+@keyframes l5-read {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 120px, 0);
+  }
+}
+
+/* The metadata line that only appears on hover. Height is reserved by the
+   card's own padding, so revealing it cannot reflow the grid. */
+.ig-l5-card .ig-l5-reveal {
+  opacity: 0;
+  transform: translate3d(0, 3px, 0);
+  transition:
+    opacity var(--ig-t-hover) var(--ig-ease-out),
+    transform var(--ig-t-hover) var(--ig-ease-out);
+}
+.ig-l5-card:hover .ig-l5-reveal,
+.ig-l5-card:focus-visible .ig-l5-reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* -------------------------------------------------------------- indicators */
+
+.ig-l5-dot {
+  animation: ig-pulse 2.4s ease-in-out infinite;
+}
+
+/* Indeterminate progress rail, used by the authentication sequence. */
+.ig-l5-rail {
+  position: relative;
+  overflow: hidden;
+  height: 2px;
+  background: var(--ig-line-track);
+}
+.ig-l5-rail::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, var(--l5-ink), transparent);
+  transform: translate3d(-100%, 0, 0);
+  animation: l5-rail 1.15s var(--ig-ease-soft) infinite;
+}
+@keyframes l5-rail {
+  to {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+/* Determinate bar — width is set inline, the transition lives here. */
+.ig-l5-bar-fill {
+  transition: transform 220ms var(--ig-ease-out);
+  transform-origin: left center;
+}
+
+/* --------------------------------------------------------- gate animations */
+
+/* Terminal cursor on the status line. */
+.ig-l5-caret::after {
+  content: "▌";
+  margin-left: 2px;
+  animation: l5-blink 1.05s steps(2, start) infinite;
+}
+@keyframes l5-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Denial: a short lateral shake plus a red wash. Both are transform/opacity. */
+.ig-l5-deny {
+  animation: l5-shake 420ms var(--ig-ease-soft) 1;
+}
+@keyframes l5-shake {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  15% {
+    transform: translate3d(-6px, 0, 0);
+  }
+  35% {
+    transform: translate3d(5px, 0, 0);
+  }
+  55% {
+    transform: translate3d(-3px, 0, 0);
+  }
+  75% {
+    transform: translate3d(2px, 0, 0);
+  }
+}
+
+/* Grant: one clipped displacement, held very short. This is the only glitch
+   in the product and it runs once, on a deliberate act. */
+.ig-l5-grant {
+  animation: l5-grant 560ms var(--ig-ease-out) 1;
+}
+@keyframes l5-grant {
+  0% {
+    opacity: 0.2;
+    transform: translate3d(0, 0, 0) scale(1.006);
+  }
+  9% {
+    opacity: 1;
+    transform: translate3d(-3px, 0, 0);
+  }
+  14% {
+    transform: translate3d(3px, 0, 0);
+  }
+  20% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* The wipe that covers the transition into the archive. */
+.ig-l5-wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(11, 15, 20, 0) 0%, rgba(11, 15, 20, 0.96) 45%, rgba(11, 15, 20, 0) 100%);
+  animation: l5-wipe 620ms var(--ig-ease-soft) 1 forwards;
+}
+@keyframes l5-wipe {
+  from {
+    transform: translate3d(0, -100%, 0);
+  }
+  to {
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+/* Classification stamp: seats itself once, slightly rotated, then settles. */
+.ig-l5-stamp {
+  animation: l5-stamp 480ms var(--ig-ease-out) 1 both;
+}
+@keyframes l5-stamp {
+  from {
+    opacity: 0;
+    transform: rotate(-9deg) scale(1.5);
+  }
+  60% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-4deg) scale(1);
+  }
+}
+
+/* Sequenced panel entrance for the Level 5 shell — same rhythm as the rest of
+   the app, one step slower on the stagger so the HUD reads as booting. */
+.ig-motion .ig-l5-seq > [data-seq] {
+  opacity: 0;
+  animation: ig-seat var(--ig-t-enter) var(--ig-ease-out) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+/* Tab underline for the dossier. */
+.ig-l5-tab {
+  position: relative;
+  transition: color var(--ig-t-micro) var(--ig-ease-out);
+}
+.ig-l5-tab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--l5-ink);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--ig-t-hover) var(--ig-ease-out);
+}
+.ig-l5-tab[aria-selected="true"]::after {
+  transform: scaleX(1);
+}
+.ig-l5-tab:hover::after {
+  transform: scaleX(1);
+  opacity: 0.5;
+}
+
+/* Panel body swap on tab change. */
+.ig-l5-panelbody {
+  animation: ig-enter 240ms var(--ig-ease-out) both;
+}
+
+/* ----------------------------------------------------------------- results */
+
+/* Filtered result rows re-enter in sequence so a filter change reads as the
+   list reassembling rather than snapping. */
+.ig-motion .ig-l5-results > [data-seq] {
+  animation: ig-enter 260ms var(--ig-ease-out) both;
+  animation-delay: calc(var(--i, 0) * 18ms);
+}
+
+/* ------------------------------------------------------------- responsive */
+
+/* The Level 5 screens stack their sections in a single-column grid. An implicit
+   grid track is sized "auto", which resolves to max-content — so on a narrow
+   viewport the widest card grid inside pushes the track past the viewport and
+   the whole page scrolls sideways. Pinning the track to minmax(0,1fr) makes the
+   children shrink to the column instead, which is what a stacked layout means.
+   Same reason for min-width on the sections themselves. */
+.ig-l5 main {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* The classification stamp is rotated, so its painted box overhangs its
+   layout box by a couple of pixels at the right edge. clip (not hidden) drops
+   that overhang without turning the page into a scroll container. */
+.ig-l5 {
+  overflow-x: clip;
+}
+.ig-l5 main > * {
+  min-width: 0;
+}
+
+.ig-l5-tag {
+  white-space: nowrap;
+}
+
+/* Technical labels sit on one line wherever there is room for one. On a phone
+   the letter-spaced monospace runs wider than the viewport, and a label is not
+   worth a horizontally scrolling page — so below the phone breakpoint they
+   wrap. The rule is here rather than inline because Tag is used ~40 times. */
+@media (max-width: 640px) {
+  .ig-l5 .ig-l5-tag {
+    white-space: normal;
+  }
+}
+
+/* ------------------------------------------------------------------- focus */
+
+.ig-l5 a:focus-visible,
+.ig-l5 button:focus-visible,
+.ig-l5 input:focus-visible {
+  outline: 2px solid var(--ig-blue-rule);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------- reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .ig-l5::before {
+    display: none;
+  }
+  .ig-l5-dot,
+  .ig-l5-rail::after,
+  .ig-l5-caret::after,
+  .ig-l5-card .ig-l5-read {
+    animation: none !important;
+  }
+  .ig-l5-deny,
+  .ig-l5-grant,
+  .ig-l5-stamp,
+  .ig-l5-wipe,
+  .ig-l5-panelbody,
+  .ig-motion .ig-l5-seq > [data-seq],
+  .ig-motion .ig-l5-results > [data-seq] {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .ig-l5-wipe {
+    display: none;
+  }
+  .ig-l5-card:hover,
+  .ig-l5-card:focus-visible {
+    transform: none;
+  }
+  .ig-l5-card .ig-l5-reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .ig-l5-bar-fill {
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------------------------- touch */
+
+@media (hover: none) {
+  /* Hover-revealed metadata would otherwise be unreachable on a touch device. */
+  .ig-l5-card .ig-l5-reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .ig-l5-card:hover {
+    transform: none;
+  }
+}
