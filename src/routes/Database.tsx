@@ -15,7 +15,7 @@ export default function Database() {
     <IndexScreen
       eyebrow="Section 01 · Specimen index"
       title="Genetic assets"
-      intro="Every specimen indexed under InGen custodianship, with current containment status, threat assessment and incident history."
+      intro="Every specimen indexed under InGen custodianship, with current containment status and threat assessment."
       summary={[
         { label: "Indexed", value: stats.dTotal, ink: "#E4E9EF" },
         { label: "Threat 4+", value: (stats.dExtreme || 0) + (stats.dHigh || 0), ink: "#E0B36A" },
@@ -26,7 +26,7 @@ export default function Database() {
       sorts={SPECIMEN_SORTS}
       haystack={specimenHaystack}
       searchLabel="Search genetic assets"
-      searchPlaceholder="Search name, species, incident…"
+      searchPlaceholder="Search name, species, classification…"
       gridMin={248}
       renderCard={(d, i) => <DinoCard key={d.id} d={d} index={i} />}
       countLabel={(shown, total) =>

@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect, useRef } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { RouteLoading } from "./components/RouteLoading";
+import { Level5Provider } from "./level5/session";
 
 // Route-level code splitting. The Suspense fallback below is the designed
 // loading state — skeleton grid plus the INDEXING ARCHIVE NODE scan banner.
@@ -22,11 +23,18 @@ const Locations = lazy(() => import("./routes/Locations"));
 const LocationDetail = lazy(() => import("./routes/Locations").then((m) => ({ default: m.LocationDetail })));
 const Paleobotany = lazy(() => import("./routes/Paleobotany"));
 const FloraDetail = lazy(() => import("./routes/Paleobotany").then((m) => ({ default: m.FloraDetail })));
-const Facilities = lazy(() => import("./routes/Facilities"));
-const FacilityDetail = lazy(() => import("./routes/Facilities").then((m) => ({ default: m.FacilityDetail })));
-const Operations = lazy(() => import("./routes/Operations"));
-const IncidentDetail = lazy(() => import("./routes/Operations").then((m) => ({ default: m.IncidentDetail })));
 const Search = lazy(() => import("./routes/Search"));
+
+// Level 5. One chunk for the gate, the dashboard, the registers and the
+// programme dossiers — they share the classified derivation, so splitting them
+// would download it twice.
+const Classified = lazy(() => import("./routes/Classified"));
+const ClassifiedCategory = lazy(() =>
+  import("./routes/Classified").then((m) => ({ default: m.ClassifiedCategoryScreen }))
+);
+const ClassifiedProject = lazy(() =>
+  import("./routes/Classified").then((m) => ({ default: m.ClassifiedProjectScreen }))
+);
 
 /**
  * On navigation: scroll to the top (unless a hash targets a record in a full
@@ -70,33 +78,36 @@ export default function App() {
       </a>
       <RouteChange />
       <ErrorBoundary>
-        {/* Keyed on pathname so each route plays one short entrance. The
+        {/* The Level 5 session sits above the router so a grant survives
+            navigation between classified screens. */}
+        <Level5Provider>
+          {/* Keyed on pathname so each route plays one short entrance. The
             transition is 160ms — felt, never waited on. */}
-        <div className="ig-route" id={ROUTE_ROOT_ID} tabIndex={-1} key={pathname}>
-          <Suspense fallback={<RouteLoading />}>
-            <Routes>
-              <Route path="/" element={<Overview />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/assets" element={<Database />} />
-              <Route path="/assets/all" element={<AllSpecimens />} />
-              <Route path="/assets/:id" element={<SpecimenDetail />} />
-              <Route path="/personnel" element={<Personnel />} />
-              <Route path="/personnel/all" element={<AllPersonnel />} />
-              <Route path="/personnel/:id" element={<PersonDetail />} />
-              <Route path="/locations" element={<Locations />} />
-              <Route path="/locations/:id" element={<LocationDetail />} />
-              <Route path="/paleobotany" element={<Paleobotany />} />
-              <Route path="/paleobotany/:id" element={<FloraDetail />} />
-              <Route path="/facilities" element={<Facilities />} />
-              <Route path="/facilities/:id" element={<FacilityDetail />} />
-              <Route path="/operations" element={<Operations />} />
-              <Route path="/operations/:id" element={<IncidentDetail />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="/states" element={<States />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </div>
+          <div className="ig-route" id={ROUTE_ROOT_ID} tabIndex={-1} key={pathname}>
+            <Suspense fallback={<RouteLoading />}>
+              <Routes>
+                <Route path="/" element={<Overview />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/assets" element={<Database />} />
+                <Route path="/assets/all" element={<AllSpecimens />} />
+                <Route path="/assets/:id" element={<SpecimenDetail />} />
+                <Route path="/personnel" element={<Personnel />} />
+                <Route path="/personnel/all" element={<AllPersonnel />} />
+                <Route path="/personnel/:id" element={<PersonDetail />} />
+                <Route path="/locations" element={<Locations />} />
+                <Route path="/locations/:id" element={<LocationDetail />} />
+                <Route path="/paleobotany" element={<Paleobotany />} />
+                <Route path="/paleobotany/:id" element={<FloraDetail />} />
+                <Route path="/search" element={<Search />} />
+                <Route path="/classified" element={<Classified />} />
+                <Route path="/classified/project/:id" element={<ClassifiedProject />} />
+                <Route path="/classified/:id" element={<ClassifiedCategory />} />
+                <Route path="/states" element={<States />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </div>
+        </Level5Provider>
       </ErrorBoundary>
     </>
   );

@@ -246,7 +246,7 @@ export function ClassifiedBlock({ children }: { children: ReactNode }) {
   );
 }
 
-/** Timeline used by incident history and assignment history. */
+/** Timeline used by assignment history. */
 export function Timeline({ events }: { events: { year: string; label: string; slug: string }[] }) {
   const reveal = useReveal();
   return (

@@ -20,8 +20,7 @@
     "tags": ["toxic", "angiosperm", "cultivated", "nublar", "ornamental"],
     "relations": {
       "locations": ["isla-nublar", "jurassic-park"],
-      "personnel": ["ellie-sattler"],
-      "incidents": ["isla-nublar-1993"]
+      "personnel": ["ellie-sattler"]
     }
   },
   {
@@ -68,8 +67,7 @@
     "notes": "The most successful plant introduction in the programme. Growth rates on Sorna exceeded projection by a wide margin, and the species now forms the structural canopy of an ecosystem InGen no longer manages.",
     "tags": ["conifer", "canopy", "cultivated", "sorna", "structural"],
     "relations": {
-      "locations": ["isla-nublar", "isla-sorna", "sorna-interior"],
-      "facilities": ["sorna-compound"]
+      "locations": ["isla-nublar", "isla-sorna", "sorna-interior"]
     }
   },
   {
@@ -116,7 +114,6 @@
     "tags": ["bennettitale", "composite", "experimental", "restricted", "unresolved"],
     "relations": {
       "locations": ["isla-sorna"],
-      "facilities": ["sorna-hatchery"],
       "personnel": ["henry-wu"]
     }
   },
@@ -207,8 +204,7 @@
     "notes": "The practical answer to a problem the reconstructed cycad caused. Keepers were briefed on the toxicity risk to themselves and to guests; no incident is recorded.",
     "tags": ["cycad", "browse", "cultivar", "toxic", "operational"],
     "relations": {
-      "locations": ["isla-nublar", "jurassic-world"],
-      "facilities": ["raptor-paddock", "main-street"]
+      "locations": ["isla-nublar", "jurassic-world"]
     }
   },
   {

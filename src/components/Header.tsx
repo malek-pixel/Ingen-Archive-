@@ -1,24 +1,17 @@
 import { NavLink, Link, useLocation } from "react-router-dom";
-import {
-  EventIcon,
-  HelixIcon,
-  LeafIcon,
-  OverviewIcon,
-  PersonnelIcon,
-  SearchIcon,
-  SiteIcon,
-  StructureIcon,
-} from "./icons";
+import { ClassifiedIcon, HelixIcon, LeafIcon, OverviewIcon, PersonnelIcon, SearchIcon, SiteIcon } from "./icons";
 import { DIVISIONS, NAV_GROUPS } from "../data/divisions";
 import type { RecordKind } from "../data/types";
+
+/** Muted classified ink for the Level 5 tab. Verified against the AA floor in
+    test/contrast.test.ts, like every other text colour in the header. */
+const L5_NAV_INK = "#C08C87";
 
 const ICONS: Record<RecordKind, () => JSX.Element> = {
   specimen: HelixIcon,
   flora: LeafIcon,
   person: PersonnelIcon,
   location: SiteIcon,
-  facility: StructureIcon,
-  incident: EventIcon,
 };
 
 export function BrandLockup() {
@@ -108,6 +101,7 @@ export function Header({ descriptor }: { descriptor?: string }) {
   const isCurrent = (path: string) => pathname === `/${path}` || pathname.startsWith(`/${path}/`);
   const onOverview = pathname === "/dashboard";
   const onSearch = pathname === "/search";
+  const onClassified = pathname === "/classified" || pathname.startsWith("/classified/");
 
   const tab = (current: boolean): React.CSSProperties => ({
     display: "flex",
@@ -179,6 +173,21 @@ export function Header({ descriptor }: { descriptor?: string }) {
               </span>
             );
           })}
+
+          {/* Level 5 sits outside the division taxonomy on purpose: it is not a
+              register of records but a clearance layer over the ones that
+              exist, so it is not in DIVISIONS and carries no record count. */}
+          <span className="ig-nav-group" role="group" aria-label="Restricted">
+            <NavLink
+              to="/classified"
+              className={onClassified ? "ig-navlink-active" : "ig-navlink"}
+              aria-current={onClassified ? "page" : undefined}
+              style={{ ...tab(onClassified), color: onClassified ? "#E4E9EF" : L5_NAV_INK }}
+            >
+              <ClassifiedIcon />
+              Level 5 // Classified
+            </NavLink>
+          </span>
         </nav>
       )}
 

@@ -4,8 +4,6 @@ import { buildArchive, loadArchive } from "../src/data/ingen";
 import { ArchiveDataError, validateArchive, validateCrossLinks } from "../src/data/validate";
 import locations from "../src/data/locations.json";
 import flora from "../src/data/flora.json";
-import facilities from "../src/data/facilities.json";
-import incidents from "../src/data/operations.json";
 
 describe("archive dataset", () => {
   it("validates the shipped data with no issues", () => {
@@ -23,14 +21,7 @@ describe("archive dataset", () => {
     expect(a.counts.specimen).toBe(a.specimens.length);
     expect(a.counts.person).toBe(a.personnel.length);
     expect(a.counts.total).toBe(a.entries.length);
-    expect(a.entries).toHaveLength(
-      a.specimens.length +
-        a.personnel.length +
-        a.locations.length +
-        a.flora.length +
-        a.facilities.length +
-        a.incidents.length
-    );
+    expect(a.entries).toHaveLength(a.specimens.length + a.personnel.length + a.locations.length + a.flora.length);
   });
 
   // Not every record was photographed — those render the drawn technical
@@ -83,21 +74,17 @@ describe("archive dataset", () => {
     expect(validateArchive(broken).some((i) => i.includes("duplicate id"))).toBe(true);
   });
 
-  // Operations are cited by slug rather than record id, so nothing else in the
-  // cross-link check can see them. A bad slug used to sever the link silently.
-  it("catches an operation slug that resolves to no incident", () => {
-    const divisions = { locations, flora, facilities, incidents } as never;
+  // Cross-links are stated on one record and read from both ends, so an id
+  // that resolves to nothing quietly severs a relationship rather than failing.
+  it("resolves every cross-link the shipped data states", () => {
+    const divisions = { locations, flora } as never;
     expect(validateCrossLinks(raw, divisions)).toEqual([]);
 
     const broken = structuredClone(raw) as typeof raw;
-    broken.personnel[0].history = ["isla-nublar-1993", "no-such-operation-1999"];
-    broken.specimens[0].incidents = ["also-not-real-2001"];
+    broken.personnel[0].locations = ["no-such-location"];
     const issues = validateCrossLinks(broken, divisions);
     expect(issues).toContain(
-      `personnel[${broken.personnel[0].id}]: "history" cites unknown operation slug "no-such-operation-1999"`
-    );
-    expect(issues).toContain(
-      `specimens[${broken.specimens[0].id}]: "incidents" cites unknown operation slug "also-not-real-2001"`
+      `personnel[${broken.personnel[0].id}]: "locations" points at unknown record "no-such-location"`
     );
   });
 });

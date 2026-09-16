@@ -27,9 +27,7 @@ beforeEach(() => {
 describe("route smoke tests", () => {
   it("renders the archive index", async () => {
     renderAt("/");
-    expect(await screen.findByRole("heading", { level: 1 })).toHaveTextContent(
-      "Central biological and operations record."
-    );
+    expect(await screen.findByRole("heading", { level: 1 })).toHaveTextContent("Central biological research record.");
     expect(screen.getByText(`${nSpec} indexed specimens`)).toBeTruthy();
     expect(screen.getByText(`${nPers} files on record`)).toBeTruthy();
   });
@@ -39,7 +37,6 @@ describe("route smoke tests", () => {
     expect(await screen.findByRole("heading", { level: 1 })).toHaveTextContent(
       "Master index of the InGen record system."
     );
-    expect(screen.getByText("Incident chronology")).toBeTruthy();
     expect(screen.getByText(`${counts.total} records indexed`)).toBeTruthy();
   });
 

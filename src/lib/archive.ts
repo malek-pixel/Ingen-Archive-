@@ -71,8 +71,6 @@ const RELATION_KIND: Record<keyof Relations, RecordKind> = {
   specimens: "specimen",
   personnel: "person",
   locations: "location",
-  facilities: "facility",
-  incidents: "incident",
   flora: "flora",
 };
 
@@ -106,18 +104,16 @@ function reverseIndex(): Map<string, Set<string>> {
   const declared: { kind: RecordKind; id: string; relations?: Relations }[] = [
     ...a.locations.map((r) => ({ kind: "location" as const, id: r.id, relations: r.relations })),
     ...a.flora.map((r) => ({ kind: "flora" as const, id: r.id, relations: r.relations })),
-    ...a.facilities.map((r) => ({ kind: "facility" as const, id: r.id, relations: r.relations })),
-    ...a.incidents.map((r) => ({ kind: "incident" as const, id: r.id, relations: r.relations })),
     // Flat fields on the base records, read into the same shape.
     ...a.specimens.map((r) => ({
       kind: "specimen" as const,
       id: r.id,
-      relations: { locations: r.locations, facilities: r.facilities, personnel: r.personnel, specimens: r.specimens },
+      relations: { locations: r.locations, personnel: r.personnel, specimens: r.specimens },
     })),
     ...a.personnel.map((r) => ({
       kind: "person" as const,
       id: r.id,
-      relations: { locations: r.locations, facilities: r.facilities, specimens: r.specimens },
+      relations: { locations: r.locations, specimens: r.specimens },
     })),
   ];
 
@@ -127,27 +123,6 @@ function reverseIndex(): Map<string, Set<string>> {
       const kind = RELATION_KIND[key as keyof Relations];
       if (!kind || !Array.isArray(ids)) continue;
       for (const id of ids) link(from, entryKey(kind, id));
-    }
-  }
-
-  // A facility's `location` is a relationship too, even though it is a plain field.
-  for (const f of a.facilities) {
-    link(entryKey("facility", f.id), entryKey("location", f.location));
-  }
-
-  // Incident slugs already carried on the original specimen and personnel
-  // records — the links that existed before this system did.
-  const incidentBySlug = new Map(a.incidents.map((i) => [i.slug, i.id]));
-  for (const d of a.specimens) {
-    for (const slug of d.incidents ?? []) {
-      const incidentId = incidentBySlug.get(slug);
-      if (incidentId) link(entryKey("specimen", d.id), entryKey("incident", incidentId));
-    }
-  }
-  for (const p of a.personnel) {
-    for (const slug of p.history ?? []) {
-      const incidentId = incidentBySlug.get(slug);
-      if (incidentId) link(entryKey("person", p.id), entryKey("incident", incidentId));
     }
   }
 
@@ -161,19 +136,10 @@ export interface RelatedGroup {
   entries: ArchiveEntry[];
 }
 
-/** Incident slug → incident record id. Slugs are what the base records cite. */
-let incidentIds: Map<string, string> | null = null;
-const incidentsBySlug = (slugs: string[] | undefined): string[] => {
-  if (!slugs?.length) return [];
-  if (!incidentIds) incidentIds = new Map(archive().incidents.map((i) => [i.slug, i.id]));
-  return slugs.map((s) => incidentIds!.get(s)).filter((v): v is string => Boolean(v));
-};
-
 /**
  * The links a record states itself, whatever shape its division stores them in.
  * The expansion divisions carry a `relations` object; the two original ones
- * carry the same information as plain fields, and cite operations by slug
- * rather than by record id — resolved here so both ends of that link agree.
+ * carry the same information as plain fields.
  */
 function declaredLinks(kind: RecordKind, id: string): Relations | undefined {
   const a = archive();
@@ -183,10 +149,8 @@ function declaredLinks(kind: RecordKind, id: string): Relations | undefined {
       return (
         r && {
           locations: r.locations,
-          facilities: r.facilities,
           personnel: r.personnel,
           specimens: r.specimens,
-          incidents: incidentsBySlug(r.incidents),
         }
       );
     }
@@ -195,9 +159,7 @@ function declaredLinks(kind: RecordKind, id: string): Relations | undefined {
       return (
         r && {
           locations: r.locations,
-          facilities: r.facilities,
           specimens: r.specimens,
-          incidents: incidentsBySlug(r.history),
         }
       );
     }
@@ -205,10 +167,6 @@ function declaredLinks(kind: RecordKind, id: string): Relations | undefined {
       return a.locationById.get(id)?.relations;
     case "flora":
       return a.floraById.get(id)?.relations;
-    case "facility":
-      return a.facilityById.get(id)?.relations;
-    case "incident":
-      return a.incidentById.get(id)?.relations;
   }
 }
 
@@ -253,8 +211,6 @@ export function getRelatedRecords(kind: RecordKind, id: string): RelatedGroup[] 
 
 /** Convenience lookups used by dossiers to resolve a single linked record. */
 export const getLocation = (id: string) => archive().locationById.get(id);
-export const getFacility = (id: string) => archive().facilityById.get(id);
-export const getIncident = (id: string) => archive().incidentById.get(id);
 export const getSpecimen = (id: string) => archive().specimenById.get(id);
 export const getPerson = (id: string) => archive().personById.get(id);
 export const getFlora = (id: string) => archive().floraById.get(id);

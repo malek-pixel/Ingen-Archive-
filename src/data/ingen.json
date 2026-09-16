@@ -15,9 +15,6 @@
       "diet": "Carnivorous",
       "habitat": "Open sky, cliff roosts, unrestricted continental range",
       "genome": 72,
-      "incidents": [
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 4,
         "defense": 2,
@@ -48,10 +45,6 @@
       "diet": "Fish, small animals, carrion",
       "habitat": "Skies, cliffs, coasts, islands",
       "genome": 90,
-      "incidents": [
-        "isla-sorna-1997",
-        "jurassic-world-2015"
-      ],
       "stats": {
         "strength": 2,
         "defense": 2,
@@ -78,9 +71,6 @@
       "diet": "Insects, fish, small prey, carrion",
       "habitat": "Cliffs, forests, coastal caves",
       "genome": 81,
-      "incidents": [
-        "jurassic-world-2015"
-      ],
       "stats": {
         "strength": 1,
         "defense": 2,
@@ -107,7 +97,6 @@
       "diet": "Fish, small animals, marine surface prey",
       "habitat": "Open skies, coastal cliffs, ocean thermals",
       "genome": 77,
-      "incidents": [],
       "stats": {
         "strength": 2,
         "defense": 2,
@@ -138,13 +127,6 @@
       "diet": "Carnivorous",
       "habitat": "Open woodland, river valleys, cleared plain",
       "genome": 94,
-      "incidents": [
-        "isla-nublar-1993",
-        "jurassic-world-2015",
-        "nublar-eruption-2018",
-        "fallen-kingdom-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 5,
         "defense": 4,
@@ -161,9 +143,6 @@
         "jurassic-world",
         "lockwood-estate",
         "biosyn-valley"
-      ],
-      "facilities": [
-        "trex-paddock"
       ]
     },
     {
@@ -181,11 +160,6 @@
       "diet": "Carnivorous",
       "habitat": "Dense cover, structured interiors, enclosed terrain",
       "genome": 88,
-      "incidents": [
-        "isla-nublar-1993",
-        "isla-sorna-1997",
-        "isla-sorna-2001"
-      ],
       "stats": {
         "strength": 3,
         "defense": 2,
@@ -200,9 +174,6 @@
         "isla-nublar",
         "isla-sorna",
         "jurassic-park"
-      ],
-      "facilities": [
-        "raptor-paddock"
       ],
       "personnel": [
         "robert-muldoon"
@@ -223,10 +194,6 @@
       "diet": "Carnivorous — medium-large prey specialist",
       "habitat": "Open terrain, forest edges, semi-arid zones",
       "genome": 83,
-      "incidents": [
-        "fallen-kingdom-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 4,
         "defense": 3,
@@ -253,9 +220,6 @@
       "diet": "Carnivorous — large apex prey specialist",
       "habitat": "Forest biomes, cold-temperate containment zones",
       "genome": 86,
-      "incidents": [
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 5,
         "defense": 5,
@@ -282,9 +246,6 @@
       "diet": "Carnivorous",
       "habitat": "River systems, coastal margin, flooded interior",
       "genome": 79,
-      "incidents": [
-        "isla-sorna-2001"
-      ],
       "stats": {
         "strength": 5,
         "defense": 4,
@@ -315,11 +276,6 @@
       "diet": "Carnivorous",
       "habitat": "Variable — confirmed wild survival post-2022",
       "genome": 97,
-      "incidents": [
-        "jurassic-world-2015",
-        "fallen-kingdom-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 4,
         "defense": 3,
@@ -346,9 +302,6 @@
       "diet": "Carnivorous",
       "habitat": "Isla Nublar",
       "genome": 92,
-      "incidents": [
-        "jurassic-world-2015"
-      ],
       "stats": {
         "strength": 3,
         "defense": 2,
@@ -375,9 +328,6 @@
       "diet": "Carnivorous",
       "habitat": "Isla Nublar",
       "genome": 92,
-      "incidents": [
-        "jurassic-world-2015"
-      ],
       "stats": {
         "strength": 3,
         "defense": 2,
@@ -404,9 +354,6 @@
       "diet": "Carnivorous",
       "habitat": "Isla Nublar",
       "genome": 92,
-      "incidents": [
-        "jurassic-world-2015"
-      ],
       "stats": {
         "strength": 3,
         "defense": 2,
@@ -433,9 +380,6 @@
       "diet": "Carnivorous",
       "habitat": "Urban and structured environments, mixed terrain",
       "genome": 76,
-      "incidents": [
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 3,
         "defense": 2,
@@ -465,9 +409,6 @@
       "diet": "Carnivorous",
       "habitat": "Boreal forest, frozen lake margin, alpine cover",
       "genome": 74,
-      "incidents": [
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 3,
         "defense": 2,
@@ -497,10 +438,6 @@
       "diet": "Herbivorous",
       "habitat": "Forests, dense jungle edges, mixed terrain",
       "genome": 91,
-      "incidents": [
-        "fallen-kingdom-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 5,
         "defense": 5,
@@ -527,9 +464,6 @@
       "diet": "Herbivorous — high vegetation browsing",
       "habitat": "Open plains, forest clearings, river valleys",
       "genome": 89,
-      "incidents": [
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 5,
         "defense": 4,
@@ -556,12 +490,6 @@
       "diet": "Herbivorous — high canopy browsing",
       "habitat": "Forest canopies, river valleys, open woodland",
       "genome": 95,
-      "incidents": [
-        "isla-nublar-1993",
-        "jurassic-world-2015",
-        "nublar-eruption-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 5,
         "defense": 3,
@@ -588,12 +516,6 @@
       "diet": "Herbivorous",
       "habitat": "Riverine plain, lake margin, open grazing",
       "genome": 93,
-      "incidents": [
-        "isla-nublar-1993",
-        "jurassic-world-2015",
-        "nublar-eruption-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 2,
         "defense": 2,
@@ -626,10 +548,6 @@
       "diet": "Omnivorous — plants, small prey, insects",
       "habitat": "Open plains, deserts, wide grasslands",
       "genome": 93,
-      "incidents": [
-        "isla-nublar-1993",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 2,
         "defense": 1,
@@ -656,10 +574,6 @@
       "diet": "Carnivorous — small prey, carrion, swarm hunting",
       "habitat": "Forest floors, beaches, dense undergrowth",
       "genome": 88,
-      "incidents": [
-        "isla-sorna-1997",
-        "isla-sorna-2001"
-      ],
       "stats": {
         "strength": 1,
         "defense": 1,
@@ -686,9 +600,6 @@
       "diet": "Carnivorous — fish-heavy, opportunistic",
       "habitat": "Rivers, swamps, marshlands, lakesides",
       "genome": 87,
-      "incidents": [
-        "fallen-kingdom-2018"
-      ],
       "stats": {
         "strength": 4,
         "defense": 3,
@@ -715,12 +626,6 @@
       "diet": "Herbivorous",
       "habitat": "Fern prairie, open woodland margin",
       "genome": 90,
-      "incidents": [
-        "isla-sorna-1997",
-        "jurassic-world-2015",
-        "nublar-eruption-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 4,
         "defense": 5,
@@ -752,9 +657,6 @@
       "diet": "Herbivorous — low vegetation grazer",
       "habitat": "Forest edges, plains, semi-dry environments",
       "genome": 84,
-      "incidents": [
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 3,
         "defense": 4,
@@ -781,11 +683,6 @@
       "diet": "Herbivorous",
       "habitat": "Open plain, low scrub, cycad stands",
       "genome": 92,
-      "incidents": [
-        "isla-nublar-1993",
-        "jurassic-world-2015",
-        "nublar-eruption-2018"
-      ],
       "stats": {
         "strength": 4,
         "defense": 5,
@@ -817,11 +714,6 @@
       "diet": "Herbivorous",
       "habitat": "Woodland margin, volcanic upland scrub",
       "genome": 87,
-      "incidents": [
-        "nublar-eruption-2018",
-        "fallen-kingdom-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 4,
         "defense": 4,
@@ -836,9 +728,6 @@
         "isla-nublar",
         "lockwood-estate",
         "biosyn-valley"
-      ],
-      "facilities": [
-        "lockwood-sublevel"
       ]
     },
     {
@@ -856,9 +745,6 @@
       "diet": "Carnivorous — small prey, scavenging, ambush hunting",
       "habitat": "Forest floors, swamp edges, dense jungle zones",
       "genome": 79,
-      "incidents": [
-        "isla-nublar-1993"
-      ],
       "stats": {
         "strength": 2,
         "defense": 2,
@@ -885,9 +771,6 @@
       "diet": "Herbivorous",
       "habitat": "Dense forest, low-light valley interior",
       "genome": 81,
-      "incidents": [
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 5,
         "defense": 5,
@@ -900,9 +783,6 @@
       "tag": "It cannot see you. It does not need to.",
       "locations": [
         "biosyn-valley"
-      ],
-      "facilities": [
-        "biosyn-research-complex"
       ]
     },
     {
@@ -920,12 +800,6 @@
       "diet": "Herbivorous",
       "habitat": "Open valley grazing, mixed canopy",
       "genome": 89,
-      "incidents": [
-        "jurassic-world-2015",
-        "nublar-eruption-2018",
-        "fallen-kingdom-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 5,
         "defense": 3,
@@ -957,10 +831,6 @@
       "diet": "Herbivorous",
       "habitat": "Open scrub, forest edge, valley floor",
       "genome": 86,
-      "incidents": [
-        "nublar-eruption-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 3,
         "defense": 4,
@@ -991,10 +861,6 @@
       "diet": "Herbivorous",
       "habitat": "Rocky upland, forest margin, structured interiors",
       "genome": 84,
-      "incidents": [
-        "nublar-eruption-2018",
-        "fallen-kingdom-2018"
-      ],
       "stats": {
         "strength": 4,
         "defense": 4,
@@ -1008,9 +874,6 @@
       "locations": [
         "isla-nublar",
         "lockwood-estate"
-      ],
-      "facilities": [
-        "lockwood-sublevel"
       ]
     },
     {
@@ -1028,9 +891,6 @@
       "diet": "Carnivorous — hyper-apex predation",
       "habitat": "Jurassic World R&D paddock — escaped",
       "genome": 100,
-      "incidents": [
-        "jurassic-world-2015"
-      ],
       "stats": {
         "strength": 5,
         "defense": 5,
@@ -1057,9 +917,6 @@
       "diet": "Carnivorous",
       "habitat": "Structured interiors — engineered for close-quarters deployment",
       "genome": 67,
-      "incidents": [
-        "fallen-kingdom-2018"
-      ],
       "stats": {
         "strength": 4,
         "defense": 3,
@@ -1072,9 +929,6 @@
       "tag": "It was not bred to survive. It was bred to be sold.",
       "locations": [
         "lockwood-estate"
-      ],
-      "facilities": [
-        "lockwood-sublevel"
       ],
       "personnel": [
         "henry-wu",
@@ -1095,9 +949,6 @@
       "weight": "~9,000 kg",
       "diet": "Carnivorous — opportunistic apex predation",
       "habitat": "Île Saint-Hubert — presumed feral island range",
-      "incidents": [
-        "ile-saint-hubert-2010"
-      ],
       "stats": {
         "strength": 5,
         "defense": 5,
@@ -1124,12 +975,6 @@
       "diet": "Carnivorous — large marine prey specialist",
       "habitat": "Open ocean, coastal zones, deep water regions",
       "genome": 96,
-      "incidents": [
-        "jurassic-world-2015",
-        "nublar-eruption-2018",
-        "fallen-kingdom-2018",
-        "dominion-2022"
-      ],
       "stats": {
         "strength": 5,
         "defense": 5,
@@ -1156,7 +1001,6 @@
       "diet": "Carnivorous — fish, squid, small marine reptiles",
       "habitat": "Open ocean, deep coastal waters",
       "genome": 76,
-      "incidents": [],
       "stats": {
         "strength": 3,
         "defense": 3,
@@ -1181,7 +1025,6 @@
       "weight": "~450–900 kg (estimated)",
       "diet": "Carnivorous / aquatic prey",
       "habitat": "Coastal and open-water habitats",
-      "incidents": [],
       "stats": {
         "strength": 3,
         "defense": 3,
@@ -1210,7 +1053,6 @@
       "weight": "Species-dependent",
       "diet": "Carnivorous; primarily fish and marine prey",
       "habitat": "Open ocean, across large geographic ranges",
-      "incidents": [],
       "stats": {
         "speed": 5,
         "intelligence": 4,
@@ -1846,9 +1688,6 @@
         "lockwood-estate",
         "isla-nublar"
       ],
-      "facilities": [
-        "lockwood-sublevel"
-      ],
       "specimens": [
         "indoraptor",
         "sinoceratops"
@@ -1914,10 +1753,6 @@
       "locations": [
         "isla-nublar",
         "jurassic-park"
-      ],
-      "facilities": [
-        "visitor-centre",
-        "trex-paddock"
       ]
     },
     {
@@ -1948,9 +1783,6 @@
       "locations": [
         "isla-nublar",
         "jurassic-park"
-      ],
-      "facilities": [
-        "visitor-centre"
       ]
     },
     {
@@ -1980,10 +1812,6 @@
       "locations": [
         "isla-nublar",
         "jurassic-park"
-      ],
-      "facilities": [
-        "visitor-centre",
-        "trex-paddock"
       ]
     },
     {
@@ -2108,10 +1936,6 @@
         "isla-nublar",
         "jurassic-world"
       ],
-      "facilities": [
-        "main-street",
-        "indominus-paddock"
-      ],
       "specimens": [
         "indominus-rex"
       ]
@@ -2143,9 +1967,6 @@
       "locations": [
         "isla-nublar",
         "jurassic-park"
-      ],
-      "facilities": [
-        "visitor-centre"
       ],
       "specimens": [
         "triceratops"
@@ -2180,9 +2001,6 @@
         "isla-nublar",
         "lockwood-estate"
       ],
-      "facilities": [
-        "lockwood-sublevel"
-      ],
       "specimens": [
         "indoraptor",
         "sinoceratops"
@@ -2214,10 +2032,6 @@
       "tag": "He kept the company's confidence for exactly as long as it took to end it.",
       "locations": [
         "biosyn-valley"
-      ],
-      "facilities": [
-        "biosyn-research-complex",
-        "biosyn-amber-mine"
       ]
     }
   ],

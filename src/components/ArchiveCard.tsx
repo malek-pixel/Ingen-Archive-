@@ -10,7 +10,7 @@ import { SecurityBadge, StatusInk } from "./RecordChrome";
  * The shared archive card, used by every division that has no bespoke card of
  * its own. Specimens and personnel keep their existing cards — their metadata
  * is richer and the designs are frozen — so this covers locations, flora,
- * facilities, operations, and mixed global search results.
+ * and mixed global search results.
  */
 export function ArchiveCard({
   entry,

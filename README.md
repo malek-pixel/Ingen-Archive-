@@ -14,8 +14,6 @@ transcribed from the mockups. The only deliberate departures are documented unde
 | Paleobotany    | `/paleobotany` | 11      | `ING-FLR`                                     |
 | Personnel      | `/personnel`   | 34      | `ING-CHR`                                     |
 | Locations      | `/locations`   | 12      | `ING-LOC`                                     |
-| Facilities     | `/facilities`  | 20      | `ING-FAC`                                     |
-| Operations     | `/operations`  | 12      | `ING-OPS`                                     |
 
 Counts are illustrative of the current data — the application never hardcodes
 them. `src/data/divisions.ts` is the single source of truth for the taxonomy:
@@ -41,18 +39,21 @@ npm run dev
 
 ## Routes
 
-| Path             | Screen                                                         |
-| ---------------- | -------------------------------------------------------------- |
-| `/`              | Archive index (master directory)                               |
-| `/dashboard`     | Overview — metrics, security intelligence, incident chronology |
-| `/assets`        | Genetic asset index — search / filter / sort                   |
-| `/assets/:id`    | Asset dossier                                                  |
-| `/assets/all`    | Full asset dossier run (`#id` deep links scroll to a record)   |
-| `/personnel`     | Personnel index                                                |
-| `/personnel/:id` | Personnel file                                                 |
-| `/personnel/all` | Full personnel run                                             |
-| `/states`        | Interface states reference                                     |
-| `*`              | Designed 404                                                   |
+| Path                      | Screen                                                       |
+| ------------------------- | ------------------------------------------------------------ |
+| `/`                       | Archive index (master directory)                             |
+| `/dashboard`              | Overview — metrics, security intelligence, critical records  |
+| `/assets`                 | Genetic asset index — search / filter / sort                 |
+| `/assets/:id`             | Asset dossier                                                |
+| `/assets/all`             | Full asset dossier run (`#id` deep links scroll to a record) |
+| `/personnel`              | Personnel index                                              |
+| `/personnel/:id`          | Personnel file                                               |
+| `/personnel/all`          | Full personnel run                                           |
+| `/states`                 | Interface states reference                                   |
+| `/classified`             | Level 5 — security gate, then the classified dashboard       |
+| `/classified/:id`         | Level 5 register (restricted experiments, site blacklist, …) |
+| `/classified/project/:id` | Level 5 programme file                                       |
+| `*`                       | Designed 404                                                 |
 
 Deploying behind a static host requires an SPA history fallback (rewrite all
 paths to `/index.html`) — see `public/_redirects` and `vercel.json`.
@@ -65,7 +66,9 @@ src/
   components/   Header, cards, dossier bodies, toolbar, states, chrome primitives
   data/         ingen.json + typed loader + structural validator
   lib/          derive.ts (frozen semantics), query.ts (search/filter/sort), hooks
-  styles/       tokens.css, base.css
+  level5/       the classified layer: config (the rule), session (state),
+                data (the derivation), components (gate + chrome)
+  styles/       tokens.css, base.css, level5.css
 ```
 
 **Why inline styles.** The mockups are the pixel source of truth and express
@@ -87,8 +90,7 @@ The archive summary figures are counted from the records at load
 (`summarise()` in `src/data/ingen.ts`) rather than stored, so adding a record
 cannot leave a published total behind.
 
-The expansion divisions live alongside it as `locations.json`, `flora.json`,
-`facilities.json` and `operations.json`.
+The expansion divisions live alongside it as `locations.json` and `flora.json`.
 
 ### Relationships
 
@@ -96,13 +98,12 @@ Records link across divisions. Every link is declared once, on whichever record
 is its natural home, and read in both directions through a lazily built reverse
 index in `src/lib/archive.ts`. `getRelatedRecords(kind, id)` reads a record's own
 links itself rather than taking them as arguments — the two base divisions store
-theirs as plain fields and cite operations by slug, and those are folded into the
-same index, so a specimen's island lists the specimen back. Every record in the
-archive resolves to at least one other; `test/expansion.test.tsx` pins that.
+theirs as plain fields, and those are folded into the same index, so a specimen's
+island lists the specimen back. Every location and botanical record resolves to at
+least one other; `test/expansion.test.tsx` pins that.
 
-Validation is referential: a link pointing at a record that does not exist, or a
-facility sited at an unknown location, fails at load rather than rendering a dead
-link. `getRelatedRecords()` is exercised across every record in the archive by
+Validation is referential: a link pointing at a record that does not exist fails
+at load rather than rendering a dead link. `getRelatedRecords()` is exercised across every record in the archive by
 `test/expansion.test.tsx`, asserting no self-links and no unresolvable targets.
 
 Every load runs `validateArchive()`: field types, required keys, duplicate ids and
@@ -224,8 +225,8 @@ deleted are dropped from the map, so it never claims an image that is gone.
 ## Imagery across divisions
 
 Photography is partial, by division and by record. Genetic assets, personnel,
-locations and paleobotany carry plates where one exists; facilities and
-operations never do. Anything without one renders a **technical plate** — the engineering
+locations and paleobotany carry plates where one exists. Anything without one
+renders a **technical plate** — the engineering
 grid already used behind specimen plates, with a division glyph and the record
 identifier.
 
@@ -268,3 +269,83 @@ something true rather than reporting a failure that did not happen.
 auto` with a reserved intrinsic size, which skips layout and paint for
   off-screen records. That is enough here at 38/34 records; a much larger
   archive would want real virtualisation.
+
+## Level 5 // Classified
+
+A clearance layer over the archive, not a seventh division. It has no records of
+its own: every file it shows is one the open archive already holds, reached
+through `src/level5/data.ts`, which selects and groups by predicate over the
+loaded archive and copies nothing. Where a panel has no source, it prints
+`DATA NOT AVAILABLE` rather than being filled in — `test/level5.test.tsx`
+pins that every classified record resolves to a real one.
+
+The six registers are:
+
+| Register               | Drawn from                                                             |
+| ---------------------- | ---------------------------------------------------------------------- |
+| Restricted experiments | assets whose own file records engineering, hybridisation, directed use |
+| Genetic programs       | assets carrying a sequencing figure                                    |
+| Incident reports       | assets whose containment or status records a failure or breach         |
+| Corporate operations   | personnel at clearance 5, executive and founding departments           |
+| Site blacklist         | locations whose status is anything other than active                   |
+| Project files          | five compiled groupings of the above                                   |
+
+**On the programme files.** The archive holds no project codenames, so the
+groupings carry descriptive labels ("Hybrid asset series" is the ING-HYB block)
+and every dossier says on its face that the label is compiled and what it is
+compiled from. Inventing `PROJECT GENESIS` and a backstory to hang on it would
+have filled the screen and broken the one rule this archive has.
+
+### The authorization code
+
+Set `VITE_INGEN_LEVEL5_PASSWORD` in a local `.env.local` (git-ignored; copy
+`.env.example`) and restart the dev server. With nothing set, the gate renders a
+distinct "access control not configured" state rather than admitting everyone.
+
+**This is not security, and the UI does not claim it is.** Vite inlines every
+`VITE_` variable into the client bundle, so the code ships in the JavaScript and
+can be read by anyone who opens devtools. The archive is a static site with no
+server to check anything. It is a deliberate in-universe gate; never put a real
+credential behind it. The flavour text in the Level 5 chrome is written to stay
+on the right side of this — it says "access is monitored", which is fiction the
+reader can see through, and never claims encryption the app does not perform.
+
+### The throttle
+
+Guessing is rate limited on an escalating ladder, in `config.ts`:
+
+| Consecutive failures | Gate holds for |
+| -------------------- | -------------- |
+| 1–2                  | —              |
+| 3                    | 15s            |
+| 4                    | 30s            |
+| 5                    | 60s            |
+| 6                    | 2 min          |
+| 7 and beyond         | 5 min          |
+
+While a hold runs the field and the submit button are disabled, the button reads
+`AUTHORIZATION SUSPENDED` with the countdown, and the panel says a hold is in
+force rather than passing judgment on the last code entered. The hold applies to
+a _correct_ code as well — checked before the code is looked at, or it would only
+throttle people who were going to fail anyway.
+
+Three properties are deliberate:
+
+- **The count persists** (`sessionStorage`, alongside the grant). Holding it in
+  component state meant reloading the page cleared it, which is a pause, not a
+  throttle.
+- **Locking the archive does not clear it.** Otherwise lock-and-return would be
+  the reset button.
+- **It is never permanent.** The last rung repeats. A lockout you cannot come
+  back from is a support ticket, and this archive has nobody to raise one with.
+
+Same honesty as above: the hold lives in this tab's storage, so anyone who knows
+to clear it can. It makes guessing tedious and makes the refusal legible. Real
+rate limiting needs a server.
+
+### Session
+
+A grant lives in `sessionStorage` for 30 minutes: it survives a reload in the
+same tab, dies with the tab, and lapses on its own. **Lock archive** ends it
+immediately and returns to the gate. The access log is a trace of what happened
+in this tab during this session — nothing external, and the panel says so.

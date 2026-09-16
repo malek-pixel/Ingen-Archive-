@@ -147,7 +147,7 @@ export default function Overview() {
             textWrap: "balance",
           }}
         >
-          Central biological and operations record.
+          Central biological research record.
         </h1>
         <p
           data-enter
@@ -160,8 +160,8 @@ export default function Overview() {
             textWrap: "pretty",
           }}
         >
-          Genetic assets, personnel, locations, paleobotany, facilities and operations, held under a single index. Every
-          record carries its own dossier and its links to every other file that references it.
+          Genetic assets, personnel, locations and paleobotany, held under a single index. Every record carries its own
+          dossier and its links to every other file that references it.
         </p>
         <div
           data-enter

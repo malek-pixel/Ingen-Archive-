@@ -46,10 +46,13 @@ const BODY_TEXT = [
   "--ig-text-8",
   "--ig-text-9",
   "--ig-link",
+  // Level 5 text ink. It exists because --ig-classified-ink is below AA for
+  // text; this pins that the lift actually clears it on every surface.
+  "--ig-l5-ink",
 ];
 
 /** Status inks: carry meaning, so they must clear the 3:1 non-text floor at minimum. */
-const SEMANTIC = ["--ig-green", "--ig-red", "--ig-amber", "--ig-blue-l5", "--ig-archival"];
+const SEMANTIC = ["--ig-green", "--ig-red", "--ig-amber", "--ig-blue-l5", "--ig-archival", "--ig-classified-ink"];
 
 function readTokens(): Record<string, string> {
   // Resolved from cwd: under the jsdom transform import.meta.url is an http URL.

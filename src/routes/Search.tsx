@@ -35,7 +35,7 @@ export default function Search() {
 
   useDocumentTitle(
     query ? `“${query}” — InGen Archive search` : "Search — InGen Archive",
-    "Search every division of the InGen archive: genetic assets, personnel, locations, paleobotany, facilities and operations."
+    "Search every division of the InGen archive: genetic assets, personnel, locations and paleobotany."
   );
 
   const setQuery = (value: string) => {

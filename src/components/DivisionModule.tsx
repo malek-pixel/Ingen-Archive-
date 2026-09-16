@@ -12,10 +12,9 @@ import type { Division } from "../data/divisions";
    archive: the count is the live division count, and the backdrop is a real
    record plate drawn from that division rather than stock imagery.
 
-   Divisions with no photography (facilities, operations) show the drawn
-   technical plate, exactly as their records do. That asymmetry is the honest
-   one — those divisions were never photographed, and giving them a borrowed
-   image to even up the grid would say something false about the archive.
+   A division whose records carry no plate shows the drawn technical plate,
+   exactly as those records do. Giving it a borrowed image to even up the grid
+   would say something false about the archive.
 
    The HUD chrome (register code, status dot) is interface, not data, and is
    drawn from fields that already exist: the division's own id prefix and the

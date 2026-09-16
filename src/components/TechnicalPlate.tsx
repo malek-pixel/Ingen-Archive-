@@ -4,8 +4,8 @@ import { PlateFrame } from "./Chrome";
 /**
  * The plate shown for divisions that hold no photography.
  *
- * This is a designed state, not a fallback: locations, facilities, botanical
- * records and operational files were never photographed for the archive, and
+ * This is a designed state, not a fallback: locations and botanical records
+ * were never photographed for the archive, and
  * saying so in the archive's own drafting language is more honest than an empty
  * frame or a stand-in image. It reuses the engineering grid already used behind
  * specimen plates, so it reads as the same system.
@@ -23,17 +23,6 @@ const GLYPHS: Record<RecordKind, { title: string; draw: () => JSX.Element }> = {
       </>
     ),
   },
-  facility: {
-    title: "Structure elevation",
-    draw: () => (
-      <>
-        <rect x="16" y="30" width="64" height="40" />
-        <path d="M16 30 L48 12 L80 30" />
-        <rect x="30" y="46" width="14" height="24" />
-        <rect x="54" y="46" width="12" height="12" />
-      </>
-    ),
-  },
   flora: {
     title: "Botanical figure",
     draw: () => (
@@ -42,16 +31,6 @@ const GLYPHS: Record<RecordKind, { title: string; draw: () => JSX.Element }> = {
         <path d="M48 46 C34 42 28 32 28 22 C40 24 46 34 48 46 Z" />
         <path d="M48 56 C62 52 68 42 68 32 C56 34 50 44 48 56 Z" />
         <path d="M38 76 h20" />
-      </>
-    ),
-  },
-  incident: {
-    title: "Event record",
-    draw: () => (
-      <>
-        <path d="M48 16 L82 74 H14 Z" />
-        <path d="M48 38 v18" />
-        <circle cx="48" cy="64" r="2.5" />
       </>
     ),
   },

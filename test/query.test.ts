@@ -51,11 +51,10 @@ describe("specimen search", () => {
     for (const d of q("", "herb").results) expect(dietLabel(d.diet)).toBe("Herbivore");
   });
 
-  it("matches on name, species, file id and incident slug", () => {
+  it("matches on name, species and file id", () => {
     expect(q("indominus").results.map((d) => d.id)).toContain("indominus-rex");
     expect(q("ING-DIN-013").results).toHaveLength(1);
     expect(q("mosasaurus").results.length).toBeGreaterThan(0);
-    expect(q("fallen-kingdom-2018").results.length).toBeGreaterThan(0);
   });
 
   it("is case- and whitespace-insensitive", () => {
@@ -152,7 +151,7 @@ describe("derived semantics", () => {
     expect(specimenStatusShort("DECEASED").ink).toBe("#E08A84");
   });
 
-  it("parses incident slugs into year and label", () => {
+  it("parses assignment slugs into year and label", () => {
     expect(parseSlug("fallen-kingdom-2018")).toEqual({
       year: "2018",
       label: "Fallen Kingdom",

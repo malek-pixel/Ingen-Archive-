@@ -221,7 +221,7 @@ export interface TimelineEvent {
   slug: string;
 }
 
-/** Incident/assignment slugs carry their own year: "fallen-kingdom-2018". */
+/** Assignment slugs carry their own year: "fallen-kingdom-2018". */
 export function parseSlug(slug: string): TimelineEvent {
   const parts = (slug || "").split("-");
   const last = parts[parts.length - 1];

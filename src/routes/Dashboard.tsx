@@ -3,7 +3,7 @@ import { Header } from "../components/Header";
 import { Eyebrow, Footer, Page, PlateFrame, Watermark } from "../components/Chrome";
 import { useArchive } from "../lib/useArchive";
 import { useDocumentTitle } from "../lib/useDocumentTitle";
-import { containmentTidy, parseSlug, plateBlend } from "../lib/derive";
+import { containmentTidy, plateBlend } from "../lib/derive";
 import { stagger, step, useCountUp, useReveal } from "../lib/motion";
 import { DIVISIONS } from "../data/divisions";
 import { SecurityBadge, StatusInk } from "../components/RecordChrome";
@@ -83,14 +83,13 @@ function Metric({
 export default function Dashboard() {
   useDocumentTitle(
     "Overview — InGen Archive",
-    "Archive overview: record counts, containment status, flagged assets and incident chronology."
+    "Archive overview: record counts, containment status and flagged assets."
   );
-  const { specimens, personnel, incidents, locations, counts, entries, stats: s } = useArchive();
+  const { specimens, personnel, locations, counts, entries, stats: s } = useArchive();
   const metricsReveal = useReveal();
   const severityReveal = useReveal();
   const clearanceReveal = useReveal();
   const divisionsReveal = useReveal();
-  const chronoReveal = useReveal();
   const criticalReveal = useReveal();
 
   // Every figure on this page derives from the loaded data. Adding a record to
@@ -105,13 +104,10 @@ export default function Dashboard() {
   const flagged = specimens.filter((d) => Number(d.threat) >= 4);
 
   // Numbers dominate; the note stays quiet. Colour only where it means something.
-  const catastrophic = incidents.filter((i) => i.severity >= 5).length;
-  const openFiles = incidents.filter((i) => /OPEN|SEALED/i.test(i.status)).length;
-
   const metrics = [
     { label: "Total records", value: counts.total, ink: "#E4E9EF", note: `Across ${DIVISIONS.length} divisions` },
     { label: "Containment failed", value: s.dFailed, ink: "#D2564D", note: "Breach recorded" },
-    { label: "Catastrophic events", value: catastrophic, ink: "#D2564D", note: `${openFiles} files still open` },
+    { label: "Threat level 4+", value: flagged.length, ink: "#C98A2E", note: "Flagged for review" },
     { label: "Level 5 clearance", value: s.pL5, ink: "#E4E9EF", note: "Full archive access" },
   ];
 
@@ -155,10 +151,6 @@ export default function Dashboard() {
       { label: "Operational", value: locations.filter((l) => /ACTIVE/i.test(l.status)).length, ink: "#7ACB9A" },
       { label: "Lost", value: locations.filter((l) => /DESTROYED|ABANDONED/i.test(l.status)).length, ink: "#E08A84" },
     ],
-    incident: [
-      { label: "Catastrophic", value: catastrophic, ink: "#D2564D" },
-      { label: "Open", value: openFiles, ink: "#E0B36A" },
-    ],
   };
 
   const sections = DIVISIONS.map((d) => ({
@@ -176,15 +168,6 @@ export default function Dashboard() {
     .filter((e) => e.security === "CRITICAL" || e.security === "CLASSIFIED")
     .sort((a, b) => (a.security === b.security ? a.name.localeCompare(b.name) : a.security === "CRITICAL" ? -1 : 1))
     .slice(0, 8);
-
-  // Aggregated from the incident slugs already on each asset record — nothing invented.
-  const slugTally = new Map<string, number>();
-  for (const d of specimens) for (const slug of d.incidents ?? []) slugTally.set(slug, (slugTally.get(slug) ?? 0) + 1);
-  const chronologyEntries = [...slugTally].map(([slug, count]) => ({ count, ...parseSlug(slug) }));
-  const max = chronologyEntries.reduce((m, e) => Math.max(m, e.count), 1);
-  const chronology = chronologyEntries
-    .sort((a, b) => a.year.localeCompare(b.year))
-    .map((e) => ({ ...e, pct: `${Math.round((e.count / max) * 100)}%` }));
 
   return (
     <Page>
@@ -237,8 +220,8 @@ export default function Dashboard() {
               textWrap: "pretty",
             }}
           >
-            Every genetic asset and personnel file held under InGen custodianship, with containment status, clearance
-            level and incident history.
+            Every genetic asset and personnel file held under InGen custodianship, with containment status and clearance
+            level.
           </p>
           <div
             data-enter
@@ -651,74 +634,6 @@ export default function Dashboard() {
                 </div>
                 <SecurityBadge level={r.security} />
               </Link>
-            ))}
-          </div>
-        </section>
-
-        <section style={{ padding: "0 clamp(20px,3vw,40px) clamp(44px,6vw,68px)" }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "baseline",
-              justifyContent: "space-between",
-              gap: 16,
-              marginBottom: 20,
-            }}
-          >
-            <Eyebrow>Incident chronology</Eyebrow>
-            <span style={{ font: "400 12px 'IBM Plex Sans',sans-serif", color: "#748899" }}>
-              Assets present per recorded event
-            </span>
-          </div>
-          <div
-            ref={chronoReveal}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit,minmax(150px,1fr))",
-              gap: "clamp(16px,2.5vw,28px)",
-              borderTop: "1px solid #1A222C",
-              paddingTop: 22,
-            }}
-          >
-            {chronology.map((c, i) => (
-              <div key={c.slug} data-reveal style={stagger(i)}>
-                <div
-                  style={{
-                    font: "500 15px 'IBM Plex Mono',monospace",
-                    color: "#9FB2C4",
-                    fontVariantNumeric: "tabular-nums",
-                  }}
-                >
-                  {c.year}
-                </div>
-                <div
-                  style={{
-                    font: "500 13px 'IBM Plex Sans',sans-serif",
-                    color: "#E4E9EF",
-                    marginTop: 7,
-                    lineHeight: 1.35,
-                  }}
-                >
-                  {c.label}
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 7, marginTop: 11 }}>
-                  <div style={{ flex: 1, height: 2, background: "#1A222C", position: "relative" }}>
-                    <div
-                      className="ig-bar-fill"
-                      style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: c.pct, background: "#3D5568" }}
-                    />
-                  </div>
-                  <span
-                    style={{
-                      font: "500 11.5px 'IBM Plex Mono',monospace",
-                      color: "#748899",
-                      fontVariantNumeric: "tabular-nums",
-                    }}
-                  >
-                    {c.count}
-                  </span>
-                </div>
-              </div>
             ))}
           </div>
         </section>

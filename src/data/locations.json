@@ -19,10 +19,7 @@
     "historicalNotes": "Mount Sibo was logged as dormant in the 1982 survey and never re-assessed. The 2018 eruption destroyed the site and every structure on it. The lease was not renewed; there is nothing left to renew.",
     "notes": "Site is a total loss. No recovery operations are authorised. Records retained for liability and research continuity only.",
     "tags": ["island", "exhibition", "destroyed", "nublar", "flagship"],
-    "relations": {
-      "incidents": ["isla-nublar-1993", "jurassic-world-2015", "fallen-kingdom-2018"],
-      "facilities": ["visitor-centre", "main-street", "raptor-paddock", "indominus-paddock", "hammond-creation-lab"]
-    }
+    "relations": {}
   },
   {
     "id": "isla-sorna",
@@ -44,10 +41,7 @@
     "historicalNotes": "The unplanned outcome is the most valuable thing in this file. Assets left to themselves bred, established territory and produced a functioning multi-generational ecosystem without human management. No InGen programme ever reproduced that result under controlled conditions.",
     "notes": "Site remains uncontained. Landing is prohibited under the 1998 accords. Observation continues by air at range.",
     "tags": ["island", "site-b", "production", "abandoned", "sorna", "uncontained"],
-    "relations": {
-      "incidents": ["isla-sorna-1997", "isla-sorna-2001"],
-      "facilities": ["sorna-compound", "sorna-hatchery", "sorna-worker-village"]
-    }
+    "relations": {}
   },
   {
     "id": "jurassic-park",
@@ -70,8 +64,6 @@
     "notes": "Superseded by the Jurassic World build on the same island. Structures were partially reclaimed by forest before the 2018 event destroyed them.",
     "tags": ["park", "nublar", "1993", "abandoned", "hammond"],
     "relations": {
-      "incidents": ["isla-nublar-1993"],
-      "facilities": ["visitor-centre", "hammond-creation-lab", "trex-paddock"],
       "locations": ["isla-nublar"]
     }
   },
@@ -96,8 +88,6 @@
     "notes": "Evacuated 2015, never reopened. Destroyed with the rest of the island in 2018.",
     "tags": ["park", "nublar", "resort", "masrani", "destroyed"],
     "relations": {
-      "incidents": ["jurassic-world-2015", "fallen-kingdom-2018"],
-      "facilities": ["main-street", "raptor-paddock", "indominus-paddock", "lagoon", "hammond-creation-lab"],
       "locations": ["isla-nublar"]
     }
   },
@@ -121,8 +111,6 @@
     "notes": "Assets released into the surrounding region during the incident. Estate is no longer a secure site under any definition.",
     "tags": ["estate", "california", "auction", "dispersal", "lockwood"],
     "relations": {
-      "incidents": ["fallen-kingdom-2018"],
-      "facilities": ["lockwood-sublevel"],
       "personnel": ["benjamin-lockwood", "maisie-lockwood", "eli-mills"]
     }
   },
@@ -146,8 +134,6 @@
     "notes": "Competitor site. Retained in this archive because a substantial share of InGen genetic material is held there.",
     "tags": ["sanctuary", "biosyn", "italy", "competitor", "active"],
     "relations": {
-      "incidents": ["dominion-2022"],
-      "facilities": ["biosyn-research-complex", "biosyn-amber-mine"],
       "personnel": ["lewis-dodgson", "henry-wu", "ian-malcolm", "ellie-sattler", "alan-grant"]
     }
   },
@@ -171,10 +157,7 @@
     "historicalNotes": "The 2010 incident ended staffed operations. Assets were not recovered and were not destroyed. The island retains a viable population.",
     "notes": "Access requires Level 5 authorisation. No landing has been authorised since 2010.",
     "tags": ["island", "research", "restricted", "critical", "uncontained"],
-    "relations": {
-      "incidents": ["ile-saint-hubert-2010"],
-      "facilities": ["saint-hubert-lab"]
-    }
+    "relations": {}
   },
   {
     "id": "nublar-north",
@@ -197,8 +180,6 @@
     "notes": "Destroyed with the island. Sector maps retained for incident reconstruction.",
     "tags": ["nublar", "restricted", "sector-5", "destroyed"],
     "relations": {
-      "incidents": ["jurassic-world-2015", "fallen-kingdom-2018"],
-      "facilities": ["indominus-paddock", "raptor-paddock"],
       "locations": ["isla-nublar"]
     }
   },
@@ -223,7 +204,6 @@
     "notes": "Barrier integrity failed during the 2018 evacuation. Asset is at large in the Pacific.",
     "tags": ["marine", "lagoon", "nublar", "exhibition", "destroyed"],
     "relations": {
-      "incidents": ["jurassic-world-2015", "fallen-kingdom-2018"],
       "specimens": ["mosasaurus"],
       "locations": ["isla-nublar", "jurassic-world"]
     }
@@ -248,9 +228,7 @@
     "notes": "No landing authorised. Observation flights maintain 500 m minimum altitude.",
     "tags": ["sorna", "ecosystem", "uncontained", "research", "observation"],
     "relations": {
-      "incidents": ["isla-sorna-1997", "isla-sorna-2001"],
-      "locations": ["isla-sorna"],
-      "facilities": ["sorna-worker-village"]
+      "locations": ["isla-sorna"]
     }
   },
   {
@@ -273,8 +251,7 @@
     "notes": "This archive is served from this site. Access is logged.",
     "tags": ["corporate", "headquarters", "records", "california", "active"],
     "relations": {
-      "personnel": ["john-hammond", "peter-ludlow", "henry-wu", "lewis-dodgson", "dennis-nedry"],
-      "incidents": ["isla-nublar-1993"]
+      "personnel": ["john-hammond", "peter-ludlow", "henry-wu", "lewis-dodgson", "dennis-nedry"]
     }
   },
   {

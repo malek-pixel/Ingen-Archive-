@@ -3,10 +3,9 @@
  * an image on disk is not referenced by any record. Both directions matter: a
  * missing file breaks a dossier, an orphan file ships dead weight.
  *
- * Specimens, personnel, locations and botanical records carry photography;
- * facilities and operational files render a technical plate by design, so they
- * are not expected here. Coverage within a division is partial by design too —
- * an empty path is a record with no photography, not a missing asset.
+ * Specimens, personnel, locations and botanical records carry photography.
+ * Coverage within a division is partial by design — an empty path is a record
+ * with no photography, not a missing asset.
  */
 import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
